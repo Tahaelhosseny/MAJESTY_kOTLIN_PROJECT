@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ماجستى</string>
+    <string name="Home">الرئيسيه</string>
+    <string name="Cart">عربه التسوق</string>
+    <string name="Favorite">المفضله</string>
+    <string name="Menu">قائمه الطعام</string>
+    <string name="Orders">طلباتى</string>
+    <string name="popular">الاطعمه المفضله</string>
+    <string name="freshOffers">أخر العروض</string>
+    <string name="more">المزيد</string>
+    <string name="load">تحميل...</string>
+
+
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginRight="10dp"
+    tools:context=".Fragments.Home">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/popular"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_height="30dp"
+                    android:text="@string/popular" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="16sp"
+                    android:gravity="right|bottom"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="25dp"
+                    android:text="@string/more" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_below="@+id/popular"
+                android:layout_marginTop="20dp"
+                android:id="@+id/popularRec"
+                android:layout_height="150dp"
+                >
+
+            </android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/fresh"
+                android:layout_marginTop="70dp"
+                android:layout_below="@+id/popularRec"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_height="30dp"
+                    android:text="@string/freshOffers" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="16sp"
+                    android:gravity="right|bottom"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="25dp"
+                    android:text="@string/more" />
+
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/fresh"
+                android:layout_marginTop="20dp"
+                android:id="@+id/freshRec"
+                android:layout_height="wrap_content"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+
+
+</FrameLayout>

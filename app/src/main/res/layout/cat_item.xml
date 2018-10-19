@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="10dp"
+    android:id="@+id/item"
+    android:layout_height="112dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:id="@+id/back"
+            android:layout_height="match_parent"
+            android:src="@drawable/cat1"/>
+        
+        <ImageView
+            android:layout_width="150dp"
+            android:src="@drawable/piza"
+            android:id="@+id/img"
+            android:layout_height="112dp" />
+
+
+
+        <ImageView
+            android:layout_width="112dp"
+            android:src="@drawable/shape_846"
+            android:id="@+id/imgh"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_height="69dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Pizza"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/name"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
