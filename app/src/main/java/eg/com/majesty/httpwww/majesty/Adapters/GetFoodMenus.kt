@@ -9,11 +9,13 @@
 package eg.com.majesty.httpwww.majesty.Adapters
 
 import android.app.Activity
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
+import eg.com.majesty.httpwww.majesty.Activity.OneItem_
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.R
 import kotlinx.android.synthetic.main.get_food_menues.view.*
@@ -36,6 +38,14 @@ class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenu
         holder.FfoodMenuDescription.setText(categoryItems.get(position).StandardPrice)
         holder.FoodMenuName.setText(categoryItems.get(position).FoodMenuName)
         Picasso.with(activity).load(categoryItems.get(position).FoodMenuImageUrl).into(holder.FoodMenuImageUrl)
+        holder.item.setOnClickListener(object : View.OnClickListener
+        {
+            override fun onClick(v: View?)
+            {
+                activity.startActivity(Intent(activity , OneItem_::class.java).
+                putExtra("ID" , categoryItems.get(position).FoodMenuID))
+            }
+        })
     }
 
 
@@ -46,5 +56,6 @@ class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenu
         val FoodMenuDescription = itemView.FoodMenuDescription
         val FoodMenuName = itemView.FoodMenuName
         val FfoodMenuDescription = itemView.FfoodMenuDescription
+        val item = itemView.item
     }
 }

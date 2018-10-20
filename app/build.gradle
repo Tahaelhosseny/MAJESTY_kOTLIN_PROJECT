@@ -42,6 +42,11 @@ android {
         targetSdkVersion 27
         versionCode 100
         versionName "1.0.0"
+
+        javaCompileOptions { annotationProcessorOptions {
+            arguments = ["androidManifestFile": "F:\\Projects UnderDevelopment\\MAJESTY kOTLIN PROJECT\\app\\src\\main\\AndroidManifest.xml"]}}
+
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,6 +59,8 @@ android {
     sourceSets {
         main.java.srcDirs += "src/main/kotlin"
     }
+
+
 }
 
 
