@@ -1,15 +1,5 @@
-/*
- * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
-
 package eg.com.majesty.httpwww.majesty.Adapters
-
 import android.app.Activity
-import android.support.constraint.solver.GoalRow
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -41,13 +31,10 @@ class PriceAdapter (val activity: Activity, val priceModels: List<PriceModel>, v
         }else holder.selected.visibility = View.GONE
 
 
-        holder.item.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?)
-            {
-                selectedi = position
-                notifyDataSetChanged()
-            }
-        })
+        holder.item.setOnClickListener {
+            selectedi = position
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
