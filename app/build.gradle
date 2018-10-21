@@ -43,8 +43,11 @@ android {
         versionCode 100
         versionName "1.0.0"
 
-        javaCompileOptions { annotationProcessorOptions {
-            arguments = ["androidManifestFile": "F:\\Projects UnderDevelopment\\MAJESTY kOTLIN PROJECT\\app\\src\\main\\AndroidManifest.xml"]}}
+        android.applicationVariants.all { variant ->
+            variant.variantData.variantConfiguration.javaCompileOptions.annotationProcessorOptions.arguments =
+                    ['androidManifestFile': variant.outputs[0]?.processResources?.manifestFile?.absolutePath,
+                     'resourcePackageName': android.defaultConfig.applicationId]
+        }
 
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -90,6 +93,8 @@ dependencies {
         exclude module: 'support-v4'
     }
     implementation 'com.beust:klaxon:3.0.1'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.github.drawers:SpinnerDatePicker:1.0.6'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

@@ -54,7 +54,7 @@
         android:textSize="11sp"
         android:textColor="#ffffff"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Getting Started \n"
+        android:text="Getting Started"
         />
 
 
@@ -73,11 +73,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:id="@+id/signUp"
             android:background="@drawable/c_a"
             android:textSize="11sp"
             android:gravity="center_vertical|center_horizontal"
             android:textColor="#ffffff"
-            android:text="Create Account \n "
+            android:text="Create Account "
             android:layout_weight="1"/>
 
         <TextView

@@ -120,5 +120,10 @@ class TutorialPage : Activity()
 
 
 
+    @Click fun signUp()
+    {
+        startActivity(Intent(this , SignUp_::class.java))
+
+    }
 
 }
