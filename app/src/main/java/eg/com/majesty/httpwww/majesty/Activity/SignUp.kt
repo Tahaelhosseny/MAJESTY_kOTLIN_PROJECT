@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
-
 package eg.com.majesty.httpwww.majesty.Activity
 
 import android.app.Activity
@@ -13,17 +5,12 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.widget.DatePicker
 import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import com.google.gson.reflect.TypeToken
 import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder
-import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
-import eg.com.majesty.httpwww.majesty.Models.CategoryModels
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
@@ -33,25 +20,18 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.fragment_menu.*
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.HashMap
-import android.provider.SyncStateContract.Helpers.update
-import android.content.pm.PackageManager
-import android.content.pm.PackageInfo
-import android.os.Build
-import android.support.annotation.RequiresApi
-import android.util.Log
+import android.view.View
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import org.androidannotations.annotations.AfterViews
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
+import org.json.JSONObject
 
 
 @EActivity(R.layout.activity_sign_up)
@@ -59,7 +39,11 @@ class SignUp : Activity()
 {
 
 
-     val EMAIL_ADDRESS_PATTERN = Pattern.compile(
+    lateinit var callbackManager : CallbackManager
+    var social = false
+    var fbId = ""
+
+    val EMAIL_ADDRESS_PATTERN = Pattern.compile(
              "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
              "\\@" +
              "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
@@ -106,8 +90,10 @@ class SignUp : Activity()
 
     @AfterViews fun afterViews()
     {
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        FacebookSdk.sdkInitialize(this)
         AppEventsLogger.activateApp(this)
+        callbackManager = CallbackManager.Factory.create()
+        LoginManager.getInstance().logOut()
     }
 
     override fun attachBaseContext(newBase: Context)
@@ -162,6 +148,7 @@ class SignUp : Activity()
 
     @Click fun signUp()
     {
+
         var emailt = email.text
         var fNamet = fName.text
         var sNamet = sName.text
@@ -174,114 +161,184 @@ class SignUp : Activity()
 
         var x = 0
 
-        if(!EMAIL_ADDRESS_PATTERN.matcher(emailt).matches())
-        {
-            x++
-            email.setError("Not Valid Mail")
-        }
-        else
-        {
-            map.set("email" , emailt.toString())
-        }
-
-        if (fNamet.length<3)
-        {
-            x++
-            fName.setError("First Name Must be At Least 3 Letters")
-        }
-        else
-        {
-            map.set("firstname" , fNamet.toString())
-        }
-
-
-        if (sNamet.length<3)
-        {
-            x++
-            sName.setError("Second Name Must be At Least 3 Letters")
-        }
-        else
-        {
-            map.set("secondname" , sNamet.toString())
-        }
-
-
-
-        if (pOnet.length != 11)
-        {
-            x++
-            pOne.setError("Phone Must be 11 numbre")
-        }
-        else
-        {
-            map.set("phone1" , pOnet.toString())
-        }
-
-        if (pSecondt.length != 11)
+        if(social)
         {
 
+            if (pOnet.length != 11)
+            {
+                x++
+                pOne.setError("Phone Must be 11 numbre")
+            }
+            else
+            {
+                map.set("phone1" , pOnet.toString())
+            }
 
-            pSecond.setError("Phone Must be 11 numbre")
-            map.set("phone2" , "")
-        }
-
-        else
-        {
-            map.set("phone2" , pSecondt.toString())
-        }
+            if (pSecondt.length != 11)
+            {
 
 
-        if (passwordt.length < 6)
-        {
-            x++
-            Password.setError("Passowrd Must be At Least 6 Letters")
-        }
+                pSecond.setError("Phone Must be 11 numbre")
+                map.set("phone2" , "")
+            }
 
-        if (!cPasswordt.toString().equals(passwordt.toString()))
-        {
-            x++
-            Password.setError("Password Not Match")
-            cPassword.setError("Password Not Match")
+            else
+            {
+                map.set("phone2" , pSecondt.toString())
+            }
+
+
         }else
         {
-            map.set("password" , cPasswordt.toString())
-        }
+            if(!EMAIL_ADDRESS_PATTERN.matcher(emailt).matches())
+            {
+                x++
+                email.setError("Not Valid Mail")
+            }
+            else
+            {
+                map.set("email" , emailt.toString())
+            }
 
+            if (fNamet.length<2)
+            {
+                x++
+                fName.setError("First Name Must be At Least 3 Letters")
+            }
+            else
+            {
+                map.set("firstname" , fNamet.toString())
+            }
+
+
+            if (sNamet.length<2)
+            {
+                x++
+                sName.setError("Second Name Must be At Least 3 Letters")
+            }
+            else
+            {
+                map.set("secondname" , sNamet.toString())
+            }
+
+
+
+            if (pOnet.length != 11)
+            {
+                x++
+                pOne.setError("Phone Must be 11 numbre")
+            }
+            else
+            {
+                map.set("phone1" , pOnet.toString())
+            }
+
+            if (pSecondt.length != 11)
+            {
+
+
+                pSecond.setError("Phone Must be 11 numbre")
+                map.set("phone2" , "")
+            }
+
+            else
+            {
+                map.set("phone2" , pSecondt.toString())
+            }
+
+
+            if (passwordt.length < 6)
+            {
+                x++
+                Password.setError("Passowrd Must be At Least 6 Letters")
+            }
+
+            if (!cPasswordt.toString().equals(passwordt.toString()))
+            {
+                x++
+                Password.setError("Password Not Match")
+                cPassword.setError("Password Not Match")
+            }else
+            {
+                map.set("password" , cPasswordt.toString())
+            }
+
+        }
 
 
         map.set("birthdate" , birthdayt.toString())
-
-
-        if(x==0)
+        if(x==0&& !social )
         {
             confirmSign(map)
+        }else if (x==0 && social)
+        {
+            confirmFbSign(map)
         }
     }
 
 
-    lateinit var callbackManager : CallbackManager
+
     @Click fun fbLogin()
     {
-     callbackManager = CallbackManager.Factory.create()
-
-
-
+        LoginManager.getInstance().logInWithReadPermissions(this , Arrays.asList("email"))
         LoginManager.getInstance().registerCallback(callbackManager,object  : FacebookCallback<LoginResult>{
             override fun onSuccess(result: LoginResult?)
             {
-                var accessToken = AccessToken.getCurrentAccessToken();
-                var isLoggedIn = accessToken != null && !accessToken.isExpired();
 
+
+                fbId = Profile.getCurrentProfile().id
+
+                val parameters = Bundle()
+                parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location") // Parámetros que pedimos a facebook
+
+                val graphRequest = GraphRequest.newMeRequest(result?.accessToken ,object  : GraphRequest.GraphJSONObjectCallback
+                {
+                    override fun onCompleted(`object`: JSONObject?, response: GraphResponse?)
+                    {
+                        if(`object`!!.has("email"))
+                        {
+                            email.setText(`object`?.getString("email"))
+                        }
+
+                        if(`object`!!.has("first_name"))
+                        {
+                            fName.setText(`object`?.getString("first_name"))
+                        }
+
+                        if(`object`!!.has("last_name"))
+                        {
+                            sName.setText(`object`?.getString("last_name"))
+                        }
+                        if(`object`!!.has("birthday"))
+                        {
+                            birthdate.setText(`object`?.getString("birthday"))
+                        }
+
+
+                        eemail.visibility = View.GONE
+                        ePassword.visibility = View.GONE
+                        ecPassword.visibility = View.GONE
+
+                        social = true
+                        Toast.makeText(this@SignUp , "Facebook Login Success , Please Complete Your Data" ,Toast.LENGTH_LONG).show()
+                    }
+                })
+                graphRequest.setParameters(parameters)
+                graphRequest.executeAsync()
+
+
+                /*var id = Profile.getCurrentProfile().id
+                var fname = Profile.getCurrentProfile().firstName
+                var lname = Profile.getCurrentProfile().lastName
+                var photo = Profile.getCurrentProfile().getProfilePictureUri(400 , 400)*/
             }
 
             override fun onCancel()
             {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onError(error: FacebookException?)
             {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
 
@@ -291,12 +348,8 @@ class SignUp : Activity()
     {
 
 
-        applicationContext
         var foreraaParameter = ForeraaParameter(applicationContext)
-
-
-
-        var makeRequest = MakeRequest("AddUser?isArabic=false&isMobileAppRegisteration=false&title=&firstname=" + map.get("firstname")+"&secondname="+map.get("secondname")+"&phone1=" +map.get("phone1") +"&phone2=" +map.get("phone2")+"&birthdate="+map.get("birthdate")+"&email="+map.get("email")
+        var makeRequest = MakeRequest("AddUser?isArabic=false&isMobileAppRegisteration=true&title=&firstname=" + map.get("firstname")+"&secondname="+map.get("secondname")+"&phone1=" +map.get("phone1") +"&phone2=" +map.get("phone2")+"&birthdate="+map.get("birthdate")+"&email="+map.get("email")
                 +"&username="+map.get("email")+"&password="+map.get("password"),"0", map , this,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
@@ -310,12 +363,11 @@ class SignUp : Activity()
                 {
                     var rem = remember.isChecked
                     var UserID = jsonObject.get("UserID").asString
-
-
                     foreraaParameter.setString("UserID" , UserID)
                     foreraaParameter.setBoolean("rem" , rem)
-
-                    Toast.makeText(applicationContext , "SignUpAndLoged" , Toast.LENGTH_SHORT).show()
+                    foreraaParameter.setBoolean("social" , social)
+                    startActivity(Intent(this@SignUp , MainActivity_::class.java))
+                    finish()
 
 
 
@@ -360,12 +412,84 @@ class SignUp : Activity()
 
     }
 
+    fun confirmFbSign(map: HashMap<String , String>)
+    {
+
+        var foreraaParameter = ForeraaParameter(applicationContext)
+        var makeRequest = MakeRequest("AddUserWithFacebook?isArabic=false&isMobileAppRegisteration=true&&title="+""+"&facebookUserId="+fbId+"&firstname=" + map.get("firstname")+"&secondname="+map.get("secondname")+"&phone1=" +map.get("phone1") +"&phone2=" +map.get("phone2")+"&birthdate="+map.get("birthdate")+"&email="+map.get("email")
+                +"&username="+map.get("email")+"&password="+map.get("password"),"0", map , this,"GetFoodMenuTypes",true)
+
+        makeRequest.request(object  : VolleyCallback
+        {
+            override fun onSuccess(result: Map<String, String>)
+            {
+                var str = result.get("res")
+                var jsonArray = Gson().fromJson(str, JsonArray::class.java)
+                var jsonObject = jsonArray.get(0).asJsonObject
+                if(jsonObject.get("IsRegisterationSucceed").asBoolean)
+                {
+                    var rem = remember.isChecked
+                    var UserID = jsonObject.get("UserID").asString
+                    foreraaParameter.setString("UserID" , UserID)
+                    foreraaParameter.setBoolean("rem" , rem)
+                    foreraaParameter.setBoolean("social" , social)
+                    startActivity(Intent(this@SignUp , MainActivity_::class.java))
+                    finish()
+
+                }else
+                {
+                    var jsonArray2 = jsonObject.get("Remarks").asJsonArray
+                    for (jsonO in jsonArray2)
+                    {
+                        if(jsonO.asJsonObject.get("ErrorCode").asString.equals("0"))
+                        {
+                        }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("1"))
+                        {
+                            email.setError("Email is already used before")
+                        }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("2"))
+                        {
+                            pOne.setError("Please enter a valid phone number")
+                        }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("3"))
+                        {
+                            pOne.setError("Phone number is already used before")
+                        }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("4"))
+                        {
+                            email.setError("Email is already used before")
+                        }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("5"))
+                        {
+                            email.setError("Please enter a valid email address")
+                            if(eemail.visibility == View.GONE)
+                            {
+                                Toast.makeText(this@SignUp , "Account Is Already Registered"  , Toast.LENGTH_LONG).show()
+
+                            }
+                        }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("6"))
+                        {
+                            Toast.makeText(this@SignUp , "This Facebook account has been used before"  , Toast.LENGTH_LONG).show()
+
+                        }
+                    }
+                }
+            }
+        } ,object : ONRetryHandler
+        {
+            override fun onRetryHandler(funName: String)
+            {
+
+            }
+        })
+    }
+
 
 
     override fun onActivityResult(requestCode : Int, resultCode : Int, data :Intent)
    {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    @Click fun backk(view :View)
+    {
+        super.onBackPressed()
     }
 }
-
