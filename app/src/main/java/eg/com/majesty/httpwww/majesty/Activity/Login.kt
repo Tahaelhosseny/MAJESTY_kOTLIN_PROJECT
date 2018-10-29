@@ -9,6 +9,7 @@ import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
@@ -17,6 +18,7 @@ import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
+import kotlinx.android.synthetic.main.activity_login.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
@@ -66,7 +68,6 @@ class Login : Activity()
         AppEventsLogger.activateApp(this)
         callbackManager = CallbackManager.Factory.create()
         LoginManager.getInstance().logOut()
-
         LoginManager.getInstance().logInWithReadPermissions(this , Arrays.asList("email"))
         LoginManager.getInstance().registerCallback(callbackManager,object  : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?)
@@ -79,7 +80,6 @@ class Login : Activity()
             {
                 Toast.makeText(applicationContext , "Login Cancel , Please Try Again" , Toast.LENGTH_LONG)
             }
-
             override fun onError(error: FacebookException?)
             {
                 Toast.makeText(applicationContext , "Failed To Login With Facebook , Please Try Again" , Toast.LENGTH_LONG)
@@ -96,11 +96,24 @@ class Login : Activity()
         var map = HashMap<String , String>()
         var makeRequest = MakeRequest("UserLoginWithFacebook?isLoginThroughMobileApp=true&isArabic=false&facebookUserId=" + fbId,"0", map , this,"UserLoginWithFacebook",true)
 
+        var foreraaParameter = ForeraaParameter(applicationContext)
                 makeRequest.request(object  : VolleyCallback
                 {
                     override fun onSuccess(result: Map<String, String>)
                     {
-
+                        if(map.get("res").toString().length<5)
+                        {
+                            Toast.makeText(this@Login , "This Account Never Register " , Toast.LENGTH_LONG ).show()
+                        }else
+                        {
+                            var rem = remember.isChecked
+                            var UserID = map.get("res").toString()
+                            foreraaParameter.setString("UserID" , UserID)
+                            foreraaParameter.setBoolean("rem" , rem)
+                            foreraaParameter.setBoolean("social" , social)
+                            startActivity(Intent(this@Login , MainActivity_::class.java))
+                            finish()
+                        }
                     }
                 } ,object : ONRetryHandler
                 {
@@ -110,6 +123,51 @@ class Login : Activity()
                     }
                 })
     }
+
+
+
+
+    @Click fun login()
+    {
+        val userName = email.getText()
+        val password = password.getText()
+
+        var foreraaParameter = ForeraaParameter(applicationContext)
+
+        var map = HashMap<String , String>()
+
+                var makeRequest = MakeRequest("UserLogin?isLoginThroughMobileApp=true&isArabic=false&username=" +userName +"&password="+password,"0", map , this,"UserLogin",true)
+
+                        makeRequest.request(object  : VolleyCallback
+                        {
+                            override fun onSuccess(result: Map<String, String>)
+                            {
+                                var ss = map.get("res").toString().subSequence(1,5)
+                                if(map.get("res").toString().length<5)
+                                {
+                                    Toast.makeText(this@Login , ss.toString() +"\nThis Account Never Register " , Toast.LENGTH_LONG ).show()
+                                }else
+                                {
+                                    var rem = remember.isChecked
+                                    var UserID = map.get("res").toString()
+                                    foreraaParameter.setString("UserID" , UserID)
+                                    foreraaParameter.setBoolean("rem" , rem)
+                                    foreraaParameter.setBoolean("social" , false)
+                                    startActivity(Intent(this@Login , MainActivity_::class.java))
+                                    finish()
+                                }
+                            }
+                        } ,object : ONRetryHandler
+                        {
+                            override fun onRetryHandler(funName: String)
+                            {
+
+                            }
+                        })
+
+
+    }
+
 
 
     override fun onActivityResult(requestCode : Int, resultCode : Int, data : Intent)

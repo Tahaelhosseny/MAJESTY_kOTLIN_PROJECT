@@ -315,7 +315,6 @@ class SignUp : Activity()
                         }
 
 
-                        eemail.visibility = View.GONE
                         ePassword.visibility = View.GONE
                         ecPassword.visibility = View.GONE
 
@@ -416,8 +415,8 @@ class SignUp : Activity()
     {
 
         var foreraaParameter = ForeraaParameter(applicationContext)
-        var makeRequest = MakeRequest("AddUserWithFacebook?isArabic=false&isMobileAppRegisteration=true&&title="+""+"&facebookUserId="+fbId+"&firstname=" + map.get("firstname")+"&secondname="+map.get("secondname")+"&phone1=" +map.get("phone1") +"&phone2=" +map.get("phone2")+"&birthdate="+map.get("birthdate")+"&email="+map.get("email")
-                +"&username="+map.get("email")+"&password="+map.get("password"),"0", map , this,"GetFoodMenuTypes",true)
+        var makeRequest = MakeRequest("AddUserWithFacebook?isArabic=false&isMobileAppRegisteration=true&&title="+""+"&facebookUserId="+fbId+"&firstname=" + fName.text+"&secondname="+sName.getText()+"&phone1=" +pOne.text +"&phone2=" +pSecond.getText()+"&birthdate="+birthdate.getText()+"&email="+email.getText()
+                +"&username="+email.getText()+"&password="+"","0", map , this,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -458,11 +457,6 @@ class SignUp : Activity()
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("5"))
                         {
                             email.setError("Please enter a valid email address")
-                            if(eemail.visibility == View.GONE)
-                            {
-                                Toast.makeText(this@SignUp , "Account Is Already Registered"  , Toast.LENGTH_LONG).show()
-
-                            }
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("6"))
                         {
                             Toast.makeText(this@SignUp , "This Facebook account has been used before"  , Toast.LENGTH_LONG).show()
