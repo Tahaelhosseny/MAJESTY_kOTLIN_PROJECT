@@ -8,22 +8,21 @@ import eg.com.majesty.httpwww.majesty.Models.PriceModel
 import eg.com.majesty.httpwww.majesty.R
 import kotlinx.android.synthetic.main.price_model.view.*
 
-class PriceAdapter (val activity: Activity, val priceModels: List<PriceModel>, val fragment : String): RecyclerView.Adapter<PriceAdapter.MyViewHolder>()
+class PriceAdapter (val activity: Activity?=null, val priceModels: List<PriceModel>?=null, val fragment : String?=null): RecyclerView.Adapter<PriceAdapter.MyViewHolder>()
 {
 
-    var selectedi = 0
-
+    public var selectedi = 0
 
 
     override fun getItemCount(): Int
     {
 
-        return priceModels.size
+        return priceModels!!.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-       holder.price_data.setText(priceModels.get(position).FoodMenuItemName +" : " + priceModels.get(position).FoodMenuItemPrice)
+       holder.price_data.setText(priceModels!!.get(position).FoodMenuItemName +" : " + priceModels.get(position).FoodMenuItemPrice)
 
         if (selectedi == position)
         {
@@ -48,4 +47,10 @@ class PriceAdapter (val activity: Activity, val priceModels: List<PriceModel>, v
         var item = itemView.item
         var selected = itemView.selected
     }
+
+
+    public fun getSize(): Int {
+        return priceModels!!.get(selectedi).FoodMenuItemID
+    }
+
 }

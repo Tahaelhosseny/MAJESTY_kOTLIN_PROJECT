@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/layoutBackgrawnd"
+    android:layout_height="match_parent"
+    tools:context=".Activity.CheckOut">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/back"
+        android:padding="13dp"
+        android:src="@drawable/icon_back_copy"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/back"
+        android:layout_marginTop="20dp"
+        android:text="CheckOut"
+        android:id="@+id/catName"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:layout_height="50dp" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/fav"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/shape_712"
+        android:layout_height="50dp" />
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="50dp"
+       android:gravity="center_vertical"
+       android:visibility="gone"
+       android:layout_marginTop="20dp"
+       android:layout_alignParentRight="true"
+       android:layout_marginRight="20dp"
+       android:orientation="horizontal">
+       <ImageView
+           android:layout_width="30dp"
+           android:layout_marginRight="5dp"
+           android:src="@drawable/icon_check_copy_2"
+           android:layout_height="30dp" />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="50dp"
+           android:textColor="#0063d8"
+           android:gravity="center_vertical"
+           android:textSize="20sp"
+           android:text="DONE"/>
+   </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="72dp"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/pink_gradiant"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:src="@drawable/shape_828_copy_5"
+            android:layout_marginLeft="15dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="252 EGP"
+            android:textSize="22dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="CheckOut"
+            android:textSize="25dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginLeft="-95dp"
+            android:layout_height="40dp" />
+
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_marginRight="15dp"
+            android:text="6"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:background="@drawable/count"
+            android:layout_height="30dp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

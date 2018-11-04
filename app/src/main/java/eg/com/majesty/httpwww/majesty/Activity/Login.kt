@@ -9,6 +9,8 @@ import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
@@ -29,6 +31,7 @@ import java.util.*
 class Login : Activity()
 {
 
+    var finish = false
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,12 @@ class Login : Activity()
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build())
+
+
+
+        try {
+            finish = intent.getBooleanExtra("finish", false)
+        }catch (e :Exception){}
     }
 
 
@@ -101,20 +110,23 @@ class Login : Activity()
                 {
                     override fun onSuccess(result: Map<String, String>)
                     {
-                        if(map.get("res").toString().length<5)
-                        {
-                            Toast.makeText(this@Login , "This Account Never Register " , Toast.LENGTH_LONG ).show()
-                        }else
+
+                        val res = result.get("res").toString()
+
+                        val jasonObject = Gson().fromJson(res , JsonObject::class.java)
+                        if(jasonObject.get("IsSucceed").asBoolean)
                         {
                             var rem = remember.isChecked
-                            var UserID = map.get("res").toString()
+                            var UserID = jasonObject.get("UserID").asString
                             foreraaParameter.setString("UserID" , UserID)
                             foreraaParameter.setBoolean("rem" , rem)
                             foreraaParameter.setBoolean("social" , social)
                             startActivity(Intent(this@Login , MainActivity_::class.java))
                             finish()
-                        }
+                        }else
+                            Toast.makeText(this@Login , "This Account Never Register " , Toast.LENGTH_LONG ).show()
                     }
+
                 } ,object : ONRetryHandler
                 {
                     override fun onRetryHandler(funName: String)

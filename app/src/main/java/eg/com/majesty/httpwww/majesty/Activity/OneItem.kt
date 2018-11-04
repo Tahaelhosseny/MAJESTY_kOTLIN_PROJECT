@@ -1,10 +1,12 @@
 package eg.com.majesty.httpwww.majesty.Activity
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -14,6 +16,8 @@ import com.squareup.picasso.Picasso
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
 import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.Adapters.PriceAdapter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.CategoryModels
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.Models.ItemModel
@@ -53,6 +57,7 @@ class OneItem : Activity()
                                 .build()))
                 .build())
         setContentView(R.layout.activity_one_item)
+
     }
 
 
@@ -102,7 +107,7 @@ class OneItem : Activity()
     }
 
 
-
+    var adapter = PriceAdapter()
 
     fun setData(jsonObject : JsonObject)
     {
@@ -117,7 +122,8 @@ class OneItem : Activity()
         val itemType = object : TypeToken<List<PriceModel>>() {}.type
         val itemList = gson.fromJson<List<PriceModel>>(model.MenuItemPricesData.toString(), itemType)
         rec.layoutManager = LinearLayoutManager(this )
-        rec.adapter = PriceAdapter(this ,itemList ,"home")
+        adapter = PriceAdapter(this ,itemList ,"home")
+        rec.adapter  = adapter
         rec.adapter.notifyDataSetChanged()
 
     }
@@ -128,10 +134,7 @@ class OneItem : Activity()
         super.onBackPressed()
     }
 
-    @Click fun addToCart()
-    {
 
-    }
 
     @Click fun plus()
     {
@@ -212,5 +215,97 @@ class OneItem : Activity()
             img4.setImageResource(R.drawable.star1)
             img5.setImageResource(R.drawable.star1)
         }
+    }
+
+
+
+
+    @Click fun addToCartt()
+    {
+        var foreraaParameter = ForeraaParameter(applicationContext)
+
+        var x = count.text
+
+
+        if(foreraaParameter.getString("UserID").length==0)
+        {
+            startActivity(Intent(this , Login_::class.java).putExtra("finish" , true))
+        }
+        else
+        {
+            var map = HashMap<String , String>()
+            var makeRequest = MakeRequest("AddFoodMenuItemToCart?userID=" +foreraaParameter.getString("UserID")+"&foodMenuItemID=" +adapter.getSize() + "&quantity=" + x ,"0", map , this,"",true)
+            makeRequest.request(object  : VolleyCallback
+            {
+                override fun onSuccess(result: Map<String, String>)
+                {
+
+                    val res = result.get("res")
+                    if (res.equals("true"))
+                    {
+                        Toast.makeText(this@OneItem , "Item Added To Cart Successfully" , Toast.LENGTH_LONG).show()
+                    }else
+                    {
+                        Toast.makeText(this@OneItem , "This Item Failed To Add To Cart Please Tray Again Later" , Toast.LENGTH_LONG).show()
+                    }
+                }
+            } ,object : ONRetryHandler
+            {
+                override fun onRetryHandler(funName: String)
+                {
+                }
+            })
+        }
+
+
+    }
+
+
+
+
+    @Click fun fav()
+    {
+
+        var foreraaParameter = ForeraaParameter(applicationContext)
+
+
+        if(foreraaParameter.getString("UserID").length==0)
+        {
+
+            startActivity(Intent(this , Login_::class.java).putExtra("finish" , true))
+        }
+        else
+        {
+            var map = HashMap<String , String>()
+
+            var makeRequest = MakeRequest("AddFoodMenuToWishlist?userID=" +foreraaParameter.getString("UserID")+"&foodMenuID=" +ID,"0", map , this,"",true)
+
+            makeRequest.request(object  : VolleyCallback
+            {
+                override fun onSuccess(result: Map<String, String>)
+                {
+
+                    val res = result.get("res")
+                    if (res.equals("true"))
+                    {
+                        Toast.makeText(this@OneItem , "Item Added To WishList Successfully" , Toast.LENGTH_LONG).show()
+                    }else
+                    {
+                        Toast.makeText(this@OneItem , "This Item Is Already in your WishList" , Toast.LENGTH_LONG).show()
+                    }
+                }
+            } ,object : ONRetryHandler
+            {
+                override fun onRetryHandler(funName: String)
+                {
+                }
+            })
+        }
+
+
+
+
+
+
     }
 }

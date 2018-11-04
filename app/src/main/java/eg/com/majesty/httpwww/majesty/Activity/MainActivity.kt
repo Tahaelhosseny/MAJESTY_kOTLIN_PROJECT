@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
 import android.app.FragmentTransaction
+import android.content.Intent
 import android.os.Build
 import eg.com.majesty.httpwww.majesty.Fragments.*
 import org.androidannotations.annotations.AfterViews
@@ -104,14 +105,15 @@ class MainActivity : Activity()
     @Click fun cart ()
     {
 
-        headerText.setText(R.string.Cart)
+       /* headerText.setText(R.string.Cart)
 
         val cart = Cart()
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameContainer, cart)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        fragmentTransaction.commit()
+        fragmentTransaction.commit()*/
+        startActivity(Intent(this , CheckOut_::class.java))
     }
 
 
