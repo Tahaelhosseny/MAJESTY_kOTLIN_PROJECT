@@ -29,11 +29,36 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/fav"
+        android:id="@+id/del"
         android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/shape_712"
         android:layout_height="50dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:id="@+id/doneLay"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="25dp"
+            android:src="@drawable/icon_check_copy_2"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Done"
+            android:textSize="20sp"
+            android:textColor="#0063d8"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
    <LinearLayout
        android:layout_width="wrap_content"
        android:layout_height="50dp"
@@ -61,6 +86,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_marginTop="80dp"
+        android:id="@+id/cartItems"
         android:layout_marginBottom="72dp"
         android:layout_height="match_parent">
 
@@ -71,6 +97,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:id="@+id/footer"
         android:background="@drawable/pink_gradiant"
         android:layout_height="70dp">
 
@@ -83,6 +110,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:text="252 EGP"
+            android:id="@+id/totalPricec"
             android:textSize="22dp"
             android:gravity="center_vertical"
             android:textColor="@color/white"
@@ -103,10 +131,11 @@
         <TextView
             android:layout_width="30dp"
             android:layout_marginRight="15dp"
-            android:text="6"
+            android:text="60"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:id="@+id/totalCount"
             android:background="@drawable/count"
             android:layout_height="30dp" />
 

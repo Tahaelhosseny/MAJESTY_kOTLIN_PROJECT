@@ -3,7 +3,7 @@
     <string name="title_activity_login">Login</string>
     <string name="Home">Home</string>
     <string name="Cart">Cart</string>
-    <string name="Favorite">Favorite</string>
+    <string name="Favorite">Favorites</string>
     <string name="Menu">Menu</string>
     <string name="Orders">My Orders</string>
     <string name="popular">Popular Food</string>
