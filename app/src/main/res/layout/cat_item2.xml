@@ -40,7 +40,7 @@
             android:text="Pizza"
             android:layout_alignParentTop="true"
             android:textColor="@color/white"
-            android:textSize="23sp"
+            android:textSize="16sp"
             android:gravity="right"
             android:layout_margin="10dp"
             android:id="@+id/name"

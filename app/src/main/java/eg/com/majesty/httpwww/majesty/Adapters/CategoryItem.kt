@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import eg.com.majesty.httpwww.majesty.Fragments.Home
 import eg.com.majesty.httpwww.majesty.Fragments.LoadCatItems
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.CategoryModels
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.cat_item.view.*
@@ -54,9 +55,10 @@ class CategoryItem (val activity: Activity,val categoryItems: List<CategoryModel
         }
 
 
-        Picasso.with(activity).load(categoryItems.get(position).FoodMenuTypeImageUrl).into(holder.img)
+        Picasso.with(activity).load(categoryItems.get(position).FoodMenuTypeImageUrl.replace("http","https")).into(holder.img)
         holder.name.setText(categoryItems.get(position).FoodMenuTypeName)
-        Picasso.with(activity).load(categoryItems.get(position).FoodMenuTypeImageUrl2).into(holder.imgh)
+        holder.name.setTypeface(Utils.Exo2Bold(activity))
+        Picasso.with(activity).load(categoryItems.get(position).FoodMenuTypeImageUrl2.replace("http" , "https")).into(holder.imgh)
         holder.item.setOnClickListener( object : View.OnClickListener
         {
             override fun onClick(v: View?)

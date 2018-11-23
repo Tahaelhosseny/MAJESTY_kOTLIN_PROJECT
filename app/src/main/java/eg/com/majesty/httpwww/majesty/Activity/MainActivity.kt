@@ -16,6 +16,7 @@ import android.app.FragmentTransaction
 import android.content.Intent
 import android.os.Build
 import eg.com.majesty.httpwww.majesty.Fragments.*
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import org.androidannotations.annotations.AfterViews
 @EActivity(R.layout.activity_main)
 class MainActivity : Activity()
@@ -28,7 +29,7 @@ class MainActivity : Activity()
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/alfares.ttf")
+                                .setDefaultFontPath("fonts/Exo2-Regular.ttf")
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build())
@@ -47,6 +48,16 @@ class MainActivity : Activity()
 
         if(Build.VERSION.SDK_INT<23)
             actionBar.hide()
+
+
+        notiNum.setTypeface(Utils.Exo2SemiBold(this))
+        cartTxt.setTypeface(Utils.Exo2SemiBold(this))
+        headerText.setTypeface(Utils.Exo2SemiBold(this))
+
+        htxt.setTypeface(Utils.Exo2SemiBold(this))
+        ftxt.setTypeface(Utils.Exo2SemiBold(this))
+        mtxt.setTypeface(Utils.Exo2SemiBold(this))
+        otxt.setTypeface(Utils.Exo2SemiBold(this))
 
 
 

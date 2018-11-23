@@ -30,6 +30,7 @@ import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import org.androidannotations.annotations.AfterViews
 import org.json.JSONObject
 
@@ -59,7 +60,7 @@ class SignUp : Activity()
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/alfares.ttf")
+                                .setDefaultFontPath("fonts/Exo2-Regular.ttf")
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build())
@@ -90,6 +91,13 @@ class SignUp : Activity()
 
     @AfterViews fun afterViews()
     {
+
+        sign.setTypeface(Utils.Exo2Bold(this))
+        ftxt.setTypeface(Utils.Exo2Bold(this))
+        signUp.setTypeface(Utils.Exo2Bold(this))
+        sign.setTypeface(Utils.Exo2Bold(this))
+
+
         FacebookSdk.sdkInitialize(this)
         AppEventsLogger.activateApp(this)
         callbackManager = CallbackManager.Factory.create()

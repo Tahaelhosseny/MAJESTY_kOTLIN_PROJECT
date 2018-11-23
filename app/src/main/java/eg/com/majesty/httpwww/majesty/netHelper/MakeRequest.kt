@@ -91,13 +91,7 @@ class MakeRequest {
                 Responce["res"] = error.toString()
                 progressDialog.dismiss()
                 callback.onSuccess(Responce)
-            }) {
-                override fun getParams(): Map<String, String> {
-                    var params: Map<String, String> = HashMap()
-                    params = map
-                    return params
-                }
-            }
+            }){}
 
             stringRequest.retryPolicy = DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
             VolleySinglton.getInstance(context).addToRequestQueue(stringRequest)

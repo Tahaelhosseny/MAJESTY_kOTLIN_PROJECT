@@ -12,6 +12,7 @@ import com.facebook.login.LoginResult
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
@@ -35,16 +36,6 @@ class Login : Activity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(CalligraphyInterceptor(
-                        CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/alfares.ttf")
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build())
-
-
-
         try {
             finish = intent.getBooleanExtra("finish", false)
         }catch (e :Exception){}
@@ -59,6 +50,18 @@ class Login : Activity()
 
     @AfterViews fun afterViews()
     {
+
+        flogin.setTypeface(Utils.Exo2Bold(this))
+        ortext.setTypeface(Utils.setExo2Regular(this))
+        mtxt.setTypeface(Utils.Exo2Bold(this))
+        email.setTypeface(Utils.setExo2Regular(this))
+        password.setTypeface(Utils.setExo2Regular(this))
+        remMe.setTypeface(Utils.setExo2Regular(this))
+        forget.setTypeface(Utils.setExo2Regular(this))
+        dont.setTypeface(Utils.setExo2Regular(this))
+        sign.setTypeface(Utils.setExo2Regular(this))
+        loginnnn.setTypeface(Utils.Exo2Bold(this))
+
 
         if(Build.VERSION.SDK_INT<23)
             actionBar.hide()

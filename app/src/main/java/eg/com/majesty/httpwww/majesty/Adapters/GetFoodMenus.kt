@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import eg.com.majesty.httpwww.majesty.Activity.OneItem_
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.R
 import kotlinx.android.synthetic.main.get_food_menues.view.*
@@ -37,7 +38,15 @@ class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenu
         holder.FoodMenuDescription.setText(categoryItems.get(position).FoodMenuDescription)
         holder.FfoodMenuDescription.setText(categoryItems.get(position).StandardPrice)
         holder.FoodMenuName.setText(categoryItems.get(position).FoodMenuName)
-        Picasso.with(activity).load(categoryItems.get(position).FoodMenuImageUrl).into(holder.FoodMenuImageUrl)
+        holder.FoodMenuName.setTypeface(Utils.Exo2SemiBold(activity))
+
+        holder.FoodMenuDescription.setTypeface(Utils.Exo2SemiBold(activity))
+        holder.FfoodMenuDescription.setTypeface(Utils.Exo2Medium(activity))
+
+        try
+        {
+            Picasso.with(activity).load(categoryItems.get(position).FoodMenuImageUrl.replace("http","https")).into(holder.FoodMenuImageUrl)
+        }catch (e : Exception){}
         holder.item.setOnClickListener(object : View.OnClickListener
         {
             override fun onClick(v: View?)

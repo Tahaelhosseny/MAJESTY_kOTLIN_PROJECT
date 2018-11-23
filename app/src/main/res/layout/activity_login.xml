@@ -74,6 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:id="@+id/flogin"
                     android:layout_gravity="center"
                     android:textColor="#ffffff"
                     android:gravity="center_horizontal"
@@ -98,6 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
+                android:id="@+id/ortext"
                 android:layout_centerHorizontal="true"
                 android:textColor="#333333"
                 android:layout_marginTop="240dp"
@@ -112,11 +114,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
+                android:id="@+id/mtxt"
                 android:layout_centerHorizontal="true"
                 android:textColor="#333333"
-                android:letterSpacing="-0.02"
                 android:layout_marginTop="280dp"
-                android:lineSpacingExtra="3.3sp"
                 android:gravity="center_horizontal"
                 android:text="Login with your email"
                 />
@@ -212,6 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:textSize="7.7sp"
+                android:id="@+id/remMe"
                 android:layout_marginTop="450dp"
                 android:layout_toRightOf="@+id/remember"
                 android:textColor="#666666"
@@ -225,6 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:textSize="7.7sp"
+                android:id="@+id/forget"
                 android:layout_marginRight="30dp"
                 android:layout_alignParentRight="true"
                 android:textColor="#666666"
@@ -253,6 +256,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="14sp"
+                    android:id="@+id/loginnnn"
                     android:layout_marginTop="-5dp"
                     android:layout_gravity="center_vertical"
                     android:textColor="#ffffff"
@@ -272,6 +276,7 @@
                     android:layout_width="wrap_content"
                     android:textColor="#e6999999"
                     android:textSize="12sp"
+                    android:id="@+id/dont"
                     android:text="Don’t have an account ? "
                     android:layout_height="wrap_content" />
 
@@ -279,6 +284,7 @@
                     android:layout_width="wrap_content"
                     android:textColor="#000000"
                     android:text=" Sign Up"
+                    android:id="@+id/sign"
                     android:textSize="12sp"
                     android:layout_height="wrap_content" />
 

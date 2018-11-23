@@ -1,9 +1,11 @@
 package eg.com.majesty.httpwww.majesty.Adapters
 import android.app.Activity
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.PriceModel
 import eg.com.majesty.httpwww.majesty.R
 import kotlinx.android.synthetic.main.price_model.view.*
@@ -24,10 +26,16 @@ class PriceAdapter (val activity: Activity?=null, val priceModels: List<PriceMod
     {
        holder.price_data.setText(priceModels!!.get(position).FoodMenuItemName +" : " + priceModels.get(position).FoodMenuItemPrice)
 
+        holder.price_data.setTypeface(Utils.Exo2SemiBold(activity!!.applicationContext))
         if (selectedi == position)
         {
             holder.selected.visibility = View.VISIBLE
-        }else holder.selected.visibility = View.GONE
+            holder.price_data.setTextColor(Color.parseColor("#000000"))
+        }else
+        {
+            holder.price_data.setTextColor(Color.parseColor("#73000000"))
+            holder.selected.visibility = View.GONE
+        }
 
 
         holder.item.setOnClickListener {

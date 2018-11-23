@@ -13,6 +13,7 @@ import com.jaeger.library.StatusBarUtil
 import com.rd.PageIndicatorView
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.Adapters.TutorilaAdapter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
@@ -26,8 +27,6 @@ import org.androidannotations.annotations.ViewById
 @EActivity(R.layout.activity_tutorial_page)
 class TutorialPage : Activity()
 {
-
-
     val titles = listOf( " title 1 ", " title 2 ", " title 3 " , " title 4 " , " title 5 ")
     val des = listOf( " des 1 ", " des 2 ", " des 3 " , " des 4 " , " des 5 ")
 
@@ -35,20 +34,16 @@ class TutorialPage : Activity()
     @ViewById lateinit var pageIndicatorView : PageIndicatorView
     @ViewById lateinit var ce_login : LinearLayout
     @ViewById lateinit var getStarted : TextView
+    @ViewById lateinit var login : TextView
+    @ViewById lateinit var signUp : TextView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
 
         StatusBarUtil.setTransparent(this)
         super.onCreate(savedInstanceState)
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(CalligraphyInterceptor(
-                        CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/alfares.ttf")
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build())
-
     }
 
 
@@ -62,9 +57,13 @@ class TutorialPage : Activity()
     @AfterViews fun afterViewa()
     {
 
+        login.setTypeface(Utils.Exo2Bold(this))
+        signUp.setTypeface(Utils.Exo2Bold(this))
+        getStarted.setTypeface(Utils.Exo2Bold(this))
 
 
-        val adapter = TutorilaAdapter(titles, des)
+
+        val adapter = TutorilaAdapter(titles, des , this)
         val activity = this
         viewPager.adapter = adapter
         viewPager.startAutoScroll(3000)

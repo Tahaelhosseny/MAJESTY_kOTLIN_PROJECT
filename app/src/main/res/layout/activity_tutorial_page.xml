@@ -44,14 +44,15 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:visibility="gone"
         android:layout_marginRight="17dp"
         android:layout_marginLeft="17dp"
+        android:layout_marginBottom="20dp"
         android:id="@+id/getStarted"
         android:layout_above="@+id/ce_login"
-        android:background="@drawable/button_bg"
-        android:textSize="11sp"
+        android:background="@drawable/pink_gradiant2"
+        android:textSize="12sp"
         android:textColor="#ffffff"
         android:gravity="center_vertical|center_horizontal"
         android:text="Getting Started"
@@ -62,9 +63,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginRight="17dp"
         android:visibility="gone"
+        android:layout_marginBottom="35dp"
+        android:layout_marginRight="17dp"
         android:layout_marginLeft="17dp"
         android:id="@+id/ce_login"
         android:layout_alignParentBottom="true"
@@ -72,10 +73,11 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:id="@+id/signUp"
-            android:background="@drawable/c_a"
-            android:textSize="11sp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/cart_item_text_back"
+            android:textSize="12sp"
             android:gravity="center_vertical|center_horizontal"
             android:textColor="#ffffff"
             android:text="Create Account "
@@ -83,13 +85,14 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="Login \n"
+            android:layout_height="50dp"
+            android:text="Login"
             android:id="@+id/login"
-            android:textSize="11sp"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical|center_horizontal"
             android:textColor="#ffffff"
-            android:background="@drawable/rounded_rectangle_1_copy_2"
+            android:background="@drawable/login_btn_text_back"
             android:layout_weight="1"/>
 
     </LinearLayout>

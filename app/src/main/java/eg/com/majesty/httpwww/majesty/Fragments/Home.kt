@@ -11,23 +11,22 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
-import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.Adapters.MenuFoodDataAdapter
 import eg.com.majesty.httpwww.majesty.Models.CategoryModels
-import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.Models.MenuFoodDataModel
-
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_menu.*
-
+import org.json.JSONArray
+import java.util.HashMap
 
 class Home : Fragment()
 {
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -91,7 +90,9 @@ class Home : Fragment()
 
     fun requestData()
     {
-        var makeRequest = MakeRequest("GetHomeScreenData?isArabic=false&categoryCount=5&itemCount=5","0",activity,"GetFoodMenuTypes",true)
+        var mapt = HashMap<String , String>()
+
+        var makeRequest = MakeRequest("GetHomeScreenData?isArabic=false&categoryCount=5&itemCount=5","0",mapt ,activity,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {

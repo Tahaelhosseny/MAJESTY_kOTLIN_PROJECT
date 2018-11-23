@@ -27,7 +27,7 @@
                     android:text="@string/popular" />
                 <TextView
                     android:layout_width="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="10sp"
                     android:gravity="right|bottom"
                     android:layout_marginRight="10dp"
                     android:layout_height="25dp"
@@ -59,7 +59,7 @@
                     android:text="@string/freshOffers" />
                 <TextView
                     android:layout_width="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="10sp"
                     android:gravity="right|bottom"
                     android:layout_marginRight="10dp"
                     android:layout_height="25dp"

@@ -69,6 +69,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_height="20dp"
                     android:gravity="center"
+                    android:id="@+id/notiNum"
                     android:textColor="@color/white"
                     android:textSize="10sp"
                     android:text="65"
@@ -115,8 +116,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:text="@string/Home"
+                    android:id="@+id/htxt"
                     android:layout_marginTop="5dp"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
@@ -136,7 +138,8 @@
                     android:layout_width="wrap_content"
                     android:text="@string/Menu"
                     android:layout_marginTop="5dp"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
+                    android:id="@+id/mtxt"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <RelativeLayout
@@ -149,24 +152,8 @@
 
                 <ImageView
                     android:layout_width="60dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ellipse_682"
-                    android:layout_height="60dp" />
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ellipse_682_copy"
-                    android:layout_height="45dp" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/shape_683"
-                    android:layout_height="20dp" />
-
+                    android:layout_height="60dp"
+                    android:src="@drawable/shape_683_copy"/>
                 <ImageView
                     android:layout_width="20dp"
                     android:id="@+id/cartIm"
@@ -207,7 +194,8 @@
                     android:layout_width="wrap_content"
                     android:text="@string/Favorite"
                     android:layout_marginTop="5dp"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
+                    android:id="@+id/ftxt"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
@@ -227,7 +215,8 @@
                     android:layout_width="wrap_content"
                     android:text="@string/Orders"
                     android:layout_marginTop="5dp"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
+                    android:id="@+id/otxt"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>

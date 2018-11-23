@@ -31,8 +31,6 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kotlinx.android.synthetic.main.activity_one_item.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_menu.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
@@ -49,13 +47,7 @@ class OneItem : Activity()
         super.onCreate(savedInstanceState)
         StatusBarUtil.setTransparent(this)
 
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(CalligraphyInterceptor(
-                        CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/alfares.ttf")
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build())
+
         setContentView(R.layout.activity_one_item)
 
     }
@@ -71,8 +63,12 @@ class OneItem : Activity()
     @AfterViews
     fun afterViews()
     {
+
         ID = intent.getStringExtra("ID")
         loadData()
+
+
+
     }
 
 
@@ -112,11 +108,16 @@ class OneItem : Activity()
     fun setData(jsonObject : JsonObject)
     {
         val model = Gson().fromJson(jsonObject , ItemModel::class.java)
-        Picasso.with(this).load(model.FoodMenuImageUrl).into(foodImage)
-        name.setText(model.FoodMenuName)
-        des.setText(model.FoodMenuDescription)
+        Picasso.with(this).load(model.FoodMenuImageUrl.replace("http" , "https")).into(foodImage)
+        nameeee.setText(model.FoodMenuName)
+        deseee.setText(model.FoodMenuDescription)
         setRating(model.Rating)
-
+        catName.setTypeface(Utils.Exo2SemiBold(this))
+        nameeee.setTypeface(Utils.Exo2SemiBold(this))
+        deseee.setTypeface(Utils.Exo2Medium(this))
+        adtxteee.setTypeface(Utils.Exo2Bold(this))
+        counteee.setTypeface(Utils.Exo2Bold(this))
+        ratetxteee.setTypeface(Utils.Exo2SemiBold(this))
 
         val gson = Gson()
         val itemType = object : TypeToken<List<PriceModel>>() {}.type
@@ -139,7 +140,7 @@ class OneItem : Activity()
     @Click fun plus()
     {
         con++
-        count.setText(con.toString())
+        counteee.setText(con.toString())
     }
 
     @Click fun min()
@@ -148,7 +149,7 @@ class OneItem : Activity()
         con--
         if(con == 0)
             con++
-        count.setText(con.toString())
+        counteee.setText(con.toString())
     }
 
 
@@ -158,7 +159,7 @@ class OneItem : Activity()
     {
         var rateI = rate.toInt()
 
-        ratetxt.setText(rateI.toString() + " Of 5")
+        ratetxteee.setText(rateI.toString() + " Of 5")
 
         if(rateI ==0)
         {
@@ -224,7 +225,7 @@ class OneItem : Activity()
     {
         var foreraaParameter = ForeraaParameter(applicationContext)
 
-        var x = count.text
+        var x = counteee.text
 
 
         if(foreraaParameter.getString("UserID").length==0)

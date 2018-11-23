@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import eg.com.majesty.httpwww.majesty.Fragments.FreshOffers
 import eg.com.majesty.httpwww.majesty.Fragments.LoadCatItems
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.Models.MenuFoodDataModel
 import eg.com.majesty.httpwww.majesty.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.get_food_menues2.view.*
+import java.lang.Exception
 
 class MenuFoodDataAdapter (val activity : Activity, val categoryItems: List<MenuFoodDataModel>, fragmnt:String): RecyclerView.Adapter<MenuFoodDataAdapter.MyViewHolder>()
 {
@@ -31,7 +33,15 @@ class MenuFoodDataAdapter (val activity : Activity, val categoryItems: List<Menu
         holder.FoodMenuDescription.setText(categoryItems.get(position).FoodMenuDescription)
         holder.FfoodMenuDescription.setText(categoryItems.get(position).StandardPrice)
         holder.FoodMenuName.setText(categoryItems.get(position).FoodMenuName)
-        Picasso.with(activity).load(categoryItems.get(position).FoodMenuImageUrl).into(holder.FoodMenuImageUrl)
+
+        holder.FoodMenuName.setTypeface(Utils.Exo2SemiBold(activity))
+
+        try
+        {
+            Picasso.with(activity).load(categoryItems.get(position).FoodMenuImageUrl.replace("http" , "https")).into(holder.FoodMenuImageUrl)
+
+        }catch (e :Exception)
+        {}
 
 
         holder.item.setOnClickListener( object : View.OnClickListener

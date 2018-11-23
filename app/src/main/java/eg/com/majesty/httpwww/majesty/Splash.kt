@@ -23,7 +23,7 @@ class Splash : Activity()
         super.onCreate(savedInstanceState)
 
         var foreraaParameter = ForeraaParameter(applicationContext)
-       // foreraaParameter.setString("UserID" , "")
+        foreraaParameter.setString("UserID" , "")
         Handler().postDelayed(
                 {
                     if(foreraaParameter.getString("UserID").equals(""))

@@ -8,11 +8,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="45sp"
         android:gravity="center"
         android:id="@+id/titletitle"
         android:textColor="#ffffff"
-        android:lineSpacingExtra="1.7sp"
         android:text="Favorite Food \nOnline Now"
         />
 
@@ -20,7 +19,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="8.5sp"
+        android:textSize="25sp"
         android:id="@+id/des"
         android:textColor="#ffffff"
         android:lineSpacingExtra="5sp"

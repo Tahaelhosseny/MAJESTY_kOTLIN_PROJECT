@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.CartAdapter
 import eg.com.majesty.httpwww.majesty.Adapters.PriceAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.CartModel
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.R
@@ -43,7 +44,7 @@ class CheckOut : Activity()
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/alfares.ttf")
+                                .setDefaultFontPath("fonts/Exo2-Regular.ttf")
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build())
@@ -60,6 +61,14 @@ class CheckOut : Activity()
     @AfterViews
     fun afterViews()
     {
+
+        catNamee.setTypeface(Utils.Exo2SemiBold(this))
+        dotxt.setTypeface(Utils.Exo2SemiBold(this))
+        totalCount.setTypeface(Utils.Exo2SemiBold(this))
+        checktxt.setTypeface(Utils.Exo2Bold(this))
+        totalPricec.setTypeface(Utils.Exo2Bold(this))
+
+
         var foreraaParameter = ForeraaParameter(applicationContext)
 
         ID = foreraaParameter.getString("UserID")

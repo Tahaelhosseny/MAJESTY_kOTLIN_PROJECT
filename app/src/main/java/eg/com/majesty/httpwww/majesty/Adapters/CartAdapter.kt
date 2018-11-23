@@ -8,6 +8,7 @@ import eg.com.majesty.httpwww.majesty.R
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.CartModel
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
@@ -33,10 +34,30 @@ class CartAdapter (val activity: Activity?=null, val cartModels: List<CartModel>
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        Picasso.with(activity).load(cartModels!!.get(position).FoodMenuImageUrl).into(holder.FoodMenuImageUrl)
+        Picasso.with(activity).load(cartModels!!.get(position).FoodMenuImageUrl.replace("http" , "https")).into(holder.FoodMenuImageUrl)
         holder.ItemName.setText(cartModels!!.get(position).FoodMenuName)
+        holder.ItemName.setTypeface(Utils.Exo2SemiBold(activity!!.applicationContext))
+
+
+
         holder.itemSize.setText(cartModels!!.get(position).FoodMenuItemName)
+        holder.itemSize.setTypeface(Utils.Exo2SemiBold(activity!!.applicationContext))
+
+
+
+
         holder.count.setText(cartModels!!.get(position).Quantity.toString())
+        holder.count.setTypeface(Utils.Exo2Bold(activity))
+
+
+        holder.itemPrice.setTypeface(Utils.Exo2SemiBold(activity))
+        holder.totalPrice.setTypeface(Utils.Exo2SemiBold(activity))
+
+
+
+
+
+
         holder.itemPrice.setText(cartModels!!.get(position).ItemPrice.toString())
         holder.totalPrice.setText(cartModels!!.get(position).TotalAmount.toString())
 

@@ -20,8 +20,8 @@ object Utils {
     var IsDev: Boolean? = false
 
 
-    var DevUrl = "http://demo.majesty.com.eg/ws/mjws.asmx/"
-    var ReleaseUrl = "http://demo.majesty.com.eg/ws/mjws.asmx/"
+    var DevUrl = "https://demo.majesty.com.eg/ws/mjws.asmx/"
+    var ReleaseUrl = "https://demo.majesty.com.eg/ws/mjws.asmx/"
 
 
     val kiwihatParentURL: String
@@ -92,6 +92,26 @@ object Utils {
     fun setFontawesome(context: Context): Typeface {
         return Typeface.createFromAsset(context.assets, "fonts/fontawesome-webfont.ttf")
     }
+
+    fun setExo2Regular(context: Context): Typeface {
+        return Typeface.createFromAsset(context.assets, "fonts/Exo2-Regular.ttf")
+    }
+
+
+    fun Exo2Bold(context: Context): Typeface {
+        return Typeface.createFromAsset(context.assets, "fonts/Exo2-Bold.ttf")
+    }
+
+    fun Exo2SemiBold(context: Context): Typeface {
+        return Typeface.createFromAsset(context.assets, "fonts/Exo2-SemiBold.ttf")
+    }
+
+
+    fun Exo2Medium(context: Context): Typeface {
+        return Typeface.createFromAsset(context.assets, "fonts/Exo2-Medium.ttf")
+    }
+
+
 
     fun changNumToArabic(input: String): String {
         /* char[] arabicChars = {'٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'};

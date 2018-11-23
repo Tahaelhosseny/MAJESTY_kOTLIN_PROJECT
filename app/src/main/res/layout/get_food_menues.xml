@@ -51,7 +51,7 @@
             android:textColor="@color/white"
             android:text="Margrita"
             android:gravity="center"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:layout_marginTop="130dp"
             android:layout_height="60dp" />
 
@@ -68,7 +68,7 @@
                 android:text="Bell pepper, Tomato,Olive,Mozarella"
                 android:id="@+id/FoodMenuDescription"
                 android:layout_weight="1"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:ellipsize="end"
                 android:lines="2"
                 android:maxLines="2"
@@ -80,7 +80,7 @@
                 android:textColor="@color/white"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="18sp"
+                android:textSize="13sp"
                 android:text="M : 41"
                 android:id="@+id/FfoodMenuDescription"
                 android:layout_height="60dp" />

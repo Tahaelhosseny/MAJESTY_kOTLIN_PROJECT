@@ -47,6 +47,7 @@
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:text="SignUp"
+                android:id="@+id/sign"
                 android:gravity="center"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="23dp" />
@@ -80,6 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:id="@+id/ftxt"
                     android:layout_gravity="center"
                     android:textColor="#ffffff"
                     android:gravity="center_horizontal"
@@ -139,16 +141,9 @@
                         android:gravity="center|left"
                         android:layout_marginLeft="20dp"
                         android:textColor="#666666"
-                        android:hint="Email "
+                        android:hint="Email* "
                         />
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:src="@drawable/req"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="-35dp"
-                        android:layout_height="10dp" />
 
                 </LinearLayout>
 
@@ -171,15 +166,8 @@
                         android:gravity="center|left"
                         android:layout_marginLeft="20dp"
                         android:textColor="#666666"
-                        android:hint="First Name "
+                        android:hint="First Name* "
                         />
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:src="@drawable/req"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="-35dp"
-                        android:layout_height="10dp" />
 
                 </LinearLayout>
 
@@ -202,17 +190,10 @@
                         android:gravity="center|left"
                         android:layout_marginLeft="20dp"
                         android:textColor="#666666"
-                        android:hint="Second Name "
+                        android:hint="Second Name* "
                         />
 
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:src="@drawable/req"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="-35dp"
-                        android:layout_height="10dp" />
 
 
                 </LinearLayout>
@@ -237,17 +218,10 @@
                         android:gravity="center|left"
                         android:layout_marginLeft="20dp"
                         android:textColor="#666666"
-                        android:hint="Phone Number1 "
+                        android:hint="Phone Number1* "
                         />
 
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:src="@drawable/req"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="-35dp"
-                        android:layout_height="10dp" />
 
 
                 </LinearLayout>
@@ -325,17 +299,9 @@
                         android:gravity="center|left"
                         android:layout_marginLeft="20dp"
                         android:textColor="#666666"
-                        android:hint="Password "
+                        android:hint="Password* "
                         />
 
-
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:src="@drawable/req"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="-35dp"
-                        android:layout_height="10dp" />
 
 
 
@@ -362,17 +328,11 @@
                         android:gravity="center|left"
                         android:layout_marginLeft="20dp"
                         android:textColor="#666666"
-                        android:hint="Confirm Password "
+                        android:hint="Confirm Password* "
                         />
 
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:src="@drawable/req"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="-35dp"
-                        android:layout_height="10dp" />
+
                 </LinearLayout>
 
 
