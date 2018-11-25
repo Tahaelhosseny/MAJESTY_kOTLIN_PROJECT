@@ -30,11 +30,10 @@
         android:id="@+id/viewPager"
         android:layout_height="match_parent">
     </cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager>
-    <com.rd.PageIndicatorView
+    <com.rd.pageindicatorview.view.PageIndicatorView
         android:layout_width="wrap_content"
+        app:radius="10dp"
         android:id="@+id/pageIndicatorView"
-        app:piv_radius="15dp"
-        app:piv_animationType="drop"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"

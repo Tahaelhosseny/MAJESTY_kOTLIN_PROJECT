@@ -26,9 +26,6 @@ import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
-import io.github.inflationx.calligraphy3.CalligraphyConfig
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor
-import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kotlinx.android.synthetic.main.activity_one_item.*
 import org.androidannotations.annotations.AfterViews

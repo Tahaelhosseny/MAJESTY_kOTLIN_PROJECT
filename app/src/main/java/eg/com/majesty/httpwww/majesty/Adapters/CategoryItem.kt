@@ -64,16 +64,13 @@ class CategoryItem (val activity: Activity,val categoryItems: List<CategoryModel
             override fun onClick(v: View?)
             {
 
-                if(fragment.equals("menu"))
-                {
-                    val loadCatItems = LoadCatItems()
-                    loadCatItems.setData(categoryItems.get(position).FoodMenuTypeID ,categoryItems.get(position).FoodMenuTypeName)
-                    val fragmentTransaction = activity.fragmentManager.beginTransaction()
-                    fragmentTransaction.addToBackStack(null)
-                    fragmentTransaction.replace(R.id.frameContainer, loadCatItems)
-                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    fragmentTransaction.commit()
-                }
+                val loadCatItems = LoadCatItems()
+                loadCatItems.setData(categoryItems.get(position).FoodMenuTypeID ,categoryItems.get(position).FoodMenuTypeName)
+                val fragmentTransaction = activity.fragmentManager.beginTransaction()
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.replace(R.id.frameContainer, loadCatItems)
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.commit()
 
             }
         })

@@ -10,7 +10,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
 import com.jaeger.library.StatusBarUtil
-import com.rd.PageIndicatorView
+import com.rd.pageindicatorview.view.PageIndicatorView
+import com.rd.pageindicatorview.view.animation.AnimationType
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.Adapters.TutorilaAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
@@ -69,7 +70,9 @@ class TutorialPage : Activity()
         viewPager.startAutoScroll(3000)
         viewPager.interval= 3000
         viewPager.isCycle = false
-        pageIndicatorView.setViewPager(viewPager)
+        pageIndicatorView.count = adapter.count
+        pageIndicatorView.setAnimationType(AnimationType.SCALE)
+        pageIndicatorView.addViewPager(viewPager)
         viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int)

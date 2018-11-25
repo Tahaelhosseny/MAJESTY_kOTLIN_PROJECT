@@ -93,6 +93,44 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
+
+        <RelativeLayout
+            android:layout_width="85dp"
+            android:id="@+id/cart"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_height="85dp"
+            >
+
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="190dp"
+                android:src="@drawable/shape_683_copy" />
+            <ImageView
+                android:layout_width="20dp"
+                android:id="@+id/cartIm"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/notification_copy_3"/>
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="20dp"
+                android:id="@+id/cartTxt"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:text="65"
+                android:layout_alignParentRight="true"
+                />
+
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -142,41 +180,12 @@
                     android:id="@+id/mtxt"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/cart"
-                android:orientation="vertical"
                 android:layout_height="match_parent"
-                >
+                android:layout_weight="1"></LinearLayout>
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/shape_683_copy"/>
-                <ImageView
-                    android:layout_width="20dp"
-                    android:id="@+id/cartIm"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/notification_copy_3"/>
-
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/cartTxt"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:text="65"
-                    android:layout_alignParentRight="true"
-                    />
-
-            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
