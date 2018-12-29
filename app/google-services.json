@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "398509507150",
+    "firebase_url": "https://majesty-mobile-app.firebaseio.com",
+    "project_id": "majesty-mobile-app",
+    "storage_bucket": "majesty-mobile-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398509507150:android:eba05fa0cabfb33f",
+        "android_client_info": {
+          "package_name": "eg.com.majesty.httpwww.majesty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398509507150-038brv5h2c2gfoq1iqjmlsem2s4shhbc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eg.com.majesty.httpwww.majesty",
+            "certificate_hash": "302e6afe9fd83f75d3f5b5a823cfe6e3ba86424f"
+          }
+        },
+        {
+          "client_id": "398509507150-um620nhnskrhefpk72v06ijbokjrd7m7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1cupZUHAgo-8dOQ6z_i4r45FL9ZYh5l8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398509507150-um620nhnskrhefpk72v06ijbokjrd7m7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
