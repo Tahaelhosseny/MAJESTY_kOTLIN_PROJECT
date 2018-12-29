@@ -12,6 +12,7 @@ import com.google.gson.JsonArray
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
 import eg.com.majesty.httpwww.majesty.Adapters.MenuFoodDataAdapter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.Models.CategoryModels
 import eg.com.majesty.httpwww.majesty.Models.MenuFoodDataModel
 import eg.com.majesty.httpwww.majesty.R
@@ -25,6 +26,8 @@ import java.util.HashMap
 
 class Home : Fragment()
 {
+
+    var ID :String =""
 
 
 
@@ -40,6 +43,14 @@ class Home : Fragment()
         activity.headerText.setText("Home")
         activity.back.visibility = View.GONE
         activity.menu.visibility = View.VISIBLE
+
+        var foreraaParameter = ForeraaParameter(activity)
+
+        try
+        {
+            ID = foreraaParameter.getString("UserID")
+
+        }catch (e : Exception){}
     }
 
 
@@ -92,7 +103,7 @@ class Home : Fragment()
     {
         var mapt = HashMap<String , String>()
 
-        var makeRequest = MakeRequest("GetHomeScreenData?isArabic=false&categoryCount=5&itemCount=5","0",mapt ,activity,"GetFoodMenuTypes",true)
+        var makeRequest = MakeRequest("GetHomeScreenData?isArabic=false&categoryCount=5&itemCount=5&userIDorPassNothing=" +ID,"0",mapt ,activity,"_Categories",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -100,12 +111,19 @@ class Home : Fragment()
             {
 
                 var str = result.get("res")
+
+
+
                 var jsonArray = Gson().fromJson(str, JsonArray::class.java)
                 var jsonObject = jsonArray.get(0).asJsonObject
+                var notificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
+
+                activity.notiNum.text = notificationNumbers.get("NotificationsCount").toString()
+                activity.cartTxt.text = notificationNumbers.get("CartItemsCount").toString()
 
                 val gson = Gson()
                 val itemType = object : TypeToken<List<CategoryModels>>() {}.type
-                val itemList = gson.fromJson<List<CategoryModels>>(jsonObject.getAsJsonArray("MenuFoodTypeData").toString(), itemType)
+                val itemList = gson.fromJson<List<CategoryModels>>(jsonObject.getAsJsonArray("_Categories").toString(), itemType)
                 popularRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
                 popularRec.adapter = CategoryItem(activity ,itemList ,"home")
                 popularRec.adapter.notifyDataSetChanged()
@@ -114,7 +132,7 @@ class Home : Fragment()
 
 
                 val itemType2 = object : TypeToken<List<MenuFoodDataModel>>() {}.type
-                val itemList2 = gson.fromJson<List<MenuFoodDataModel>>(jsonObject.getAsJsonArray("MenuFoodData").toString(), itemType2)
+                val itemList2 = gson.fromJson<List<MenuFoodDataModel>>(jsonObject.getAsJsonArray("_HotItems").toString(), itemType2)
                 freshRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
                 freshRec.adapter = MenuFoodDataAdapter(activity ,itemList2 ,"home")
                 freshRec.adapter.notifyDataSetChanged()

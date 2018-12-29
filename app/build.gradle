@@ -26,6 +26,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: "kotlin-allopen"
+apply plugin: 'io.fabric'
 
 
 kapt {
@@ -99,6 +100,11 @@ dependencies {
     implementation 'com.github.drawers:SpinnerDatePicker:1.0.6'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+
+    // Add dependency
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'
 }
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
