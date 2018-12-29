@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
+import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 
 import eg.com.majesty.httpwww.majesty.R
@@ -28,6 +30,7 @@ class LoadCatItems : Fragment()
 
     var FoodMenuTypeID :String = ""
     var CategoryName : String = ""
+    var ID :String =""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_load_cat_items, container, false)
@@ -37,6 +40,13 @@ class LoadCatItems : Fragment()
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
         super.onActivityCreated(savedInstanceState)
+        var foreraaParameter = ForeraaParameter(activity)
+
+        try
+        {
+            ID = foreraaParameter.getString("UserID")
+
+        }catch (e : Exception){}
         loadData()
 
     }
@@ -52,7 +62,7 @@ class LoadCatItems : Fragment()
 
     fun loadData()
     {
-        var makeRequest = MakeRequest("GetFoodMenus?isArabic=false&&foodMenuTypeID=" + FoodMenuTypeID,"0",activity,"GetFoodMenuTypes",true)
+        var makeRequest = MakeRequest("GetCategoryItems?isArabic=false&&foodMenuTypeID=" + FoodMenuTypeID + "&userIDorPassNothing=" + ID,"0",activity,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -61,8 +71,23 @@ class LoadCatItems : Fragment()
 
                 Log.e("responce" , result.get("res"))
                 val gson = Gson()
+
+
+                var str = result.get("res")
+
+
+                var jsonObject = Gson().fromJson(str, JsonObject::class.java)
+
+                var notificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
+
+                activity.notiNum.text = notificationNumbers.get("NotificationsCount").toString()
+                activity.cartTxt.text = notificationNumbers.get("CartItemsCount").toString()
+
+
+
+
                 val itemType = object : TypeToken<List<GetFoodMenusModel>>() {}.type
-                val itemList = gson.fromJson<List<GetFoodMenusModel>>(result.get("res").toString(), itemType)
+                val itemList = gson.fromJson<List<GetFoodMenusModel>>(jsonObject.get("ItemDetails").toString(), itemType)
                 cat_item.layoutManager = LinearLayoutManager(activity)
                 cat_item.adapter = GetFoodMenus(activity ,itemList ,"n")
                 cat_item.adapter.notifyDataSetChanged()

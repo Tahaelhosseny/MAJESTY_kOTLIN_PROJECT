@@ -8,4 +8,12 @@
 
 package eg.com.majesty.httpwww.majesty.Models
 
-class GetFoodMenusModel(var FoodMenuID: String,var FoodMenuTypeID : String ,var FoodMenuName : String, var FoodMenuDescription : String,var FoodMenuImageUrl : String , var StandardPrice : String)
+class GetFoodMenusModel(var FoodMenuID: String,
+                        var FoodMenuTypeID : String ,
+                        var FoodMenuName : String,
+                        var FoodMenuDescription : String,
+                        var FoodMenuImageUrl : String ,
+                        var StandardPrice : String ,
+                        var Rating: Float ,
+                        var IsItemInUserFavourites : Boolean,
+                        var MenuItemPricesData : String)

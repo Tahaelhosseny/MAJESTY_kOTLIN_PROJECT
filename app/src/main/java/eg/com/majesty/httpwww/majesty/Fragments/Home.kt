@@ -92,7 +92,6 @@ class Home : Fragment()
 
         requestData()
 
-
     }
 
 

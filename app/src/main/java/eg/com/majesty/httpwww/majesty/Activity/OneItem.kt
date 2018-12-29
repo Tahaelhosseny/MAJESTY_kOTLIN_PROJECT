@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -27,6 +28,7 @@ import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_one_item.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
@@ -38,6 +40,8 @@ class OneItem : Activity()
 {
     var ID :String =""
     var con = 0
+
+    var  userIDorPassNothing = ""
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -62,6 +66,14 @@ class OneItem : Activity()
     {
 
         ID = intent.getStringExtra("ID")
+        var foreraaParameter = ForeraaParameter(this)
+
+        try
+        {
+            userIDorPassNothing = foreraaParameter.getString("UserID")
+
+        }catch (e : Exception){}
+
         loadData()
 
 
@@ -73,19 +85,22 @@ class OneItem : Activity()
 
     fun loadData()
     {
-        var makeRequest = MakeRequest("GetFoodMenuItemsAndPrices?isArabic=false&foodMenuID=" + ID,"0",this,"GetFoodMenuTypes",true)
+        var makeRequest = MakeRequest("GetItemDetails?isArabic=false&foodMenuID=" + ID + "&userIDorPassNothing=" + userIDorPassNothing,"0",this,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {
             override fun onSuccess(result: Map<String, String>)
             {
 
-                Log.e("responce" , result.get("res"))
 
                 var str = result.get("res")
-                var jsonArray = Gson().fromJson(str, JsonArray::class.java)
-                var jsonObject = jsonArray.get(0).asJsonObject
-                setData(jsonObject)
+
+                var jsonObject = Gson().fromJson(str, JsonObject::class.java)
+               // var notificationNumbers = jsonObject.getAsJsonObject("NotificationNumbers").get(0).asJsonObject
+
+                var jsonObject2 = jsonObject.getAsJsonArray("ItemDetails").get(0).asJsonObject
+
+                setData(jsonObject2)
             }
         } ,object : ONRetryHandler
         {
@@ -105,7 +120,7 @@ class OneItem : Activity()
     fun setData(jsonObject : JsonObject)
     {
         val model = Gson().fromJson(jsonObject , ItemModel::class.java)
-        Picasso.with(this).load(model.FoodMenuImageUrl.replace("http" , "https")).into(foodImage)
+        Glide.with(this).load(model.FoodMenuImageUrl.replace("http" , "https")).thumbnail(.1f).into(foodImage)
         nameeee.setText(model.FoodMenuName)
         deseee.setText(model.FoodMenuDescription)
         setRating(model.Rating)

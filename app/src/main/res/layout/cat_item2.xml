@@ -17,6 +17,18 @@
             android:layout_height="150dp"
             android:src="@drawable/cat1"/>
         
+
+
+
+        <ImageView
+            android:layout_width="80dp"
+            android:src="@drawable/shape_846"
+            android:id="@+id/imgh"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_height="80dp" />
+
+
         <ImageView
             android:layout_width="110dp"
             android:src="@drawable/piza"
@@ -25,15 +37,6 @@
             android:layout_alignParentLeft="true"
             android:layout_height="130dp" />
 
-
-
-        <ImageView
-            android:layout_width="120dp"
-            android:src="@drawable/shape_846"
-            android:id="@+id/imgh"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_height="120dp" />
 
         <TextView
             android:layout_width="150dp"
