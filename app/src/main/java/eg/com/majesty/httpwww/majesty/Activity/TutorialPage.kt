@@ -9,12 +9,18 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.reflect.TypeToken
 import com.jaeger.library.StatusBarUtil
 import com.rd.pageindicatorview.view.PageIndicatorView
 import com.rd.pageindicatorview.view.animation.AnimationType
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.Adapters.TutorilaAdapter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
+import eg.com.majesty.httpwww.majesty.Models.AppLoginIntroSliderModel
+import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
@@ -28,8 +34,7 @@ import org.androidannotations.annotations.ViewById
 @EActivity(R.layout.activity_tutorial_page)
 class TutorialPage : Activity()
 {
-    val titles = listOf( " title 1 ", " title 2 ", " title 3 " , " title 4 " , " title 5 ")
-    val des = listOf( " des 1 ", " des 2 ", " des 3 " , " des 4 " , " des 5 ")
+
 
     @ViewById lateinit var viewPager : AutoScrollViewPager
     @ViewById lateinit var pageIndicatorView : PageIndicatorView
@@ -64,7 +69,16 @@ class TutorialPage : Activity()
 
 
 
-        val adapter = TutorilaAdapter(titles, des , this)
+        var str = ForeraaParameter(this).getString("GetAppIntroData")
+        val gson = Gson()
+        var jsonObject = Gson().fromJson(str, JsonObject::class.java)
+        val itemType = object : TypeToken<List<AppLoginIntroSliderModel>>() {}.type
+        val itemList = gson.fromJson<List<AppLoginIntroSliderModel>>(jsonObject.get("AppLoginIntroSlider").toString(), itemType)
+
+
+
+
+        val adapter = TutorilaAdapter( itemList, this)
         val activity = this
         viewPager.adapter = adapter
         viewPager.startAutoScroll(3000)
@@ -85,19 +99,6 @@ class TutorialPage : Activity()
             }
             override fun onPageSelected(position: Int)
             {
-
-                if(position == titles.size-1)
-                {
-                    ce_login.visibility = View.VISIBLE
-                    getStarted.visibility = View.VISIBLE
-                    pageIndicatorView.visibility = View.GONE
-
-                }else
-                {
-                    ce_login.visibility = View.GONE
-                    getStarted.visibility = View.GONE
-                    pageIndicatorView.visibility = View.VISIBLE
-                }
 
             }
 

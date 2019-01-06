@@ -28,15 +28,17 @@
     <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
         android:layout_width="match_parent"
         android:id="@+id/viewPager"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/getStarted"
         android:layout_height="match_parent">
     </cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager>
     <com.rd.pageindicatorview.view.PageIndicatorView
         android:layout_width="wrap_content"
         app:radius="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@+id/getStarted"
         android:id="@+id/pageIndicatorView"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         />
 
@@ -44,7 +46,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:visibility="gone"
         android:layout_marginRight="17dp"
         android:layout_marginLeft="17dp"
         android:layout_marginBottom="20dp"
@@ -62,7 +63,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_marginBottom="35dp"
         android:layout_marginRight="17dp"
         android:layout_marginLeft="17dp"

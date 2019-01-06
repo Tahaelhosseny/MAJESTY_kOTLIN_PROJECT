@@ -15,7 +15,9 @@ import org.androidannotations.annotations.EActivity
 import android.app.FragmentTransaction
 import android.content.Intent
 import android.os.Build
+import android.widget.Toast
 import eg.com.majesty.httpwww.majesty.Fragments.*
+import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import org.androidannotations.annotations.AfterViews
 @EActivity(R.layout.activity_main)
@@ -130,19 +132,47 @@ class MainActivity : Activity()
 
     @Click fun favorite ()
     {
-        homeIm.setImageResource(R.drawable.icon_home)
-        favoriteIm.setImageResource(R.drawable.favorite1)
-        ordersIm.setImageResource(R.drawable.ordera)
-        menuIm.setImageResource(R.drawable.menu)
 
-        headerText.setText(R.string.Favorite)
 
-        val favorite = Favorite()
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameContainer, favorite)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        fragmentTransaction.commit()
+        var ID = ""
+
+
+        var foreraaParameter = ForeraaParameter(this)
+
+        try
+        {
+            ID = foreraaParameter.getString("UserID")
+
+        }catch (e : Exception){}
+
+
+
+
+
+        if(ID.equals(""))
+        {
+            Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
+        }else
+        {
+            homeIm.setImageResource(R.drawable.icon_home)
+            favoriteIm.setImageResource(R.drawable.favorite1)
+            ordersIm.setImageResource(R.drawable.ordera)
+            menuIm.setImageResource(R.drawable.menu)
+
+            headerText.setText(R.string.Favorite)
+
+            val favorite = Favorite()
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameContainer, favorite)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            fragmentTransaction.commit()
+        }
+
+
+
+
+
     }
 
 

@@ -52,7 +52,11 @@
         <activity
             android:name=".Activity.SignUp_"
             android:theme="@style/AppTheme.login" />
-        <activity android:name=".Activity.CheckOut_" android:theme="@style/AppTheme.login"></activity>
+        <activity
+            android:name=".Activity.CheckOut_"
+            android:theme="@style/AppTheme.login" />
+        <activity android:name=".Activity.MyPlaces" />
+        <activity android:name=".Activity.AddNewPlace"></activity>
     </application>
 
 </manifest>

@@ -6,9 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import eg.com.majesty.httpwww.majesty.R
 import android.view.ViewGroup
+import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
+import eg.com.majesty.httpwww.majesty.InterFaces.RemoveFromCartUpdate
 import eg.com.majesty.httpwww.majesty.Models.CartModel
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
@@ -16,10 +22,9 @@ import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import kotlinx.android.synthetic.main.cart_item.view.*
 
 
-class CartAdapter (val activity: Activity?=null, val cartModels: List<CartModel>?=null): RecyclerView.Adapter<CartAdapter.MyViewHolder>()
+class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<CartModel>?=null , var removeFromCartUpdate : RemoveFromCartUpdate?=null): RecyclerView.Adapter<CartAdapter.MyViewHolder>()
 
 {
-
     var delete = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
@@ -34,7 +39,7 @@ class CartAdapter (val activity: Activity?=null, val cartModels: List<CartModel>
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        Picasso.with(activity).load(cartModels!!.get(position).FoodMenuImageUrl.replace("http" , "https")).into(holder.FoodMenuImageUrl)
+        Glide.with(activity!!.applicationContext).load(cartModels!!.get(position).FoodMenuImageUrl.replace("http" , "https")).thumbnail(.2f).into(holder.FoodMenuImageUrl)
         holder.ItemName.setText(cartModels!!.get(position).FoodMenuName)
         holder.ItemName.setTypeface(Utils.Exo2SemiBold(activity!!.applicationContext))
 
@@ -115,6 +120,7 @@ class CartAdapter (val activity: Activity?=null, val cartModels: List<CartModel>
         }
 
 
+
         return totalPrice
     }
 
@@ -128,12 +134,22 @@ class CartAdapter (val activity: Activity?=null, val cartModels: List<CartModel>
 
         var ID = foreraaParameter.getString("UserID")
 
-        var makeRequest = MakeRequest("RemoveFoodMenuFromWishlist?isArabice=false&userID=" + ID + "&foodMenuID=" + foodMenuID ,"0",activity!!.applicationContext,"GetFoodMenuTypes",true)
+        var makeRequest = MakeRequest("RemoveItemFromCart?isArabice=false&userID=" + ID + "&foodMenuItemID=" + foodMenuID ,"0",activity,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {
             override fun onSuccess(result: Map<String, String>)
             {
+
+                var jsonObject = Gson().fromJson(result.get("res"), JsonArray::class.java).get(0).asJsonObject
+
+                if(jsonObject.get("Succeed").asBoolean)
+                {
+                    Toast.makeText(activity!!.applicationContext , "Item Removed Successfully from your cart" ,Toast.LENGTH_LONG).show()
+                    cartModels!!.removeAt(position)
+                    notifyDataSetChanged()
+                    removeFromCartUpdate!!.update(jsonObject.get("CartTotalAmount").asFloat , cartModels.size)
+                }
             }
         } ,object : ONRetryHandler
         {

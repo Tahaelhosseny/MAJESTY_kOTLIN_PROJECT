@@ -47,8 +47,6 @@ class OneItem : Activity()
     {
         super.onCreate(savedInstanceState)
         StatusBarUtil.setTransparent(this)
-
-
         setContentView(R.layout.activity_one_item)
 
     }
@@ -247,14 +245,20 @@ class OneItem : Activity()
         else
         {
             var map = HashMap<String , String>()
-            var makeRequest = MakeRequest("AddFoodMenuItemToCart?userID=" +foreraaParameter.getString("UserID")+"&foodMenuItemID=" +adapter.getSize() + "&quantity=" + x ,"0", map , this,"",true)
+            var makeRequest = MakeRequest("AddItemToCart?userID=" +foreraaParameter.getString("UserID")+"&foodMenuItemID=" +adapter.getSize() + "&quantity=" + x ,"0", map , this,"",true)
             makeRequest.request(object  : VolleyCallback
             {
                 override fun onSuccess(result: Map<String, String>)
                 {
 
-                    val res = result.get("res")
-                    if (res.equals("true"))
+                    val res = result.get("res").toString()
+
+
+                    var jsonObject = Gson().fromJson(res, JsonArray::class.java).get(0).asJsonObject
+
+
+
+                    if (jsonObject.get("Succeed").asBoolean)
                     {
                         Toast.makeText(this@OneItem , "Item Added To Cart Successfully" , Toast.LENGTH_LONG).show()
                     }else

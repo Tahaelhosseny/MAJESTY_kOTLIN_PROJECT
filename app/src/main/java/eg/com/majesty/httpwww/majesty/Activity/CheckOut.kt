@@ -1,6 +1,7 @@
 package eg.com.majesty.httpwww.majesty.Activity
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import eg.com.majesty.httpwww.majesty.Adapters.CartAdapter
 import eg.com.majesty.httpwww.majesty.Adapters.PriceAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
+import eg.com.majesty.httpwww.majesty.InterFaces.RemoveFromCartUpdate
 import eg.com.majesty.httpwww.majesty.Models.CartModel
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.R
@@ -85,7 +87,7 @@ class CheckOut : Activity()
 
     fun loadData()
     {
-        var makeRequest = MakeRequest("GetCurrentShoppingCartItems?isArabice=false&userID=" + ID,"0",this,"GetFoodMenuTypes",true)
+        var makeRequest = MakeRequest("GetCurrentShoppingCartItems?isArabice=false&userID=" + ID,"0",this,"GetCurrentShoppingCartItems",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -113,11 +115,26 @@ class CheckOut : Activity()
     fun setData(responce : String)
     {
         val gson = Gson()
+
+        var jsonObject = Gson().fromJson(responce, JsonObject::class.java)
+        var NotificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
+        var shoppingCartItemData = jsonObject.getAsJsonArray("shoppingCartItemData")
+
+
+
         val itemType = object : TypeToken<List<CartModel>>() {}.type
-        val itemList = gson.fromJson<List<CartModel>>(responce, itemType)
+        val itemList = gson.fromJson<MutableList<CartModel>>(shoppingCartItemData.toString(), itemType)
 
         cartItems.layoutManager = LinearLayoutManager(this )
-        adapter = CartAdapter(this ,itemList)
+        adapter = CartAdapter(this ,itemList , object : RemoveFromCartUpdate
+        {
+            override fun update(CartTotalAmount: Float , cartItemsCount : Int)
+            {
+                totalCount.setText(cartItemsCount.toString())
+                totalPricec.setText(CartTotalAmount.toString() )
+            }
+
+        })
         cartItems.adapter  = adapter
         cartItems.adapter.notifyDataSetChanged()
         totalCount.setText(itemList.size.toString())
@@ -148,7 +165,11 @@ class CheckOut : Activity()
 
     @Click fun footer()
     {
-        var makeRequest = MakeRequest("ConfirmCurrentShoppingCart?isArabice=false&userID=" + ID,"0",this,"GetFoodMenuTypes",true)
+
+
+
+        startActivity(Intent(this , MyPlaces::class.java))
+       /* var makeRequest = MakeRequest("ConfirmCurrentShoppingCart?isArabice=false&userID=" + ID,"0",this,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -164,7 +185,7 @@ class CheckOut : Activity()
             {
 
             }
-        })
+        })*/
     }
 
 
