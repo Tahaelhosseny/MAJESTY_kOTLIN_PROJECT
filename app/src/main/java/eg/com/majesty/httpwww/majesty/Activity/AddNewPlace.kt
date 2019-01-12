@@ -333,8 +333,8 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
             {
 
                 var str = result.get("res").toString()
-                var jsonObject = Gson().fromJson(str, JSONObject::class.java)
-                if( jsonObject.getJSONArray("NotificationsNumbers").getJSONObject(0).getBoolean("Succeed"))
+                var jsonObject = Gson().fromJson(str, JsonObject::class.java)
+                if( jsonObject.get("NotificationsNumbers").asJsonArray.get(0).asJsonObject.get("Succeed").asBoolean)
                 {
                     Toast.makeText(this@AddNewPlace , "Address Add Successfully !!" , Toast.LENGTH_LONG).show()
                 }
