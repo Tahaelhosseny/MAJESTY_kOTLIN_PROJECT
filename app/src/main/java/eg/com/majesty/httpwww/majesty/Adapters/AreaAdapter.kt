@@ -8,16 +8,16 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import eg.com.majesty.httpwww.majesty.InterFaces.UpdateCity
-import eg.com.majesty.httpwww.majesty.Models.CityModel
+import eg.com.majesty.httpwww.majesty.Models.AreaModel
 import eg.com.majesty.httpwww.majesty.R
 import kotlinx.android.synthetic.main.cityitem.view.*
 
 
 
-class CityAdapter(var activity :Activity , var listCity: MutableList<CityModel> , var updateCity : UpdateCity) : RecyclerView.Adapter<CityAdapter.MyViewHolder>() , Filterable
+class AreaAdapter(var activity :Activity, var listCity: MutableList<AreaModel>, var updateCity : UpdateCity) : RecyclerView.Adapter<AreaAdapter.MyViewHolder>() , Filterable
 {
 
-    var  filterdItemList : MutableList<CityModel>
+    var  filterdItemList : MutableList<AreaModel>
 
     init {
         filterdItemList = listCity
@@ -36,13 +36,13 @@ class CityAdapter(var activity :Activity , var listCity: MutableList<CityModel> 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        holder.city.text = filterdItemList.get(position).CityName
+        holder.city.text = filterdItemList.get(position).AreaName
 
 
         holder.itemView.setOnClickListener(object :View.OnClickListener{
             override fun onClick(v: View?)
             {
-                updateCity.update(filterdItemList.get(position).CityID ,filterdItemList.get(position).CityName )
+                updateCity.update(filterdItemList.get(position).AreaID ,filterdItemList.get(position).AreaName )
             }
         })
 
@@ -67,10 +67,10 @@ class CityAdapter(var activity :Activity , var listCity: MutableList<CityModel> 
                      filterdItemList =listCity
                  } else {
 
-                     val filteredList : MutableList<CityModel> = arrayListOf()
+                     val filteredList : MutableList<AreaModel> = arrayListOf()
                      for (item in listCity)
                      {
-                         if (item.CityName.toLowerCase().contains(charString.toLowerCase()))
+                         if (item.AreaName.toLowerCase().contains(charString.toLowerCase()))
                          {
                              filteredList.add(item)
                          }
@@ -84,7 +84,7 @@ class CityAdapter(var activity :Activity , var listCity: MutableList<CityModel> 
 
              override fun publishResults(constraint: CharSequence?, results: FilterResults?)
              {
-                 filterdItemList = results!!.values as MutableList<CityModel>
+                 filterdItemList = results!!.values as MutableList<AreaModel>
                  notifyDataSetChanged()
              }
          }

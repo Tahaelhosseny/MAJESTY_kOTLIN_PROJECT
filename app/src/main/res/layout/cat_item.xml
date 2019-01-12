@@ -5,7 +5,7 @@
     android:layout_marginBottom="10dp"
     app:cardCornerRadius="10dp"
     android:id="@+id/item"
-    android:layout_height="112dp">
+    android:layout_height="115dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,26 +17,26 @@
             android:src="@drawable/cat1"/>
         
         <ImageView
-            android:layout_width="112dp"
+            android:layout_width="190dp"
             android:src="@drawable/piza"
             android:id="@+id/img"
-            android:layout_height="112dp" />
+            android:layout_height="match_parent" />
 
 
         <ImageView
-            android:layout_width="112dp"
+            android:layout_width="136dp"
             android:src="@drawable/shape_846"
             android:id="@+id/imgh"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_height="69dp" />
+            android:layout_height="match_parent" />
 
         <TextView
             android:layout_width="match_parent"
             android:text="Pizza"
-            android:layout_toRightOf="@+id/img"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:layout_marginLeft="150dp"
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:id="@+id/name"

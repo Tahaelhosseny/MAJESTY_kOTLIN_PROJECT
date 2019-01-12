@@ -117,6 +117,8 @@
                         android:fontFamily="@font/exoregular"
                         android:inputType="textEmailAddress"
                         android:id="@+id/area"
+                        android:onClick="area"
+                        android:clickable="true"
                         android:background="@null"
                         android:gravity="center|left"
                         android:layout_marginLeft="20dp"
@@ -142,6 +144,8 @@
                         android:fontFamily="@font/exoregular"
                         android:inputType="textEmailAddress"
                         android:id="@+id/subArea"
+                        android:onClick="subArea"
+                        android:clickable="true"
                         android:background="@null"
                         android:gravity="center|left"
                         android:layout_marginLeft="20dp"
@@ -166,7 +170,7 @@
                         android:textSize="14sp"
                         android:fontFamily="@font/exoregular"
                         android:inputType="textEmailAddress"
-                        android:id="@+id/stret"
+                        android:id="@+id/Street"
                         android:background="@null"
                         android:gravity="center|left"
                         android:layout_marginLeft="20dp"
@@ -189,7 +193,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textSize="14sp"
-                        android:inputType="textEmailAddress"
+                        android:inputType="number"
                         android:fontFamily="@font/exoregular"
                         android:id="@+id/buildingNumber"
                         android:background="@null"
@@ -215,7 +219,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/exoregular"
                         android:textSize="14sp"
-                        android:inputType="textEmailAddress"
+                        android:inputType="number"
                         android:id="@+id/floor"
                         android:background="@null"
                         android:gravity="center|left"
@@ -239,7 +243,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textSize="14sp"
-                        android:inputType="textEmailAddress"
+                        android:inputType="number"
                         android:id="@+id/apartment"
                         android:fontFamily="@font/exoregular"
                         android:background="@null"
@@ -305,6 +309,8 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="20dp"
                     android:id="@+id/save"
+                    android:clickable="true"
+                    android:onClick="saveAddress"
                     android:background="@drawable/pink_gradiant2"
                     android:textSize="11sp"
                     android:gravity="center"
@@ -322,7 +328,6 @@
         android:layout_width="match_parent"
         android:id="@+id/cityLayout"
         android:visibility="gone"
-
         android:layout_height="match_parent">
         <ImageView
             android:layout_width="match_parent"
@@ -361,6 +366,113 @@
                     android:layout_marginLeft="20dp"
                     android:id="@+id/cityRec"
                     android:layout_below="@+id/citySearch"
+                    android:layout_height="match_parent">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/areaLayout"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:alpha=".7"
+            android:id="@+id/areaBack"
+            android:clickable="true"
+            android:onClick="cityBack"
+            android:background="@color/black"
+            android:layout_height="match_parent" />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="40dp"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.SearchView
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:id="@+id/areaSearch"
+                    app:iconifiedByDefault="false"
+                    android:layout_height="50dp">
+                </android.support.v7.widget.SearchView>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/areaRec"
+                    android:layout_below="@+id/areaSearch"
+                    android:layout_height="match_parent">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/subareaLayout"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:alpha=".7"
+            android:id="@+id/subareaBack"
+            android:clickable="true"
+            android:onClick="cityBack"
+            android:background="@color/black"
+            android:layout_height="match_parent" />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="40dp"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.SearchView
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:id="@+id/subareaSearch"
+                    app:iconifiedByDefault="false"
+                    android:layout_height="50dp">
+                </android.support.v7.widget.SearchView>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/subareaRec"
+                    android:layout_below="@+id/subareaSearch"
                     android:layout_height="match_parent">
 
                 </android.support.v7.widget.RecyclerView>
