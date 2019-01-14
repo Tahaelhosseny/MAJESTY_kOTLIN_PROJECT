@@ -100,6 +100,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:clickable="true"
         android:id="@+id/footer"
         android:background="@drawable/pink_gradiant"
         android:layout_height="70dp">

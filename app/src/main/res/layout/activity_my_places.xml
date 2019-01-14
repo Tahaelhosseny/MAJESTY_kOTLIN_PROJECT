@@ -100,6 +100,8 @@
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:id="@+id/places"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:background="@color/layoutBackgrawnd"
                 android:layout_height="wrap_content">
 
@@ -146,6 +148,8 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
+        android:clickable="true"
+        android:onClick="footer"
         android:gravity="center_vertical"
         android:id="@+id/footer"
         android:background="@drawable/pink_gradiant"

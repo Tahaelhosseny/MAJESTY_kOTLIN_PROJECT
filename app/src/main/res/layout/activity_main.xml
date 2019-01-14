@@ -100,12 +100,12 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:orientation="vertical"
-            android:layout_height="85dp"
+            android:layout_height="70dp"
             >
 
             <ImageView
-                android:layout_width="190dp"
-                android:layout_height="190dp"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:src="@drawable/shape_683_copy" />
             <ImageView
                 android:layout_width="20dp"

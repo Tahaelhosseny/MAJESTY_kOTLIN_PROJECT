@@ -23,7 +23,6 @@ import org.androidannotations.annotations.AfterViews
 @EActivity(R.layout.activity_main)
 class MainActivity : Activity()
 {
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
 

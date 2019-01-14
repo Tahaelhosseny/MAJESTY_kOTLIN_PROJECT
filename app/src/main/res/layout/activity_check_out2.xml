@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/fragmentBack"
+    android:layout_height="match_parent"
+    tools:context=".Activity.CheckOut">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/back"
+        android:padding="13dp"
+        android:src="@drawable/icon_back_copy"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/back"
+        android:layout_marginTop="20dp"
+        android:text="My Cart"
+        android:id="@+id/catNamee"
+        android:fontFamily="@font/exosemibold"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="#0063d8"
+        android:fontFamily="@font/exosemibold"
+        android:id="@+id/del"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:text="Edit"
+        android:textSize="16sp"
+        android:layout_height="50dp" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/icon_check_copy_2"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textColor="#0063d8"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:text="DONE"/>
+    </LinearLayout>
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="72dp"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/cartItems"
+            android:background="@color/layoutBackgrawnd"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:id="@+id/footer"
+        android:background="@drawable/pink_gradiant"
+        android:layout_height="70dp">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Place Order"
+            android:textSize="16dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="@font/exobold"
+            android:id="@+id/checktxt"
+            android:textColor="@color/white"
+            android:layout_height="40dp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

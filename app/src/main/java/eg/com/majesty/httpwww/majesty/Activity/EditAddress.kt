@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -17,7 +16,6 @@ import eg.com.majesty.httpwww.majesty.Adapters.SubAreaAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.InterFaces.UpdateCity
 import eg.com.majesty.httpwww.majesty.Models.AreaModel
-import eg.com.majesty.httpwww.majesty.Models.CartModel
 import eg.com.majesty.httpwww.majesty.Models.CityModel
 import eg.com.majesty.httpwww.majesty.Models.SubAreaModel
 import eg.com.majesty.httpwww.majesty.R
@@ -26,11 +24,15 @@ import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import kotlinx.android.synthetic.main.activity_add_new_place.*
 
-class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
+class EditAddress : AppCompatActivity (), SearchView.OnQueryTextListener
+{
 
 
-    lateinit var adapter :CityAdapter
-    lateinit var areaadapter :AreaAdapter
+
+
+
+    lateinit var adapter : CityAdapter
+    lateinit var areaadapter : AreaAdapter
     lateinit var subareaadapter : SubAreaAdapter
     var  cityItemList : MutableList<CityModel> = arrayListOf()
     var  areaItemList : MutableList<AreaModel> = arrayListOf()
@@ -48,6 +50,8 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
     var landmarkStr = ""
     var notesStr = ""
 
+    var userAddressID = ""
+
 
 
 
@@ -55,11 +59,16 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_place)
-        citySearch.setOnQueryTextListener(this@AddNewPlace)
-        areaSearch.setOnQueryTextListener(this@AddNewPlace)
-        subareaSearch.setOnQueryTextListener(this@AddNewPlace)
-        ID = ForeraaParameter(applicationContext).getString("UserID")
 
+        citySearch.setOnQueryTextListener(this@EditAddress)
+        areaSearch.setOnQueryTextListener(this@EditAddress)
+        subareaSearch.setOnQueryTextListener(this@EditAddress)
+        ID = ForeraaParameter(applicationContext).getString("UserID")
+        userAddressID = intent.getStringExtra("userAddressID")
+
+
+
+        getUserAddressForEdit()
     }
 
 
@@ -93,6 +102,10 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
 
+    
+
+
+
 
     fun cityBack(view: View)
     {
@@ -107,6 +120,9 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
     {
         subareaLayout.visibility = View.GONE
     }
+
+
+
 
 
 
@@ -220,15 +236,15 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
                 var jsonObject = Gson().fromJson(str, JsonArray::class.java)
                 val itemType = object : TypeToken<List<CityModel>>() {}.type
                 cityItemList = Gson().fromJson<MutableList<CityModel>>(jsonObject.toString(), itemType)
-                adapter = CityAdapter(this@AddNewPlace , cityItemList , object : UpdateCity{
+                adapter = CityAdapter(this@EditAddress , cityItemList , object : UpdateCity {
                     override fun update(cityId: Int ,  CityName : String)
                     {
                         cityLayout.visibility = View.GONE
                         city.setText(CityName)
-                        this@AddNewPlace.cityId =cityId
+                        this@EditAddress.cityId =cityId
                     }
                 })
-                cityRec.layoutManager = LinearLayoutManager(this@AddNewPlace)
+                cityRec.layoutManager = LinearLayoutManager(this@EditAddress)
                 cityRec.adapter = adapter
                 adapter.notifyDataSetChanged()
                 cityLayout.visibility = View.VISIBLE
@@ -256,15 +272,15 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
                 var jsonObject = Gson().fromJson(str, JsonArray::class.java)
                 val itemType = object : TypeToken<List<AreaModel>>() {}.type
                 areaItemList = Gson().fromJson<MutableList<AreaModel>>(jsonObject.toString(), itemType)
-                areaadapter = AreaAdapter(this@AddNewPlace , areaItemList , object : UpdateCity{
+                areaadapter = AreaAdapter(this@EditAddress , areaItemList , object : UpdateCity {
                     override fun update(cityId: Int ,  CityName : String)
                     {
                         areaLayout.visibility = View.GONE
                         area.setText(CityName)
-                        this@AddNewPlace.areaId =cityId
+                        this@EditAddress.areaId =cityId
                     }
                 })
-                areaRec.layoutManager = LinearLayoutManager(this@AddNewPlace)
+                areaRec.layoutManager = LinearLayoutManager(this@EditAddress)
                 areaRec.adapter = areaadapter
                 areaadapter.notifyDataSetChanged()
                 areaLayout.visibility = View.VISIBLE
@@ -293,15 +309,15 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
                 var jsonObject = Gson().fromJson(str, JsonArray::class.java)
                 val itemType = object : TypeToken<List<SubAreaModel>>() {}.type
                 subareaItemList = Gson().fromJson<MutableList<SubAreaModel>>(jsonObject.toString(), itemType)
-                subareaadapter = SubAreaAdapter(this@AddNewPlace , subareaItemList , object : UpdateCity{
+                subareaadapter = SubAreaAdapter(this@EditAddress , subareaItemList , object : UpdateCity {
                     override fun update(cityId: Int ,  CityName : String)
                     {
                         subareaLayout.visibility = View.GONE
                         subArea.setText(CityName)
-                        this@AddNewPlace.subAreaa =cityId
+                        this@EditAddress.subAreaa =cityId
                     }
                 })
-                subareaRec.layoutManager = LinearLayoutManager(this@AddNewPlace)
+                subareaRec.layoutManager = LinearLayoutManager(this@EditAddress)
                 subareaRec.adapter = subareaadapter
                 subareaadapter.notifyDataSetChanged()
                 subareaLayout.visibility = View.VISIBLE
@@ -318,13 +334,14 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     fun saveAdd()
     {
-        var makeRequest = MakeRequest("AddUserAddress?isArabic=false&subAreaId=" + subAreaa
+        var makeRequest = MakeRequest("SaveEditedUserAddress?isArabic=false&subAreaId=" + subAreaa
                 + "&userId=" +ID
                 + "&street=" + StreettStr
                 + "&buildingNumber=" + buildingNumberStr
                 + "&floor=" + floorStr
                 + "&apartmentNumber=" + apartmentStr
                 + "&landmark=" + landmarkStr
+                + "&userAddressID=" +userAddressID
                 + "&notes=" + notesStr,"0",this,"AddUserAddress",true)
 
         makeRequest.request(object  : VolleyCallback
@@ -336,7 +353,7 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
                 var jsonObject = Gson().fromJson(str, JsonObject::class.java)
                 if( jsonObject.get("NotificationsNumbers").asJsonArray.get(0).asJsonObject.get("Succeed").asBoolean)
                 {
-                    Toast.makeText(this@AddNewPlace , "Address Add Successfully !!" , Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditAddress , "Address Edited Successfully !!" , Toast.LENGTH_LONG).show()
                     finish()
                 }
             }
@@ -349,7 +366,48 @@ class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
         })
     }
 
+
+
+    fun getUserAddressForEdit()
+    {
+        var makeRequest = MakeRequest("GetUserAddressForEdit?isArabic=false&userAddressID=" + userAddressID,"0",this,"GetCities",true)
+
+        makeRequest.request(object  : VolleyCallback
+        {
+            override fun onSuccess(result: Map<String, String>)
+            {
+
+                var str = result.get("res").toString()
+                var jsonObject = Gson().fromJson(str, JsonObject::class.java).get("AddressInformation").asJsonArray.get(0).asJsonObject
+
+
+                areaId = jsonObject.get("AreaID").asInt
+                cityId = jsonObject.get("CityID").asInt
+                subAreaa = jsonObject.get("SubAreaID").asInt
+
+
+                city.text = jsonObject.get("CityName").asString
+                area.text = jsonObject.get("AreaName").asString
+                subArea.text = jsonObject.get("SubAreaName").asString
+                Street.setText( jsonObject.get("Street").asString.toString())
+                buildingNumber.setText( jsonObject.get("BuildingNumber").asString.toString())
+                floor.setText(jsonObject.get("Floor").asString.toString())
+                apartment.setText(jsonObject.get("ApartmentNumber").asString.toString())
+                landmark.setText( jsonObject.get("Landmark").asString.toString())
+                notes.setText( jsonObject.get("Notes").asString.toString())
+
+
+
+
+            }
+        } ,object : ONRetryHandler
+        {
+            override fun onRetryHandler(funName: String)
+            {
+
+            }
+        })
+    }
+
+
 }
-
-
-

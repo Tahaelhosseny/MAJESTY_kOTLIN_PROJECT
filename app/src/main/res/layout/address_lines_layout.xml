@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:id="@+id/notMain"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="#1728262c"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/min"
+                android:id="@+id/min1"
+                android:clickable="true"
+                android:layout_alignParentRight="true"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/line1"
+                android:layout_toLeftOf="@+id/min1"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/exomedium"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:lineSpacingExtra="-3dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/line2"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/exomedium"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="-3dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line1"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/line3"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/exomedium"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:lineSpacingExtra="-3dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line2"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/line4"
+                android:layout_below="@+id/line3"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/exomedium"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingExtra="-3dp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:id="@+id/mainnlay"
+        android:visibility="gone"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="#ffffff"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/min"
+                android:id="@+id/min2"
+                android:layout_alignParentRight="true"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/mline1"
+                android:layout_toLeftOf="@+id/min2"
+
+                android:fontFamily="@font/exomedium"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="-3dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:fontFamily="@font/exomedium"
+                android:layout_width="match_parent"
+                android:id="@+id/mline2"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:lineSpacingExtra="-3dp"
+                android:layout_height="wrap_content"                android:layout_below="@+id/mline1"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:fontFamily="@font/exomedium"
+                android:id="@+id/mline3"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:lineSpacingExtra="-3dp"
+                android:layout_height="wrap_content"                android:layout_below="@+id/mline2"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/mline4"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/exomedium"
+                android:layout_marginRight="5dp"
+                android:lineSpacingExtra="-3dp"
+                android:layout_height="wrap_content"                android:layout_below="@+id/mline3"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/main"
+                android:layout_alignParentRight="true"
+                android:text="Main Adress"
+                android:textColor="#f81243"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/exosemibold"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@+id/mline4"
+                android:layout_height="30dp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:padding="5dp"
+                android:src="@drawable/icon_check_copy_3"
+                android:layout_toLeftOf="@+id/main"
+                android:layout_below="@+id/mline4"
+                android:layout_height="30dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

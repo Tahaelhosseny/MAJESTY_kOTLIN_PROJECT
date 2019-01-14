@@ -147,7 +147,7 @@ class CheckOut : Activity()
         adapter.updateList(true)
         doneLay.visibility = View.VISIBLE
         del.visibility = View.GONE
-        footer.visibility = View.GONE
+        //footer.visibility = View.GONE
     }
 
 
