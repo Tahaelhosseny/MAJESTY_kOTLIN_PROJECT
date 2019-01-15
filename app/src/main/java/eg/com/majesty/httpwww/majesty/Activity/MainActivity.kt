@@ -14,12 +14,34 @@ import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
 import android.app.FragmentTransaction
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
+import android.support.v7.app.ActionBarDrawerToggle
 import android.widget.Toast
 import eg.com.majesty.httpwww.majesty.Fragments.*
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import org.androidannotations.annotations.AfterViews
+import eg.com.majesty.httpwww.majesty.R.id.drawerLayout
+import android.support.v4.view.ViewCompat.setTranslationX
+import android.opengl.ETC1.getWidth
+import android.support.v4.view.GravityCompat
+import android.view.Gravity
+import android.view.View
+import android.support.v4.view.ViewCompat.setScaleY
+import android.support.v4.view.ViewCompat.setScaleX
+import android.support.v4.view.ViewCompat.setTranslationX
+import android.opengl.ETC1.getWidth
+import android.support.v4.view.ViewCompat.setScaleY
+import android.support.v4.view.ViewCompat.setScaleX
+import android.support.v4.view.ViewCompat.setTranslationX
+import eg.com.majesty.httpwww.majesty.R.id.drawerLayout
+
+
+
+
+
+
 @EActivity(R.layout.activity_main)
 class MainActivity : Activity()
 {
@@ -50,10 +72,35 @@ class MainActivity : Activity()
         if(Build.VERSION.SDK_INT<23)
             actionBar.hide()
 
+        drawerLayout.setScrimColor(Color.TRANSPARENT)
+        drawerLayout.setDrawerElevation((0).toFloat())
+        var scaleFactor = 6f;
+
+
+        val actionBarDrawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close) {
+
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float)
+            {
+                super.onDrawerSlide(drawerView, slideOffset)
+                val slideX = drawerView!!.width * slideOffset
+                content.translationX = slideX
+                content.translationY = slideX/4
+
+
+
+            }
+        }
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+
+
+
 
         notiNum.setTypeface(Utils.Exo2SemiBold(this))
         cartTxt.setTypeface(Utils.Exo2SemiBold(this))
         headerText.setTypeface(Utils.Exo2SemiBold(this))
+        userName.setTypeface(Utils.Exo2SemiBold(this))
+        logouttxt.setTypeface(Utils.Exo2SemiBold(this))
 
         htxt.setTypeface(Utils.Exo2SemiBold(this))
         ftxt.setTypeface(Utils.Exo2SemiBold(this))
@@ -83,6 +130,11 @@ class MainActivity : Activity()
     }
     @Click fun home ()
     {
+
+
+
+
+
         homeIm.setImageResource(R.drawable.icon_home1)
         favoriteIm.setImageResource(R.drawable.favorite)
         ordersIm.setImageResource(R.drawable.ordera)
@@ -99,6 +151,10 @@ class MainActivity : Activity()
 
     @Click fun menuu ()
     {
+
+
+
+
         homeIm.setImageResource(R.drawable.icon_home)
         favoriteIm.setImageResource(R.drawable.favorite)
         ordersIm.setImageResource(R.drawable.ordera)
@@ -131,6 +187,7 @@ class MainActivity : Activity()
 
     @Click fun favorite ()
     {
+
 
 
         var ID = ""
@@ -177,6 +234,9 @@ class MainActivity : Activity()
 
     @Click fun orders ()
     {
+
+
+
         headerText.setText(R.string.Orders)
 
         homeIm.setImageResource(R.drawable.icon_home)
@@ -193,6 +253,33 @@ class MainActivity : Activity()
         fragmentTransaction.commit()
     }
 
+
+    @Click fun menu()
+    {
+        manageLay()
+
+    }
+
+
+
+
+
+
+    @Click fun addressBok()
+    {
+        //manageLay()
+        startActivity(Intent(this , MyPlaces::class.java))
+    }
+
+
+
+    fun manageLay()
+    {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.openDrawer(GravityCompat.END)
+        else
+            drawerLayout.openDrawer(GravityCompat.START)
+    }
 
 }
 

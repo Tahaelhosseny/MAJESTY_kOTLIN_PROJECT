@@ -17,4 +17,7 @@
 
     <string name="facebook_app_id" translatable="false">637947423244006</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb637947423244006</string>
+
+    <string name="open">open</string>
+    <string name="close">open</string>
 </resources>
