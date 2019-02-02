@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="272727" />
-                            <entry key="outputName" value="min" />
-                            <entry key="sourceFile" value="G:\Projects UnderDevelopment\MAJESTY kOTLIN PROJECT\New folder\loc.svg" />
+                            <entry key="outputName" value="ic_orderb" />
+                            <entry key="sourceFile" value="G:\Projects UnderDevelopment\MAJESTY kOTLIN PROJECT\New folder\orderb.svg" />
                           </map>
                         </option>
                       </PersistentState>

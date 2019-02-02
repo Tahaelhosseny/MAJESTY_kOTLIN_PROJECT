@@ -7,4 +7,5 @@ class CartModel(var FoodMenuItemID:Int,
                 var ItemPrice:Float,
                 var ItemTaxPercent:Float,
                 var ItemTax:Float,
-                var TotalAmount:Float)
+                var TotalAmount:Float
+                )

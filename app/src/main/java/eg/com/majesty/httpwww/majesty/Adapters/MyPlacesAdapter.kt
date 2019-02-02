@@ -21,6 +21,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Activity.EditAddress
+import eg.com.majesty.httpwww.majesty.Activity.FinalCheckOut
 import eg.com.majesty.httpwww.majesty.Activity.MainActivity
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.Models.AreaModel
@@ -95,6 +96,19 @@ class MyPlacesAdapter(var activity : Activity, var userAddressAsLines : MutableL
                 openMenu(holder.min2 , position)
             }
         })
+
+
+
+
+
+        holder.itemView.setOnClickListener(object : View.OnClickListener
+        {
+            override fun onClick(v: View?)
+            {
+                activity.startActivity(Intent(activity , FinalCheckOut::class.java).putExtra("UseAddressID",userAddressAsLines.get(position).UseAddressID.toString()))
+
+            }
+        } )
 
     }
 

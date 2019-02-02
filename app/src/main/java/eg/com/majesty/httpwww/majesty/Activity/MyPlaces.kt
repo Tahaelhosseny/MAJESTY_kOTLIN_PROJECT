@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -30,6 +31,7 @@ class MyPlaces : AppCompatActivity()
 
 
     var ID :String =""
+
     var  userAddressAsLinesList : MutableList<UserAddressAsLines> = arrayListOf()
 
 
@@ -39,6 +41,7 @@ class MyPlaces : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_places)
         ID = ForeraaParameter(applicationContext).getString("UserID")
+
 
 
     }
@@ -51,7 +54,6 @@ class MyPlaces : AppCompatActivity()
     }
     fun footer(view : View)
     {
-        startActivity(Intent(this , FinalCheckOut::class.java))
     }
 
 

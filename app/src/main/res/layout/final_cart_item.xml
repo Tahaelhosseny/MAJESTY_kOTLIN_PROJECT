@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"  android:id="@+id/tit"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:ellipsize="end"
+            android:layout_marginRight="110dp"
+            android:textSize="20dp"
+            android:id="@+id/ItemName"
+            android:layout_toRightOf="@+id/count"
+            android:textColor="@color/black"
+            android:text="pizza_margarita"
+            android:gravity="top"
+            android:maxLines="2"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Medium"
+            android:layout_weight="1"
+            android:id="@+id/itemSize"
+            android:gravity="center|left"
+            android:textSize="16dp"
+            android:layout_below="@+id/ItemName"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_width="40dp"
+            android:gravity="center"
+            android:textColor="#0065d9"
+            android:fontFamily="@font/exobold"
+            android:textSize="20dp"
+            android:id="@+id/count"
+            android:text="37 x"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:id="@+id/onePrice"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text = "Item Price: "
+                android:textSize="10sp"
+                android:gravity="center|right"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:text="42 EGP"
+                android:id="@+id/itemPrice"
+                android:textSize="14sp"
+                android:gravity="center|left"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:id="@+id/tax"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/onePrice"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text = "Tax: "
+                android:id="@+id/total"
+                android:textSize="10sp"
+                android:gravity="center|right"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:text="82 EGP"
+                android:fontFamily="@font/exo__semibold"
+                android:textSize="14sp"
+                android:id="@+id/taxPrice"
+                android:gravity="center|left"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/tax"
+            android:id="@+id/totallll"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text = "Total: "
+                android:textSize="10sp"
+                android:gravity="center|right"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:text="82 EGP"
+                android:textSize="14sp"
+                android:id="@+id/totalPrice"
+                android:gravity="center|left"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tit"
+        android:layout_marginTop="10dp"
+        android:src="#dedede"
+        android:layout_height="2dp" />
+
+
+
+    </RelativeLayout>

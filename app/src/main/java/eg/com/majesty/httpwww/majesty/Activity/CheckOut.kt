@@ -51,6 +51,9 @@ class CheckOut : Activity()
                                 .build()))
                 .build())
 
+
+
+
     }
 
     override fun attachBaseContext(newBase: Context)
@@ -168,24 +171,12 @@ class CheckOut : Activity()
 
 
 
-        startActivity(Intent(this , MyPlaces::class.java))
-       /* var makeRequest = MakeRequest("ConfirmCurrentShoppingCart?isArabice=false&userID=" + ID,"0",this,"GetFoodMenuTypes",true)
-
-        makeRequest.request(object  : VolleyCallback
+        if(adapter.cartModels!!.size==0)
         {
-            override fun onSuccess(result: Map<String, String>)
-            {
+            Toast.makeText(applicationContext , "Your Cart Is Empty Please Add Items In It" , Toast.LENGTH_LONG).show()
+        }
+        else startActivity(Intent(this , MyPlaces::class.java))
 
-                var str = result.get("res").toString()
-                setData(str)
-            }
-        } ,object : ONRetryHandler
-        {
-            override fun onRetryHandler(funName: String)
-            {
-
-            }
-        })*/
     }
 
 

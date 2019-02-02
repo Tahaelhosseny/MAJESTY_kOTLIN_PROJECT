@@ -3,7 +3,6 @@ package eg.com.majesty.httpwww.majesty.Activity
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import com.jaeger.library.StatusBarUtil
 import eg.com.majesty.httpwww.majesty.R
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
@@ -22,23 +21,12 @@ import eg.com.majesty.httpwww.majesty.Fragments.*
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import org.androidannotations.annotations.AfterViews
-import eg.com.majesty.httpwww.majesty.R.id.drawerLayout
-import android.support.v4.view.ViewCompat.setTranslationX
-import android.opengl.ETC1.getWidth
 import android.support.v4.view.GravityCompat
-import android.view.Gravity
 import android.view.View
-import android.support.v4.view.ViewCompat.setScaleY
-import android.support.v4.view.ViewCompat.setScaleX
-import android.support.v4.view.ViewCompat.setTranslationX
-import android.opengl.ETC1.getWidth
-import android.support.v4.view.ViewCompat.setScaleY
-import android.support.v4.view.ViewCompat.setScaleX
-import android.support.v4.view.ViewCompat.setTranslationX
-import eg.com.majesty.httpwww.majesty.R.id.drawerLayout
 
 
 
+var isHistory = false
 
 
 
@@ -47,7 +35,6 @@ class MainActivity : Activity()
 {
     override fun onCreate(savedInstanceState: Bundle?)
     {
-
         super.onCreate(savedInstanceState)
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(CalligraphyInterceptor(
@@ -65,33 +52,49 @@ class MainActivity : Activity()
 
 
 
-    @AfterViews fun AfterViews()
-    {
+    @AfterViews fun AfterViews() {
 
 
-        if(Build.VERSION.SDK_INT<23)
+        try {
+            isHistory = intent.getBooleanExtra("isHistory", false)
+        } catch (e: java.lang.Exception) {
+        }
+
+
+        if (Build.VERSION.SDK_INT < 23)
             actionBar.hide()
 
         drawerLayout.setScrimColor(Color.TRANSPARENT)
         drawerLayout.setDrawerElevation((0).toFloat())
-        var scaleFactor = 6f;
-
 
         val actionBarDrawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close) {
 
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float)
-            {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 super.onDrawerSlide(drawerView, slideOffset)
                 val slideX = drawerView!!.width * slideOffset
                 content.translationX = slideX
-                content.translationY = slideX/4
+                content.translationY = slideX / 4
 
 
+            }
 
+
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                content.setBackgroundResource(R.color.fragmentBack)
+            }
+
+
+            override fun onDrawerOpened(drawerView: View)
+            {
+                super.onDrawerOpened(drawerView)
+                content.setBackgroundResource(R.color.white)
             }
         }
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
+
+
 
 
 
@@ -101,25 +104,46 @@ class MainActivity : Activity()
         headerText.setTypeface(Utils.Exo2SemiBold(this))
         userName.setTypeface(Utils.Exo2SemiBold(this))
         logouttxt.setTypeface(Utils.Exo2SemiBold(this))
-
         htxt.setTypeface(Utils.Exo2SemiBold(this))
         ftxt.setTypeface(Utils.Exo2SemiBold(this))
         mtxt.setTypeface(Utils.Exo2SemiBold(this))
         otxt.setTypeface(Utils.Exo2SemiBold(this))
 
 
+        if (isHistory)
+        {
+            headerText.setText(R.string.Orders)
+            homeIm.setImageResource(R.drawable.icon_home)
+            favoriteIm.setImageResource(R.drawable.favorite)
+            ordersIm.setImageResource(R.drawable.ic_orderb
+            )
+            menuIm.setImageResource(R.drawable.menu)
 
-        homeIm.setImageResource(R.drawable.icon_home1)
-        favoriteIm.setImageResource(R.drawable.favorite)
-        ordersIm.setImageResource(R.drawable.ordera)
-        menuIm.setImageResource(R.drawable.menu)
-        headerText.setText(R.string.Home)
 
-        val home = Home()
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameContainer, home)
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        fragmentTransaction.commit()
+            val orders = Orders()
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameContainer, orders)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            fragmentTransaction.commit()
+        }else
+        {
+            homeIm.setImageResource(R.drawable.icon_home1)
+            favoriteIm.setImageResource(R.drawable.favorite)
+            ordersIm.setImageResource(R.drawable.ordera)
+            menuIm.setImageResource(R.drawable.menu)
+            headerText.setText(R.string.Home)
+
+            val home = Home()
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameContainer, home)
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            fragmentTransaction.commit()
+        }
+
+
+
+
     }
 
 
@@ -241,7 +265,7 @@ class MainActivity : Activity()
 
         homeIm.setImageResource(R.drawable.icon_home)
         favoriteIm.setImageResource(R.drawable.favorite)
-        ordersIm.setImageResource(R.drawable.ordera)
+        ordersIm.setImageResource(R.drawable.ic_orderb)
         menuIm.setImageResource(R.drawable.menu)
 
 
@@ -276,9 +300,13 @@ class MainActivity : Activity()
     fun manageLay()
     {
         if(drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.openDrawer(GravityCompat.END)
+            {
+                drawerLayout.openDrawer(GravityCompat.END)
+            }
         else
+        {
             drawerLayout.openDrawer(GravityCompat.START)
+        }
     }
 
 }
