@@ -13,6 +13,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
+import eg.com.majesty.httpwww.majesty.Adapters.PreviousOrderAdapter
 import eg.com.majesty.httpwww.majesty.Adapters.UpcommingOrderAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
@@ -125,6 +126,12 @@ class Orders : Fragment() {
                 upRec.adapter = upcommingOrderAdapter
                 upRec.layoutManager=LinearLayoutManager(activity)
                 upcommingOrderAdapter.notifyDataSetChanged()
+
+
+                val perviousOrderAdapter = PreviousOrderAdapter(activity  ,itemListPreviousOrders )
+                pastRec.adapter = perviousOrderAdapter
+                pastRec.layoutManager=LinearLayoutManager(activity)
+                perviousOrderAdapter.notifyDataSetChanged()
 
             }
         } ,object : ONRetryHandler

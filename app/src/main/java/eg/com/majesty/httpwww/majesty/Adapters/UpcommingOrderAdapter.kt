@@ -68,9 +68,6 @@ class UpcommingOrderAdapter (var activity : Activity , var upcommingOrdersModels
 
 
 
-
-
-
     }
 
 

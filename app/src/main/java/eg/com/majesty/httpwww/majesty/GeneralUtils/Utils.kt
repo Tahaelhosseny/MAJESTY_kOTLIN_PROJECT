@@ -7,8 +7,10 @@ import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.text.format.DateFormat
 import android.util.Log
 import eg.com.majesty.httpwww.majesty.BuildConfig
+import java.util.*
 
 /**
  * Created by Taha on 4/3/2018.
@@ -131,6 +133,13 @@ object Utils {
             else*/
         return input
 
+    }
+
+    fun getDate(time: Long): String {
+        val cal = Calendar.getInstance(Locale.ENGLISH)
+        cal.timeInMillis = time * 1000L
+        val date = DateFormat.format("yyyy-MM-dd", cal).toString()
+        return date
     }
 
 }
