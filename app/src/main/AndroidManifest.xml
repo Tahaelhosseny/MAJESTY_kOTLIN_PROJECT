@@ -57,8 +57,9 @@
             android:theme="@style/AppTheme.login" />
         <activity android:name=".Activity.MyPlaces" />
         <activity android:name=".Activity.AddNewPlace" />
-        <activity android:name=".Activity.EditAddress"></activity>
-        <activity android:name=".Activity.FinalCheckOut"/>
+        <activity android:name=".Activity.EditAddress" />
+        <activity android:name=".Activity.FinalCheckOut" />
+        <activity android:name=".Activity.OneOrderDetails"></activity>
     </application>
 
 </manifest>

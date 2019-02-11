@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activity.OneOrderDetails">
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/back"
+        android:onClick="back"
+        android:padding="13dp"
+        android:src="@drawable/icon_back_copy"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/back"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:id="@+id/catNamee"
+        android:fontFamily="@font/exosemibold"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:layout_height="50dp" />
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="80dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:padding="20dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+
+                    android:layout_below="@id/oNum"
+                    android:layout_width="match_parent"
+                    android:id="@+id/stlay"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:id="@+id/statIcon"
+                        android:src="@drawable/ic_pen"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Pending"
+                        android:fontFamily="@font/exo__semibold"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/sttext"
+                        android:textColor="#606060"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:id="@+id/rateLay"
+                    android:layout_marginTop="3dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:src="@drawable/star1"
+                        android:id="@+id/img1"
+                        android:onClick="img1"
+                        android:layout_height="15dp" />
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:id="@+id/img2"
+                        android:onClick="img2"
+                        android:src="@drawable/star"
+                        android:layout_height="15dp" />
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:onClick="img3"
+                        android:src="@drawable/star"
+                        android:id="@+id/img3"
+                        android:layout_height="15dp" />
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:onClick="img4"
+                        android:id="@+id/img4"
+                        android:src="@drawable/star"
+                        android:layout_height="15dp" />
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:onClick="img5"
+                        android:id="@+id/img5"
+                        android:src="@drawable/star"
+                        android:layout_height="15dp" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/date"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/exoregular"
+                    android:layout_below="@+id/rateLay"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="20dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Delivery address"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/exo__semibold"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#343434"
+                    android:id="@+id/addlin1"
+                    android:visibility="gone"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/exomedium"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/addlin2"
+                    android:visibility="gone"
+                    android:fontFamily="@font/exomedium"
+                    android:textColor="#343434"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/addlin3"
+                    android:visibility="gone"
+                    android:fontFamily="@font/exomedium"
+                    android:textColor="#343434"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="#343434"
+                    android:fontFamily="@font/exomedium"
+                    android:id="@+id/addlin4"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cartItems"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="@color/fragmentBack"
+                android:scrollbars="none"></android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+
+                    android:layout_marginLeft="20dp" android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/exoregular"
+                        android:text="Total Price(before tax)"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/exoregular"
+                        android:text="500"
+                        android:id="@+id/totalPriceBeforeTax"
+                        android:gravity="right"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"   android:background="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/exoregular"
+                        android:text="Total Tax"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/exoregular"
+                        android:text="500"
+                        android:id="@+id/totalTax"
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Delivery Fees"
+                        android:fontFamily="@font/exoregular"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:text="500"
+                        android:gravity="right"
+                        android:id="@+id/deliveryFee"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/exoregular"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"  android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Discount"
+                        android:fontFamily="@font/exoregular"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/exoregular"
+                        android:text="500"
+                        android:gravity="right"
+                        android:id="@+id/discount"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="#dedede"
+                    android:layout_height="2dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Grand Total"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/exosemibold"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/exosemibold"
+                        android:textColor="@color/black"                       android:text="500"
+                        android:gravity="right"
+                        android:id="@+id/grandTotal"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:lines="3"
+                android:gravity="top"
+                android:fontFamily="@font/exoregular"
+                android:padding="10dp"
+                android:id="@+id/note"
+                android:textSize="12sp"
+                android:hint="Order Notes"
+                android:layout_margin="20dp"
+                android:background="@drawable/rectangle_1_copy_5"
+                android:maxLines="3"
+                android:layout_height="100dp" />
+
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                app:cardCornerRadius="25dp"
+                android:id="@+id/comentLay"
+                android:onClick="comentLay"
+                android:visibility="gone"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="50dp"
+                android:layout_height="50dp" >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:background="#f61157"
+                    android:text="SEND"
+                    android:gravity="center"
+                    android:fontFamily="@font/exobold"
+                    android:textColor="@color/white"
+                    android:layout_height="match_parent" />
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+
+
+
+    </ScrollView>
+
+
+
+</RelativeLayout>
