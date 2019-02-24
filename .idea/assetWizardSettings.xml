@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -30,8 +35,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="272727" />
-                            <entry key="outputName" value="spinner_arrow" />
-                            <entry key="sourceFile" value="G:\Projects UnderDevelopment\MAJESTY kOTLIN PROJECT\New folder\rectangle_1326.svg" />
+                            <entry key="outputName" value="ic_forma_1" />
+                            <entry key="sourceFile" value="G:\Projects UnderDevelopment\MAJESTY kOTLIN PROJECT\New folder\forma_1.svg" />
                           </map>
                         </option>
                       </PersistentState>
