@@ -1,4 +1,5 @@
 package eg.com.majesty.httpwww.majesty.Activity
+import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_one_order_details.*
 import org.androidannotations.annotations.Click
 
 
-class OneOrderDetails : AppCompatActivity()
+class OneOrderDetails : Activity()
 {
 
     var orderId = ""

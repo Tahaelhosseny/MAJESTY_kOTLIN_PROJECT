@@ -1,5 +1,6 @@
 package eg.com.majesty.httpwww.majesty.Activity
 
+import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -24,7 +25,7 @@ import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import kotlinx.android.synthetic.main.activity_add_new_place.*
 
-class EditAddress : AppCompatActivity (), SearchView.OnQueryTextListener
+class EditAddress : Activity(), SearchView.OnQueryTextListener
 {
 
 
@@ -49,7 +50,6 @@ class EditAddress : AppCompatActivity (), SearchView.OnQueryTextListener
     var apartmentStr = ""
     var landmarkStr = ""
     var notesStr = ""
-
     var userAddressID = ""
 
 
@@ -59,7 +59,6 @@ class EditAddress : AppCompatActivity (), SearchView.OnQueryTextListener
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_place)
-
         citySearch.setOnQueryTextListener(this@EditAddress)
         areaSearch.setOnQueryTextListener(this@EditAddress)
         subareaSearch.setOnQueryTextListener(this@EditAddress)

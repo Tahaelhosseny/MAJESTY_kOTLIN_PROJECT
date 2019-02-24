@@ -1,5 +1,6 @@
 package eg.com.majesty.httpwww.majesty.Activity
 
+import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -26,7 +27,9 @@ import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import kotlinx.android.synthetic.main.activity_add_new_place.*
 
-class AddNewPlace : AppCompatActivity(), SearchView.OnQueryTextListener {
+
+
+class AddNewPlace : Activity(), SearchView.OnQueryTextListener {
 
 
     lateinit var adapter :CityAdapter

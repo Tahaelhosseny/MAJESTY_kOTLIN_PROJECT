@@ -1,5 +1,6 @@
 package eg.com.majesty.httpwww.majesty.Activity
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -25,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_add_new_place.*
 import kotlinx.android.synthetic.main.activity_my_places.*
 import org.androidannotations.annotations.Click
 
-class MyPlaces : AppCompatActivity()
+class MyPlaces : Activity()
 {
 
 

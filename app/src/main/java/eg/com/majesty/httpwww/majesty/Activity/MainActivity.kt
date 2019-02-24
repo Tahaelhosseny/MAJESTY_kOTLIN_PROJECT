@@ -295,6 +295,11 @@ class MainActivity : Activity()
         startActivity(Intent(this , MyPlaces::class.java))
     }
 
+    
+    @Click fun branches()
+    {
+        startActivity(Intent(this , Branches::class.java))
+    }
 
 
     fun manageLay()

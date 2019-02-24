@@ -334,6 +334,7 @@
                 android:layout_width="match_parent"
                 android:textColor="#202020"
                 android:text="Our Branches"
+                android:id="@+id/branches"
                 android:fontFamily="@font/exoregular"
                 android:gravity="center"
                 android:layout_height="30dp" />
