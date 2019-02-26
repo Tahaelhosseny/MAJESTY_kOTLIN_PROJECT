@@ -342,6 +342,8 @@
                 android:layout_width="match_parent"
                 android:textColor="#202020"
                 android:text="Contact Us"
+                android:onClick="Contact_Us"
+                android:id="@+id/Contact_Us"
                 android:fontFamily="@font/exoregular"
                 android:gravity="center"
                 android:layout_height="30dp" />

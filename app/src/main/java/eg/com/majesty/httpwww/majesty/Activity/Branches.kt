@@ -115,8 +115,6 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
                 areaSpinner.setSelection(0)
 
 
-
-
             }
         })
 
@@ -198,13 +196,7 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
         try {
             branchDialog.dismiss()
         }catch (e:Exception){}
-
-
-
-
-
         var id = marker.tag.toString()
-
 
         for (branch in branchestemp)
         {
@@ -219,6 +211,7 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
 
                 name.setTypeface(Utils.Exo2SemiBold(this))
                 address.setTypeface(Utils.Exo2Medium(this))
+                directionTxt.setTypeface(Utils.Exo2Bold(this))
 
                 direction.setOnClickListener(View.OnClickListener
                 {

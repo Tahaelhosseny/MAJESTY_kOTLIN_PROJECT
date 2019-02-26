@@ -4,6 +4,7 @@
     package="eg.com.majesty.httpwww.majesty">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -80,6 +81,8 @@
         <activity
             android:name=".Activity.Branches"
             android:theme="@style/AppTheme.login" />
+        <activity android:name=".Activity.ContactUs"
+            android:theme="@style/AppTheme.login"></activity>
     </application>
 
 </manifest>

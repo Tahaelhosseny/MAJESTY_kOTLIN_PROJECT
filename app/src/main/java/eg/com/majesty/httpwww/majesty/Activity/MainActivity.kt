@@ -302,6 +302,12 @@ class MainActivity : Activity()
     }
 
 
+    @Click fun Contact_Us()
+    {
+        startActivity(Intent(this , ContactUs::class.java))
+    }
+
+
     fun manageLay()
     {
         if(drawerLayout.isDrawerOpen(GravityCompat.START))
