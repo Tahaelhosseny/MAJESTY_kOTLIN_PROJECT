@@ -63,9 +63,9 @@ class Home : Fragment()
         {
             override fun onClick(v: View?)
             {
-                val freshOffers = FreshOffers()
+                var freshOffers = FreshOffers()
                 activity.headerText.setText("Fresh Offers")
-                val fragmentTransaction = activity.fragmentManager.beginTransaction()
+                var fragmentTransaction = activity.fragmentManager.beginTransaction()
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.replace(R.id.frameContainer,freshOffers )
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -79,9 +79,9 @@ class Home : Fragment()
         {
             override fun onClick(v: View?)
             {
-                val popularFood = PopularFood()
+                var popularFood = PopularFood()
                 activity.headerText.setText("Popular Food")
-                val fragmentTransaction = activity.fragmentManager.beginTransaction()
+                var fragmentTransaction = activity.fragmentManager.beginTransaction()
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.replace(R.id.frameContainer,popularFood )
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -120,9 +120,9 @@ class Home : Fragment()
                 activity.notiNum.text = notificationNumbers.get("NotificationsCount").toString()
                 activity.cartTxt.text = notificationNumbers.get("CartItemsCount").toString()
 
-                val gson = Gson()
-                val itemType = object : TypeToken<List<CategoryModels>>() {}.type
-                val itemList = gson.fromJson<List<CategoryModels>>(jsonObject.getAsJsonArray("_Categories").toString(), itemType)
+                var gson = Gson()
+                var itemType = object : TypeToken<List<CategoryModels>>() {}.type
+                var itemList = gson.fromJson<List<CategoryModels>>(jsonObject.getAsJsonArray("_Categories").toString(), itemType)
                 popularRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
                 popularRec.adapter = CategoryItem(activity ,itemList ,"home")
                 popularRec.adapter.notifyDataSetChanged()
@@ -130,8 +130,8 @@ class Home : Fragment()
 
 
 
-                val itemType2 = object : TypeToken<List<MenuFoodDataModel>>() {}.type
-                val itemList2 = gson.fromJson<List<MenuFoodDataModel>>(jsonObject.getAsJsonArray("_HotItems").toString(), itemType2)
+                var itemType2 = object : TypeToken<List<MenuFoodDataModel>>() {}.type
+                var itemList2 = gson.fromJson<List<MenuFoodDataModel>>(jsonObject.getAsJsonArray("_HotItems").toString(), itemType2)
                 freshRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
                 freshRec.adapter = MenuFoodDataAdapter(activity ,itemList2 ,"home")
                 freshRec.adapter.notifyDataSetChanged()

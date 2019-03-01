@@ -21,7 +21,7 @@ class BranchesAdapter (var activity: Activity , var branches : MutableList<Branc
 
 
 
-    var lastSelected = 0
+    public var lastSelected = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):MyViewHolder
     {
@@ -68,7 +68,6 @@ class BranchesAdapter (var activity: Activity , var branches : MutableList<Branc
         })
 
     }
-
 
 
 

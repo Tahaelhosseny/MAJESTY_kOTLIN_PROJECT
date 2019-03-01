@@ -23,9 +23,12 @@ import eg.com.majesty.httpwww.majesty.Models.BranchDataList
 import kotlinx.android.synthetic.main.activity_branches.*
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import java.util.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import com.google.gson.JsonArray
+import kotlin.collections.ArrayList
 
 
 class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerClickListener
@@ -36,16 +39,21 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
     private lateinit var mMap: GoogleMap
     lateinit   var subTownModelSpiners :ArrayList<AreaSpinnerModel>
     lateinit var branchestemp: ArrayList<BranchDataList>
+    var branchDataList = ArrayList<BranchDataList>()
     lateinit var branchDialog :BranchDialog
-
-
+    lateinit var branches : MutableList<BranchModel>
+    var lastSelected = 0
+    lateinit var branchesAdapter : BranchesAdapter
+    var lat = ""
+    var lng = ""
+    var nam = ""
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_branches)
 
-        val mapFragment =supportFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment
+        var mapFragment =supportFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
@@ -54,7 +62,6 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
     {
         super.onResume()
         catNamee.setTypeface(Utils.Exo2SemiBold(this))
-
 
     }
 
@@ -71,9 +78,8 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
 
                 var str = result.get("res").toString()
                 var itemType = object : TypeToken<MutableList<BranchModel>>() {}.type
-                var branches = Gson().fromJson<MutableList<BranchModel>>(str, itemType)
+                branches = Gson().fromJson<MutableList<BranchModel>>(str, itemType)
                 setData(branches)
-
 
             }
         } ,object : ONRetryHandler
@@ -100,12 +106,33 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
 
 
         branches.get(0).Selected = true
+        subTownModelSpiners = Gson().fromJson(branches.get(0).BranchesInCityList.toString(), object : TypeToken<ArrayList<AreaSpinnerModel>>() {}.type) as ArrayList<AreaSpinnerModel>
 
-        var branchesAdapter =  BranchesAdapter(this@Branches , branches , object : UpdateAreaSpinner{
+        for(subtown in subTownModelSpiners)
+        {
+
+            var temp = Gson().fromJson(subtown.BranchDataList.toString(), object : TypeToken<ArrayList<BranchDataList>>() {}.type) as ArrayList<BranchDataList>
+            branchDataList.addAll(temp)
+        }
+
+        mapSetMarkers(branchDataList)
+
+        branchesAdapter =  BranchesAdapter(this@Branches , branches , object : UpdateAreaSpinner{
             override fun updateAreaSpinner(cityId: Int)
             {
-                subTownModelSpiners = Gson().fromJson(branches.get(cityId).BranchesInCityList.toString(), object : TypeToken<ArrayList<AreaSpinnerModel>>() {}.type) as ArrayList<AreaSpinnerModel>
 
+
+                branchDataList.clear()
+                lastSelected = cityId
+                subTownModelSpiners = Gson().fromJson(branches.get(cityId).BranchesInCityList.toString(), object : TypeToken<ArrayList<AreaSpinnerModel>>() {}.type) as ArrayList<AreaSpinnerModel>
+                for(subtown in subTownModelSpiners)
+                {
+
+                    var temp = Gson().fromJson(subtown.BranchDataList.toString(), object : TypeToken<ArrayList<BranchDataList>>() {}.type) as ArrayList<BranchDataList>
+                    branchDataList.addAll(temp)
+                }
+                mapSetMarkers(branchDataList)
+                subTownModelSpiners.add(0 ,AreaSpinnerModel(-1 ,"Choose Your Area " , JsonArray()) )
                 var areaSpinnerAdapter = AreaSpinnerAdapter(this@Branches, R.layout.area_name, R.id.areaName, subTownModelSpiners)
 
                 areaSpinner.adapter = areaSpinnerAdapter
@@ -118,11 +145,14 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
             }
         })
 
+
+
         branchesRec.layoutManager = LinearLayoutManager(this , LinearLayoutManager.HORIZONTAL , false)
         branchesRec.adapter =  branchesAdapter
         branchesAdapter.notifyDataSetChanged()
 
         subTownModelSpiners = Gson().fromJson(branches.get(0).BranchesInCityList.toString(), object : TypeToken<ArrayList<AreaSpinnerModel>>() {}.type) as ArrayList<AreaSpinnerModel>
+        subTownModelSpiners.add(0 ,AreaSpinnerModel(-1 ,"Choose Your Area " , JsonArray()) )
 
         var areaSpinnerAdapter = AreaSpinnerAdapter(this@Branches, R.layout.area_name, R.id.areaName, subTownModelSpiners)
 
@@ -136,13 +166,49 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
         {
         override fun onNothingSelected(parent: AdapterView<*>?)
         {
-
         }
 
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
         {
-            var branchDataList = Gson().fromJson(subTownModelSpiners.get(position).BranchDataList.toString(), object : TypeToken<ArrayList<BranchDataList>>() {}.type) as ArrayList<BranchDataList>
+
+            if(position!=0)
+            {
+                branchDataList.clear()
+                var temp = Gson().fromJson(subTownModelSpiners.get(position).BranchDataList.toString(), object : TypeToken<ArrayList<BranchDataList>>() {}.type) as ArrayList<BranchDataList>
+                branchDataList.addAll(temp)
+
+                dialog.visibility = View.VISIBLE
+                Glide.with(this@Branches).load(temp.get(0).Image).thumbnail(.2f).into(image)
+                name.text = temp.get(0).BranchName
+                address.text = temp.get(0).Address
+
+                name.setTypeface(Utils.Exo2SemiBold(this@Branches))
+                address.setTypeface(Utils.Exo2Medium(this@Branches))
+                directionTxt.setTypeface(Utils.Exo2Bold(this@Branches))
+                lat = temp.get(0).Latitude
+                lng = temp.get(0).Longitude
+                nam = temp.get(0).BranchName
+
+
+            }else
+            {
+                branchDataList.clear()
+
+                for(subtown in subTownModelSpiners)
+                {
+                    var temp = Gson().fromJson(subtown.BranchDataList.toString(), object : TypeToken<ArrayList<BranchDataList>>() {}.type) as ArrayList<BranchDataList>
+                    branchDataList.addAll(temp)
+
+                }
+            }
+
+
             mapSetMarkers(branchDataList)
+
+
+
+
+
         }
 
     }
@@ -155,15 +221,7 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
    {
 
 
-       val builder = LatLngBounds.Builder()
-
-
-
-
-
-
-
-
+       var builder = LatLngBounds.Builder()
        branchestemp = branches
        mMap.clear()
        for (branch in branches)
@@ -174,12 +232,13 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
            builder.include(marker.getPosition())
        }
 
-
-       val bounds = builder.build()
-       var  cu = CameraUpdateFactory.newLatLngZoom(bounds.center, 12f)
+       var width = resources.displayMetrics.widthPixels
+       var height = resources.displayMetrics.heightPixels
+       var padding = (width * 0.12).toInt()
+       var bounds = builder.build()
+       var  cu = CameraUpdateFactory.newLatLngBounds(bounds , padding)
        mMap.moveCamera(cu)
        mMap.animateCamera(cu)
-
    }
 
     override fun onMapReady(googleMap: GoogleMap)
@@ -203,8 +262,6 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
             if(id.toInt() == branch.BranchID)
             {
                 dialog.visibility = View.VISIBLE
-
-
                 Glide.with(this).load(branch.Image).thumbnail(.2f).into(image)
                 name.text = branch.BranchName
                 address.text = branch.Address
@@ -212,20 +269,9 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
                 name.setTypeface(Utils.Exo2SemiBold(this))
                 address.setTypeface(Utils.Exo2Medium(this))
                 directionTxt.setTypeface(Utils.Exo2Bold(this))
-
-                direction.setOnClickListener(View.OnClickListener
-                {
-
-                    val my_data = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr="+branch.Latitude+","+branch.Longitude+branch.BranchName)
-
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(my_data))
-                    intent.setPackage("com.google.android.apps.maps")
-                    startActivity(intent)
-
-                })
-
-
-
+                lat = branch.Latitude
+                lng = branch.Longitude
+                nam = branch.BranchName
 
                 break
             }
@@ -234,6 +280,15 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
         return  true
     }
 
+
+    fun direction (view: View)
+    {
+        var my_data = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr="+lat+","+lng+nam)
+
+        var intent = Intent(Intent.ACTION_VIEW, Uri.parse(my_data))
+        intent.setPackage("com.google.android.apps.maps")
+        startActivity(intent)
+    }
 
 
 

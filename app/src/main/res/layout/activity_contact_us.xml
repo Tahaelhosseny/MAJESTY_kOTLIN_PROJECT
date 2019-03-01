@@ -34,12 +34,12 @@
             android:layout_marginTop="70dp"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:layout_width="150dp"
+                android:layout_width="110dp"
                 android:id="@+id/call"
                 android:onClick="call"
                 android:layout_gravity="center"
                 android:layout_centerHorizontal="true"
-                android:layout_height="180dp">
+                android:layout_height="135dp">
 
                 <ImageView
                     android:layout_width="150dp"
@@ -49,8 +49,9 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_marginBottom="13dp"
+                    android:layout_marginBottom="5dp"
                     android:gravity="center"
+                    android:textSize="10dp"
                     android:id="@+id/shift"
                     android:textColor="@color/white"
                     android:text="24 hour a day"
@@ -60,11 +61,11 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="35dp"
                     android:gravity="center"
                     android:text="19915"
                     android:id="@+id/caltxt"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:textColor="@color/white"
                     android:layout_height="80dp" />
 
@@ -74,50 +75,75 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:id="@+id/social"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="0dp"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_below="@+id/call"
-                android:layout_height="50dp">
-
-                <ImageView
-                    android:layout_width="18dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:id="@+id/facebook"
-                    android:src="@drawable/ic_face_book"
                     android:onClick="facebook"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:layout_height="39dp" />
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_toRightOf="@+id/facebook"
+                    android:padding="20dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:src="@drawable/ic_face_book"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitXY"
+                        android:layout_height="26dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:id="@+id/twiter"
-                    android:layout_marginLeft="30dp"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_twitter"
                     android:onClick="twiter"
-                    android:layout_height="40dp" />
-                <ImageView
-                    android:layout_width="45dp"
-                    android:scaleType="fitXY"
-                    android:layout_marginLeft="30dp"
-                    android:layout_toRightOf="@+id/twiter"
+                    android:padding="20dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_toRightOf="@+id/facebook"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_twitter"
+                        android:layout_height="27dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:onClick="youtube"
-                    android:src="@drawable/ic_youtube"
-                    android:layout_height="34dp" />
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_marginLeft="30dp"
+                    android:id="@+id/youtube"
+                    android:padding="20dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:scaleType="fitXY"
+                        android:layout_toRightOf="@+id/twiter"
+                        android:src="@drawable/ic_youtube"
+                        android:layout_height="22dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:id="@+id/instegram"
-                    android:src="@drawable/ic_instgram"
-                    android:layout_toRightOf="@+id/youtube"
                     android:onClick="instegram"
-                    android:layout_height="36dp" />
+                    android:padding="20dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:src="@drawable/ic_instgram"
+                        android:layout_toRightOf="@+id/youtube"
+                        android:layout_height="24dp" />
+
+                </LinearLayout>
+
+
+
 
             </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@color/fragmentBack"
             android:layout_height="match_parent">
             <RelativeLayout
                 android:layout_alignParentBottom="true"
