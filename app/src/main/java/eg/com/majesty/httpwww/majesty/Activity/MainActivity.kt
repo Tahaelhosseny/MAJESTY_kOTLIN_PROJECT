@@ -33,6 +33,9 @@ var isHistory = false
 @EActivity(R.layout.activity_main)
 class MainActivity : Activity()
 {
+
+
+    var savedInstanceStateA :Bundle? = null
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,7 @@ class MainActivity : Activity()
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build())
+        savedInstanceStateA = savedInstanceState
     }
 
     override fun attachBaseContext(newBase: Context)
@@ -54,92 +58,96 @@ class MainActivity : Activity()
 
     @AfterViews fun AfterViews() {
 
-
-        try {
-            isHistory = intent.getBooleanExtra("isHistory", false)
-        } catch (e: java.lang.Exception) {
-        }
-
-
-        if (Build.VERSION.SDK_INT < 23)
-            actionBar.hide()
-
-        drawerLayout.setScrimColor(Color.TRANSPARENT)
-        drawerLayout.setDrawerElevation((0).toFloat())
-
-        val actionBarDrawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close) {
-
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                super.onDrawerSlide(drawerView, slideOffset)
-                val slideX = drawerView!!.width * slideOffset
-                content.translationX = slideX
-                content.translationY = slideX / 4
-
-
+        if(savedInstanceStateA==null)
+        {
+            try {
+                isHistory = intent.getBooleanExtra("isHistory", false)
+            } catch (e: java.lang.Exception) {
             }
 
 
-            override fun onDrawerClosed(drawerView: View) {
-                super.onDrawerClosed(drawerView)
-                content.setBackgroundResource(R.color.fragmentBack)
+            if (Build.VERSION.SDK_INT < 23)
+                actionBar.hide()
+
+            drawerLayout.setScrimColor(Color.TRANSPARENT)
+            drawerLayout.setDrawerElevation((0).toFloat())
+
+            val actionBarDrawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close) {
+
+                override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                    super.onDrawerSlide(drawerView, slideOffset)
+                    val slideX = drawerView!!.width * slideOffset
+                    content.translationX = slideX
+                    content.translationY = slideX / 4
+
+
+                }
+
+
+                override fun onDrawerClosed(drawerView: View) {
+                    super.onDrawerClosed(drawerView)
+                    content.setBackgroundResource(R.color.fragmentBack)
+                }
+
+
+                override fun onDrawerOpened(drawerView: View)
+                {
+                    super.onDrawerOpened(drawerView)
+                    content.setBackgroundResource(R.color.white)
+                }
             }
 
+            drawerLayout.addDrawerListener(actionBarDrawerToggle)
 
-            override fun onDrawerOpened(drawerView: View)
+
+
+
+
+
+            notiNum.setTypeface(Utils.Exo2SemiBold(this))
+            cartTxt.setTypeface(Utils.Exo2SemiBold(this))
+            headerText.setTypeface(Utils.Exo2SemiBold(this))
+            userName.setTypeface(Utils.Exo2SemiBold(this))
+            logouttxt.setTypeface(Utils.Exo2SemiBold(this))
+            htxt.setTypeface(Utils.Exo2SemiBold(this))
+            ftxt.setTypeface(Utils.Exo2SemiBold(this))
+            mtxt.setTypeface(Utils.Exo2SemiBold(this))
+            otxt.setTypeface(Utils.Exo2SemiBold(this))
+
+
+            if (isHistory)
             {
-                super.onDrawerOpened(drawerView)
-                content.setBackgroundResource(R.color.white)
+                headerText.setText(R.string.Orders)
+                homeIm.setImageResource(R.drawable.icon_home)
+                favoriteIm.setImageResource(R.drawable.favorite)
+                ordersIm.setImageResource(R.drawable.ic_orderb
+                )
+                menuIm.setImageResource(R.drawable.menu)
+
+
+                val orders = Orders()
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.frameContainer, orders)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.commit()
+            }else
+            {
+                homeIm.setImageResource(R.drawable.icon_home1)
+                favoriteIm.setImageResource(R.drawable.favorite)
+                ordersIm.setImageResource(R.drawable.ordera)
+                menuIm.setImageResource(R.drawable.menu)
+                headerText.setText(R.string.Home)
+
+                val home = Home()
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.frameContainer, home)
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.commit()
             }
+
         }
 
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-
-
-
-
-
-
-        notiNum.setTypeface(Utils.Exo2SemiBold(this))
-        cartTxt.setTypeface(Utils.Exo2SemiBold(this))
-        headerText.setTypeface(Utils.Exo2SemiBold(this))
-        userName.setTypeface(Utils.Exo2SemiBold(this))
-        logouttxt.setTypeface(Utils.Exo2SemiBold(this))
-        htxt.setTypeface(Utils.Exo2SemiBold(this))
-        ftxt.setTypeface(Utils.Exo2SemiBold(this))
-        mtxt.setTypeface(Utils.Exo2SemiBold(this))
-        otxt.setTypeface(Utils.Exo2SemiBold(this))
-
-
-        if (isHistory)
-        {
-            headerText.setText(R.string.Orders)
-            homeIm.setImageResource(R.drawable.icon_home)
-            favoriteIm.setImageResource(R.drawable.favorite)
-            ordersIm.setImageResource(R.drawable.ic_orderb
-            )
-            menuIm.setImageResource(R.drawable.menu)
-
-
-            val orders = Orders()
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frameContainer, orders)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            fragmentTransaction.commit()
-        }else
-        {
-            homeIm.setImageResource(R.drawable.icon_home1)
-            favoriteIm.setImageResource(R.drawable.favorite)
-            ordersIm.setImageResource(R.drawable.ordera)
-            menuIm.setImageResource(R.drawable.menu)
-            headerText.setText(R.string.Home)
-
-            val home = Home()
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frameContainer, home)
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            fragmentTransaction.commit()
-        }
 
 
 

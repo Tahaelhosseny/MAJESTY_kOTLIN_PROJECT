@@ -9,6 +9,7 @@
 package eg.com.majesty.httpwww.majesty.Adapters
 
 import android.app.Activity
+import android.app.FragmentTransaction
 import android.app.SearchManager
 import android.content.DialogInterface
 import android.content.Intent
@@ -21,7 +22,8 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import eg.com.majesty.httpwww.majesty.Activity.OneItem_
+import eg.com.majesty.httpwww.majesty.Fragments.Home
+import eg.com.majesty.httpwww.majesty.Fragments.OneItem
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
@@ -73,8 +75,16 @@ class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenu
         {
             override fun onClick(v: View?)
             {
-                activity.startActivity(Intent(activity , OneItem_::class.java).
-                putExtra("ID" , categoryItems.get(position).FoodMenuID))
+
+
+                val oneItem = OneItem()
+                val fragmentTransaction = activity.fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.frameContainer, oneItem)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.commit()
+                oneItem.setData(categoryItems.get(position).FoodMenuID)
+
             }
         })
 

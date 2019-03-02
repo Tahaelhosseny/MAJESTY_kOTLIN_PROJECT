@@ -56,7 +56,6 @@
         <activity
             android:name=".Activity.MainActivity_"
             android:theme="@style/AppTheme.login" />
-        <activity android:name=".Activity.OneItem_" />
         <activity
             android:name=".Activity.SignUp_"
             android:theme="@style/AppTheme.login" />
