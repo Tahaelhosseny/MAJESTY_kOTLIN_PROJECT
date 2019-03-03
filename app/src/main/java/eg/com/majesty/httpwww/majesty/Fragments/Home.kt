@@ -51,12 +51,7 @@ class Home : Fragment()
             ID = foreraaParameter.getString("UserID")
 
         }catch (e : Exception){}
-    }
 
-
-    override fun onActivityCreated(savedInstanceState: Bundle?)
-    {
-        super.onActivityCreated(savedInstanceState)
 
 
         fresh.setOnClickListener( object : View.OnClickListener
@@ -92,7 +87,18 @@ class Home : Fragment()
 
         requestData()
 
+
     }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?)
+    {
+        super.onActivityCreated(savedInstanceState)
+
+
+
+    }
+
 
 
 

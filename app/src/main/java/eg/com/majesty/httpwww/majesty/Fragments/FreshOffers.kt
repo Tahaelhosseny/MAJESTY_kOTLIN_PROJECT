@@ -40,7 +40,7 @@ class FreshOffers : Fragment()
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
         super.onActivityCreated(savedInstanceState)
-        loadData()
+
 
     }
 
@@ -122,6 +122,7 @@ class FreshOffers : Fragment()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
         activity.headerText.setText("Fresh Offers")
+        loadData()
     }
 
 

@@ -50,13 +50,6 @@ class OneItem : Fragment()
         super.onResume()
         activity.header.visibility= View.GONE
 
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?)
-    {
-        super.onActivityCreated(savedInstanceState)
-
-
         var foreraaParameter = ForeraaParameter(activity)
 
         try
@@ -95,6 +88,15 @@ class OneItem : Fragment()
             }
         })
         loadData()
+
+
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?)
+    {
+        super.onActivityCreated(savedInstanceState)
+
 
 
 

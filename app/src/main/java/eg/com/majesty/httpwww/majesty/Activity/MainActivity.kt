@@ -58,8 +58,7 @@ class MainActivity : Activity()
 
     @AfterViews fun AfterViews() {
 
-        if(savedInstanceStateA==null)
-        {
+
             try {
                 isHistory = intent.getBooleanExtra("isHistory", false)
             } catch (e: java.lang.Exception) {
@@ -115,6 +114,7 @@ class MainActivity : Activity()
             otxt.setTypeface(Utils.Exo2SemiBold(this))
 
 
+        if(savedInstanceStateA==null)
             if (isHistory)
             {
                 headerText.setText(R.string.Orders)
@@ -146,7 +146,7 @@ class MainActivity : Activity()
                 fragmentTransaction.commit()
             }
 
-        }
+
 
 
 

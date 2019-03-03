@@ -39,44 +39,6 @@ class Favorite : Fragment()
         super.onActivityCreated(savedInstanceState)
 
 
-        var foreraaParameter = ForeraaParameter(activity)
-
-        try
-        {
-            ID = foreraaParameter.getString("UserID")
-
-        }catch (e : Exception){}
-
-
-
-            var makeRequest = MakeRequest("FavouritesGetAllItems?isArabice=false&userID=" + ID, "0", activity, "GetFoodMenuTypes", true)
-            makeRequest.request(object : VolleyCallback {
-                override fun onSuccess(result: Map<String, String>)
-                {
-
-                    val gson = Gson()
-
-                    var str = result.get("res")
-
-
-                    var jsonObject = Gson().fromJson(str, JsonObject::class.java)
-                    var notificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
-
-                    activity.notiNum.text = notificationNumbers.get("NotificationsCount").toString()
-                    activity.cartTxt.text = notificationNumbers.get("CartItemsCount").toString()
-
-                    val itemType = object : TypeToken<List<GetFoodMenusModel>>() {}.type
-                    val itemList = gson.fromJson<List<GetFoodMenusModel>>(jsonObject.get("FavouriteItems").toString(), itemType)
-
-                    fav_item.layoutManager = LinearLayoutManager(activity)
-                    fav_item.adapter = GetFoodMenus(activity, itemList, "Favorites")
-                    fav_item.adapter.notifyDataSetChanged()
-                }
-            }, object : ONRetryHandler {
-                override fun onRetryHandler(funName: String) {
-
-                }
-            })
 
 
         }
@@ -96,5 +58,47 @@ class Favorite : Fragment()
         super.onResume()
         activity.back.visibility = View.GONE
         activity.menu.visibility = View.VISIBLE
+
+
+
+        var foreraaParameter = ForeraaParameter(activity)
+
+        try
+        {
+            ID = foreraaParameter.getString("UserID")
+
+        }catch (e : Exception){}
+
+
+
+        var makeRequest = MakeRequest("FavouritesGetAllItems?isArabice=false&userID=" + ID, "0", activity, "GetFoodMenuTypes", true)
+        makeRequest.request(object : VolleyCallback {
+            override fun onSuccess(result: Map<String, String>)
+            {
+
+                val gson = Gson()
+
+                var str = result.get("res")
+
+
+                var jsonObject = Gson().fromJson(str, JsonObject::class.java)
+                var notificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
+
+                activity.notiNum.text = notificationNumbers.get("NotificationsCount").toString()
+                activity.cartTxt.text = notificationNumbers.get("CartItemsCount").toString()
+
+                val itemType = object : TypeToken<List<GetFoodMenusModel>>() {}.type
+                val itemList = gson.fromJson<List<GetFoodMenusModel>>(jsonObject.get("FavouriteItems").toString(), itemType)
+
+                fav_item.layoutManager = LinearLayoutManager(activity)
+                fav_item.adapter = GetFoodMenus(activity, itemList, "Favorites")
+                fav_item.adapter.notifyDataSetChanged()
+            }
+        }, object : ONRetryHandler {
+            override fun onRetryHandler(funName: String) {
+
+            }
+        })
+
     }
 }

@@ -28,6 +28,7 @@ class Menu : Fragment()
 
 
 
+    var savedInstanceStateA: Bundle? = null
     var ID :String =""
 
 
@@ -40,6 +41,18 @@ class Menu : Fragment()
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
         super.onActivityCreated(savedInstanceState)
+
+
+    }
+
+
+
+    override fun onResume() {
+        super.onResume()
+        activity.back.visibility = View.GONE
+        activity.menu.visibility = View.VISIBLE
+        activity.headerText.setText("Menu")
+
 
         var foreraaParameter = ForeraaParameter(activity)
 
@@ -90,15 +103,7 @@ class Menu : Fragment()
 
 
 
-    }
 
-
-
-    override fun onResume() {
-        super.onResume()
-        activity.back.visibility = View.GONE
-        activity.menu.visibility = View.VISIBLE
-        activity.headerText.setText("Menu")
     }
 
 }

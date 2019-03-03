@@ -49,9 +49,12 @@ class Orders : Fragment() {
         pasttext.setTypeface(Utils.Exo2SemiBold(activity))
         uptext.setTypeface(Utils.Exo2SemiBold(activity))
 
+        GetAllUserOrders()
 
 
-       view.pastLay.setOnClickListener { view->
+
+
+        view.pastLay.setOnClickListener { view->
            uptext.setTextColor(Color.parseColor("#aaaaaa"))
            pasttext.setTextColor(Color.BLACK)
            pastline.visibility = View.VISIBLE
@@ -78,7 +81,6 @@ class Orders : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
         super.onActivityCreated(savedInstanceState)
-        GetAllUserOrders()
     }
 
 

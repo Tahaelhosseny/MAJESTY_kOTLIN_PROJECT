@@ -40,14 +40,7 @@ class LoadCatItems : Fragment()
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
         super.onActivityCreated(savedInstanceState)
-        var foreraaParameter = ForeraaParameter(activity)
 
-        try
-        {
-            ID = foreraaParameter.getString("UserID")
-
-        }catch (e : Exception){}
-        loadData()
 
     }
 
@@ -124,6 +117,15 @@ class LoadCatItems : Fragment()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
         activity.headerText.setText(this.CategoryName)
+
+        var foreraaParameter = ForeraaParameter(activity)
+
+        try
+        {
+            ID = foreraaParameter.getString("UserID")
+
+        }catch (e : Exception){}
+        loadData()
     }
 
 
