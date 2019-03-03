@@ -87,6 +87,16 @@ class OneItem : Fragment()
                 addToCartt()
             }
         })
+
+
+        backkk.setOnClickListener(object :View.OnClickListener
+        {
+            override fun onClick(v: View?)
+            {
+                backto()
+            }
+        })
+
         loadData()
 
 
@@ -340,6 +350,20 @@ class OneItem : Fragment()
             })
         }
 
+
+    }
+
+
+    fun backto()
+    {
+        activity.header.visibility = View.VISIBLE
+    }
+
+
+    override fun onDestroy()
+    {
+        super.onDestroy()
+        activity.header.visibility = View.VISIBLE
 
     }
 }

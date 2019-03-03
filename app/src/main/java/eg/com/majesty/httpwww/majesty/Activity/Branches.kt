@@ -176,12 +176,10 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
                 branchDataList.clear()
                 var temp = Gson().fromJson(subTownModelSpiners.get(position).BranchDataList.toString(), object : TypeToken<ArrayList<BranchDataList>>() {}.type) as ArrayList<BranchDataList>
                 branchDataList.addAll(temp)
-
                 dialog.visibility = View.VISIBLE
                 Glide.with(this@Branches).load(temp.get(0).Image).thumbnail(.2f).into(image)
                 name.text = temp.get(0).BranchName
                 address.text = temp.get(0).Address
-
                 name.setTypeface(Utils.Exo2SemiBold(this@Branches))
                 address.setTypeface(Utils.Exo2Medium(this@Branches))
                 directionTxt.setTypeface(Utils.Exo2Bold(this@Branches))
@@ -237,7 +235,6 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
        var padding = (width * 0.12).toInt()
        var bounds = builder.build()
        var  cu = CameraUpdateFactory.newLatLngBounds(bounds , padding)
-       mMap.moveCamera(cu)
        mMap.animateCamera(cu)
    }
 
