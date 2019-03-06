@@ -8,6 +8,7 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -60,6 +61,7 @@ class FinalCheckOut : Activity()
 
         ID = ForeraaParameter(this).getString("UserID")
         UseAddressID = getIntent().getStringExtra("UseAddressID")
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         loadData()
 
 
@@ -170,6 +172,7 @@ class FinalCheckOut : Activity()
                 {
                     Toast.makeText(applicationContext ,"Order Added Successfully , Thank You" , Toast.LENGTH_LONG ).show()
                     startActivity(Intent(this@FinalCheckOut , MainActivity_::class.java).putExtra("isHistory" , true).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
                 }
             }
         } ,object : ONRetryHandler

@@ -13,6 +13,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Activity.Login_
+import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.Adapters.PriceAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
@@ -32,8 +33,7 @@ class OneItem : Fragment()
     var con = 0
 
     var  userIDorPassNothing = ""
-
-
+    var IsItemInUserFavourites = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_one_item, container, false)
     }
@@ -163,6 +163,14 @@ class OneItem : Fragment()
         counteee.setTypeface(Utils.Exo2Bold(activity))
         ratetxteee.setTypeface(Utils.Exo2SemiBold(activity))
         catName.setText(model.FoodMenuName)
+        IsItemInUserFavourites = model.IsItemInUserFavourites
+
+
+        if(IsItemInUserFavourites)
+            fav2.visibility = View.VISIBLE
+        else
+            fav2.visibility = View.GONE
+
         val gson = Gson()
         val itemType = object : TypeToken<List<PriceModel>>() {}.type
         val itemList = gson.fromJson<List<PriceModel>>(model.MenuItemPricesData.toString(), itemType)
@@ -176,7 +184,7 @@ class OneItem : Fragment()
 
     fun back(view : View)
     {
-        //super.onBackPressed()
+        activity.onBackPressed()
     }
 
 
@@ -292,6 +300,11 @@ class OneItem : Fragment()
 
                     if (jsonObject.get("Succeed").asBoolean)
                     {
+
+
+                        activity.notiNum.text = jsonObject.get("NotificationsCount").toString()
+                        activity.cartTxt.text = jsonObject.get("CartItemsCount").toString()
+
                         Toast.makeText(activity , "Item Added To Cart Successfully" , Toast.LENGTH_LONG).show()
                     }else
                     {
@@ -324,31 +337,90 @@ class OneItem : Fragment()
         }
         else
         {
-            var map = HashMap<String , String>()
-
-            var makeRequest = MakeRequest("AddFoodMenuToWishlist?userID=" +foreraaParameter.getString("UserID")+"&foodMenuID=" +ID,"0", map , activity,"",true)
-
-            makeRequest.request(object  : VolleyCallback
+            if(IsItemInUserFavourites)
             {
-                override fun onSuccess(result: Map<String, String>)
-                {
-
-                    val res = result.get("res")
-                    if (res.equals("true"))
-                    {
-                        Toast.makeText(activity , "Item Added To WishList Successfully" , Toast.LENGTH_LONG).show()
-                    }else
-                    {
-                        Toast.makeText(activity , "This Item Is Already in your WishList" , Toast.LENGTH_LONG).show()
-                    }
-                }
-            } ,object : ONRetryHandler
+                removeItemfromFavourites()
+            }
+            else
             {
-                override fun onRetryHandler(funName: String)
-                {
-                }
-            })
+                additemtoFavourites()
+            }
         }
+
+
+    }
+
+
+
+
+
+
+    fun additemtoFavourites()
+    {
+
+        var map = java.util.HashMap<String, String>()
+
+        var makeRequest = MakeRequest("FavouritesAddItem?isArabic=false&foodMenuID=" + ID + "&userID=" + userIDorPassNothing,"0"  , map,activity,"GetFoodMenuTypes",true)
+
+        makeRequest.request(object  : VolleyCallback
+        {
+            override fun onSuccess(result: Map<String, String>)
+            {
+
+                var str = result.get("res")
+
+                var jsonObject = Gson().fromJson(str, JsonArray::class.java).get(0).asJsonObject
+                if(jsonObject.get("Succeed").asBoolean)
+                {
+                    IsItemInUserFavourites =true
+                    fav2.visibility = View.VISIBLE
+                }
+            }
+        } ,object : ONRetryHandler
+        {
+            override fun onRetryHandler(funName: String)
+            {
+
+            }
+        })
+
+
+
+    }
+
+    fun removeItemfromFavourites()
+    {
+        var map = java.util.HashMap<String, String>()
+
+        var makeRequest = MakeRequest("FavouritesRemoveItem?isArabic=false&foodMenuID=" + ID + "&userID=" + userIDorPassNothing,"0", map, activity,"GetFoodMenuTypes",true)
+
+        makeRequest.request(object  : VolleyCallback
+        {
+            override fun onSuccess(result: Map<String, String>)
+            {
+
+
+                var str = result.get("res")
+
+                var jsonObject = Gson().fromJson(str, JsonArray::class.java).get(0).asJsonObject
+                if(jsonObject.get("Succeed").asBoolean)
+                {
+
+                    IsItemInUserFavourites = false
+                    fav2.visibility = View.GONE
+
+                }
+
+            }
+        } ,object : ONRetryHandler
+        {
+            override fun onRetryHandler(funName: String)
+            {
+
+            }
+        })
+
+
 
 
     }
@@ -357,13 +429,14 @@ class OneItem : Fragment()
     fun backto()
     {
         activity.header.visibility = View.VISIBLE
+        activity.onBackPressed()
     }
 
 
     override fun onDestroy()
     {
-        super.onDestroy()
         activity.header.visibility = View.VISIBLE
+        super.onDestroy()
 
     }
 }

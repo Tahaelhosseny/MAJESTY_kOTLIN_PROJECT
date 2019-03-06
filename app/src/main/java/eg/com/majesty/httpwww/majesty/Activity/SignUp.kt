@@ -26,12 +26,14 @@ import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.HashMap
 import android.view.View
+import android.view.WindowManager
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import org.androidannotations.annotations.AfterViews
+import org.androidannotations.annotations.WakeLock
 import org.json.JSONObject
 
 
@@ -85,6 +87,10 @@ class SignUp : Activity()
         } catch (e: Exception) {
             Log.e("exception", e.toString())
         }*/
+
+
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
     }
 
@@ -293,7 +299,6 @@ class SignUp : Activity()
             override fun onSuccess(result: LoginResult?)
             {
 
-
                 fbId = Profile.getCurrentProfile().id
 
                 val parameters = Bundle()
@@ -354,7 +359,6 @@ class SignUp : Activity()
     fun confirmSign(map: HashMap<String , String>)
     {
 
-
         var foreraaParameter = ForeraaParameter(applicationContext)
         var makeRequest = MakeRequest("AddUser?isArabic=false&isMobileAppRegisteration=true&title=&firstname=" + map.get("firstname")+"&secondname="+map.get("secondname")+"&phone1=" +map.get("phone1") +"&phone2=" +map.get("phone2")+"&birthdate="+map.get("birthdate")+"&email="+map.get("email")
                 +"&username="+map.get("email")+"&password="+map.get("password"),"0", map , this,"GetFoodMenuTypes",true)
@@ -373,9 +377,22 @@ class SignUp : Activity()
                     foreraaParameter.setString("UserID" , UserID)
                     foreraaParameter.setBoolean("rem" , rem)
                     foreraaParameter.setBoolean("social" , social)
-                    startActivity(Intent(this@SignUp , MainActivity_::class.java))
-                    finish()
 
+
+
+
+
+                    foreraaParameter.setString("FirstName" , map.get("firstname").toString() )
+                    foreraaParameter.setString("SecondName" , map.get("secondname").toString())
+                    foreraaParameter.setString("Phone1" ,map.get("phone1").toString())
+                    foreraaParameter.setString("Phone2" , map.get("phone2").toString())
+                    foreraaParameter.setString("Email" , map.get("email").toString())
+
+
+
+
+                    startActivity(Intent(this@SignUp , MainActivity_::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                    finish()
 
 
                 }else
@@ -440,6 +457,16 @@ class SignUp : Activity()
                     foreraaParameter.setString("UserID" , UserID)
                     foreraaParameter.setBoolean("rem" , rem)
                     foreraaParameter.setBoolean("social" , social)
+
+                    foreraaParameter.setString("FirstName" , map.get("firstname").toString() )
+                    foreraaParameter.setString("SecondName" , map.get("secondname").toString())
+                    foreraaParameter.setString("Phone1" ,map.get("phone1").toString())
+                    foreraaParameter.setString("Phone2" , map.get("phone2").toString())
+                    foreraaParameter.setString("Email" , map.get("email").toString())
+
+
+
+
                     startActivity(Intent(this@SignUp , MainActivity_::class.java))
                     finish()
 

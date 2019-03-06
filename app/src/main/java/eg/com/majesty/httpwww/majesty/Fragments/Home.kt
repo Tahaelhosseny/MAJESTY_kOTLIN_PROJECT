@@ -43,6 +43,8 @@ class Home : Fragment()
         activity.headerText.setText("Home")
         activity.back.visibility = View.GONE
         activity.menu.visibility = View.VISIBLE
+        activity.header.visibility = View.VISIBLE
+
 
         var foreraaParameter = ForeraaParameter(activity)
 

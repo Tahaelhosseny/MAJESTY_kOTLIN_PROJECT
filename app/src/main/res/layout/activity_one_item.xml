@@ -36,11 +36,22 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/group_16"
                 android:layout_height="50dp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:padding="20dp"
+                android:id="@+id/fav2"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/favstar2"
+                android:elevation="10dp"
+                android:visibility="gone"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="19dp"
+                android:layout_height="50dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@+id/backkk"
                 android:layout_marginTop="20dp"
-
                 android:id="@+id/catName"
                 android:textColor="@color/white"
                 android:gravity="center_vertical"

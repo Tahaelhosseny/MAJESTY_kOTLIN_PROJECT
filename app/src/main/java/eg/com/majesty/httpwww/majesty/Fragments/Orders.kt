@@ -44,18 +44,14 @@ class Orders : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activity.back.visibility = View.GONE
-        activity.menu.visibility = View.VISIBLE
+        activity.back.visibility = View.VISIBLE
+        activity.menu.visibility = View.INVISIBLE
+        activity.header.visibility = View.VISIBLE
         pasttext.setTypeface(Utils.Exo2SemiBold(activity))
         uptext.setTypeface(Utils.Exo2SemiBold(activity))
-
         GetAllUserOrders()
-
-
-
-
         view.pastLay.setOnClickListener { view->
-           uptext.setTextColor(Color.parseColor("#aaaaaa"))
+            uptext.setTextColor(Color.parseColor("#aaaaaa"))
            pasttext.setTextColor(Color.BLACK)
            pastline.visibility = View.VISIBLE
            upline.visibility = View.GONE

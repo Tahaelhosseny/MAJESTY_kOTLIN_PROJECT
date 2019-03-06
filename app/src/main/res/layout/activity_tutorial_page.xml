@@ -34,7 +34,7 @@
     </cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager>
     <com.rd.pageindicatorview.view.PageIndicatorView
         android:layout_width="wrap_content"
-        app:radius="10dp"
+        app:radius="5dp"
         android:layout_marginBottom="15dp"
         android:layout_above="@+id/getStarted"
         android:id="@+id/pageIndicatorView"

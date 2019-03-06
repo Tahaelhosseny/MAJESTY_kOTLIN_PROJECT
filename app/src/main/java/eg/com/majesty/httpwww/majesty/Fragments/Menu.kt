@@ -49,8 +49,10 @@ class Menu : Fragment()
 
     override fun onResume() {
         super.onResume()
-        activity.back.visibility = View.GONE
-        activity.menu.visibility = View.VISIBLE
+        activity.back.visibility = View.VISIBLE
+        activity.menu.visibility = View.INVISIBLE
+        activity.header.visibility = View.VISIBLE
+
         activity.headerText.setText("Menu")
 
 
@@ -103,6 +105,16 @@ class Menu : Fragment()
 
 
 
+
+    }
+
+
+
+    override fun onDestroy()
+    {
+        super.onDestroy()
+        activity.back.visibility = View.GONE
+        activity.menu.visibility = View.VISIBLE
 
     }
 

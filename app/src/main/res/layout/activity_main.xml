@@ -207,7 +207,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"></LinearLayout>
+                    android:layout_weight="1">
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -280,7 +282,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="Taha Elhosseny"
+            android:text=""
             android:textSize="16sp"
             android:layout_below="@+id/uLogo"
             android:layout_centerHorizontal="true"
@@ -354,6 +356,15 @@
                 android:fontFamily="@font/exoregular"
                 android:text="Setings"
                 android:layout_height="30dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="#202020"
+                android:fontFamily="@font/exoregular"
+                android:text="Log In"
+                android:onClick="LogIn"
+                android:id="@+id/LogIn"
+                android:layout_height="30dp" />
 
         </LinearLayout>
 
@@ -363,6 +374,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:id="@+id/logOutLayout"
+            android:onClick="@+id/logOutLayout"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="80dp"

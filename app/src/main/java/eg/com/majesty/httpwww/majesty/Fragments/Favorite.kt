@@ -56,8 +56,10 @@ class Favorite : Fragment()
 
     override fun onResume() {
         super.onResume()
-        activity.back.visibility = View.GONE
-        activity.menu.visibility = View.VISIBLE
+        activity.back.visibility = View.VISIBLE
+        activity.menu.visibility = View.INVISIBLE
+        activity.header.visibility = View.VISIBLE
+
 
 
 

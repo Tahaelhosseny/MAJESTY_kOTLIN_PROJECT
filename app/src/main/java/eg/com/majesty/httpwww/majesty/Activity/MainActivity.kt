@@ -22,8 +22,9 @@ import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import org.androidannotations.annotations.AfterViews
 import android.support.v4.view.GravityCompat
+import android.support.v7.widget.ViewUtils
 import android.view.View
-
+import android.view.WindowManager
 
 
 var isHistory = false
@@ -47,6 +48,13 @@ class MainActivity : Activity()
                                 .build()))
                 .build())
         savedInstanceStateA = savedInstanceState
+
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
+
+
+
     }
 
     override fun attachBaseContext(newBase: Context)
@@ -147,7 +155,20 @@ class MainActivity : Activity()
             }
 
 
+        var foreraaParameter = ForeraaParameter(this@MainActivity)
 
+        if(foreraaParameter.getString("UserID").equals(""))
+        {
+            userName.setText("User Name")
+            editProfile.visibility = View.INVISIBLE
+            logOutLayout.visibility = View.INVISIBLE
+        }else
+        {
+            userName.setText(foreraaParameter.getString("Title")+" " +foreraaParameter.getString("FirstName")+" " +foreraaParameter.getString("SecondName"))
+            editProfile.visibility = View.VISIBLE
+            logOutLayout.visibility = View.VISIBLE
+            LogIn.visibility = View.INVISIBLE
+        }
 
 
 
@@ -162,10 +183,6 @@ class MainActivity : Activity()
     }
     @Click fun home ()
     {
-
-
-
-
 
         homeIm.setImageResource(R.drawable.icon_home1)
         favoriteIm.setImageResource(R.drawable.favorite)
@@ -213,7 +230,23 @@ class MainActivity : Activity()
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction.commit()*/
-        startActivity(Intent(this , CheckOut_::class.java))
+
+
+
+        var foreraaParameter = ForeraaParameter(this@MainActivity)
+
+        if(!foreraaParameter.getString("UserID").equals(""))
+        {
+            startActivity(Intent(this , CheckOut_::class.java))
+
+        }else
+        {
+            Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
+        }
+
+
+
+
     }
 
 
@@ -269,20 +302,34 @@ class MainActivity : Activity()
 
 
 
-        headerText.setText(R.string.Orders)
 
-        homeIm.setImageResource(R.drawable.icon_home)
-        favoriteIm.setImageResource(R.drawable.favorite)
-        ordersIm.setImageResource(R.drawable.ic_orderb)
-        menuIm.setImageResource(R.drawable.menu)
+        var foreraaParameter = ForeraaParameter(this@MainActivity)
+
+        if(!foreraaParameter.getString("UserID").equals(""))
+        {
+            headerText.setText(R.string.Orders)
+
+            homeIm.setImageResource(R.drawable.icon_home)
+            favoriteIm.setImageResource(R.drawable.favorite)
+            ordersIm.setImageResource(R.drawable.ic_orderb)
+            menuIm.setImageResource(R.drawable.menu)
 
 
-        val orders = Orders()
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameContainer, orders)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        fragmentTransaction.commit()
+            val orders = Orders()
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameContainer, orders)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            fragmentTransaction.commit()
+        }else
+        {
+            Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
+        }
+
+
+
+
+
     }
 
 
@@ -300,7 +347,15 @@ class MainActivity : Activity()
     @Click fun addressBok()
     {
         //manageLay()
-        startActivity(Intent(this , MyPlaces::class.java))
+        var foreraaParameter = ForeraaParameter(this@MainActivity)
+
+        if(!foreraaParameter.getString("UserID").equals(""))
+        {
+            startActivity(Intent(this , MyPlaces::class.java))
+        }else
+        {
+            Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
+        }
     }
 
     
@@ -313,6 +368,30 @@ class MainActivity : Activity()
     @Click fun Contact_Us()
     {
         startActivity(Intent(this , ContactUs::class.java))
+    }
+
+
+    @Click fun logOutLayout()
+    {
+        var foreraaParameter = ForeraaParameter(this@MainActivity)
+        foreraaParameter.setString("UserID" , "")
+        cartTxt.setText("0")
+        userName.setText("User Name")
+        editProfile.visibility = View.INVISIBLE
+        logOutLayout.visibility = View.INVISIBLE
+        LogIn.visibility = View.VISIBLE
+
+
+
+
+    }
+
+
+
+
+    @Click fun LogIn()
+    {
+        startActivity(Intent(this , Login_::class.java))
     }
 
 

@@ -116,6 +116,8 @@ class LoadCatItems : Fragment()
         super.onResume()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
+        activity.header.visibility = View.VISIBLE
+
         activity.headerText.setText(this.CategoryName)
 
         var foreraaParameter = ForeraaParameter(activity)

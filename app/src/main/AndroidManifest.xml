@@ -55,6 +55,7 @@
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.MainActivity_"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.SignUp_"

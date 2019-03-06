@@ -121,6 +121,7 @@ class FreshOffers : Fragment()
         super.onResume()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
+        activity.header.visibility = View.VISIBLE
         activity.headerText.setText("Fresh Offers")
         loadData()
     }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
@@ -39,6 +40,11 @@ class Login : Activity()
         try {
             finish = intent.getBooleanExtra("finish", false)
         }catch (e :Exception){}
+
+
+
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 
 
@@ -114,20 +120,31 @@ class Login : Activity()
                     override fun onSuccess(result: Map<String, String>)
                     {
 
-                        val res = result.get("res").toString()
 
-                        val jasonObject = Gson().fromJson(res , JsonObject::class.java)
-                        if(jasonObject.get("IsSucceed").asBoolean)
+
+                        var jsonObject = JSONObject(result.get("res").toString())
+                        var _UserLoginInfo = jsonObject.getJSONObject("_UserLoginInfo")
+                        var _UserInfoData = jsonObject.getJSONObject("_UserInfoData")
+
+                        if(_UserLoginInfo.getBoolean("IsSucceed"))
                         {
                             var rem = remember.isChecked
-                            var UserID = jasonObject.get("UserID").asString
-                            foreraaParameter.setString("UserID" , UserID)
+                            foreraaParameter.setString("UserID" , _UserInfoData.getString("UserID"))
+                            foreraaParameter.setString("Title" , _UserInfoData.getString("Title"))
+                            foreraaParameter.setString("FirstName" , _UserInfoData.getString("FirstName"))
+                            foreraaParameter.setString("SecondName" , _UserInfoData.getString("SecondName"))
+                            foreraaParameter.setString("Phone1" , _UserInfoData.getString("Phone1"))
+                            foreraaParameter.setString("Phone2" , _UserInfoData.getString("Phone2"))
+                            foreraaParameter.setString("Email" , _UserInfoData.getString("Email"))
+                            foreraaParameter.setBoolean("IsVerified" , _UserInfoData.getBoolean("IsVerified"))
+                            foreraaParameter.setBoolean("IsMale" , _UserInfoData.getBoolean("IsMale"))
                             foreraaParameter.setBoolean("rem" , rem)
-                            foreraaParameter.setBoolean("social" , social)
-                            startActivity(Intent(this@Login , MainActivity_::class.java))
-                            finish()
+                            foreraaParameter.setBoolean("social" , true)
+                            startActivity(Intent(this@Login , MainActivity_::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                         }else
-                            Toast.makeText(this@Login , "This Account Never Register " , Toast.LENGTH_LONG ).show()
+                        {
+                            Toast.makeText(this@Login , "This Account Not Register" , Toast.LENGTH_LONG).show()
+                        }
                     }
 
                 } ,object : ONRetryHandler
@@ -145,32 +162,47 @@ class Login : Activity()
     @Click fun login()
     {
         val userName = email.getText()
-        val password = password.getText()
+        val passwordd = password.getText()
 
         var foreraaParameter = ForeraaParameter(applicationContext)
 
         var map = HashMap<String , String>()
 
-                var makeRequest = MakeRequest("UserLogin?isLoginThroughMobileApp=true&isArabic=false&username=" +userName +"&password="+password,"0", map , this,"UserLogin",true)
+                var makeRequest = MakeRequest("UserLogin?isLoginThroughMobileApp=true&isArabic=false&username=" +userName +"&password="+passwordd,"0", map , this,"UserLogin",true)
 
                         makeRequest.request(object  : VolleyCallback
                         {
                             override fun onSuccess(result: Map<String, String>)
                             {
-                                var ss = map.get("res").toString().subSequence(1,5)
-                                if(map.get("res").toString().length<5)
-                                {
-                                    Toast.makeText(this@Login , ss.toString() +"\nThis Account Never Register " , Toast.LENGTH_LONG ).show()
-                                }else
+
+                                var jsonObject = JSONObject(result.get("res"))
+                                var _UserLoginInfo = jsonObject.getJSONObject("_UserLoginInfo")
+                                var _UserInfoData = jsonObject.getJSONObject("_UserInfoData")
+
+                                if(_UserLoginInfo.getBoolean("IsSucceed"))
                                 {
                                     var rem = remember.isChecked
-                                    var UserID = map.get("res").toString()
-                                    foreraaParameter.setString("UserID" , UserID)
+
+                                    foreraaParameter.setString("UserID" , _UserInfoData.getString("UserID"))
+                                    foreraaParameter.setString("Title" , _UserInfoData.getString("Title"))
+                                    foreraaParameter.setString("FirstName" , _UserInfoData.getString("FirstName"))
+                                    foreraaParameter.setString("SecondName" , _UserInfoData.getString("SecondName"))
+                                    foreraaParameter.setString("Phone1" , _UserInfoData.getString("Phone1"))
+                                    foreraaParameter.setString("Phone2" , _UserInfoData.getString("Phone2"))
+                                    foreraaParameter.setString("Email" , _UserInfoData.getString("Email"))
+                                    foreraaParameter.setBoolean("IsVerified" , _UserInfoData.getBoolean("IsVerified"))
+                                    foreraaParameter.setBoolean("IsMale" , _UserInfoData.getBoolean("IsMale"))
                                     foreraaParameter.setBoolean("rem" , rem)
                                     foreraaParameter.setBoolean("social" , false)
-                                    startActivity(Intent(this@Login , MainActivity_::class.java))
-                                    finish()
+                                    startActivity(Intent(this@Login , MainActivity_::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+
+                                }else
+                                {
+                                    email.setError("This Email Not Registered Yet")
+                                    password.setError("Password Error")
+                                    Toast.makeText(this@Login , "This Account Not Register" , Toast.LENGTH_LONG).show()
                                 }
+
                             }
                         } ,object : ONRetryHandler
                         {
@@ -181,6 +213,14 @@ class Login : Activity()
                         })
 
 
+    }
+
+
+
+
+    @Click fun signUp()
+    {
+        startActivity(Intent(this , SignUp_::class.java))
     }
 
 

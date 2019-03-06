@@ -68,13 +68,8 @@ class Splash : Activity()
 
                 var foreraaParameter = ForeraaParameter(this@Splash)
                 foreraaParameter.setString("GetAppIntroData" , str.toString())
-
-                if(foreraaParameter.getString("UserID").equals(""))
-                    startActivity(Intent(this@Splash , TutorialPage_::class.java))
-                else
-                    startActivity(Intent(this@Splash , MainActivity_::class.java))
+                startActivity(Intent(this@Splash , TutorialPage_::class.java))
                 finish()
-
             }
         }, object : ONRetryHandler {
             override fun onRetryHandler(funName: String) {

@@ -178,7 +178,7 @@ class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenu
                 var str = result.get("res")
 
                 var jsonObject = Gson().fromJson(str, JsonArray::class.java).get(0).asJsonObject
-                if(!jsonObject.get("Succeed").asBoolean)
+                if(jsonObject.get("Succeed").asBoolean)
                 {
                     categoryItems.get(position).IsItemInUserFavourites =false
                     holder.fav2.visibility = View.GONE

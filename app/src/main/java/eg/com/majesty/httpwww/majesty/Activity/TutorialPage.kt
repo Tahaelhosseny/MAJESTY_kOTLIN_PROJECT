@@ -44,7 +44,6 @@ class TutorialPage : Activity()
     @ViewById lateinit var signUp : TextView
 
 
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
 
@@ -105,6 +104,11 @@ class TutorialPage : Activity()
         })
 
 
+        var foreraaParameter = ForeraaParameter(this@TutorialPage)
+        if(!foreraaParameter.getString("UserID").equals(""))
+        {
+            ce_login.visibility = View.INVISIBLE
+        }
 
     }
 
@@ -112,12 +116,14 @@ class TutorialPage : Activity()
     @Click fun login()
     {
         startActivity(Intent(this , Login_::class.java))
+        finish()
     }
 
 
     @Click fun getStarted ()
     {
         startActivity(Intent(this , MainActivity_::class.java))
+        finish()
     }
 
 
@@ -126,7 +132,7 @@ class TutorialPage : Activity()
     @Click fun signUp()
     {
         startActivity(Intent(this , SignUp_::class.java))
-
+        finish()
     }
 
 }
