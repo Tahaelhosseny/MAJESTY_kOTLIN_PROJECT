@@ -42,16 +42,20 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".Splash_">
+        <activity android:name=".Splash_"
+            android:configChanges="orientation|screenSize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.TutorialPage_" />
+        <activity android:name=".Activity.TutorialPage_"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".Activity.Login_"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.MainActivity_"
@@ -60,29 +64,38 @@
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.SignUp_"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.CheckOut_"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.MyPlaces"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.AddNewPlace"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.EditAddress"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.FinalCheckOut"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.OneOrderDetails"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
             android:name=".Activity.Branches"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity android:name=".Activity.ContactUs"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login"></activity>
     </application>
 
