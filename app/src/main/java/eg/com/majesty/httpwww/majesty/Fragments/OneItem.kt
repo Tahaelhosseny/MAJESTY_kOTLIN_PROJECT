@@ -151,7 +151,7 @@ class OneItem : Fragment()
 
     fun setData(jsonObject : JsonObject)
     {
-        val model = Gson().fromJson(jsonObject , ItemModel::class.java)
+        var model = Gson().fromJson(jsonObject , ItemModel::class.java)
         Glide.with(activity).load(model.FoodMenuImageUrl.replace("http" , "https")).thumbnail(.1f).into(foodImage)
         nameeee.setText(model.FoodMenuName)
         deseee.setText(model.FoodMenuDescription)
@@ -171,9 +171,9 @@ class OneItem : Fragment()
         else
             fav2.visibility = View.GONE
 
-        val gson = Gson()
-        val itemType = object : TypeToken<List<PriceModel>>() {}.type
-        val itemList = gson.fromJson<List<PriceModel>>(model.MenuItemPricesData.toString(), itemType)
+        var gson = Gson()
+        var itemType = object : TypeToken<List<PriceModel>>() {}.type
+        var itemList = gson.fromJson<List<PriceModel>>(model.MenuItemPricesData.toString(), itemType)
         rec.layoutManager = LinearLayoutManager(activity )
         adapter = PriceAdapter(activity ,itemList ,"home")
         rec.adapter  = adapter
@@ -291,7 +291,7 @@ class OneItem : Fragment()
                 override fun onSuccess(result: Map<String, String>)
                 {
 
-                    val res = result.get("res").toString()
+                    var res = result.get("res").toString()
 
 
                     var jsonObject = Gson().fromJson(res, JsonArray::class.java).get(0).asJsonObject
