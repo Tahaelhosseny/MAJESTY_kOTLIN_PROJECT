@@ -24,14 +24,16 @@
             android:layout_width="80dp"
             android:src="@drawable/shape_846"
             android:id="@+id/imgh"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_height="80dp" />
 
 
         <ImageView
-            android:layout_width="110dp"
+            android:layout_width="match_parent"
             android:src="@drawable/piza"
+            android:scaleType="fitXY"
             android:layout_alignParentBottom="true"
             android:id="@+id/img"
             android:layout_alignParentLeft="true"

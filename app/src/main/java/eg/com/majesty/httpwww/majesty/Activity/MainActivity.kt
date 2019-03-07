@@ -342,20 +342,7 @@ class MainActivity : Activity()
     override fun onNewIntent(intent: Intent)
     {
         super.onNewIntent(intent)
-        var foreraaParameter = ForeraaParameter(this@MainActivity)
 
-        if(foreraaParameter.getString("UserID").equals(""))
-        {
-            userName.setText("User Name")
-            editProfile.visibility = View.INVISIBLE
-            logOutLayout.visibility = View.INVISIBLE
-        }else
-        {
-            userName.setText(foreraaParameter.getString("Title")+" " +foreraaParameter.getString("FirstName")+" " +foreraaParameter.getString("SecondName"))
-            editProfile.visibility = View.VISIBLE
-            logOutLayout.visibility = View.VISIBLE
-            LogIn.visibility = View.INVISIBLE
-        }
     }
 
 
@@ -385,6 +372,7 @@ class MainActivity : Activity()
 
     @Click fun Contact_Us()
     {
+
         startActivity(Intent(this , ContactUs::class.java))
     }
 

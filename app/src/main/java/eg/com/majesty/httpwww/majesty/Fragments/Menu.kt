@@ -26,11 +26,7 @@ import org.json.JSONObject
 class Menu : Fragment()
 {
 
-
-
     var ID :String =""
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         return inflater.inflate(R.layout.fragment_menu, container, false)
@@ -40,8 +36,6 @@ class Menu : Fragment()
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
         super.onActivityCreated(savedInstanceState)
-
-
     }
 
 
