@@ -122,23 +122,22 @@ class MainActivity : Activity()
             otxt.setTypeface(Utils.Exo2SemiBold(this))
 
 
-        if(savedInstanceStateA==null)
-            if (isHistory)
-            {
-                headerText.setText(R.string.Orders)
-                homeIm.setImageResource(R.drawable.icon_home)
-                favoriteIm.setImageResource(R.drawable.favorite)
-                ordersIm.setImageResource(R.drawable.ic_orderb
-                )
-                menuIm.setImageResource(R.drawable.menu)
+        if (isHistory)
+        {
+            headerText.setText(R.string.Orders)
+            homeIm.setImageResource(R.drawable.icon_home)
+            favoriteIm.setImageResource(R.drawable.favorite)
+            ordersIm.setImageResource(R.drawable.ic_orderb
+            )
+            menuIm.setImageResource(R.drawable.menu)
 
 
-                val orders = Orders()
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.frameContainer, orders)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                fragmentTransaction.commit()
+            val orders = Orders()
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameContainer, orders)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            fragmentTransaction.commit()
             }else
             {
                 homeIm.setImageResource(R.drawable.icon_home1)
@@ -339,6 +338,25 @@ class MainActivity : Activity()
 
     }
 
+
+    override fun onNewIntent(intent: Intent)
+    {
+        super.onNewIntent(intent)
+        var foreraaParameter = ForeraaParameter(this@MainActivity)
+
+        if(foreraaParameter.getString("UserID").equals(""))
+        {
+            userName.setText("User Name")
+            editProfile.visibility = View.INVISIBLE
+            logOutLayout.visibility = View.INVISIBLE
+        }else
+        {
+            userName.setText(foreraaParameter.getString("Title")+" " +foreraaParameter.getString("FirstName")+" " +foreraaParameter.getString("SecondName"))
+            editProfile.visibility = View.VISIBLE
+            logOutLayout.visibility = View.VISIBLE
+            LogIn.visibility = View.INVISIBLE
+        }
+    }
 
 
 

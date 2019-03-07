@@ -34,6 +34,19 @@ class Login : Activity()
 {
 
     var finish = false
+    lateinit var callbackManager : CallbackManager
+    var social = false
+    var fbId = ""
+
+
+
+
+
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -76,9 +89,6 @@ class Login : Activity()
 
 
 
-    lateinit var callbackManager : CallbackManager
-    var social = false
-    var fbId = ""
 
     @Click fun facebookLogin()
     {
