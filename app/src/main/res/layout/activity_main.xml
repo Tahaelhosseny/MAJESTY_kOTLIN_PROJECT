@@ -95,7 +95,7 @@
                         android:id="@+id/notiNum"
                         android:textColor="@color/white"
                         android:textSize="10sp"
-                        android:text="65"
+                        android:text="0"
                         android:layout_alignParentRight="true"
                         />
                 </RelativeLayout>
@@ -148,7 +148,7 @@
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="10sp"
-                    android:text="65"
+                    android:text="0"
                     android:layout_alignParentRight="true"
                     />
 

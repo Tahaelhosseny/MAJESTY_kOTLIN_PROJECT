@@ -11,6 +11,7 @@ import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Activity.Login_
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
+import eg.com.majesty.httpwww.majesty.Adapters.FavoriteAdapter
 import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.Models.CategoryModels
@@ -90,10 +91,9 @@ class Favorite : Fragment()
                 activity.cartTxt.text = notificationNumbers.get("CartItemsCount").toString()
 
                 val itemType = object : TypeToken<List<GetFoodMenusModel>>() {}.type
-                val itemList = gson.fromJson<List<GetFoodMenusModel>>(jsonObject.get("FavouriteItems").toString(), itemType)
-
+                val itemList = gson.fromJson<MutableList<GetFoodMenusModel>>(jsonObject.get("FavouriteItems").toString(), itemType)
                 fav_item.layoutManager = LinearLayoutManager(activity)
-                fav_item.adapter = GetFoodMenus(activity, itemList, "Favorites")
+                fav_item.adapter = FavoriteAdapter(activity, itemList, "Favorites")
                 fav_item.adapter.notifyDataSetChanged()
             }
         }, object : ONRetryHandler {

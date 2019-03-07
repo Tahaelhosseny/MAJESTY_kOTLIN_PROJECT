@@ -28,7 +28,6 @@ class Menu : Fragment()
 
 
 
-    var savedInstanceStateA: Bundle? = null
     var ID :String =""
 
 
