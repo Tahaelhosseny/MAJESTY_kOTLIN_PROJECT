@@ -23,8 +23,10 @@ import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import org.androidannotations.annotations.AfterViews
 import android.support.v4.view.GravityCompat
 import android.support.v7.widget.ViewUtils
+import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import kotlinx.android.synthetic.main.drawer_menu.*
 
 
 var isHistory = false
@@ -154,20 +156,6 @@ class MainActivity : Activity()
             }
 
 
-        var foreraaParameter = ForeraaParameter(this@MainActivity)
-
-        if(foreraaParameter.getString("UserID").equals(""))
-        {
-            userName.setText("User Name")
-            editProfile.visibility = View.INVISIBLE
-            logOutLayout.visibility = View.INVISIBLE
-        }else
-        {
-            userName.setText(foreraaParameter.getString("Title")+" " +foreraaParameter.getString("FirstName")+" " +foreraaParameter.getString("SecondName"))
-            editProfile.visibility = View.VISIBLE
-            logOutLayout.visibility = View.VISIBLE
-            LogIn.visibility = View.INVISIBLE
-        }
 
 
 
@@ -199,9 +187,6 @@ class MainActivity : Activity()
 
     @Click fun menuu ()
     {
-
-
-
 
         homeIm.setImageResource(R.drawable.icon_home)
         favoriteIm.setImageResource(R.drawable.favorite)
@@ -351,22 +336,51 @@ class MainActivity : Activity()
 
     @Click fun addressBok()
     {
-        //manageLay()
+
         var foreraaParameter = ForeraaParameter(this@MainActivity)
 
         if(!foreraaParameter.getString("UserID").equals(""))
         {
-            startActivity(Intent(this , MyPlaces::class.java))
+
+            startActivity(Intent(this , MyPlaces::class.java).putExtra("isAddressBok",false))
+
         }else
         {
             Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
         }
+
+
     }
 
     
     @Click fun branches()
     {
         startActivity(Intent(this , Branches::class.java))
+    }
+
+
+    override fun onResume()
+    {
+        super.onResume()
+        manageLay()
+
+        var foreraaParameter = ForeraaParameter(this@MainActivity)
+
+        if(foreraaParameter.getString("UserID").equals(""))
+        {
+            userName.setText("User Name")
+            editProfile.visibility = View.INVISIBLE
+            logOutLayout.visibility = View.INVISIBLE
+        }else
+        {
+            userName.setText(foreraaParameter.getString("Title")+" " +foreraaParameter.getString("FirstName")+" " +foreraaParameter.getString("SecondName"))
+            editProfile.visibility = View.VISIBLE
+            logOutLayout.visibility = View.VISIBLE
+            LogIn.visibility = View.INVISIBLE
+        }
+
+
+
     }
 
 
@@ -403,13 +417,13 @@ class MainActivity : Activity()
 
     fun manageLay()
     {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+        if(drawerLayout.isDrawerOpen(drawer))
             {
-                drawerLayout.openDrawer(GravityCompat.END)
+                drawerLayout.closeDrawer(drawer)
             }
         else
         {
-            drawerLayout.openDrawer(GravityCompat.START)
+            drawerLayout.openDrawer(drawer)
         }
     }
 

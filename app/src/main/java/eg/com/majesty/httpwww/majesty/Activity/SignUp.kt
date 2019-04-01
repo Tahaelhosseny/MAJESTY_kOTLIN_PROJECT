@@ -32,6 +32,7 @@ import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
+import kotlinx.android.synthetic.main.page_layout.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.WakeLock
 import org.json.JSONObject
@@ -171,6 +172,7 @@ class SignUp : Activity()
         var birthdayt = birthdate.text
         var passwordt = Password.text
         var cPasswordt = cPassword.text
+        var titleT = titleee.text
         var map = HashMap<String , String>()
 
         var x = 0
@@ -188,17 +190,27 @@ class SignUp : Activity()
                 map.set("phone1" , pOnet.toString())
             }
 
-            if (pSecondt.length != 11)
+            if(pSecondt.length>0)
+                if (pSecondt.length != 11)
+                {
+
+                    pSecond.setError("Phone Must be 11 numbre")
+                    map.set("phone2" , "")
+                } else
+                {
+                    map.set("phone2" , pSecondt.toString())
+                }
+
+
+
+            if (titleT.length<2)
             {
-
-
-                pSecond.setError("Phone Must be 11 numbre")
-                map.set("phone2" , "")
+                x++
+                titleee.setError("You Have To Enter Title ")
             }
-
             else
             {
-                map.set("phone2" , pSecondt.toString())
+                map.set("title" , titleT.toString())
             }
 
 
@@ -225,6 +237,21 @@ class SignUp : Activity()
             }
 
 
+
+            if (titleT.length<2)
+            {
+                x++
+                titleee.setError("You Have To Enter Title ")
+            }
+            else
+            {
+                map.set("title" , titleT.toString())
+            }
+
+
+
+
+
             if (sNamet.length<2)
             {
                 x++
@@ -246,19 +273,19 @@ class SignUp : Activity()
             {
                 map.set("phone1" , pOnet.toString())
             }
+            if(pSecondt.length>0)
+                if (pSecondt.length != 11)
+                {
 
-            if (pSecondt.length != 11)
-            {
 
+                    pSecond.setError("Phone Must be 11 numbre")
+                    map.set("phone2" , "")
+                }
 
-                pSecond.setError("Phone Must be 11 numbre")
-                map.set("phone2" , "")
-            }
-
-            else
-            {
-                map.set("phone2" , pSecondt.toString())
-            }
+                else
+                {
+                    map.set("phone2" , pSecondt.toString())
+                }
 
 
             if (passwordt.length < 6)
@@ -357,10 +384,11 @@ class SignUp : Activity()
     }
 
     fun confirmSign(map: HashMap<String , String>)
+
     {
 
         var foreraaParameter = ForeraaParameter(applicationContext)
-        var makeRequest = MakeRequest("AddUser?isArabic=false&isMobileAppRegisteration=true&title=&firstname=" + map.get("firstname")+"&secondname="+map.get("secondname")+"&phone1=" +map.get("phone1") +"&phone2=" +map.get("phone2")+"&birthdate="+map.get("birthdate")+"&email="+map.get("email")
+        var makeRequest = MakeRequest("AddUser?isArabic=false&isMobileAppRegisteration=true&title="+ titleee.text.toString()+"&firstname=" + map.get("firstname")+"&secondname="+map.get("secondname")+"&phone1=" +map.get("phone1") +"&phone2=" +map.get("phone2")+"&birthdate="+map.get("birthdate")+"&email="+map.get("email")
                 +"&username="+map.get("email")+"&password="+map.get("password"),"0", map , this,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
@@ -377,7 +405,7 @@ class SignUp : Activity()
                     foreraaParameter.setString("UserID" , UserID)
                     foreraaParameter.setBoolean("rem" , rem)
                     foreraaParameter.setBoolean("social" , social)
-
+                    foreraaParameter.setString("Title" , titleee.text.toString())
 
 
 
@@ -455,6 +483,8 @@ class SignUp : Activity()
                     var rem = remember.isChecked
                     var UserID = jsonObject.get("UserID").asString
                     foreraaParameter.setString("UserID" , UserID)
+                    foreraaParameter.setString("Title" , titleee.text.toString())
+
                     foreraaParameter.setBoolean("rem" , rem)
                     foreraaParameter.setBoolean("social" , social)
 

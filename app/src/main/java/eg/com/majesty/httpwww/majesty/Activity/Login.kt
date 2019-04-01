@@ -169,6 +169,12 @@ class Login : Activity()
 
 
 
+    @Click fun backBtn()
+    {
+        onBackPressed()
+    }
+
+
     @Click fun login()
     {
         val userName = email.getText()

@@ -176,7 +176,7 @@ class CheckOut : Activity()
         {
             Toast.makeText(applicationContext , "Your Cart Is Empty Please Add Items In It" , Toast.LENGTH_LONG).show()
         }
-        else startActivity(Intent(this , MyPlaces::class.java))
+        else startActivity(Intent(this , MyPlaces::class.java).putExtra("isAddressBok" , true))
 
     }
 

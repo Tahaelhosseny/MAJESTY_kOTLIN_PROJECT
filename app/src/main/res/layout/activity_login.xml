@@ -34,6 +34,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="16dp"
                 android:scaleType="fitXY"
+                android:clickable="true"
+                android:id="@+id/backBtn"
                 android:src="@drawable/icon_back_copy" />
 
 
@@ -189,6 +191,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="14sp"
+                    android:inputType="textWebPassword"
                     android:id="@+id/password"
                     android:gravity="center|left"
                     android:layout_marginLeft="20dp"
@@ -212,7 +215,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:textSize="7.7sp"
+                android:textSize="12sp"
                 android:id="@+id/remMe"
                 android:layout_marginTop="450dp"
                 android:layout_toRightOf="@+id/remember"
@@ -226,7 +229,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:textSize="7.7sp"
+                android:textSize="12sp"
                 android:id="@+id/forget"
                 android:layout_marginRight="30dp"
                 android:layout_alignParentRight="true"

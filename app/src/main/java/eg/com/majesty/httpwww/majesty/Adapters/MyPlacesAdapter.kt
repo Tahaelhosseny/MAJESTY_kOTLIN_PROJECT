@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.activity_add_new_place.*
 
 
 
-class MyPlacesAdapter(var activity : Activity, var userAddressAsLines : MutableList<UserAddressAsLines>, var updateCity : UpdateCity) : RecyclerView.Adapter<MyPlacesAdapter.MyViewHolder>()
+class MyPlacesAdapter(var activity : Activity, var userAddressAsLines : MutableList<UserAddressAsLines>,var isAddressBok :Boolean, var updateCity : UpdateCity) : RecyclerView.Adapter<MyPlacesAdapter.MyViewHolder>()
 {
 
 
@@ -105,7 +105,8 @@ class MyPlacesAdapter(var activity : Activity, var userAddressAsLines : MutableL
         {
             override fun onClick(v: View?)
             {
-                activity.startActivity(Intent(activity , FinalCheckOut::class.java).putExtra("UseAddressID",userAddressAsLines.get(position).UseAddressID.toString()))
+                if(isAddressBok)
+                    activity.startActivity(Intent(activity , FinalCheckOut::class.java).putExtra("UseAddressID",userAddressAsLines.get(position).UseAddressID.toString()))
 
             }
         } )

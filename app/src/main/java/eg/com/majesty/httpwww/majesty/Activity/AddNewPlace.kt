@@ -1,13 +1,13 @@
 package eg.com.majesty.httpwww.majesty.Activity
 
+import android.Manifest
 import android.app.Activity
-import android.support.v7.app.AppCompatActivity
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.View
 import android.view.WindowManager
-import android.widget.LinearLayout
 import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -19,7 +19,6 @@ import eg.com.majesty.httpwww.majesty.Adapters.SubAreaAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.InterFaces.UpdateCity
 import eg.com.majesty.httpwww.majesty.Models.AreaModel
-import eg.com.majesty.httpwww.majesty.Models.CartModel
 import eg.com.majesty.httpwww.majesty.Models.CityModel
 import eg.com.majesty.httpwww.majesty.Models.SubAreaModel
 import eg.com.majesty.httpwww.majesty.R
@@ -27,21 +26,46 @@ import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import kotlinx.android.synthetic.main.activity_add_new_place.*
+import android.content.pm.PackageManager
+import android.support.v4.app.ActivityCompat
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.location.*
+import java.io.IOException
+import java.util.*
+import android.location.Geocoder
+import android.provider.Settings
+import android.support.multidex.MultiDex
+import android.widget.ProgressBar
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.OnSuccessListener
+
+
+class AddNewPlace : Activity(), SearchView.OnQueryTextListener  , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener
+{
 
 
 
-class AddNewPlace : Activity(), SearchView.OnQueryTextListener {
-
-
+    private lateinit var mGoogleApiClient: GoogleApiClient
+    private var mLocationManager: LocationManager? = null
+    lateinit var mLocation: Location
+    private var mLocationRequest: LocationRequest? = null
+    private val listener: com.google.android.gms.location.LocationListener? = null
+    private val UPDATE_INTERVAL = (2 * 1000).toLong()  /* 10 secs */
+    private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
+    lateinit var locationManager: LocationManager
     lateinit var adapter :CityAdapter
     lateinit var areaadapter :AreaAdapter
     lateinit var subareaadapter : SubAreaAdapter
     var  cityItemList : MutableList<CityModel> = arrayListOf()
     var  areaItemList : MutableList<AreaModel> = arrayListOf()
     var  subareaItemList : MutableList<SubAreaModel> = arrayListOf()
-
     var ID :String =""
-
     var cityId = -1
     var areaId = -1
     var subAreaa = -1
@@ -51,9 +75,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener {
     var apartmentStr = ""
     var landmarkStr = ""
     var notesStr = ""
-
-
-
+    var progress : ProgressBar ? =null
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -63,9 +85,9 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener {
         areaSearch.setOnQueryTextListener(this@AddNewPlace)
         subareaSearch.setOnQueryTextListener(this@AddNewPlace)
         ID = ForeraaParameter(applicationContext).getString("UserID")
-
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
+
 
     }
 
@@ -355,6 +377,154 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener {
             }
         })
     }
+
+
+
+    fun back(view: View)
+    {
+        onBackPressed()
+    }
+
+    fun latLong(view: View)
+    {
+        mGoogleApiClient = GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build()
+        mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        checkLocation()
+
+    }
+
+
+
+
+
+
+    override fun onStart() {
+        super.onStart();
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
+    }
+
+    override fun onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    override fun onConnectionSuspended(p0: Int)
+    {
+        mGoogleApiClient.connect()
+    }
+
+    override fun onConnectionFailed(connectionResult: ConnectionResult) {
+    }
+
+    override fun onLocationChanged(location: Location)
+    {
+        onLocationChangeeeed(location)
+    }
+
+    override fun onConnected(p0: Bundle?) {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+
+
+        startLocationUpdates();
+
+        var fusedLocationProviderClient :
+                FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationProviderClient .getLastLocation()
+                .addOnSuccessListener(this, OnSuccessListener<Location> { location ->
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null)
+                    {
+                        // Logic to handle location object
+                        mLocation = location
+
+                    }
+                })
+    }
+
+
+    private fun checkLocation(): Boolean {
+        if(!isLocationEnabled())
+            showAlert();
+        return isLocationEnabled();
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    private fun showAlert() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("Enable Location")
+                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " + "use this app")
+                .setPositiveButton("Location Settings", DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
+                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(myIntent)
+                })
+                .setNegativeButton("Cancel", DialogInterface.OnClickListener { paramDialogInterface, paramInt -> })
+        dialog.show()
+    }
+
+    protected fun startLocationUpdates() {
+
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(UPDATE_INTERVAL)
+                .setFastestInterval(FASTEST_INTERVAL);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
+                mLocationRequest, this)
+    }
+
+
+
+
+
+
+
+
+    fun  onLocationChangeeeed(location : Location)
+    {
+    var geocoder =  Geocoder(this, Locale.getDefault())
+    var latitude = location.getLatitude()
+    var longitude = location.getLongitude()
+
+
+    try {
+        var addresses = geocoder.getFromLocation(latitude, longitude, 1)
+        if (addresses != null && addresses.size > 0) {
+            var address = addresses.get(0).getAddressLine(0)
+            var knownName = addresses.get(0).getFeatureName()
+            Street.setText(address + " , " + knownName)
+        }
+    } catch (e : IOException) {
+        // TODO Auto-generated catch block
+        e.printStackTrace()
+    }
+}
+
+
+
+
+
+
+
+
+
 
 }
 

@@ -32,7 +32,7 @@ class MyPlaces : Activity()
 
 
     var ID :String =""
-
+    var isAddressBok = false
     var  userAddressAsLinesList : MutableList<UserAddressAsLines> = arrayListOf()
 
 
@@ -43,7 +43,7 @@ class MyPlaces : Activity()
         setContentView(R.layout.activity_my_places)
         ID = ForeraaParameter(applicationContext).getString("UserID")
 
-
+        isAddressBok = intent.getBooleanExtra("isAddressBok" , false);
 
     }
 
@@ -78,7 +78,7 @@ class MyPlaces : Activity()
 
                 val itemType = object : TypeToken<List<UserAddressAsLines>>() {}.type
                 userAddressAsLinesList = Gson().fromJson<MutableList<UserAddressAsLines>>(jsonObject.get("UserAddressAsLines").asJsonArray.toString(), itemType)
-                var myPlacesAdapter = MyPlacesAdapter(this@MyPlaces ,userAddressAsLinesList , object : UpdateCity{
+                var myPlacesAdapter = MyPlacesAdapter(this@MyPlaces ,userAddressAsLinesList ,isAddressBok, object : UpdateCity{
                     override fun update(cityId: Int, CityName: String)
                     {
                     }
@@ -111,6 +111,12 @@ class MyPlaces : Activity()
 
     }
 
+
+
+    fun back(view: View)
+    {
+        onBackPressed()
+    }
 
 
 }
