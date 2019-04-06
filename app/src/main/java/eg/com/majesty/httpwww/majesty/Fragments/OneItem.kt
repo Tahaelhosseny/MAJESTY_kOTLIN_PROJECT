@@ -30,8 +30,8 @@ import kotlinx.android.synthetic.main.activity_one_item.*
 class OneItem : Fragment()
 {
     var ID :String =""
-    var con = 0
-
+    var con = 1
+    var rateee = 0
     var  userIDorPassNothing = ""
     var IsItemInUserFavourites = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -97,6 +97,47 @@ class OneItem : Fragment()
             }
         })
 
+
+
+
+        img1.setOnClickListener(object :View.OnClickListener
+        {
+            override fun onClick(v: View?)
+            {
+                setRating((1).toFloat())
+                rateItem()
+            }
+        })
+        img2.setOnClickListener(object :View.OnClickListener{
+            override fun onClick(v: View?)
+            {
+                setRating((2).toFloat())
+                rateItem()
+
+            }
+        })
+        img3.setOnClickListener(object :View.OnClickListener
+        {
+            override fun onClick(v: View?) {
+                setRating((3).toFloat())
+                rateItem()
+            }
+        })
+        img4.setOnClickListener(object :View.OnClickListener
+        {
+            override fun onClick(v: View?) {
+                setRating((4).toFloat())
+                rateItem()
+            }
+        })
+        img5.setOnClickListener(object :View.OnClickListener
+        {
+            override fun onClick(v: View?) {
+                setRating((5).toFloat())
+                rateItem()
+            }
+        })
+
         loadData()
 
 
@@ -106,8 +147,6 @@ class OneItem : Fragment()
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
         super.onActivityCreated(savedInstanceState)
-
-
 
 
     }
@@ -209,6 +248,7 @@ class OneItem : Fragment()
     fun setRating(rate :Float)
     {
         var rateI = rate.toInt()
+        rateee = rateI
 
         ratetxteee.setText(rateI.toString() + " Of 5")
 
@@ -439,4 +479,40 @@ class OneItem : Fragment()
         super.onDestroy()
 
     }
+
+
+
+    fun rateItem()
+    {
+        var map = java.util.HashMap<String, String>()
+
+        var makeRequest = MakeRequest("AddItemRating?foodMenuID=" + ID + "&userIDorPassNothing=" + userIDorPassNothing+"&rating=" + rateee,"0", map, activity,"AddItemRating",true)
+
+        makeRequest.request(object  : VolleyCallback
+        {
+            override fun onSuccess(result: Map<String, String>)
+            {
+                var str = result.get("res")
+                var jsonObject = Gson().fromJson(str, JsonArray::class.java).get(0).asJsonObject
+                if(jsonObject.get("Succeed").asBoolean)
+                {
+
+
+                }
+
+            }
+        } ,object : ONRetryHandler
+        {
+            override fun onRetryHandler(funName: String)
+            {
+
+            }
+        })
+    }
+
+
+
+
+
+
 }

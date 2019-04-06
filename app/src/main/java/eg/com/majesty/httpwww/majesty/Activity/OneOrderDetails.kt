@@ -11,6 +11,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.FinalCartAdapter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.InterFaces.RemoveFromCartUpdate
 import eg.com.majesty.httpwww.majesty.Models.CartModel
 import eg.com.majesty.httpwww.majesty.R
@@ -67,7 +68,7 @@ class OneOrderDetails : Activity()
                 rat = orderHeader.get("Rating").asInt
 
                 comment = orderHeader.get("CommentAfterDelivery").asString
-                date.text = orderHeader.get("OrderDate").asString
+                date.text = Utils.getDate(orderHeader.get("OrderDateTS").asLong)
                 rating(rat)
                 addlin1.setText(orderHeader.get("UserAddressLine1").asString)
                 addlin2.setText(orderHeader.get("UserAddressLine2").asString)

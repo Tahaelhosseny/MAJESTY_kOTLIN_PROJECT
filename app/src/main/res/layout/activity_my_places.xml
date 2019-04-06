@@ -30,7 +30,6 @@
         android:layout_width="match_parent"
         android:layout_toRightOf="@+id/back"
         android:layout_marginTop="20dp"
-        android:text="Select Delivery Address"
         android:id="@+id/catNamee"
         android:textColor="@color/black"
         android:fontFamily="@font/exosemibold"

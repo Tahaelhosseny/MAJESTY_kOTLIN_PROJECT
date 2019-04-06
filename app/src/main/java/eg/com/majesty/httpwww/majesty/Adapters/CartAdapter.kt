@@ -1,6 +1,7 @@
 package eg.com.majesty.httpwww.majesty.Adapters
 
 import android.app.Activity
+import android.app.FragmentTransaction
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
+import eg.com.majesty.httpwww.majesty.Activity.MainActivity
+import eg.com.majesty.httpwww.majesty.Activity.MainActivity_
+import eg.com.majesty.httpwww.majesty.Fragments.OneItem
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.InterFaces.RemoveFromCartUpdate
@@ -84,6 +88,21 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
             holder.FoodMenuImageDel.visibility = View.GONE
             holder.FoodMenuImageAvatar.visibility = View.GONE
         }
+
+
+
+        holder.itemView.setOnClickListener(object :View.OnClickListener{
+            override fun onClick(v: View?)
+            {
+                val oneItem = OneItem()
+                val fragmentTransaction = activity.fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.frameContainer, oneItem)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.commit()
+                oneItem.setData(cartModels.get(position).FoodMenuItemID.toString())
+            }
+        })
 
     }
 

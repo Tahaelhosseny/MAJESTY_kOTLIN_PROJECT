@@ -59,6 +59,7 @@ class FinalCheckOut : Activity()
 
         setContentView(R.layout.activity_check_out2)
 
+        del.visibility = View.GONE
         ID = ForeraaParameter(this).getString("UserID")
         UseAddressID = getIntent().getStringExtra("UseAddressID")
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -184,4 +185,12 @@ class FinalCheckOut : Activity()
         })
     }
 
+
+
+
+
+    fun back(view: View)
+    {
+        onBackPressed()
+    }
 }

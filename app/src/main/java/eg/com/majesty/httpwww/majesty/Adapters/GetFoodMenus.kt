@@ -71,23 +71,6 @@ class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenu
         {
             Glide.with(activity).load(categoryItems.get(position).FoodMenuImageUrl.replace("http","https")).thumbnail(.1f).into(holder.FoodMenuImageUrl)
         }catch (e : Exception){}
-        holder.item.setOnClickListener(object : View.OnClickListener
-        {
-            override fun onClick(v: View?)
-            {
-
-
-                val oneItem = OneItem()
-                val fragmentTransaction = activity.fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.frameContainer, oneItem)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                fragmentTransaction.commit()
-                oneItem.setData(categoryItems.get(position).FoodMenuID)
-
-            }
-        })
-
 
         holder.fav.setOnClickListener (object :View.OnClickListener
         {

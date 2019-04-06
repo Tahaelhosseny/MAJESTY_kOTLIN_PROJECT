@@ -2,29 +2,21 @@ package eg.com.majesty.httpwww.majesty.Activity
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import android.widget.Toast
 import com.google.gson.Gson
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.MyPlacesAdapter
-import eg.com.majesty.httpwww.majesty.Adapters.SubAreaAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.InterFaces.UpdateCity
-import eg.com.majesty.httpwww.majesty.Models.CityModel
-import eg.com.majesty.httpwww.majesty.Models.SubAreaModel
 import eg.com.majesty.httpwww.majesty.Models.UserAddressAsLines
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
-import kotlinx.android.synthetic.main.activity_add_new_place.*
 import kotlinx.android.synthetic.main.activity_my_places.*
-import org.androidannotations.annotations.Click
 
 class MyPlaces : Activity()
 {
@@ -42,8 +34,18 @@ class MyPlaces : Activity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_places)
         ID = ForeraaParameter(applicationContext).getString("UserID")
+        isAddressBok = intent.getBooleanExtra("isAddressBok" , false)
+        if(isAddressBok)
+        {
 
-        isAddressBok = intent.getBooleanExtra("isAddressBok" , false);
+            catNamee.text = "Select Delivery Address"
+
+
+        }else
+        {
+            catNamee.text = "My Address Book"
+        }
+
 
     }
 

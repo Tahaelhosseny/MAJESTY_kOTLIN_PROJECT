@@ -362,7 +362,8 @@ class MainActivity : Activity()
     override fun onResume()
     {
         super.onResume()
-        manageLay()
+
+        closeLay()
 
         var foreraaParameter = ForeraaParameter(this@MainActivity)
 
@@ -414,6 +415,16 @@ class MainActivity : Activity()
         startActivity(Intent(this , Login_::class.java))
     }
 
+
+
+
+    fun closeLay()
+    {
+        if(drawerLayout.isDrawerOpen(drawer))
+        {
+            drawerLayout.closeDrawer(drawer)
+        }
+    }
 
     fun manageLay()
     {

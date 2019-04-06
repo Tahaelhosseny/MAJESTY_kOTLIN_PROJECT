@@ -1,6 +1,7 @@
 package eg.com.majesty.httpwww.majesty.GeneralUtils
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Typeface
@@ -11,6 +12,9 @@ import android.text.format.DateFormat
 import android.util.Log
 import eg.com.majesty.httpwww.majesty.BuildConfig
 import java.util.*
+import android.content.DialogInterface
+
+
 
 /**
  * Created by Taha on 4/3/2018.
@@ -138,9 +142,42 @@ object Utils {
     fun getDate(time: Long): String {
         val cal = Calendar.getInstance(Locale.ENGLISH)
         cal.timeInMillis = time * 1000L
-        val date = DateFormat.format("yyyy-MM-dd", cal).toString()
-        return date
+        val date = DateFormat.format("dd-MM-yyyy", cal).toString()
+        return date.replace("-","/")
     }
+
+
+
+
+    fun showOkDialoge(activity: Activity, msg: String, listenerPos: DialogInterface.OnClickListener, txtbtn: String) {
+        try {
+            val builder = AlertDialog.Builder(activity)
+            builder.setMessage(msg)
+                    .setCancelable(true)
+                    .setPositiveButton(txtbtn, listenerPos)
+            val alert = builder.create()
+            alert.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    fun show2OptionsDialoge(activity: Activity, msg: String, listenerPos: DialogInterface.OnClickListener, listenerNeg: DialogInterface.OnClickListener, txtbtnP: String, txtbtnN: String) {
+        try {
+            val builder = AlertDialog.Builder(activity)
+            builder.setMessage(msg)
+                    .setCancelable(false)
+                    .setPositiveButton(txtbtnP, listenerPos)
+                    .setNegativeButton(txtbtnN, listenerNeg)
+            val alert = builder.create()
+            alert.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
 
 }
 
