@@ -54,6 +54,12 @@ class Orders : Fragment() {
 
 
     override fun onResume() {
+        activity.headerText.setText(R.string.Orders)
+        activity.homeIm.setImageResource(R.drawable.icon_home)
+        activity.favoriteIm.setImageResource(R.drawable.favorite)
+        activity.ordersIm.setImageResource(R.drawable.ic_orderb)
+        activity.menuIm.setImageResource(R.drawable.menu)
+
         super.onResume()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE

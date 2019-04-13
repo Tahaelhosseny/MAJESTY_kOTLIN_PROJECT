@@ -125,6 +125,12 @@ class FreshOffers : Fragment()
         activity.header.visibility = View.VISIBLE
         activity.cart.visibility = View.VISIBLE
         activity.bottom.visibility = View.VISIBLE
+
+
+        activity.homeIm.setImageResource(R.drawable.icon_home)
+        activity.favoriteIm.setImageResource(R.drawable.favorite)
+        activity.ordersIm.setImageResource(R.drawable.ordera)
+        activity.menuIm.setImageResource(R.drawable.menu)
         activity.headerText.setText("Fresh Offers")
         loadData()
     }

@@ -125,6 +125,10 @@ class MyPlaces : Fragment()
         activity.header.visibility = View.GONE
         activity.cart.visibility = View.GONE
         activity.bottom.visibility = View.GONE
+        activity.homeIm.setImageResource(R.drawable.icon_home)
+        activity.favoriteIm.setImageResource(R.drawable.favorite)
+        activity.ordersIm.setImageResource(R.drawable.ordera)
+        activity.menuIm.setImageResource(R.drawable.menu)
         ID = ForeraaParameter(activity).getString("UserID")
         if(isAddressBok)
         {

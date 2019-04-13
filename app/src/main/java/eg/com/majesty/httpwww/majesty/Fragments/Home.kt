@@ -51,6 +51,13 @@ class Home : Fragment()
         activity.bottom.visibility = View.VISIBLE
 
 
+        activity.headerText.setText(R.string.Orders)
+        activity.homeIm.setImageResource(R.drawable.icon_home1)
+        activity.favoriteIm.setImageResource(R.drawable.favorite)
+        activity.ordersIm.setImageResource(R.drawable.ordera)
+        activity.menuIm.setImageResource(R.drawable.menu)
+
+
         var foreraaParameter = ForeraaParameter(activity)
 
         try
