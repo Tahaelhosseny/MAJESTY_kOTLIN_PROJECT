@@ -1,36 +1,28 @@
 package eg.com.majesty.httpwww.majesty.Adapters
 
 import android.app.Activity
+import android.app.FragmentTransaction
 import android.content.Intent
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import eg.com.majesty.httpwww.majesty.InterFaces.UpdateCity
 import eg.com.majesty.httpwww.majesty.Models.UserAddressAsLines
 import eg.com.majesty.httpwww.majesty.R
 
 import kotlinx.android.synthetic.main.address_lines_layout.view.*
-import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Activity.EditAddress
-import eg.com.majesty.httpwww.majesty.Activity.FinalCheckOut
 import eg.com.majesty.httpwww.majesty.Activity.MainActivity
+import eg.com.majesty.httpwww.majesty.Fragments.FinalCheckOut
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
-import eg.com.majesty.httpwww.majesty.Models.AreaModel
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
-import kotlinx.android.synthetic.main.activity_add_new_place.*
-
-
 
 
 class MyPlacesAdapter(var activity : Activity, var userAddressAsLines : MutableList<UserAddressAsLines>,var isAddressBok :Boolean, var updateCity : UpdateCity) : RecyclerView.Adapter<MyPlacesAdapter.MyViewHolder>()
@@ -106,7 +98,16 @@ class MyPlacesAdapter(var activity : Activity, var userAddressAsLines : MutableL
             override fun onClick(v: View?)
             {
                 if(isAddressBok)
-                    activity.startActivity(Intent(activity , FinalCheckOut::class.java).putExtra("UseAddressID",userAddressAsLines.get(position).UseAddressID.toString()))
+                {
+                    val finalCheckOut = FinalCheckOut()
+                    MainActivity().activeCenterFragments.add(finalCheckOut)
+                    val fragmentTransaction = activity.fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.frameContainer, finalCheckOut)
+                    fragmentTransaction.addToBackStack("finalCheckOut")
+                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    fragmentTransaction.commit()
+                    finalCheckOut.setDataaa(userAddressAsLines.get(position).UseAddressID.toString())
+                }
 
             }
         } )

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/layoutBackgrawnd"
     android:layout_height="match_parent"
-    tools:context=".Activity.MyPlaces">
+    tools:context=".Fragments.MyPlaces">
 
 
     <ImageView
@@ -20,15 +20,14 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/back"
-        android:onClick="back"
+        android:id="@+id/backNow"
         android:padding="13dp"
         android:src="@drawable/icon_back_copy"
         android:layout_height="50dp" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_toRightOf="@+id/back"
+        android:layout_toRightOf="@+id/backNow"
         android:layout_marginTop="20dp"
         android:id="@+id/catNamee"
         android:textColor="@color/black"

@@ -26,6 +26,8 @@ import org.json.JSONObject
 class Menu : Fragment()
 {
 
+    var TAG = "Menu"
+
     var ID :String =""
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -45,7 +47,8 @@ class Menu : Fragment()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
         activity.header.visibility = View.VISIBLE
-
+        activity.cart.visibility = View.VISIBLE
+        activity.bottom.visibility = View.VISIBLE
         activity.headerText.setText("Menu")
 
 

@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_favorite.*
 
 class Favorite : Fragment()
 {
+    var TAG = "Favorite"
 
 
     var ID :String =""
@@ -38,8 +39,6 @@ class Favorite : Fragment()
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
         super.onActivityCreated(savedInstanceState)
-
-
 
 
         }
@@ -60,6 +59,8 @@ class Favorite : Fragment()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
         activity.header.visibility = View.VISIBLE
+        activity.cart.visibility = View.VISIBLE
+        activity.bottom.visibility = View.VISIBLE
 
 
 

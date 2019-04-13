@@ -2,9 +2,15 @@ package eg.com.majesty.httpwww.majesty.Activity
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.Dialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
+import android.support.v4.app.FragmentActivity
+import android.support.v7.app.AppCompatActivity
+import android.text.format.DateFormat
 import android.widget.DatePicker
 import android.widget.Toast
 import com.google.gson.Gson
@@ -27,6 +33,7 @@ import java.util.regex.Pattern
 import kotlin.collections.HashMap
 import android.view.View
 import android.view.WindowManager
+import android.widget.TimePicker
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
@@ -39,7 +46,7 @@ import org.json.JSONObject
 
 
 @EActivity(R.layout.activity_sign_up)
-class SignUp : Activity()
+class SignUp : FragmentActivity()
 {
 
 
@@ -119,7 +126,16 @@ class SignUp : Activity()
 
     @Click fun birthdate()
     {
-        SpinnerDatePickerDialogBuilder()
+
+
+
+        TimePickerFragment().show(supportFragmentManager, "timePicker")
+
+
+
+
+
+/*        SpinnerDatePickerDialogBuilder()
                 .context(this)
 
                 .callback(object : DatePickerDialog.OnDateSetListener, com.tsongkha.spinnerdatepicker.DatePickerDialog.OnDateSetListener {
@@ -155,7 +171,7 @@ class SignUp : Activity()
                 .maxDate(2050, 0, 1)
                 .minDate(1950, 0, 1)
                 .build()
-                .show()
+                .show()*/
 
     }
 
@@ -551,4 +567,46 @@ class SignUp : Activity()
     {
         super.onBackPressed()
     }
+
+
+
+
+    class TimePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
+    {
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+            // Use the current date as the default date in the picker
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+            return DatePickerDialog(activity, this, year, month, day)
+        }
+
+
+        override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int)
+        {
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = System.currentTimeMillis()
+
+            val mYear = calendar.get(Calendar.YEAR)
+            val mMonth = calendar.get(Calendar.MONTH)
+            val mDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+
+            if(mYear - year <10 )
+            {
+                Toast.makeText(activity , "Not Valid BirthDay" , Toast.LENGTH_LONG).show()
+                activity!!.birthdate.setText("")
+            }else
+            {
+                activity!!.birthdate.setText(year.toString() + "/" + (month+1) + "/" + dayOfMonth)
+            }
+        }
+
+
+    }
+
+
+
+
 }

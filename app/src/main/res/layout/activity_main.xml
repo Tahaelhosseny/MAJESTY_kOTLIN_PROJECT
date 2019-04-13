@@ -111,7 +111,7 @@
             <FrameLayout
                 android:id="@+id/frameContainer"
                 android:layout_below="@+id/header"
-                android:layout_marginBottom="70dp"
+                android:layout_above="@+id/cart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

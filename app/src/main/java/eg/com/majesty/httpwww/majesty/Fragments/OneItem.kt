@@ -29,6 +29,10 @@ import kotlinx.android.synthetic.main.activity_one_item.*
 
 class OneItem : Fragment()
 {
+
+
+    var TAG = "OneItem"
+
     var ID :String =""
     var con = 1
     var rateee = 0
@@ -49,7 +53,8 @@ class OneItem : Fragment()
     {
         super.onResume()
         activity.header.visibility= View.GONE
-
+        activity.cart.visibility = View.VISIBLE
+        activity.bottom.visibility = View.VISIBLE
         var foreraaParameter = ForeraaParameter(activity)
 
         try
@@ -167,9 +172,11 @@ class OneItem : Fragment()
                 var str = result.get("res")
 
                 var jsonObject = Gson().fromJson(str, JsonObject::class.java)
-               // var notificationNumbers = jsonObject.getAsJsonObject("NotificationNumbers").get(0).asJsonObject
 
                 var jsonObject2 = jsonObject.getAsJsonArray("ItemDetails").get(0).asJsonObject
+                var notificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
+                activity.notiNum.text = notificationNumbers.get("NotificationsCount").toString()
+                activity.cartTxt.text = notificationNumbers.get("CartItemsCount").toString()
 
                 setData(jsonObject2)
             }
@@ -468,17 +475,10 @@ class OneItem : Fragment()
 
     fun backto()
     {
-        activity.header.visibility = View.VISIBLE
         activity.onBackPressed()
     }
 
 
-    override fun onDestroy()
-    {
-        activity.header.visibility = View.VISIBLE
-        super.onDestroy()
-
-    }
 
 
 

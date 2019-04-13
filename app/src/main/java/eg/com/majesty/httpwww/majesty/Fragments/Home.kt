@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.reflect.TypeToken
+import eg.com.majesty.httpwww.majesty.Activity.MainActivity
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
 import eg.com.majesty.httpwww.majesty.Adapters.MenuFoodDataAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
@@ -26,6 +27,8 @@ import java.util.HashMap
 
 class Home : Fragment()
 {
+    var TAG = "Home"
+
 
     var ID :String =""
 
@@ -44,6 +47,8 @@ class Home : Fragment()
         activity.back.visibility = View.GONE
         activity.menu.visibility = View.VISIBLE
         activity.header.visibility = View.VISIBLE
+        activity.cart.visibility = View.VISIBLE
+        activity.bottom.visibility = View.VISIBLE
 
 
         var foreraaParameter = ForeraaParameter(activity)
@@ -63,7 +68,7 @@ class Home : Fragment()
                 var freshOffers = FreshOffers()
                 activity.headerText.setText("Fresh Offers")
                 var fragmentTransaction = activity.fragmentManager.beginTransaction()
-                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.addToBackStack("freshOffers")
                 fragmentTransaction.replace(R.id.frameContainer,freshOffers )
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.commit()
@@ -77,9 +82,10 @@ class Home : Fragment()
             override fun onClick(v: View?)
             {
                 var popularFood = PopularFood()
+                MainActivity().activeCenterFragments.add(popularFood)
                 activity.headerText.setText("Popular Food")
                 var fragmentTransaction = activity.fragmentManager.beginTransaction()
-                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.addToBackStack("popularFood")
                 fragmentTransaction.replace(R.id.frameContainer,popularFood )
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.commit()

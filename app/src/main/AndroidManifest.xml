@@ -67,14 +67,7 @@
             android:name=".Activity.SignUp_"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
-        <activity
-            android:name=".Activity.CheckOut_"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.login" />
-        <activity
-            android:name=".Activity.MyPlaces"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.login" />
+
         <activity
             android:name=".Activity.AddNewPlace"
             android:configChanges="orientation|screenSize"
@@ -84,7 +77,7 @@
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
-            android:name=".Activity.FinalCheckOut"
+            android:name=".Fragments.FinalCheckOut"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity

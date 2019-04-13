@@ -96,7 +96,7 @@
             android:gravity="center"
             android:textColor="#202020"
             android:fontFamily="@font/exoregular"
-            android:text="Setings"
+            android:text="Settings"
             android:layout_height="30dp" />
         <TextView
             android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
+import eg.com.majesty.httpwww.majesty.Activity.MainActivity
 import eg.com.majesty.httpwww.majesty.Fragments.Home
 import eg.com.majesty.httpwww.majesty.Fragments.LoadCatItems
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
@@ -68,7 +69,7 @@ class CategoryItem (val activity: Activity,val categoryItems: List<CategoryModel
                 val loadCatItems = LoadCatItems()
                 loadCatItems.setData(categoryItems.get(position).FoodMenuTypeID ,categoryItems.get(position).FoodMenuTypeName)
                 val fragmentTransaction = activity.fragmentManager.beginTransaction()
-                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.addToBackStack("loadCatItems")
                 fragmentTransaction.replace(R.id.frameContainer, loadCatItems)
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.commit()

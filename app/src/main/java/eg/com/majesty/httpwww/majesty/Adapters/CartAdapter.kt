@@ -89,20 +89,21 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
             holder.FoodMenuImageAvatar.visibility = View.GONE
         }
 
-
-
-        holder.itemView.setOnClickListener(object :View.OnClickListener{
+        holder.itemView.setOnClickListener(object : View.OnClickListener
+        {
             override fun onClick(v: View?)
             {
                 val oneItem = OneItem()
+                MainActivity().activeCenterFragments.add(oneItem)
                 val fragmentTransaction = activity.fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.frameContainer, oneItem)
-                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.addToBackStack("oneItem")
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.commit()
-                oneItem.setData(cartModels.get(position).FoodMenuItemID.toString())
+                oneItem.setData(""+cartModels.get(position).FoodMenuID)
             }
         })
+
 
     }
 

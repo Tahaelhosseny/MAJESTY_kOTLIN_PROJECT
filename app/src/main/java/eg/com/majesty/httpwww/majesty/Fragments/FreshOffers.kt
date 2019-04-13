@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.fragment_load_cat_items.*
 
 class FreshOffers : Fragment()
 {
+    var TAG = "FreshOffers"
 
     var ID :String =""
 
@@ -122,6 +123,8 @@ class FreshOffers : Fragment()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
         activity.header.visibility = View.VISIBLE
+        activity.cart.visibility = View.VISIBLE
+        activity.bottom.visibility = View.VISIBLE
         activity.headerText.setText("Fresh Offers")
         loadData()
     }

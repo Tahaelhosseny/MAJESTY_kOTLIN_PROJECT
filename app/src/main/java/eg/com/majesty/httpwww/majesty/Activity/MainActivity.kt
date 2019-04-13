@@ -1,6 +1,7 @@
 package eg.com.majesty.httpwww.majesty.Activity
 
 import android.app.Activity
+import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
 import eg.com.majesty.httpwww.majesty.R
@@ -11,22 +12,21 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kotlinx.android.synthetic.main.activity_main.*
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
-import android.app.FragmentTransaction
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBarDrawerToggle
 import android.widget.Toast
 import eg.com.majesty.httpwww.majesty.Fragments.*
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import org.androidannotations.annotations.AfterViews
-import android.support.v4.view.GravityCompat
-import android.support.v7.widget.ViewUtils
-import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.drawer_menu.*
+
+
 
 
 var isHistory = false
@@ -37,7 +37,7 @@ var isHistory = false
 class MainActivity : Activity()
 {
 
-
+   var activeCenterFragments: MutableList<Fragment> = ArrayList<Fragment>()
     var savedInstanceStateA :Bundle? = null
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -51,9 +51,7 @@ class MainActivity : Activity()
                 .build())
         savedInstanceStateA = savedInstanceState
 
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-
 
 
 
@@ -135,11 +133,13 @@ class MainActivity : Activity()
 
 
             val orders = Orders()
+            activeCenterFragments.add(orders)
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.frameContainer, orders)
-            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.addToBackStack("orders")
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             fragmentTransaction.commit()
+            orders.setClearr(false)
             }else
             {
                 homeIm.setImageResource(R.drawable.icon_home1)
@@ -149,19 +149,14 @@ class MainActivity : Activity()
                 headerText.setText(R.string.Home)
 
                 val home = Home()
+                activeCenterFragments.add(home)
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.frameContainer, home)
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.commit()
             }
 
-
-
-
-
-
     }
-
 
 
     @Click fun back ()
@@ -177,9 +172,10 @@ class MainActivity : Activity()
         menuIm.setImageResource(R.drawable.menu)
         headerText.setText(R.string.Home)
         val home = Home()
+        activeCenterFragments.add(home)
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameContainer, home)
-        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.addToBackStack("home")
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction.commit()
     }
@@ -195,9 +191,10 @@ class MainActivity : Activity()
         headerText.setText(R.string.Menu)
 
         val menu = Menu()
+        activeCenterFragments.add(menu)
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameContainer, menu)
-        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.addToBackStack("menu")
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction.commit()
     }
@@ -221,7 +218,13 @@ class MainActivity : Activity()
 
         if(!foreraaParameter.getString("UserID").equals(""))
         {
-            startActivity(Intent(this , CheckOut_::class.java))
+            val checkOut = CheckOut()
+            activeCenterFragments.add(checkOut)
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameContainer, checkOut)
+            fragmentTransaction.addToBackStack("checkOut")
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            fragmentTransaction.commit()
 
         }else
         {
@@ -267,9 +270,10 @@ class MainActivity : Activity()
             headerText.setText(R.string.Favorite)
 
             val favorite = Favorite()
+            activeCenterFragments.add(favorite)
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.frameContainer, favorite)
-            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.addToBackStack("favorite")
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             fragmentTransaction.commit()
         }
@@ -300,11 +304,13 @@ class MainActivity : Activity()
 
 
             val orders = Orders()
+            activeCenterFragments.add(orders)
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.frameContainer, orders)
-            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.addToBackStack("orders")
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             fragmentTransaction.commit()
+            orders.setClearr(false)
         }else
         {
             Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
@@ -341,8 +347,15 @@ class MainActivity : Activity()
 
         if(!foreraaParameter.getString("UserID").equals(""))
         {
-
-            startActivity(Intent(this , MyPlaces::class.java).putExtra("isAddressBok",false))
+            closeLay()
+            val myPlaces = MyPlaces()
+            activeCenterFragments.add(myPlaces)
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameContainer, myPlaces)
+            fragmentTransaction.addToBackStack("myPlaces")
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            fragmentTransaction.commit()
+            myPlaces.setData(false)
 
         }else
         {

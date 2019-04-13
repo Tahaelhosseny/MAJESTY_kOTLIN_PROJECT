@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_menu.*
 class LoadCatItems : Fragment()
 {
 
+    var TAG = "LoadCatItems"
 
 
 
@@ -118,7 +119,8 @@ class LoadCatItems : Fragment()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
         activity.header.visibility = View.VISIBLE
-
+        activity.cart.visibility = View.VISIBLE
+        activity.bottom.visibility = View.VISIBLE
         activity.headerText.setText(this.CategoryName)
 
         var foreraaParameter = ForeraaParameter(activity)

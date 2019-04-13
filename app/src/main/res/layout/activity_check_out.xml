@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:background="@color/layoutBackgrawnd"
     android:layout_height="match_parent"
-    tools:context=".Activity.CheckOut">
+    tools:context=".Fragments.CheckOut">
 
     <ImageView
         android:layout_width="50dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/back"
+        android:id="@+id/backNow"
         android:padding="13dp"
         android:src="@drawable/icon_back_copy"
         android:layout_height="50dp" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_toRightOf="@+id/back"
+        android:layout_toRightOf="@+id/backNow"
         android:layout_marginTop="20dp"
         android:text="MyCart"
         android:id="@+id/catNamee"

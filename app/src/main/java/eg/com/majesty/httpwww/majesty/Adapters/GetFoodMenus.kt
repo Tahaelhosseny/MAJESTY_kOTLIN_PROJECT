@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import eg.com.majesty.httpwww.majesty.Activity.MainActivity
 import eg.com.majesty.httpwww.majesty.Fragments.Home
 import eg.com.majesty.httpwww.majesty.Fragments.OneItem
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
@@ -34,6 +35,7 @@ import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import kotlinx.android.synthetic.main.get_food_menues.view.*
 import org.json.JSONObject
 import java.util.HashMap
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenusModel> ,  fragmnt:String): RecyclerView.Adapter<eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus.MyViewHolder>()
 {
@@ -106,6 +108,21 @@ class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenu
 
             }
 
+        })
+
+
+        holder.itemView.setOnClickListener(object : View.OnClickListener
+        {
+            override fun onClick(v: View?)
+            {
+                val oneItem = OneItem()
+                val fragmentTransaction = activity.fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.frameContainer, oneItem)
+                fragmentTransaction.addToBackStack("oneItem")
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.commit()
+                oneItem.setData(categoryItems.get(position).FoodMenuID)
+            }
         })
 
 

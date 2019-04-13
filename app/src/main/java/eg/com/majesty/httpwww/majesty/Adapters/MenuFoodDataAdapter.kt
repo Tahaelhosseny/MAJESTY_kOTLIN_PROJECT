@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
+import eg.com.majesty.httpwww.majesty.Activity.MainActivity
 import eg.com.majesty.httpwww.majesty.Fragments.FreshOffers
 import eg.com.majesty.httpwww.majesty.Fragments.LoadCatItems
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
@@ -51,7 +52,7 @@ class MenuFoodDataAdapter (val activity : Activity, val categoryItems: List<Menu
                 val freshOffers = FreshOffers()
                 activity.headerText.setText("Fresh Offers")
                 val fragmentTransaction = activity.fragmentManager.beginTransaction()
-                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.addToBackStack("freshOffers")
                 fragmentTransaction.replace(R.id.frameContainer,freshOffers )
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.commit()

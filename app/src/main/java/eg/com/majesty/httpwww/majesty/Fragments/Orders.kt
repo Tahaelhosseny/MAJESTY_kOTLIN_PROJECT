@@ -1,7 +1,7 @@
 package eg.com.majesty.httpwww.majesty.Fragments
-
-
 import android.app.Fragment
+import android.app.FragmentManager
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -12,13 +12,13 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
+import eg.com.majesty.httpwww.majesty.Activity.MainActivity
+import eg.com.majesty.httpwww.majesty.Activity.MainActivity_
 import eg.com.majesty.httpwww.majesty.Adapters.PreviousOrderAdapter
 import eg.com.majesty.httpwww.majesty.Adapters.UpcommingOrderAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
-import eg.com.majesty.httpwww.majesty.Models.CategoryModels
-import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
+import eg.com.majesty.httpwww.majesty.Models.CartModel
 import eg.com.majesty.httpwww.majesty.Models.PreviousOrdersModel
 import eg.com.majesty.httpwww.majesty.Models.UpcommingOrdersModel
 import eg.com.majesty.httpwww.majesty.R
@@ -26,13 +26,17 @@ import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_menu.*
 import kotlinx.android.synthetic.main.fragment_orders.*
 import kotlinx.android.synthetic.main.fragment_orders.view.*
 
 
+
+
 class Orders : Fragment() {
 
+
+    var clear :Boolean = false
+    var TAG = "Orders"
 
     var ID :String =""
 
@@ -42,11 +46,20 @@ class Orders : Fragment() {
     }
 
 
+
+    fun setClearr(clearr : Boolean)
+    {
+        this.clear = clearr
+    }
+
+
     override fun onResume() {
         super.onResume()
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
         activity.header.visibility = View.VISIBLE
+        activity.cart.visibility = View.VISIBLE
+        activity.bottom.visibility = View.VISIBLE
         pasttext.setTypeface(Utils.Exo2SemiBold(activity))
         uptext.setTypeface(Utils.Exo2SemiBold(activity))
         GetAllUserOrders()
@@ -67,10 +80,20 @@ class Orders : Fragment() {
             upRec.visibility = View.VISIBLE
             pastRec.visibility = View.GONE
 
+        }
+
+
+
+        if(clear)
+        {
 
 
 
         }
+
+
+
+
     }
 
 
@@ -99,37 +122,43 @@ class Orders : Fragment() {
             override fun onSuccess(result: Map<String, String>)
             {
 
-                val gson = Gson()
 
-                var str = result.get("res")
+                try
+                {
+                    val gson = Gson()
 
-
-                var jsonObject = Gson().fromJson(str, JsonObject::class.java)
-
-                var notificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
-
-                var UpcommingOrders = jsonObject.getAsJsonArray("UpcommingOrders").toString()
-                var PreviousOrders = jsonObject.getAsJsonArray("PreviousOrders").toString()
+                    var str = result.get("res")
 
 
-                activity.notiNum.text = notificationNumbers.get("NotificationsCount").toString()
-                activity.cartTxt.text = notificationNumbers.get("CartItemsCount").toString()
+                    var jsonObject = Gson().fromJson(str, JsonObject::class.java)
 
-                val itemTypeUpcommingOrders = object : TypeToken<List<UpcommingOrdersModel>>() {}.type
-                val itemTypePreviousOrders = object : TypeToken<List<PreviousOrdersModel>>() {}.type
-                val itemListUpcommingOrders = gson.fromJson<List<UpcommingOrdersModel>>(UpcommingOrders, itemTypeUpcommingOrders)
-                val itemListPreviousOrders = gson.fromJson<List<PreviousOrdersModel>>(PreviousOrders, itemTypePreviousOrders)
+                    var notificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
 
-                val upcommingOrderAdapter = UpcommingOrderAdapter(activity  ,itemListUpcommingOrders )
-                upRec.adapter = upcommingOrderAdapter
-                upRec.layoutManager=LinearLayoutManager(activity)
-                upcommingOrderAdapter.notifyDataSetChanged()
+                    var UpcommingOrders = jsonObject.getAsJsonArray("UpcommingOrders").toString()
+                    var PreviousOrders = jsonObject.getAsJsonArray("PreviousOrders").toString()
 
 
-                val perviousOrderAdapter = PreviousOrderAdapter(activity  ,itemListPreviousOrders )
-                pastRec.adapter = perviousOrderAdapter
-                pastRec.layoutManager=LinearLayoutManager(activity)
-                perviousOrderAdapter.notifyDataSetChanged()
+                    activity.notiNum.text = notificationNumbers.get("NotificationsCount").toString()
+                    activity.cartTxt.text = notificationNumbers.get("CartItemsCount").toString()
+
+                    val itemTypeUpcommingOrders = object : TypeToken<List<UpcommingOrdersModel>>() {}.type
+                    val itemTypePreviousOrders = object : TypeToken<List<PreviousOrdersModel>>() {}.type
+                    val itemListUpcommingOrders = gson.fromJson<List<UpcommingOrdersModel>>(UpcommingOrders, itemTypeUpcommingOrders)
+                    val itemListPreviousOrders = gson.fromJson<List<PreviousOrdersModel>>(PreviousOrders, itemTypePreviousOrders)
+
+                    val upcommingOrderAdapter = UpcommingOrderAdapter(activity  ,itemListUpcommingOrders )
+                    upRec.adapter = upcommingOrderAdapter
+                    upRec.layoutManager=LinearLayoutManager(activity)
+                    upcommingOrderAdapter.notifyDataSetChanged()
+                    val perviousOrderAdapter = PreviousOrderAdapter(activity  ,itemListPreviousOrders )
+                    pastRec.adapter = perviousOrderAdapter
+                    pastRec.layoutManager=LinearLayoutManager(activity)
+                    perviousOrderAdapter.notifyDataSetChanged()
+
+                }catch (e:java.lang.Exception)
+                {
+
+                }
 
             }
         } ,object : ONRetryHandler
