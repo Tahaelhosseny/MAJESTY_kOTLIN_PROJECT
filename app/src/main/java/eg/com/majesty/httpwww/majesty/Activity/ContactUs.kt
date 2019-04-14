@@ -25,7 +25,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 import android.content.pm.ApplicationInfo
 import com.bumptech.glide.Glide
+import java.lang.Exception
 import java.util.*
+
+
 
 
 class ContactUs : Activity()
@@ -83,7 +86,7 @@ class ContactUs : Activity()
 
     fun facebook(view: View)
     {
-         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(face)))
+        startActivity(Utils.getOpenFacebookIntent(this))
     }
 
     fun twiter(view: View)

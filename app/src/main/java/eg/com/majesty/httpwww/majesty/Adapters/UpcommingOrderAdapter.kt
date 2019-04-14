@@ -2,12 +2,14 @@ package eg.com.majesty.httpwww.majesty.Adapters
 
 import android.app.Activity
 import android.content.Intent
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import eg.com.majesty.httpwww.majesty.Activity.OneOrderDetails
+import eg.com.majesty.httpwww.majesty.Fragments.Orders
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.UpcommingOrdersModel
 import eg.com.majesty.httpwww.majesty.R
@@ -108,7 +110,16 @@ class UpcommingOrderAdapter (var activity : Activity , var upcommingOrdersModels
         {
             override fun onClick(v: View?)
             {
-                activity.startActivity(Intent(activity , OneOrderDetails::class.java).putExtra("orderId" , upcommingOrdersModels.get(position).OrderNo.toString()))
+
+
+                val oneOrderDetails = OneOrderDetails()
+                val fragmentTransaction = activity.fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.frameContainer, oneOrderDetails)
+                fragmentTransaction.addToBackStack("oneOrderDetails")
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.commit()
+                oneOrderDetails.setData(upcommingOrdersModels.get(position).OrderNo.toString())
+
             }
         })
 

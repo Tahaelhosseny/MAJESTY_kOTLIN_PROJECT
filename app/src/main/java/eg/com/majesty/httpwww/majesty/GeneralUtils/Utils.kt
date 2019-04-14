@@ -13,7 +13,8 @@ import android.util.Log
 import eg.com.majesty.httpwww.majesty.BuildConfig
 import java.util.*
 import android.content.DialogInterface
-
+import android.content.Intent
+import android.net.Uri
 
 
 /**
@@ -179,6 +180,49 @@ object Utils {
     }
 
 
+    fun getOpenFacebookIntent(context: Context): Intent
+    {
+        val FACEBOOK_URL = "https://www.facebook.com/Majesty.19915eg"
+        val FACEBOOK_PAGE_ID = "Majesty.19915eg"
+        val facebookIntent = Intent(Intent.ACTION_VIEW)
+        val packageManager = context.packageManager
+        try {
+            val versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode
+            return if (versionCode >= 3002850)
+            { //newer versions of fb app
+                facebookIntent.setData(Uri.parse("fb://facewebmodal/f?href=$FACEBOOK_URL"))
+            } else { //older versions of fb app
+                facebookIntent.setData(Uri.parse("fb://page/$FACEBOOK_PAGE_ID"))
+
+            }
+        } catch (e: PackageManager.NameNotFoundException)
+        {
+            return facebookIntent.setData(Uri.parse(FACEBOOK_URL))  //normal web url
+        }
+    }
+
+
+
+
+    fun getOpenTwiterrIntent(context: Context): Intent
+    {
+        val FACEBOOK_URL = "https://www.facebook.com/Majesty.19915eg"
+        val FACEBOOK_PAGE_ID = "Majesty.19915eg"
+        val facebookIntent = Intent(Intent.ACTION_VIEW)
+        val packageManager = context.packageManager
+        try {
+            val versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode
+            return if (versionCode >= 3002850)
+            { //newer versions of fb app
+                facebookIntent.setData(Uri.parse("fb://facewebmodal/f?href=$FACEBOOK_URL"))
+            } else { //older versions of fb app
+                facebookIntent.setData(Uri.parse("fb://page/$FACEBOOK_PAGE_ID"))
+
+            }
+        } catch (e: PackageManager.NameNotFoundException)
+        {
+            return facebookIntent.setData(Uri.parse(FACEBOOK_URL))  //normal web url
+        }
+    }
+
 }
-
-

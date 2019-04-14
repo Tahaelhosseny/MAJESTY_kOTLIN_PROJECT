@@ -56,35 +56,23 @@ class FinalCartAdapter (val activity: Activity?=null, val cartModels: MutableLis
 
         holder.count.setText(cartModels!!.get(position).Quantity.toString() + "X")
         holder.count.setTypeface(Utils.Exo2Bold(activity))
-
-
         holder.itemPrice.setTypeface(Utils.Exo2SemiBold(activity))
         holder.totalPrice.setTypeface(Utils.Exo2SemiBold(activity))
-
-
-
-
         holder.taxPrice.setTypeface(Utils.Exo2SemiBold(activity))
-
-
         holder.itemPrice.setText(cartModels!!.get(position).ItemPrice.toString())
         holder.totalPrice.setText(cartModels!!.get(position).TotalAmount.toString())
         holder.taxPrice.setText(cartModels!!.get(position).ItemTax.toString())
-
-
-
         holder.itemView.setOnClickListener(object : View.OnClickListener
         {
             override fun onClick(v: View?)
             {
                 val oneItem = OneItem()
-                MainActivity().activeCenterFragments.add(oneItem)
                 val fragmentTransaction = activity.fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.frameContainer, oneItem)
                 fragmentTransaction.addToBackStack("oneItem")
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.commit()
-                oneItem.setData(""+cartModels.get(position).FoodMenuID)
+                oneItem.setData(""+cartModels.get(position).FoodMenuID , cartModels.get(position).FoodMenuItemID ,cartModels.get(position).Quantity )
             }
         })
 

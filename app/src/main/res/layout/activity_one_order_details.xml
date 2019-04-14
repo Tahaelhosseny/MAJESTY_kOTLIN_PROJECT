@@ -10,18 +10,17 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/back"
-        android:onClick="back"
+        android:id="@+id/backkk"
         android:padding="13dp"
         android:src="@drawable/icon_back_copy"
         android:layout_height="50dp" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_toRightOf="@+id/back"
+        android:layout_toRightOf="@+id/backkk"
         android:layout_marginTop="20dp"
         android:text=""
-        android:id="@+id/catNamee"
+        android:id="@+id/catNameev"
         android:fontFamily="@font/exosemibold"
         android:textColor="@color/black"
         android:gravity="center_vertical"

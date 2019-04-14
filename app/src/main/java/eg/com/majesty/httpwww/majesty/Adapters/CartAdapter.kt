@@ -64,6 +64,35 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
 
 
 
+        holder.min.setOnClickListener(
+                {
+                    cartModels.get(position).Quantity=cartModels.get(position).Quantity-1
+                    if(cartModels.get(position).Quantity<1)
+                    {
+                        cartModels.get(position).Quantity =1
+
+                    }
+
+
+                    editCartItemQua(cartModels.get(position).FoodMenuItemID , position , cartModels.get(position).Quantity , false)
+
+                    holder.count.setText(cartModels!!.get(position).Quantity.toString())
+
+                })
+
+
+
+
+        holder.plus.setOnClickListener(
+                {
+                    cartModels.get(position).Quantity=cartModels.get(position).Quantity+1
+
+                    editCartItemQua(cartModels.get(position).FoodMenuItemID , position , cartModels.get(position).Quantity , true)
+                    holder.count.setText(cartModels!!.get(position).Quantity.toString())
+
+                })
+
+
 
 
 
@@ -100,7 +129,7 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
                 fragmentTransaction.addToBackStack("oneItem")
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.commit()
-                oneItem.setData(""+cartModels.get(position).FoodMenuID)
+                oneItem.setData(""+cartModels.get(position).FoodMenuID , cartModels.get(position).FoodMenuItemID ,cartModels.get(position).Quantity )
             }
         })
 
@@ -168,7 +197,8 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
                     Toast.makeText(activity!!.applicationContext , "Item Removed Successfully from your cart" ,Toast.LENGTH_LONG).show()
                     cartModels!!.removeAt(position)
                     notifyDataSetChanged()
-                    removeFromCartUpdate!!.update(jsonObject.get("CartTotalAmount").asFloat , cartModels.size)
+
+                    removeFromCartUpdate!!.update(jsonObject.get("CartTotalAmount").asFloat ,jsonObject.get("CartItemsCount").asInt)
                 }
             }
         } ,object : ONRetryHandler
@@ -182,5 +212,60 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
 
 
     }
+
+
+
+
+
+    fun editCartItemQua(foodMenuID : Int , position: Int ,qun : Int , isAdd : Boolean)
+    {
+
+        var foreraaParameter = ForeraaParameter(activity!!.applicationContext)
+
+        var ID = foreraaParameter.getString("UserID")
+
+        var makeRequest = MakeRequest("EditCartItemQua?isArabice=false&userID=" + ID + "&foodMenuItemID=" + foodMenuID +"&newQua=" + qun ,"0",activity,"GetFoodMenuTypes",true)
+
+        makeRequest.request(object  : VolleyCallback
+        {
+            override fun onSuccess(result: Map<String, String>)
+            {
+
+                var jsonObject = Gson().fromJson(result.get("res"), JsonArray::class.java).get(0).asJsonObject
+
+                if(jsonObject.get("Succeed").asBoolean)
+                {
+                    Toast.makeText(activity!!.applicationContext , "Item Edited Successfully from your cart" ,Toast.LENGTH_LONG).show()
+                    notifyDataSetChanged()
+                }else
+                {
+                    Toast.makeText(activity!!.applicationContext , "Item Can't Edited Successfully from your cart" ,Toast.LENGTH_LONG).show()
+                    if(isAdd)
+                        cartModels!!.get(position).Quantity =cartModels!!.get(position).Quantity-1
+                    else
+                        cartModels!!.get(position).Quantity =cartModels!!.get(position).Quantity+1
+                    notifyDataSetChanged()
+
+
+
+
+                }
+                removeFromCartUpdate!!.update(jsonObject.get("CartTotalAmount").asFloat ,jsonObject.get("CartItemsCount").asInt)
+            }
+        } ,object : ONRetryHandler
+        {
+            override fun onRetryHandler(funName: String)
+            {
+
+            }
+        })
+
+
+
+    }
+
+
+
+
 
 }

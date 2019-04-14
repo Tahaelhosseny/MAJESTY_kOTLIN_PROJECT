@@ -1,5 +1,6 @@
 package eg.com.majesty.httpwww.majesty.Fragments
 import android.app.Fragment
+import android.app.FragmentManager
 import android.app.FragmentTransaction
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -134,9 +135,8 @@ class CheckOut : Fragment()
         val gson = Gson()
 
         var jsonObject = Gson().fromJson(responce, JsonObject::class.java)
-        var NotificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
+        var notificationNumbers = jsonObject.getAsJsonArray("NotificationNumbers").get(0).asJsonObject
         var shoppingCartItemData = jsonObject.getAsJsonArray("shoppingCartItemData")
-
         val itemType = object : TypeToken<List<CartModel>>() {}.type
         val itemList = gson.fromJson<MutableList<CartModel>>(shoppingCartItemData.toString(), itemType)
 
@@ -152,12 +152,27 @@ class CheckOut : Fragment()
             {
                 totalCount.setText(cartItemsCount.toString())
                 totalPricec.setText(CartTotalAmount.toString() )
+
+
+                if(cartItemsCount==0)
+                {
+                    var backStackCount =activity.fragmentManager.getBackStackEntryCount()
+                    for (i in 0 until backStackCount)
+                    {
+                        var fragment = activity.fragmentManager.getBackStackEntryAt(i).name
+                        if (fragment.equals("checkOut"))
+                        {
+                            var backStackId = activity.fragmentManager.getBackStackEntryAt(i).getId()
+                            activity.fragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                        }
+                    }
+                }
             }
 
         })
         cartItems.adapter  = adapter
         cartItems.adapter.notifyDataSetChanged()
-        totalCount.setText(itemList.size.toString())
+        totalCount.setText(notificationNumbers.get("CartItemsCount").toString())
         totalPricec.setText("%.2f".format(adapter.getTotalPrice()).toString())
     }
 

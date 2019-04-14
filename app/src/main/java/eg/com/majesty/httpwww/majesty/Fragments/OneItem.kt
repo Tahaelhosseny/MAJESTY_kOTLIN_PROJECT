@@ -17,6 +17,7 @@ import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.Adapters.PriceAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
+import eg.com.majesty.httpwww.majesty.InterFaces.UpdateAreaSpinner
 import eg.com.majesty.httpwww.majesty.Models.ItemModel
 import eg.com.majesty.httpwww.majesty.Models.PriceModel
 import eg.com.majesty.httpwww.majesty.R
@@ -34,6 +35,7 @@ class OneItem : Fragment()
     var TAG = "OneItem"
 
     var ID :String =""
+    var selectedFoodMenuID :Int =-1
     var con = 1
     var rateee = 0
     var  userIDorPassNothing = ""
@@ -47,6 +49,12 @@ class OneItem : Fragment()
     fun setData(ID :String)
     {
         this.ID =ID
+    }
+ fun setData(ID :String ,selectedFoodMenuID :Int , con : Int)
+    {
+        this.ID =ID
+        this.selectedFoodMenuID = selectedFoodMenuID
+        this.con = con
     }
 
     override fun onResume()
@@ -225,7 +233,35 @@ class OneItem : Fragment()
         var itemType = object : TypeToken<List<PriceModel>>() {}.type
         var itemList = gson.fromJson<List<PriceModel>>(model.MenuItemPricesData.toString(), itemType)
         rec.layoutManager = LinearLayoutManager(activity )
-        adapter = PriceAdapter(activity ,itemList ,"home")
+
+
+        adapter = PriceAdapter(activity ,itemList ,"home" , object : UpdateAreaSpinner
+        {
+            override fun updateAreaSpinner(cityId: Int)
+            {
+                con = 1
+                counteee.text = "" + con
+            }
+        })
+
+
+
+        if(selectedFoodMenuID!=-1)
+        {
+            for(i in 0 until itemList.size)
+            {
+                if(itemList[i].FoodMenuItemID==selectedFoodMenuID)
+                {
+                    adapter.selectedi = i
+                    counteee.text = "" + con
+                    adapter.notifyDataSetChanged()
+                    break
+                }
+            }
+        }
+
+
+
         rec.adapter  = adapter
         rec.adapter.notifyDataSetChanged()
 

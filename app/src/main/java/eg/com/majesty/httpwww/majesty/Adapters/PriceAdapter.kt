@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
+import eg.com.majesty.httpwww.majesty.InterFaces.UpdateAreaSpinner
 import eg.com.majesty.httpwww.majesty.Models.PriceModel
 import eg.com.majesty.httpwww.majesty.R
 import kotlinx.android.synthetic.main.price_model.view.*
 
-class PriceAdapter (val activity: Activity?=null, val priceModels: List<PriceModel>?=null, val fragment : String?=null): RecyclerView.Adapter<PriceAdapter.MyViewHolder>()
+class PriceAdapter (val activity: Activity?=null, val priceModels: List<PriceModel>?=null, val fragment : String?=null , var updateAreaSpinner: UpdateAreaSpinner?=null): RecyclerView.Adapter<PriceAdapter.MyViewHolder>()
 {
 
     public var selectedi = 0
@@ -41,6 +42,7 @@ class PriceAdapter (val activity: Activity?=null, val priceModels: List<PriceMod
         holder.item.setOnClickListener {
             selectedi = position
             notifyDataSetChanged()
+            updateAreaSpinner!!.updateAreaSpinner(4)
         }
     }
 

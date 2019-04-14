@@ -80,10 +80,7 @@
             android:name=".Fragments.FinalCheckOut"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
-        <activity
-            android:name=".Activity.OneOrderDetails"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.login" />
+
         <activity
             android:name=".Activity.Branches"
             android:configChanges="orientation|screenSize"

@@ -1,10 +1,10 @@
 package eg.com.majesty.httpwww.majesty.Activity
-import android.app.Activity
-import android.support.v7.app.AppCompatActivity
+import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -18,11 +18,11 @@ import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_one_order_details.*
-import org.androidannotations.annotations.Click
 
 
-class OneOrderDetails : Activity()
+class OneOrderDetails : Fragment()
 {
 
     var orderId = ""
@@ -31,18 +31,33 @@ class OneOrderDetails : Activity()
     var comment =""
 
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_one_order_details)
-        orderId = intent.getStringExtra("orderId")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.activity_one_order_details, container, false)
     }
+
+    fun setData(orderId :String)
+    {
+        this.orderId =orderId
+    }
+
+
 
 
     override fun onResume()
     {
         super.onResume()
-        catNamee.setText("Order #" + orderId)
+        activity.header.visibility= View.GONE
+        activity.cart.visibility = View.GONE
+        activity.bottom.visibility = View.GONE
+        activity.homeIm.setImageResource(R.drawable.icon_home)
+        activity.favoriteIm.setImageResource(R.drawable.favorite)
+        activity.ordersIm.setImageResource(R.drawable.ordera)
+        activity.menuIm.setImageResource(R.drawable.menu)
+        catNameev.setText("Order #" + orderId)
+        backkk.setOnClickListener(
+                {
+                    backkk()
+                })
         getData()
     }
 
@@ -50,7 +65,7 @@ class OneOrderDetails : Activity()
 
     fun getData()
     {
-        var makeRequest = MakeRequest("OrderFullDetails?isArabic=false&orderNo=" + orderId,"0",this,"OrderFullDetails",true)
+        var makeRequest = MakeRequest("OrderFullDetails?isArabic=false&orderNo=" + orderId,"0",activity,"OrderFullDetails",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -95,14 +110,14 @@ class OneOrderDetails : Activity()
 
                 val itemType = object : TypeToken<List<CartModel>>() {}.type
                 val itemList = Gson().fromJson<MutableList<CartModel>>(jsonObject.getAsJsonArray("OrderDetails").toString(), itemType)
-                cartItems.layoutManager = LinearLayoutManager(this@OneOrderDetails )
+                cartItems.layoutManager = LinearLayoutManager(activity )
                 cartItems.setHasFixedSize(true)
                 cartItems.setNestedScrollingEnabled(false)
 
 
 
 
-                var adapter = FinalCartAdapter(this@OneOrderDetails ,itemList , object : RemoveFromCartUpdate
+                var adapter = FinalCartAdapter(activity ,itemList , object : RemoveFromCartUpdate
                 {
                     override fun update(CartTotalAmount: Float , cartItemsCount : Int)
                     {
@@ -255,7 +270,7 @@ class OneOrderDetails : Activity()
 
     fun comentLay(view: View)
     {
-        var makeRequest = MakeRequest("AddCommentToDeliveredOrder?orderId=" + orderId+"&comment=" + note.text.toString(),"0",this,"AddCommentToDeliveredOrder",true)
+        var makeRequest = MakeRequest("AddCommentToDeliveredOrder?orderId=" + orderId+"&comment=" + note.text.toString(),"0",activity,"AddCommentToDeliveredOrder",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -320,7 +335,7 @@ class OneOrderDetails : Activity()
     {
         if (rat == 0)
         {
-            var makeRequest = MakeRequest("AddRatingToDeliveredOrder?orderId=" + orderId+"&rate=" + ratee,"0",this,"AddCommentToDeliveredOrder",true)
+            var makeRequest = MakeRequest("AddRatingToDeliveredOrder?orderId=" + orderId+"&rate=" + ratee,"0",activity,"AddCommentToDeliveredOrder",true)
 
             makeRequest.request(object  : VolleyCallback
             {
@@ -350,8 +365,8 @@ class OneOrderDetails : Activity()
 
 
 
-    fun back(view: View)
+    fun backkk()
     {
-        onBackPressed()
+        activity.onBackPressed()
     }
 }
