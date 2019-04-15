@@ -12,6 +12,8 @@
         android:layout_height="140dp"
         android:layout_alignParentStart="true"
         android:id="@+id/first"
+        android:visibility="gone"
+
         android:layout_alignParentTop="true">
 
         <ImageView

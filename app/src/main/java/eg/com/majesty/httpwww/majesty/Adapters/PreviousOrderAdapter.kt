@@ -68,6 +68,9 @@ class PreviousOrderAdapter (var activity : Activity, var upcommingOrdersModels: 
 
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
 
     fun rating(rate : Int , holder: MyViewHolder)

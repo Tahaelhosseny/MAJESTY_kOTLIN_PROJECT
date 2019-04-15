@@ -64,35 +64,6 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
 
 
 
-        holder.min.setOnClickListener(
-                {
-                    cartModels.get(position).Quantity=cartModels.get(position).Quantity-1
-                    if(cartModels.get(position).Quantity<1)
-                    {
-                        cartModels.get(position).Quantity =1
-
-                    }
-
-
-                    editCartItemQua(cartModels.get(position).FoodMenuItemID , position , cartModels.get(position).Quantity , false)
-
-                    holder.count.setText(cartModels!!.get(position).Quantity.toString())
-
-                })
-
-
-
-
-        holder.plus.setOnClickListener(
-                {
-                    cartModels.get(position).Quantity=cartModels.get(position).Quantity+1
-
-                    editCartItemQua(cartModels.get(position).FoodMenuItemID , position , cartModels.get(position).Quantity , true)
-                    holder.count.setText(cartModels!!.get(position).Quantity.toString())
-
-                })
-
-
 
 
 
