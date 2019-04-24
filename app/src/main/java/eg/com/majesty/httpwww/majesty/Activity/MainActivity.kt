@@ -451,6 +451,14 @@ class MainActivity : Activity()
         }
     }
 
+
+
+
+    @Click fun editProfile(view: View)
+    {
+        startActivity(Intent(this , EditUserData::class.java))
+    }
+
 }
 
 
