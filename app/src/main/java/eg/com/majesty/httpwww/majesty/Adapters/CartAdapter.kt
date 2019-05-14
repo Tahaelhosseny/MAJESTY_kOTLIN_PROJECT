@@ -11,10 +11,8 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import com.squareup.picasso.Picasso
+
 import eg.com.majesty.httpwww.majesty.Activity.MainActivity
-import eg.com.majesty.httpwww.majesty.Activity.MainActivity_
 import eg.com.majesty.httpwww.majesty.Fragments.OneItem
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils

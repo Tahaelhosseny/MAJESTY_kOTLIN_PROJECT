@@ -51,7 +51,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".Splash_"
+        <activity android:name=".Splash"
             android:configChanges="orientation|screenSize">
 
             <intent-filter>
@@ -60,19 +60,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.TutorialPage_"
+        <activity android:name=".Activity.TutorialPage"
             android:configChanges="orientation|screenSize"/>
         <activity
-            android:name=".Activity.Login_"
+            android:name=".Activity.Login"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
-            android:name=".Activity.MainActivity_"
+            android:name=".Activity.MainActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
         <activity
-            android:name=".Activity.SignUp_"
+            android:name=".Activity.SignUp"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.login" />
 

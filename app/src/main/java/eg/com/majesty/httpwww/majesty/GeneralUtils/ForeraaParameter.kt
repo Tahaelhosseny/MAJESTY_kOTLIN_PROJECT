@@ -87,6 +87,17 @@ class ForeraaParameter
         return x
     }
 
+
+    fun getInt(key: String , normal : Int): Int {
+        var x = 0
+        openConnection()
+        if (ForeraaSettings!!.contains(key)) {
+            x = ForeraaSettings!!.getInt(key, normal)
+        }
+        closeConnection()
+        return x
+    }
+
     fun setBoolean(key: String, value: Boolean) {
         openConnection()
         editor!!.putBoolean(key, value)
@@ -103,6 +114,20 @@ class ForeraaParameter
         closeConnection()
         return result
     }
+
+
+    fun isSetLanguage(): Boolean {
+        var result = false
+        openConnection()
+
+        if (ForeraaSettings!!.contains("language")) {
+            result = true
+        }
+
+        closeConnection()
+        return result
+    }
+
 
     companion object {
         val APP_PREFERENCES = "MajestyAppShared"

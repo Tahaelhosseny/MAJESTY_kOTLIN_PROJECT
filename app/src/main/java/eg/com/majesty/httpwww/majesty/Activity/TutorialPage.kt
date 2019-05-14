@@ -20,35 +20,21 @@ import eg.com.majesty.httpwww.majesty.Adapters.TutorilaAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.AppLoginIntroSliderModel
-import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
-import io.github.inflationx.calligraphy3.CalligraphyConfig
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor
-import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
-import org.androidannotations.annotations.AfterViews
-import org.androidannotations.annotations.Click
-import org.androidannotations.annotations.EActivity
-import org.androidannotations.annotations.ViewById
+import kotlinx.android.synthetic.main.activity_tutorial_page.*
 
 
-@EActivity(R.layout.activity_tutorial_page)
 class TutorialPage : Activity()
 {
-
-
-    @ViewById lateinit var viewPager : AutoScrollViewPager
-    @ViewById lateinit var pageIndicatorView : PageIndicatorView
-    @ViewById lateinit var ce_login : LinearLayout
-    @ViewById lateinit var getStarted : TextView
-    @ViewById lateinit var login : TextView
-    @ViewById lateinit var signUp : TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
 
         StatusBarUtil.setTransparent(this)
+        setContentView(R.layout.activity_tutorial_page)
         super.onCreate(savedInstanceState)
+        afterViewa()
     }
 
 
@@ -59,7 +45,7 @@ class TutorialPage : Activity()
 
 
 
-    @AfterViews fun afterViewa()
+    fun afterViewa()
     {
 
         login.setTypeface(Utils.Exo2Bold(this))
@@ -113,25 +99,25 @@ class TutorialPage : Activity()
     }
 
 
-    @Click fun login()
+    fun login(view: View)
     {
-        startActivity(Intent(this , Login_::class.java))
+        startActivity(Intent(this , Login::class.java))
         finish()
     }
 
 
-    @Click fun getStarted ()
+   fun getStarted (view: View)
     {
-        startActivity(Intent(this , MainActivity_::class.java))
+        startActivity(Intent(this , MainActivity::class.java))
         finish()
     }
 
 
 
 
-    @Click fun signUp()
+    fun signUp(view: View)
     {
-        startActivity(Intent(this , SignUp_::class.java))
+        startActivity(Intent(this , SignUp::class.java))
         finish()
     }
 

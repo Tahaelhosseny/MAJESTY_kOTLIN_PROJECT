@@ -26,27 +26,20 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import org.androidannotations.annotations.Click
-import org.androidannotations.annotations.EActivity
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.HashMap
 import android.view.View
 import android.view.WindowManager
-import android.widget.TimePicker
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
-import kotlinx.android.synthetic.main.page_layout.*
-import org.androidannotations.annotations.AfterViews
-import org.androidannotations.annotations.WakeLock
 import org.json.JSONObject
 import kotlin.collections.ArrayList
 
 
-@EActivity(R.layout.activity_sign_up)
 class EditUserData : FragmentActivity()
 {
 
@@ -69,6 +62,7 @@ class EditUserData : FragmentActivity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        setContentView((R.layout.activity_sign_up))
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
@@ -99,10 +93,10 @@ class EditUserData : FragmentActivity()
         }*/
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
+        afterViews()
     }
 
-
-    @AfterViews fun afterViews()
+     fun afterViews()
     {
 
         sign.setTypeface(Utils.Exo2Bold(this))
@@ -113,7 +107,7 @@ class EditUserData : FragmentActivity()
 
 
         signUp.setText("Save Edits")
-        fbLogin.visibility = View.VISIBLE
+        //fbLogin.visibility = View.VISIBLE
         sep.visibility = View.VISIBLE
         orrrrr.visibility = View.VISIBLE
 
@@ -133,8 +127,7 @@ class EditUserData : FragmentActivity()
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
     }
 
-
-    @Click fun birthdate()
+    fun birthdate(view :View)
     {
 
 
@@ -187,7 +180,7 @@ class EditUserData : FragmentActivity()
 
 
 
-    @Click fun signUp()
+     fun signUp(view :View)
     {
 
         var emailt = email.text
@@ -345,7 +338,7 @@ class EditUserData : FragmentActivity()
 
 
 
-    @Click fun fbLogin()
+    fun fbLogin(view :View)
     {
         LoginManager.getInstance().logInWithReadPermissions(this , Arrays.asList("email"))
         LoginManager.getInstance().registerCallback(callbackManager,object  : FacebookCallback<LoginResult>{
@@ -445,7 +438,7 @@ class EditUserData : FragmentActivity()
 
 
 
-                    startActivity(Intent(this@EditUserData , MainActivity_::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                    startActivity(Intent(this@EditUserData , MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                     finish()
 
 
@@ -523,7 +516,7 @@ class EditUserData : FragmentActivity()
 
 
 
-                    startActivity(Intent(this@EditUserData , MainActivity_::class.java))
+                    startActivity(Intent(this@EditUserData , MainActivity::class.java))
                     finish()
 
                 }else
@@ -573,7 +566,7 @@ class EditUserData : FragmentActivity()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    @Click fun backk(view :View)
+     fun backk(view :View)
     {
         super.onBackPressed()
     }

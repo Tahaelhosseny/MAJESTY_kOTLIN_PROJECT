@@ -43,6 +43,7 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
     var ID :String =""
 
     var cityId = -1
+    var addressType = 0   //0 for home 1 for work
     var areaId = -1
     var subAreaa = -1
     var StreettStr=""
@@ -342,7 +343,8 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
                 + "&apartmentNumber=" + apartmentStr
                 + "&landmark=" + landmarkStr
                 + "&userAddressID=" +userAddressID
-                + "&notes=" + notesStr,"0",this,"AddUserAddress",true)
+                + "&notes=" + notesStr
+                +"&addressType=" + addressType,"0",this,"AddUserAddress",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -396,6 +398,17 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
                 landmark.setText( jsonObject.get("Landmark").asString.toString())
                 notes.setText( jsonObject.get("Notes").asString.toString())
 
+                if(jsonObject.get("AddressType").asInt==0)
+                {
+                    home.setChecked(true)
+                    work.setChecked(false)
+                    addressType = 0
+                }else
+                {
+                    home.setChecked(false)
+                    work.setChecked(true)
+                    addressType = 1
+                }
 
 
 
@@ -409,5 +422,20 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
         })
     }
 
+
+    fun workkkk(view: View)
+    {
+        home.setChecked(false)
+        work.setChecked(true)
+        addressType = 1
+    }
+
+
+    fun homeee(view: View)
+    {
+        home.setChecked(true)
+        work.setChecked(false)
+        addressType = 0
+    }
 
 }

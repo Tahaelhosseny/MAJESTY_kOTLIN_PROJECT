@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         // replace with the current version of the Android plugin
         classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.google.gms:google-services:4.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
     }
@@ -27,7 +28,8 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: "kotlin-allopen"
 apply plugin: 'io.fabric'
-
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 kapt {
     generateStubs = true
@@ -45,11 +47,6 @@ android {
         versionName "1.0.0"
         multiDexEnabled true
 
-        android.applicationVariants.all { variant ->
-            variant.variantData.variantConfiguration.javaCompileOptions.annotationProcessorOptions.arguments =
-                    ['androidManifestFile': variant.outputs[0]?.processResources?.manifestFile?.absolutePath,
-                     'resourcePackageName': android.defaultConfig.applicationId]
-        }
 
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -73,7 +70,6 @@ allOpen {
     annotation("org.androidannotations.api.KotlinOpen")
 }
 
-def AAVersion = "4.4.0"
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -86,13 +82,12 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
 
-    implementation 'com.google.firebase:firebase-messaging:17.3.2'
-    kapt "org.androidannotations:androidannotations:$AAVersion"
-    implementation "org.androidannotations:androidannotations-api:$AAVersion"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.squareup.picasso:picasso:2.5.0'
     implementation 'com.github.d-max:spots-dialog:0.4@aar'
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
     testImplementation 'junit:junit:4.12'
     implementation('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'
@@ -112,5 +107,4 @@ dependencies {
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'
 }
 
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
+

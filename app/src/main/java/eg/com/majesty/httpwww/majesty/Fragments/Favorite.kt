@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import eg.com.majesty.httpwww.majesty.Activity.Login_
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
 import eg.com.majesty.httpwww.majesty.Adapters.FavoriteAdapter
 import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus

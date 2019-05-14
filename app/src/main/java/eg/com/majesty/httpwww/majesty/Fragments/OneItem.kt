@@ -12,8 +12,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import eg.com.majesty.httpwww.majesty.Activity.Login_
-import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
+import eg.com.majesty.httpwww.majesty.Activity.Login
 import eg.com.majesty.httpwww.majesty.Adapters.PriceAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
@@ -367,7 +366,7 @@ class OneItem : Fragment()
 
         if(foreraaParameter.getString("UserID").length==0)
         {
-            startActivity(Intent(activity , Login_::class.java).putExtra("finish" , true))
+            startActivity(Intent(activity , Login::class.java).putExtra("finish" , true))
         }
         else
         {
@@ -420,7 +419,7 @@ class OneItem : Fragment()
         if(foreraaParameter.getString("UserID").length==0)
         {
 
-            startActivity(Intent(activity , Login_::class.java).putExtra("finish" , true))
+            startActivity(Intent(activity , Login::class.java).putExtra("finish" , true))
         }
         else
         {

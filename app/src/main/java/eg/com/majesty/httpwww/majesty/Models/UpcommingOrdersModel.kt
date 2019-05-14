@@ -24,5 +24,6 @@ class UpcommingOrdersModel
         var UserAddressLine3: String,
         var UserAddressLine4: String,
         var COnfirmDateTimeTS: String ,
-        var OrderDateTS: String
+        var OrderDateTS: String,
+        var CurrentServerTS : Long
 )

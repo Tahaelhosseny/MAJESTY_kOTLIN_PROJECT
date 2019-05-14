@@ -60,6 +60,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
     var floorStr = ""
     var apartmentStr = ""
     var landmarkStr = ""
+    var addressType = "0"   //0 for home 1 for work
     var notesStr = ""
     var REQUEST_ID_MULTIPLE_PERMISSIONS = 50
 
@@ -351,7 +352,8 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
                 + "&floor=" + floorStr
                 + "&apartmentNumber=" + apartmentStr
                 + "&landmark=" + landmarkStr
-                + "&notes=" + notesStr,"0",this,"AddUserAddress",true)
+                + "&notes=" + notesStr
+                +"&addressType=" + addressType,"0",this,"AddUserAddress",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -558,4 +560,20 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
             return result
         }
 
+
+    fun workkkk(view: View)
+    {
+        home.setChecked(false)
+        work.setChecked(true)
+        addressType = "1"
+    }
+
+
+    fun homeee(view: View)
+    {
+
+        home.setChecked(true)
+        work.setChecked(false)
+        addressType = "0"
+    }
 }

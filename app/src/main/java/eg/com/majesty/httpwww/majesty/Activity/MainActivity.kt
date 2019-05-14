@@ -10,8 +10,6 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kotlinx.android.synthetic.main.activity_main.*
-import org.androidannotations.annotations.Click
-import org.androidannotations.annotations.EActivity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -21,9 +19,9 @@ import android.widget.Toast
 import eg.com.majesty.httpwww.majesty.Fragments.*
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
-import org.androidannotations.annotations.AfterViews
 import android.view.View
 import android.view.WindowManager
+import eg.com.majesty.httpwww.majesty.Splash
 import kotlinx.android.synthetic.main.drawer_menu.*
 
 
@@ -33,7 +31,6 @@ var isHistory = false
 
 
 
-@EActivity(R.layout.activity_main)
 class MainActivity : Activity()
 {
 
@@ -42,6 +39,7 @@ class MainActivity : Activity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
@@ -53,6 +51,7 @@ class MainActivity : Activity()
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
+        AfterViews()
 
 
     }
@@ -64,7 +63,7 @@ class MainActivity : Activity()
 
 
 
-    @AfterViews fun AfterViews() {
+    fun AfterViews() {
 
 
             try {
@@ -159,11 +158,11 @@ class MainActivity : Activity()
     }
 
 
-    @Click fun back ()
+    fun back (view: View)
     {
         super.onBackPressed()
     }
-    @Click fun home ()
+    fun home (view: View)
     {
 
         homeIm.setImageResource(R.drawable.icon_home1)
@@ -181,7 +180,7 @@ class MainActivity : Activity()
     }
 
 
-    @Click fun menuu ()
+    fun menuu (view: View)
     {
 
         homeIm.setImageResource(R.drawable.icon_home)
@@ -200,7 +199,7 @@ class MainActivity : Activity()
     }
 
 
-    @Click fun cart ()
+    fun cart (view: View)
     {
 
        /* headerText.setText(R.string.Cart)
@@ -237,7 +236,7 @@ class MainActivity : Activity()
     }
 
 
-    @Click fun favorite ()
+     fun favorite (view: View)
     {
 
 
@@ -285,7 +284,7 @@ class MainActivity : Activity()
     }
 
 
-    @Click fun orders ()
+    fun orders (view: View)
     {
 
 
@@ -323,7 +322,7 @@ class MainActivity : Activity()
     }
 
 
-    @Click fun menu()
+    fun menu(view: View)
     {
         manageLay()
 
@@ -340,7 +339,7 @@ class MainActivity : Activity()
 
 
 
-    @Click fun addressBok()
+   fun addressBok(view: View)
     {
 
         var foreraaParameter = ForeraaParameter(this@MainActivity)
@@ -366,7 +365,7 @@ class MainActivity : Activity()
     }
 
     
-    @Click fun branches()
+  fun branches(view: View)
     {
         startActivity(Intent(this , Branches::class.java))
     }
@@ -375,6 +374,14 @@ class MainActivity : Activity()
     override fun onResume()
     {
         super.onResume()
+
+        if(ForeraaParameter(this).getInt("language" , 0) ==0 )
+        {
+            arabic.setText("English")
+        }else
+        {
+            arabic.setText("عربى")
+        }
 
         closeLay()
 
@@ -390,7 +397,7 @@ class MainActivity : Activity()
             userName.setText(foreraaParameter.getString("Title")+" " +foreraaParameter.getString("FirstName")+" " +foreraaParameter.getString("SecondName"))
             editProfile.visibility = View.VISIBLE
             logOutLayout.visibility = View.VISIBLE
-            LogIn.visibility = View.INVISIBLE
+            LogIn.visibility = View.GONE
         }
 
 
@@ -398,14 +405,14 @@ class MainActivity : Activity()
     }
 
 
-    @Click fun Contact_Us()
+    fun Contact_Us(view: View)
     {
 
         startActivity(Intent(this , ContactUs::class.java))
     }
 
 
-    @Click fun logOutLayout()
+    fun logOutLayout(view: View)
     {
         var foreraaParameter = ForeraaParameter(this@MainActivity)
         foreraaParameter.setString("UserID" , "")
@@ -423,9 +430,9 @@ class MainActivity : Activity()
 
 
 
-    @Click fun LogIn()
+    fun LogIn(view: View)
     {
-        startActivity(Intent(this , Login_::class.java))
+       startActivity(Intent(this , Login::class.java))
     }
 
 
@@ -452,9 +459,19 @@ class MainActivity : Activity()
     }
 
 
+    fun arabic(view: View)
+    {
+
+        if(ForeraaParameter(this@MainActivity).getInt("language" , 0) == 0)
+            ForeraaParameter(this@MainActivity).setInt("language" , 1)
+        else
+            ForeraaParameter(this@MainActivity).setInt("language" , 0)
 
 
-    @Click fun editProfile(view: View)
+        startActivity(Intent(this , Splash::class.java))
+    }
+
+   fun editProfile(view: View)
     {
         startActivity(Intent(this , EditUserData::class.java))
     }

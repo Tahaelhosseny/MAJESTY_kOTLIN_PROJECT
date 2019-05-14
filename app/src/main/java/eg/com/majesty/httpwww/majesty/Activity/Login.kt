@@ -4,32 +4,25 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
-import io.github.inflationx.calligraphy3.CalligraphyConfig
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor
-import io.github.inflationx.viewpump.ViewPump
+
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kotlinx.android.synthetic.main.activity_login.*
-import org.androidannotations.annotations.AfterViews
-import org.androidannotations.annotations.Click
-import org.androidannotations.annotations.EActivity
 import org.json.JSONObject
 import java.util.*
 
-@EActivity(R.layout.activity_login)
 class Login : Activity()
 {
 
@@ -50,6 +43,7 @@ class Login : Activity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
         try {
             finish = intent.getBooleanExtra("finish", false)
         }catch (e :Exception){}
@@ -58,6 +52,8 @@ class Login : Activity()
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
+        afterViews()
     }
 
 
@@ -67,7 +63,7 @@ class Login : Activity()
     }
 
 
-    @AfterViews fun afterViews()
+   fun afterViews()
     {
 
         flogin.setTypeface(Utils.Exo2Bold(this))
@@ -90,7 +86,7 @@ class Login : Activity()
 
 
 
-    @Click fun facebookLogin()
+    fun facebookLogin(views: View)
     {
         FacebookSdk.sdkInitialize(this)
         AppEventsLogger.activateApp(this)
@@ -150,7 +146,7 @@ class Login : Activity()
                             foreraaParameter.setBoolean("IsMale" , _UserInfoData.getBoolean("IsMale"))
                             foreraaParameter.setBoolean("rem" , rem)
                             foreraaParameter.setBoolean("social" , true)
-                            startActivity(Intent(this@Login , MainActivity_::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                            startActivity(Intent(this@Login , MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                         }else
                         {
                             Toast.makeText(this@Login , "This Account Not Register" , Toast.LENGTH_LONG).show()
@@ -169,13 +165,13 @@ class Login : Activity()
 
 
 
-    @Click fun backBtn()
+    fun backBtn(views: View)
     {
         onBackPressed()
     }
 
 
-    @Click fun login()
+    fun login(views: View)
     {
         val userName = email.getText()
         val passwordd = password.getText()
@@ -210,7 +206,7 @@ class Login : Activity()
                                     foreraaParameter.setBoolean("IsMale" , _UserInfoData.getBoolean("IsMale"))
                                     foreraaParameter.setBoolean("rem" , rem)
                                     foreraaParameter.setBoolean("social" , false)
-                                    startActivity(Intent(this@Login , MainActivity_::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                                    startActivity(Intent(this@Login , MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 
                                 }else
                                 {
@@ -233,10 +229,9 @@ class Login : Activity()
 
 
 
-
-    @Click fun signUp()
+    fun signUp(views: View)
     {
-        startActivity(Intent(this , SignUp_::class.java))
+        startActivity(Intent(this , SignUp::class.java))
     }
 
 

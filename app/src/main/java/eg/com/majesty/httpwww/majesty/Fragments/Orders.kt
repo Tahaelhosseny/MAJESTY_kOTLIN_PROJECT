@@ -1,9 +1,8 @@
 package eg.com.majesty.httpwww.majesty.Fragments
 import android.app.Fragment
-import android.app.FragmentManager
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,6 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import eg.com.majesty.httpwww.majesty.Activity.MainActivity
-import eg.com.majesty.httpwww.majesty.Activity.MainActivity_
 import eg.com.majesty.httpwww.majesty.Adapters.PreviousOrderAdapter
 import eg.com.majesty.httpwww.majesty.Adapters.UpcommingOrderAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
@@ -59,6 +56,8 @@ class Orders : Fragment() {
         activity.favoriteIm.setImageResource(R.drawable.favorite)
         activity.ordersIm.setImageResource(R.drawable.ic_orderb)
         activity.menuIm.setImageResource(R.drawable.menu)
+
+
 
         super.onResume()
         activity.back.visibility = View.VISIBLE
@@ -161,6 +160,7 @@ class Orders : Fragment() {
                     pastRec.layoutManager=LinearLayoutManager(activity)
                     perviousOrderAdapter.notifyDataSetChanged()
 
+
                 }catch (e:java.lang.Exception)
                 {
 
@@ -181,4 +181,7 @@ class Orders : Fragment() {
 
 
     }
+
+
+
 }

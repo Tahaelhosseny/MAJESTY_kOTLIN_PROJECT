@@ -26,26 +26,21 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import org.androidannotations.annotations.Click
-import org.androidannotations.annotations.EActivity
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.HashMap
 import android.view.View
 import android.view.WindowManager
-import android.widget.TimePicker
+import android.widget.RadioGroup
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
-import kotlinx.android.synthetic.main.page_layout.*
-import org.androidannotations.annotations.AfterViews
-import org.androidannotations.annotations.WakeLock
+
 import org.json.JSONObject
 
 
-@EActivity(R.layout.activity_sign_up)
 class SignUp : FragmentActivity()
 {
 
@@ -67,6 +62,7 @@ class SignUp : FragmentActivity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        setContentView((R.layout.activity_sign_up))
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
@@ -76,40 +72,21 @@ class SignUp : FragmentActivity()
                 .build())
 
 
-
-       /* val info: PackageInfo
-        try {
-            info = packageManager.getPackageInfo("eg.com.majesty.httpwww.majesty", PackageManager.GET_SIGNATURES)
-            for (signature in info.signatures) {
-                val md: MessageDigest
-                md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                val something = Base64.getEncoder().encodeToString(md.digest())
-                //String something = new String(Base64.encodeBytes(md.digest()));
-                Log.e("hash key", something)
-            }
-        } catch (e1: PackageManager.NameNotFoundException) {
-            Log.e("name not found", e1.toString())
-        } catch (e: NoSuchAlgorithmException) {
-            Log.e("no such an algorithm", e.toString())
-        } catch (e: Exception) {
-            Log.e("exception", e.toString())
-        }*/
-
-
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
+        afterViews()
     }
 
-
-    @AfterViews fun afterViews()
+    fun afterViews()
     {
 
         sign.setTypeface(Utils.Exo2Bold(this))
         ftxt.setTypeface(Utils.Exo2Bold(this))
         signUp.setTypeface(Utils.Exo2Bold(this))
         sign.setTypeface(Utils.Exo2Bold(this))
+
+
+
 
 
         FacebookSdk.sdkInitialize(this)
@@ -124,7 +101,7 @@ class SignUp : FragmentActivity()
     }
 
 
-    @Click fun birthdate()
+    fun birthdate(view :View)
     {
 
 
@@ -177,7 +154,7 @@ class SignUp : FragmentActivity()
 
 
 
-    @Click fun signUp()
+    fun signUp(view :View)
     {
 
         var emailt = email.text
@@ -335,7 +312,7 @@ class SignUp : FragmentActivity()
 
 
 
-    @Click fun fbLogin()
+    fun fbLogin(view :View)
     {
         LoginManager.getInstance().logInWithReadPermissions(this , Arrays.asList("email"))
         LoginManager.getInstance().registerCallback(callbackManager,object  : FacebookCallback<LoginResult>{
@@ -435,7 +412,7 @@ class SignUp : FragmentActivity()
 
 
 
-                    startActivity(Intent(this@SignUp , MainActivity_::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                    startActivity(Intent(this@SignUp , MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                     finish()
 
 
@@ -513,7 +490,7 @@ class SignUp : FragmentActivity()
 
 
 
-                    startActivity(Intent(this@SignUp , MainActivity_::class.java))
+                    startActivity(Intent(this@SignUp , MainActivity::class.java))
                     finish()
 
                 }else
@@ -563,7 +540,7 @@ class SignUp : FragmentActivity()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    @Click fun backk(view :View)
+    fun backk(view :View)
     {
         super.onBackPressed()
     }
@@ -605,6 +582,9 @@ class SignUp : FragmentActivity()
 
 
     }
+
+
+
 
 
 

@@ -13,7 +13,6 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import eg.com.majesty.httpwww.majesty.Activity.MainActivity_
 import eg.com.majesty.httpwww.majesty.Adapters.FinalCartAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.InterFaces.RemoveFromCartUpdate

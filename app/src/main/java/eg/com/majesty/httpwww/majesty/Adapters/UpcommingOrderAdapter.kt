@@ -1,11 +1,13 @@
 package eg.com.majesty.httpwww.majesty.Adapters
 
 import android.app.Activity
+import android.os.Handler
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import eg.com.majesty.httpwww.majesty.Activity.OneOrderDetails
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
@@ -15,6 +17,11 @@ import kotlinx.android.synthetic.main.upcomming_orders_lay.view.*
 
 class UpcommingOrderAdapter (var activity : Activity , var upcommingOrdersModels: List<UpcommingOrdersModel>): RecyclerView.Adapter<UpcommingOrderAdapter.MyViewHolder>()
 {
+
+
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
     {
         return MyViewHolder(LayoutInflater.from(activity).inflate(R.layout.upcomming_orders_lay , parent, false))
@@ -63,32 +70,11 @@ class UpcommingOrderAdapter (var activity : Activity , var upcommingOrdersModels
             Glide.with(activity).load(upcommingOrdersModels.get(position).OrderImageUrl).thumbnail(.2f).into(holder.FoodMenuImageUrl)
             holder.orderId.text = upcommingOrdersModels.get(position).OrderNo.toString()
             holder.totalPrice.text = upcommingOrdersModels.get(position).Total.toString()
-
-            if( upcommingOrdersModels.get(position).COnfirmDateTimeTS.equals(""))
-                holder.progress.setCurrentProgress(100)
-            else
-            {
-                var current = ( upcommingOrdersModels.get(position).COnfirmDateTimeTS.toLong() + upcommingOrdersModels.get(position).ExpectedDeliveryMinues*60) -(System.currentTimeMillis())
-                if(current.toInt()<0)
-                {
-                    current = (0).toFloat()
-                    holder.time.text = "00:00"
-                    holder.progress.setCurrentProgress(current.toInt())
-                }
-                else
-                {
-
-                    holder.time.text
-                    current = (current * 100) /  upcommingOrdersModels.get(position).ExpectedDeliveryMinues*60
-                    holder.progress.setCurrentProgress(current.toInt())
-                }
-
-            }
-
-        }
+            holder.estimatedArrival.text =Utils.getDateHHMM(upcommingOrdersModels.get(position).COnfirmDateTimeTS.toLong() + upcommingOrdersModels.get(position).ExpectedDeliveryMinues.toLong()*60)
 
 
 
+            startBoutiqueRefreshTimer(holder ,position)
 
         holder.itemView.setOnClickListener( object :View.OnClickListener
         {
@@ -108,6 +94,7 @@ class UpcommingOrderAdapter (var activity : Activity , var upcommingOrdersModels
 
 
 
+    }
     }
 
 
@@ -139,6 +126,38 @@ class UpcommingOrderAdapter (var activity : Activity , var upcommingOrdersModels
 
 
 
+    }
+
+
+
+    private fun startBoutiqueRefreshTimer(holder : MyViewHolder , position: Int)
+    {
+
+        Handler().apply {
+            val runnable = object : Runnable
+            {
+                override fun run()
+                {
+
+                    var elapsedtimeValue = upcommingOrdersModels.get(position).COnfirmDateTimeTS.toLong() + upcommingOrdersModels.get(position).ExpectedDeliveryMinues.toLong() * 60 - upcommingOrdersModels.get(position).CurrentServerTS
+                    if (elapsedtimeValue >= 0)
+                    {
+                        var elapsedtime = Utils.getWatingTime(elapsedtimeValue)
+                        holder.time.setText(elapsedtime)
+                        var progress = (((upcommingOrdersModels.get(position).COnfirmDateTimeTS.toLong() + upcommingOrdersModels.get(position).ExpectedDeliveryMinues.toLong() * 60 - upcommingOrdersModels.get(position).CurrentServerTS) * 100) / (upcommingOrdersModels.get(position).ExpectedDeliveryMinues.toLong() * 60)).toInt()
+                        holder.progress.setCurrentProgress(progress)
+                    } else {
+                        holder.time.setText("00:00")
+                        holder.progress.setCurrentProgress(0)
+
+                    }
+
+                    upcommingOrdersModels.get(position).CurrentServerTS =upcommingOrdersModels.get(position).CurrentServerTS+1
+                    postDelayed(this, 1000)
+                }
+            }
+            postDelayed(runnable, 0)
+        }
     }
 
 }

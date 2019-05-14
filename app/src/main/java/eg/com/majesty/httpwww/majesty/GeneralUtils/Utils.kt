@@ -148,6 +148,36 @@ object Utils {
     }
 
 
+    fun getDateHHMM(time: Long): String {
+        val cal = Calendar.getInstance()
+        cal.timeInMillis = time * 1000L
+        val date = DateFormat.format("hh:mm a", cal).toString()
+        return date
+    }
+    fun getWatingTime(time: Long): String
+    {
+        var min = time / 60
+        var sec = time %60
+
+        var minstr = min.toString()
+        var secstr = sec.toString()
+
+
+        if(min<10)
+        {
+            minstr = "0"+min
+        }
+
+
+        if(sec<10)
+        {
+            secstr = "0"+sec
+        }
+
+        return minstr + ":" +secstr
+    }
+
+
 
 
     fun showOkDialoge(activity: Activity, msg: String, listenerPos: DialogInterface.OnClickListener, txtbtn: String) {
@@ -223,6 +253,18 @@ object Utils {
         {
             return facebookIntent.setData(Uri.parse(FACEBOOK_URL))  //normal web url
         }
+    }
+
+
+    fun changeLocale(con: Context, language: String?) {
+        val res = con.resources
+        val config = res.configuration
+        if (language == null || language.length == 0) {
+            config.locale = Locale.getDefault()
+        } else {
+            config.locale = Locale(language)
+        }
+        res.updateConfiguration(config, null)
     }
 
 }
