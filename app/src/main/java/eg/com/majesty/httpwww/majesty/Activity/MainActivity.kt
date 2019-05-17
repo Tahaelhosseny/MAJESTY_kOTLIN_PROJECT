@@ -39,14 +39,31 @@ class MainActivity : Activity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        Utils.changeLocale(this, resources.getStringArray(R.array.languages_tag)[ForeraaParameter(this).getInt( "language" ,0)])
         setContentView(R.layout.activity_main)
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(CalligraphyInterceptor(
-                        CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/Exo2-Regular.ttf")
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build())
+
+
+        if(ForeraaParameter(this).getInt("language" ,0)==0)
+        {
+            ViewPump.init(ViewPump.builder()
+                    .addInterceptor(CalligraphyInterceptor(
+                            CalligraphyConfig.Builder()
+                                    .setDefaultFontPath("fonts/cairo_regular.ttf")
+                                    .setFontAttrId(R.attr.fontPath)
+                                    .build()))
+                    .build())
+        }
+        else
+        {
+            ViewPump.init(ViewPump.builder()
+                    .addInterceptor(CalligraphyInterceptor(
+                            CalligraphyConfig.Builder()
+                                    .setDefaultFontPath("fonts/Exo2-Regular.ttf")
+                                    .setFontAttrId(R.attr.fontPath)
+                                    .build()))
+                    .build())
+        }
+
         savedInstanceStateA = savedInstanceState
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -80,11 +97,21 @@ class MainActivity : Activity()
 
             val actionBarDrawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close) {
 
-                override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                override fun onDrawerSlide(drawerView: View, slideOffset: Float)
+                {
                     super.onDrawerSlide(drawerView, slideOffset)
                     val slideX = drawerView!!.width * slideOffset
-                    content.translationX = slideX
+
                     content.translationY = slideX / 4
+
+                    if(ForeraaParameter(this@MainActivity).getInt("language" , 0)== 0)
+                    {
+                        content.translationX = -slideX
+                    }
+                    else
+                    {
+                        content.translationX = slideX
+                    }
 
 
                 }
@@ -119,28 +146,6 @@ class MainActivity : Activity()
             ftxt.setTypeface(Utils.Exo2SemiBold(this))
             mtxt.setTypeface(Utils.Exo2SemiBold(this))
             otxt.setTypeface(Utils.Exo2SemiBold(this))
-
-
-        if (isHistory)
-        {
-            headerText.setText(R.string.Orders)
-            homeIm.setImageResource(R.drawable.icon_home)
-            favoriteIm.setImageResource(R.drawable.favorite)
-            ordersIm.setImageResource(R.drawable.ic_orderb
-            )
-            menuIm.setImageResource(R.drawable.menu)
-
-
-            val orders = Orders()
-            activeCenterFragments.add(orders)
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frameContainer, orders)
-            fragmentTransaction.addToBackStack("orders")
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            fragmentTransaction.commit()
-            orders.setClearr(false)
-            }else
-            {
                 homeIm.setImageResource(R.drawable.icon_home1)
                 favoriteIm.setImageResource(R.drawable.favorite)
                 ordersIm.setImageResource(R.drawable.ordera)
@@ -153,7 +158,6 @@ class MainActivity : Activity()
                 fragmentTransaction.replace(R.id.frameContainer, home)
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 fragmentTransaction.commit()
-            }
 
     }
 
@@ -440,10 +444,7 @@ class MainActivity : Activity()
 
     fun closeLay()
     {
-        if(drawerLayout.isDrawerOpen(drawer))
-        {
-            drawerLayout.closeDrawer(drawer)
-        }
+        drawerLayout.closeDrawers()
     }
 
     fun manageLay()
@@ -468,7 +469,8 @@ class MainActivity : Activity()
             ForeraaParameter(this@MainActivity).setInt("language" , 0)
 
 
-        startActivity(Intent(this , Splash::class.java))
+        startActivity(Intent(this , Splash::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+        finish()
     }
 
    fun editProfile(view: View)

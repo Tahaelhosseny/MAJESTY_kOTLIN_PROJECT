@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
@@ -107,7 +106,6 @@ class Splash : Activity()
             {
 
                 var str = result.get("res")
-
                 var foreraaParameter = ForeraaParameter(this@Splash)
                 foreraaParameter.setString("GetAppIntroData" , str.toString())
                 startActivity(Intent(this@Splash , TutorialPage::class.java))

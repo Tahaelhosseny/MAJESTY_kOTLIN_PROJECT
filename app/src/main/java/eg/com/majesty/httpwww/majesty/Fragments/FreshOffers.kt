@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
 import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.CategoryModels
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.Models.ItemModel
@@ -60,7 +61,7 @@ class FreshOffers : Fragment()
 
 
 
-        var makeRequest = MakeRequest("GetAllHotItemsForHomeScreen?isArabic=false&userIDorPassNothing=" + ID,"0",activity,"GetCategories",true)
+        var makeRequest = MakeRequest("GetAllHotItemsForHomeScreen?isArabic="+Utils.isArabic(activity)+"&userIDorPassNothing=" + ID,"0",activity,"GetCategories",true)
 
         makeRequest.request(object  : VolleyCallback
         {

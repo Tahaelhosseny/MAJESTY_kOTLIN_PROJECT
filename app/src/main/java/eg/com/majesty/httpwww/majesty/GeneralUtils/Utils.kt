@@ -97,25 +97,96 @@ object Utils {
     }
 
     fun setFontawesome(context: Context): Typeface {
-        return Typeface.createFromAsset(context.assets, "fonts/fontawesome-webfont.ttf")
+
+
+        if(ForeraaParameter(context).getInt("language" ,0) ==0)
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/fontawesome-webfont.ttf")
+        }else
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/fontawesome-webfont.ttf")
+        }
+
+
+
     }
 
-    fun setExo2Regular(context: Context): Typeface {
-        return Typeface.createFromAsset(context.assets, "fonts/Exo2-Regular.ttf")
+    fun setExo2Regular(context: Context): Typeface
+    {
+
+
+
+        if(ForeraaParameter(context).getInt("language" ,0) ==0)
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/cairo_regular.ttf")
+        }else
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/Exo2-Regular.ttf")
+        }
+
+
+
     }
 
 
     fun Exo2Bold(context: Context): Typeface {
-        return Typeface.createFromAsset(context.assets, "fonts/Exo2-Bold.ttf")
+
+
+        if(ForeraaParameter(context).getInt("language" ,0) ==0)
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/cairo_black.ttf")
+        }else
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/Exo2-Bold.ttf")
+        }
+
+
+
     }
 
     fun Exo2SemiBold(context: Context): Typeface {
-        return Typeface.createFromAsset(context.assets, "fonts/Exo2-SemiBold.ttf")
+
+
+
+        if(ForeraaParameter(context).getInt("language" ,0) ==0)
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/cairo_bold.ttf")
+        }else
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/Exo2-SemiBold.ttf")
+        }
+
+
+
     }
 
 
+
+    fun isArabic(con: Context) :String
+    {
+        if(ForeraaParameter(con).getInt("language" , 0) ==0)
+        {
+            return "true"
+        }
+        else
+        {
+            return  "false"
+        }
+    }
+
     fun Exo2Medium(context: Context): Typeface {
-        return Typeface.createFromAsset(context.assets, "fonts/Exo2-Medium.ttf")
+
+
+        if(ForeraaParameter(context).getInt("language" ,0) ==0)
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/cairo_semibold.ttf")
+        }else
+        {
+            return Typeface.createFromAsset(context.assets, "fonts/Exo2-Medium.ttf")
+        }
+
+
+
     }
 
 

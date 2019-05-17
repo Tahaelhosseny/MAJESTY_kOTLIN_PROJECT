@@ -172,7 +172,7 @@ class OneItem : Fragment()
 
     fun loadData()
     {
-        var makeRequest = MakeRequest("GetItemDetails?isArabic=false&foodMenuID=" + ID + "&userIDorPassNothing=" + userIDorPassNothing,"0",activity,"GetFoodMenuTypes",true)
+        var makeRequest = MakeRequest("GetItemDetails?isArabic="+Utils.isArabic(activity)+"&foodMenuID=" + ID + "&userIDorPassNothing=" + userIDorPassNothing,"0",activity,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {

@@ -27,6 +27,7 @@ class Menu : Fragment()
 {
 
     var TAG = "Menu"
+    var  isArabic = false
 
     var ID :String =""
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -44,14 +45,20 @@ class Menu : Fragment()
 
     override fun onResume() {
         super.onResume()
+        if(ForeraaParameter(activity).getInt("language" , 0) ==0)
+        {
+            isArabic = true
+        }
+        else
+        {
+            isArabic = false
+        }
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
         activity.header.visibility = View.VISIBLE
         activity.cart.visibility = View.VISIBLE
         activity.bottom.visibility = View.VISIBLE
-        activity.headerText.setText("Menu")
-
-        activity.headerText.setText(R.string.Orders)
+        activity.headerText.setText(R.string.Menu)
         activity.homeIm.setImageResource(R.drawable.icon_home)
         activity.favoriteIm.setImageResource(R.drawable.favorite)
         activity.ordersIm.setImageResource(R.drawable.ordera)
@@ -65,7 +72,7 @@ class Menu : Fragment()
         }catch (e : Exception){}
 
 
-        var makeRequest = MakeRequest("GetCategories?isArabic=false&userIDorPassNothing=" + ID,"0",activity,"GetCategories",true)
+        var makeRequest = MakeRequest("GetCategories?isArabic="+isArabic+"&userIDorPassNothing=" + ID,"0",activity,"GetCategories",true)
 
         makeRequest.request(object  : VolleyCallback
         {

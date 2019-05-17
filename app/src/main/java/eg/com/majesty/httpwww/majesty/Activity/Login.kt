@@ -96,6 +96,7 @@ class Login : Activity()
         LoginManager.getInstance().registerCallback(callbackManager,object  : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?)
             {
+
                 fbId = Profile.getCurrentProfile().id
                 fbLogin()
             }

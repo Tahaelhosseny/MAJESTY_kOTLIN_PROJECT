@@ -2,6 +2,7 @@ package eg.com.majesty.httpwww.majesty.Adapters
 
 import android.app.Activity
 import android.content.Intent
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -46,13 +47,13 @@ class PreviousOrderAdapter (var activity : Activity, var upcommingOrdersModels: 
 
         if(upcommingOrdersModels.get(position).StatusDesc.equals("Delivered"))
         {
-            holder.sttext.text = "Delivered"
+            holder.sttext.text = activity.resources.getString(R.string.delivered)
             Glide.with(activity).load(R.drawable.ic_del).thumbnail(.2f).into(holder.statIcon)
             holder.statIcon
         }
         else if(upcommingOrdersModels.get(position).StatusDesc.equals("Rejected"))
         {
-            holder.sttext.text = "Canceled"
+            holder.sttext.text = activity.resources.getString(R.string.canceled)
             Glide.with(activity).load(R.drawable.ic_can).thumbnail(.2f).into(holder.statIcon)
         }
 
@@ -62,8 +63,13 @@ class PreviousOrderAdapter (var activity : Activity, var upcommingOrdersModels: 
         {
             override fun onClick(v: View?)
             {
-                activity.startActivity(Intent(activity , OneOrderDetails::class.java).putExtra("orderId" , upcommingOrdersModels.get(position).OrderNo.toString()))
-            }
+                val oneOrderDetails = OneOrderDetails()
+                val fragmentTransaction = activity.fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.frameContainer, oneOrderDetails)
+                fragmentTransaction.addToBackStack("oneOrderDetails")
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fragmentTransaction.commit()
+                oneOrderDetails.setData(upcommingOrdersModels.get(position).OrderNo.toString())            }
         })
 
     }

@@ -40,7 +40,7 @@ class UpcommingOrderAdapter (var activity : Activity , var upcommingOrdersModels
 
             holder.first.visibility = View.GONE
             holder.second.visibility = View.VISIBLE
-            holder.sttext.text = "Pending"
+            holder.sttext.text = activity.resources.getString(R.string.pending)
             Glide.with(activity).load(R.drawable.ic_pen).thumbnail(.2f).into(holder.statIcon)
             holder.statIcon
             holder.orderId2.setTypeface(Utils.Exo2SemiBold(activity))
@@ -51,7 +51,7 @@ class UpcommingOrderAdapter (var activity : Activity , var upcommingOrdersModels
             holder.orderId2.text = upcommingOrdersModels.get(position).OrderNo.toString()
             holder.totalPrice2.text = upcommingOrdersModels.get(position).Total.toString()
             holder.date2.text = Utils.getDate(upcommingOrdersModels.get(position).OrderDateTS.toLong())
-
+            holder.totalPrice2.setTypeface(Utils.Exo2SemiBold(activity))
 
 
 
@@ -72,6 +72,7 @@ class UpcommingOrderAdapter (var activity : Activity , var upcommingOrdersModels
             holder.totalPrice.text = upcommingOrdersModels.get(position).Total.toString()
             holder.estimatedArrival.text =Utils.getDateHHMM(upcommingOrdersModels.get(position).COnfirmDateTimeTS.toLong() + upcommingOrdersModels.get(position).ExpectedDeliveryMinues.toLong()*60)
 
+            holder.totalPrice2.setTypeface(Utils.Exo2SemiBold(activity))
 
 
             startBoutiqueRefreshTimer(holder ,position)

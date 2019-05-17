@@ -12,6 +12,7 @@ import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 
 import eg.com.majesty.httpwww.majesty.R
@@ -27,6 +28,7 @@ class LoadCatItems : Fragment()
 
     var TAG = "LoadCatItems"
 
+    var isArabic = false
 
 
     var FoodMenuTypeID :String = ""
@@ -57,7 +59,7 @@ class LoadCatItems : Fragment()
 
     fun loadData()
     {
-        var makeRequest = MakeRequest("GetCategoryItems?isArabic=false&&foodMenuTypeID=" + FoodMenuTypeID + "&userIDorPassNothing=" + ID,"0",activity,"GetFoodMenuTypes",true)
+        var makeRequest = MakeRequest("GetCategoryItems?isArabic="+Utils.isArabic(activity)+"&&foodMenuTypeID=" + FoodMenuTypeID + "&userIDorPassNothing=" + ID,"0",activity,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -116,6 +118,9 @@ class LoadCatItems : Fragment()
 
     override fun onResume() {
         super.onResume()
+
+
+
         activity.back.visibility = View.VISIBLE
         activity.menu.visibility = View.INVISIBLE
         activity.header.visibility = View.VISIBLE

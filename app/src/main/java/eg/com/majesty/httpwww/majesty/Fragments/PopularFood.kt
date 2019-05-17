@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
 import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.CategoryModels
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 
@@ -70,7 +71,7 @@ class PopularFood : Fragment()
 
 
 
-        var makeRequest = MakeRequest("GetCategories?isArabic=false&userIDorPassNothing=" + ID,"0",activity,"GetCategories",true)
+        var makeRequest = MakeRequest("GetCategories?isArabic="+Utils.isArabic(activity)+"&userIDorPassNothing=" + ID,"0",activity,"GetCategories",true)
 
         makeRequest.request(object  : VolleyCallback
         {

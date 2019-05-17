@@ -1,0 +1,169 @@
+<ScrollView
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"    android:layout_width="match_parent">
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="@color/fragmentBack"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="100dp"
+        app:riv_corner_radius="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:scaleType="fitXY"
+        android:id="@+id/uLogo"
+        android:src="@drawable/capa_1"
+        android:layout_height="100dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:layout_below="@+id/uLogo"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/userName"
+            android:textColor="#202020"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="تعديل الملف الشخصى"
+            android:layout_marginBottom="50dp"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/exoregular"
+            android:id="@+id/editProfile"
+            android:onClick="editProfile"
+            android:layout_below="@+id/userName"
+            android:textColor="#cc666666"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content" />
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/editProfile"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_above="@+id/logOutLayout"
+            android:layout_height="match_parent">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textColor="#202020"
+            android:id="@+id/addressBok"
+            android:onClick="addressBok"
+            android:fontFamily="@font/exoregular"
+            android:text="سجل العناوين"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="#202020"
+            android:text="فروعنا"
+            android:id="@+id/branches"
+            android:onClick="branches"
+            android:fontFamily="@font/exoregular"
+            android:gravity="center"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="#202020"
+            android:text="اتصل بنا"
+            android:onClick="Contact_Us"
+            android:id="@+id/Contact_Us"
+            android:fontFamily="@font/exoregular"
+            android:gravity="center"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textColor="#202020"
+            android:fontFamily="@font/exoregular"
+            android:text="الأعدادات"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textColor="#202020"
+            android:fontFamily="@font/exoregular"
+            android:text="تسجيل الدخول"
+            android:onClick="LogIn"
+            android:id="@+id/LogIn"
+            android:layout_height="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="#202020"
+                android:fontFamily="@font/exoregular"
+                android:text="English"
+                android:onClick="arabic"
+                android:id="@+id/arabic"
+                android:layout_height="30dp" />
+
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/logOutLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:onClick="logOutLayout"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/power" />
+
+
+            <TextView
+                android:id="@+id/logouttxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/uLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="تسجيل خروج"
+                android:textColor="#202020"
+                android:textSize="16sp" />
+
+
+            <ImageView
+                android:layout_width="212dp"
+                android:layout_height="228dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="-50dp"
+                android:rotationY="180"
+                android:layout_gravity="right"
+                android:layout_marginTop="-100dp"
+                android:layout_marginBottom="-50dp"
+                android:src="@drawable/ic_shape_846" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

@@ -14,6 +14,7 @@ import eg.com.majesty.httpwww.majesty.Activity.MainActivity
 import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
 import eg.com.majesty.httpwww.majesty.Adapters.MenuFoodDataAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.CategoryModels
 import eg.com.majesty.httpwww.majesty.Models.MenuFoodDataModel
 import eg.com.majesty.httpwww.majesty.R
@@ -33,7 +34,6 @@ class Home : Fragment()
     var ID :String =""
 
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -43,6 +43,8 @@ class Home : Fragment()
 
     override fun onResume() {
         super.onResume()
+
+
         activity.headerText.setText("Home")
         activity.back.visibility = View.GONE
         activity.menu.visibility = View.VISIBLE
@@ -51,7 +53,7 @@ class Home : Fragment()
         activity.bottom.visibility = View.VISIBLE
 
 
-        activity.headerText.setText(R.string.Orders)
+        activity.headerText.setText(R.string.Home)
         activity.homeIm.setImageResource(R.drawable.icon_home1)
         activity.favoriteIm.setImageResource(R.drawable.favorite)
         activity.ordersIm.setImageResource(R.drawable.ordera)
@@ -123,7 +125,7 @@ class Home : Fragment()
     {
         var mapt = HashMap<String , String>()
 
-        var makeRequest = MakeRequest("GetHomeScreenData?isArabic=false&categoryCount=5&itemCount=5&userIDorPassNothing=" +ID,"0",mapt ,activity,"_Categories",true)
+        var makeRequest = MakeRequest("GetHomeScreenData?isArabic="+Utils.isArabic(activity)+"&categoryCount=5&itemCount=5&userIDorPassNothing=" +ID,"0",mapt ,activity,"_Categories",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -144,7 +146,18 @@ class Home : Fragment()
                 var gson = Gson()
                 var itemType = object : TypeToken<List<CategoryModels>>() {}.type
                 var itemList = gson.fromJson<List<CategoryModels>>(jsonObject.getAsJsonArray("_Categories").toString(), itemType)
-                popularRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
+
+                if(ForeraaParameter(activity).getInt("language")==0)
+                {
+                    popularRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , true)
+
+                }else
+                {
+                    popularRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
+
+                }
+
+
                 popularRec.adapter = CategoryItem(activity ,itemList ,"home")
                 popularRec.adapter.notifyDataSetChanged()
 
@@ -153,7 +166,15 @@ class Home : Fragment()
 
                 var itemType2 = object : TypeToken<List<MenuFoodDataModel>>() {}.type
                 var itemList2 = gson.fromJson<List<MenuFoodDataModel>>(jsonObject.getAsJsonArray("_HotItems").toString(), itemType2)
-                freshRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
+                if(ForeraaParameter(activity).getInt("language")==0)
+                {
+                    freshRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , true)
+
+                }else
+                {
+                    freshRec.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
+
+                }
                 freshRec.adapter = MenuFoodDataAdapter(activity ,itemList2 ,"home")
                 freshRec.adapter.notifyDataSetChanged()
             }

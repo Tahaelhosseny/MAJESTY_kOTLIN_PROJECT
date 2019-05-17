@@ -13,6 +13,7 @@ import eg.com.majesty.httpwww.majesty.Adapters.CategoryItem
 import eg.com.majesty.httpwww.majesty.Adapters.FavoriteAdapter
 import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.Models.CategoryModels
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.R
@@ -62,7 +63,7 @@ class Favorite : Fragment()
         activity.bottom.visibility = View.VISIBLE
 
 
-        activity.headerText.setText(R.string.Orders)
+        activity.headerText.setText(R.string.Favorite)
         activity.homeIm.setImageResource(R.drawable.icon_home)
         activity.favoriteIm.setImageResource(R.drawable.favorite1)
         activity.ordersIm.setImageResource(R.drawable.ordera)
@@ -78,7 +79,7 @@ class Favorite : Fragment()
 
 
 
-        var makeRequest = MakeRequest("FavouritesGetAllItems?isArabice=false&userID=" + ID, "0", activity, "GetFoodMenuTypes", true)
+        var makeRequest = MakeRequest("FavouritesGetAllItems?isArabice="+Utils.isArabic(activity)+"&userID=" + ID, "0", activity, "GetFoodMenuTypes", true)
         makeRequest.request(object : VolleyCallback {
             override fun onSuccess(result: Map<String, String>)
             {

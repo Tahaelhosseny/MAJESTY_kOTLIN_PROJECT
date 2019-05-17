@@ -21,4 +21,9 @@
         <item>English</item>
         <item>Française</item>
     </string-array>
+
+
+    <string name="delivered">تم التوصيل</string>
+    <string name="canceled">ملغى</string>
+    <string name="pending">معلق</string>
 </resources>

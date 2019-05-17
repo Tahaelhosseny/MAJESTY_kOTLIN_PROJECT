@@ -29,27 +29,32 @@
             android:src="@drawable/piza" />
 
 
-        <android.support.v7.widget.CardView
-            android:layout_width="150dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="37dp"
-            app:cardCornerRadius="10dp"
-             android:layout_below="@+id/ggg"
-            android:layout_alignParentEnd="true"
+            android:gravity="right"
+            android:elevation="10dp"
+            android:layout_marginRight="37dp"
+            android:layout_below="@+id/ggg"
+            android:layout_marginBottom="10dp"
             android:layout_height="45dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:background="@drawable/cat1"
-                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/bakkkk"
+                    android:layout_height="match_parent" />
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:text="edfsdsdf"
                     android:id="@+id/FfoodMenuDescription"
                     android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
                     android:textColor="@color/white"
                     android:layout_height="match_parent" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
 
 
         <TextView
@@ -57,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_toRightOf="@+id/FoodMenuImageUrl"
             android:elevation="10dp"
             android:ellipsize="end"
@@ -83,6 +88,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ellipsize="end"
+                android:lineSpacingExtra="-5dp"
                 android:gravity="center|left"
                 android:lines="2"
                 android:maxLines="2"

@@ -98,6 +98,11 @@ class ForeraaParameter
         return x
     }
 
+
+
+
+
+
     fun setBoolean(key: String, value: Boolean) {
         openConnection()
         editor!!.putBoolean(key, value)

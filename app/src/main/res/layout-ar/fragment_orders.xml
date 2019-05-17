@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/fragmentBack"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Orders">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:rotationY="180"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:id="@+id/upLay"
+            android:clickable="true"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:id="@+id/uptext"
+                android:rotationY="180"
+                android:fontFamily="@font/cairo_bold"
+                android:text="الحاليه"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="#ff3366"
+                android:id="@+id/upline"
+                android:layout_height="5dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/pastLay"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:text="السابقه"
+                android:padding="5dp"
+                android:id="@+id/pasttext"
+                android:rotationY="180"
+                android:fontFamily="@font/cairo_bold"
+                android:textColor="#aaaaaa"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/pastline"
+                android:src="#ff3366"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginTop="47dp"
+        android:id="@+id/upRec"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginTop="47dp"
+        android:id="@+id/pastRec"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</FrameLayout>

@@ -36,6 +36,9 @@ class MenuFoodDataAdapter (val activity : Activity, val categoryItems: List<Menu
         holder.FoodMenuName.setText(categoryItems.get(position).FoodMenuName)
 
         holder.FoodMenuName.setTypeface(Utils.Exo2SemiBold(activity))
+        holder.FoodMenuDescription.setTypeface(Utils.setExo2Regular(activity))
+        holder.FfoodMenuDescription.setTypeface(Utils.Exo2SemiBold(activity))
+
 
         try
         {

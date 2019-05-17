@@ -46,10 +46,50 @@ android {
         versionCode 100
         versionName "1.0.0"
         multiDexEnabled true
-
-
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                lintOptions {
+                    disable 'MissingTranslation'
+                    checkReleaseBuilds false
+                    abortOnError false
+                }
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
+
+            }
+            debug {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.debug
+
+
+            }
+        }
+
+
+
+        signingConfigs {
+
+            release {
+
+                keyAlias 'android apps'
+
+                keyPassword 'tahaAmira'
+
+                storeFile file('../tahaKeyStore')
+
+                storePassword 'tahaAmira'
+
+            }
+            
+        }
+
     }
     buildTypes {
         release {
