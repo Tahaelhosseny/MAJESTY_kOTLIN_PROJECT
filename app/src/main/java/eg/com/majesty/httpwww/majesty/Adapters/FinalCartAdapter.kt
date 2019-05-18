@@ -54,7 +54,7 @@ class FinalCartAdapter (val activity: Activity?=null, val cartModels: MutableLis
 
 
 
-        holder.count.setText(cartModels!!.get(position).Quantity.toString() + "X")
+        holder.count.setText(" " +cartModels!!.get(position).Quantity.toString() + " X ")
         holder.count.setTypeface(Utils.Exo2Bold(activity))
         holder.itemPrice.setTypeface(Utils.Exo2SemiBold(activity))
         holder.totalPrice.setTypeface(Utils.Exo2SemiBold(activity))

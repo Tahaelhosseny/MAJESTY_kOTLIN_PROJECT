@@ -319,7 +319,7 @@ class SignUp : FragmentActivity()
             override fun onSuccess(result: LoginResult?)
             {
 
-                fbId = Profile.getCurrentProfile().id
+                fbId  = result!!.accessToken.userId
 
                 val parameters = Bundle()
                 parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location") // Parámetros que pedimos a facebook

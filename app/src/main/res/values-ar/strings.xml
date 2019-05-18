@@ -25,5 +25,7 @@
 
     <string name="delivered">تم التوصيل</string>
     <string name="canceled">ملغى</string>
-    <string name="pending">معلق</string>
+    <string name="pending">انتظار</string>
+    <string name="approved">تم اقبول</string>
+
 </resources>

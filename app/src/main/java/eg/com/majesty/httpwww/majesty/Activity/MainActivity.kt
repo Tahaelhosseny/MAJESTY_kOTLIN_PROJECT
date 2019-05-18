@@ -90,7 +90,11 @@ class MainActivity : Activity()
 
 
             if (Build.VERSION.SDK_INT < 23)
-                actionBar.hide()
+                if(Build.VERSION.SDK_INT<23)
+                    try
+                    {
+                        actionBar.hide()
+                    }catch (e : Exception){}
 
             drawerLayout.setScrimColor(Color.TRANSPARENT)
             drawerLayout.setDrawerElevation((0).toFloat())

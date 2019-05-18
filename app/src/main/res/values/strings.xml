@@ -40,6 +40,7 @@
     <string name="delivered">Delivered</string>
     <string name="canceled">Canceled</string>
     <string name="pending">Pending</string>
+    <string name="approved">Approved</string>
 
 
 </resources>

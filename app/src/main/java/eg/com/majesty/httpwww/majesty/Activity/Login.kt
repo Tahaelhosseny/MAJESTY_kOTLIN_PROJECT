@@ -13,7 +13,6 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
-import eg.com.majesty.httpwww.majesty.R
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
@@ -22,6 +21,8 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 import java.util.*
+import eg.com.majesty.httpwww.majesty.R
+
 
 class Login : Activity()
 {
@@ -47,8 +48,6 @@ class Login : Activity()
         try {
             finish = intent.getBooleanExtra("finish", false)
         }catch (e :Exception){}
-
-
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -79,7 +78,10 @@ class Login : Activity()
 
 
         if(Build.VERSION.SDK_INT<23)
-            actionBar.hide()
+            try {
+                actionBar.hide()
+            }catch (e : Exception){}
+
     }
 
 
@@ -93,12 +95,15 @@ class Login : Activity()
         callbackManager = CallbackManager.Factory.create()
         LoginManager.getInstance().logOut()
         LoginManager.getInstance().logInWithReadPermissions(this , Arrays.asList("email"))
-        LoginManager.getInstance().registerCallback(callbackManager,object  : FacebookCallback<LoginResult> {
+        LoginManager.getInstance().registerCallback(callbackManager,object  : FacebookCallback<LoginResult>
+        {
+
             override fun onSuccess(result: LoginResult?)
             {
 
-                fbId = Profile.getCurrentProfile().id
+                fbId = result!!.accessToken.userId
                 fbLogin()
+
             }
 
             override fun onCancel()

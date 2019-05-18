@@ -174,6 +174,21 @@ object Utils {
         }
     }
 
+
+
+    fun isArabicBoolean(con: Context) :Boolean
+    {
+        if(ForeraaParameter(con).getInt("language" , 0) ==0)
+        {
+            return true
+        }
+        else
+        {
+            return  false
+        }
+    }
+
+
     fun Exo2Medium(context: Context): Typeface {
 
 
