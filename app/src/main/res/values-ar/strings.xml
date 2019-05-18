@@ -26,6 +26,12 @@
     <string name="delivered">تم التوصيل</string>
     <string name="canceled">ملغى</string>
     <string name="pending">انتظار</string>
-    <string name="approved">تم اقبول</string>
+    <string name="approved">تم القبول</string>
+    <string name="select_address">أختر عنوان التوصيل</string>
+    <string name="address_book">سجل العناوين</string>
+    <string name="mainaddress">العنوان الرئيسى</string>
+    <string name="editaddress">تعديل العنوان</string>
+    <string name="deleteaddress">مسح العنوان</string>
+    <string name="min">دقيقة</string>
 
 </resources>

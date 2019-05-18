@@ -41,6 +41,12 @@
     <string name="canceled">Canceled</string>
     <string name="pending">Pending</string>
     <string name="approved">Approved</string>
+    <string name="select_address">Select Delivery Address</string>
+    <string name="address_book">Address Book</string>
+    <string name="mainaddress">Main Address</string>
+    <string name="editaddress">Edit Address</string>
+    <string name="deleteaddress">Delete Address</string>
+    <string name="min">Minutes</string>
 
 
 </resources>

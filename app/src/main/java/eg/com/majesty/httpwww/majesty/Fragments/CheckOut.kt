@@ -43,6 +43,8 @@ class CheckOut : Fragment()
         activity.header.visibility = View.GONE
         activity.cart.visibility = View.GONE
         activity.bottom.visibility = View.GONE
+        doneLay.visibility = View.GONE
+        del.visibility = View.VISIBLE
         activity.headerText.setText(R.string.Orders)
         activity.homeIm.setImageResource(R.drawable.icon_home)
         activity.favoriteIm.setImageResource(R.drawable.favorite)
@@ -111,7 +113,7 @@ class CheckOut : Fragment()
 
     fun loadData()
     {
-        var makeRequest = MakeRequest("GetCurrentShoppingCartItems?isArabice=false&userID=" + ID,"0",activity,"GetCurrentShoppingCartItems",true)
+        var makeRequest = MakeRequest("GetCurrentShoppingCartItems?isArabice="+Utils.isArabic(activity)+"&userID=" + ID,"0",activity,"GetCurrentShoppingCartItems",true)
         makeRequest.request(object  : VolleyCallback
         {
             override fun onSuccess(result: Map<String, String>)

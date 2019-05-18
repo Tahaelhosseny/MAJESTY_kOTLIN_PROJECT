@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:rotationY="180"
     android:background="@color/fragmentBack"
     android:layout_height="match_parent"
     tools:context=".Fragments.CheckOut">
@@ -19,8 +20,9 @@
         android:layout_width="match_parent"
         android:layout_toRightOf="@+id/backLay"
         android:layout_marginTop="20dp"
-        android:text="CheckOut"
+        android:text="الحساب النهائى"
         android:id="@+id/catNamee"
+        android:rotationY="180"
         android:fontFamily="@font/exosemibold"
         android:textColor="@color/black"
         android:gravity="center_vertical"
@@ -33,11 +35,12 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:textColor="#0063d8"
+        android:rotationY="180"
         android:fontFamily="@font/exosemibold"
         android:id="@+id/del"
         android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"
-        android:text="Edit"
+        android:text="تعديل"
         android:textSize="16sp"
         android:layout_height="50dp" />
 
@@ -53,12 +56,14 @@
         android:orientation="horizontal">
         <ImageView
             android:layout_width="30dp"
+            android:rotationY="180"
             android:layout_marginRight="5dp"
             android:src="@drawable/icon_check_copy_2"
             android:layout_height="30dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:rotationY="180"
             android:textColor="#0063d8"
             android:gravity="center_vertical"
             android:textSize="20sp"
@@ -87,155 +92,166 @@
                 android:background="@color/fragmentBack"
                 android:scrollbars="none"></android.support.v7.widget.RecyclerView>
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:background="@color/white"
-               android:orientation="vertical"
-               android:layout_height="wrap_content">
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:background="@color/white"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginTop="20dp"
-
-                   android:layout_marginLeft="20dp" android:orientation="horizontal"
-                   android:layout_height="wrap_content">
-
-
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_weight="1"
-                       android:fontFamily="@font/exoregular"
-                       android:text="Total Price(before tax)"
-                       android:layout_height="wrap_content" />
-
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:fontFamily="@font/exoregular"
-                       android:text="500"
-                       android:id="@+id/totalPriceBeforeTax"
-                       android:gravity="right"
-                       android:layout_height="wrap_content" />
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginLeft="20dp"   android:background="@color/white"
-                   android:layout_marginTop="10dp"
-                   android:orientation="horizontal"
-                   android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
 
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:fontFamily="@font/exoregular"
-                       android:text="Total Tax"
-                       android:layout_weight="1"
-                       android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:rotationY="180"
+                        android:fontFamily="@font/exoregular"
+                        android:text="(قبل الضريبه) السعر الكلى"
+                        android:layout_height="wrap_content" />
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:fontFamily="@font/exoregular"
-                       android:text="500"
-                       android:id="@+id/totalTax"
-                       android:gravity="right"
-                       android:layout_weight="1"
-                       android:layout_height="wrap_content" />
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginTop="10dp"
-                   android:layout_marginLeft="20dp"
-                   android:background="@color/white"
-                   android:orientation="horizontal"
-                   android:layout_height="wrap_content">
-
-
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:text="Delivery Fees"
-                       android:fontFamily="@font/exoregular"
-                       android:layout_weight="1"
-                       android:layout_height="wrap_content" />
-
-                   <TextView
-                       android:text="500"
-                       android:gravity="right"
-                       android:id="@+id/deliveryFee"
-                       android:layout_width="match_parent"
-                       android:fontFamily="@font/exoregular"
-                       android:layout_weight="1"
-                       android:layout_height="wrap_content" />
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:background="@color/white"
-                   android:layout_marginTop="10dp"
-                   android:layout_marginBottom="20dp"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginLeft="20dp"  android:orientation="horizontal"
-                   android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/exoregular"
+                        android:rotationY="180"
+                        android:text="500"
+                        android:id="@+id/totalPriceBeforeTax"
+                        android:gravity="left"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
 
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:text="Discount"
-                       android:fontFamily="@font/exoregular"
-                       android:layout_weight="1"
-                       android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/exoregular"
+                        android:rotationY="180"
+                        android:text="مجموع الضريبة"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:fontFamily="@font/exoregular"
-                       android:text="500"
-                       android:gravity="right"
-                       android:id="@+id/discount"
-                       android:layout_weight="1"
-                       android:layout_height="wrap_content" />
-               </LinearLayout>
-
-
-               <ImageView
-                   android:layout_width="match_parent"
-                   android:src="#dedede"
-                   android:layout_height="2dp" />
-
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:background="@color/white"
-                   android:layout_marginTop="10dp"
-                   android:layout_marginBottom="20dp"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginLeft="20dp"
-                   android:orientation="horizontal"
-                   android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/exoregular"
+                        android:rotationY="180"
+                        android:text="500"
+                        android:id="@+id/totalTax"
+                        android:gravity="left"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
 
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:text="Grand Total"
-                       android:textSize="18sp"
-                       android:fontFamily="@font/exosemibold"
-                       android:textColor="@color/black"
-                       android:layout_weight="1"
-                       android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:rotationY="180"
+                        android:text="رسوم التوصيل"
+                        android:fontFamily="@font/exoregular"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:textSize="18sp"
-                       android:fontFamily="@font/exosemibold"
-                       android:textColor="@color/black"                       android:text="500"
-                       android:gravity="right"
-                       android:id="@+id/grandTotal"
-                       android:layout_weight="1"
-                       android:layout_height="wrap_content" />
-               </LinearLayout>
+                    <TextView
+                        android:text="500"
+                        android:gravity="left"
+                        android:rotationY="180"
+                        android:id="@+id/deliveryFee"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/exoregular"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"  android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:rotationY="180"
+                        android:text="خصم"
+                        android:fontFamily="@font/exoregular"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/exoregular"
+                        android:text="500"
+                        android:rotationY="180"
+                        android:gravity="left"
+                        android:id="@+id/discount"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="#dedede"
+                    android:layout_height="2dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="المجموع الكلي"
+                        android:rotationY="180"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/cairo_bold"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/cairo_bold"
+                        android:textColor="@color/black"                       android:text="500"
+                        android:rotationY="180"
+                        android:gravity="left"
+                        android:id="@+id/grandTotal"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
 
 
 
-           </LinearLayout>
+            </LinearLayout>
 
 
 
@@ -243,11 +259,12 @@
                 android:layout_width="match_parent"
                 android:lines="3"
                 android:gravity="top"
+                android:rotationY="180"
                 android:fontFamily="@font/exoregular"
                 android:padding="10dp"
                 android:id="@+id/note"
                 android:textSize="12sp"
-                android:hint="Order Notes"
+                android:hint="ملاحظات على الطلب"
                 android:layout_margin="20dp"
                 android:background="@drawable/rectangle_1_copy_5"
                 android:maxLines="3"
@@ -268,7 +285,8 @@
                     android:layout_height="20dp" />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="Est. Delivery Time: "
+                    android:text="وقت الوصول المتوقع  "
+                    android:rotationY="180"
                     android:fontFamily="@font/exoregular"
                     android:layout_marginLeft="15dp"
                     android:layout_height="wrap_content" />
@@ -276,6 +294,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:textSize="16sp"
+                    android:rotationY="180"
                     android:id="@+id/time"
                     android:fontFamily="@font/exosemibold"
                     android:textColor="@color/black"
@@ -310,9 +329,10 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:text="Place Order"
+            android:text="تنفيذ الطلب"
             android:textSize="25dp"
             android:layout_weight="1"
+            android:rotationY="180"
             android:gravity="center"
             android:fontFamily="@font/exobold"
             android:id="@+id/checktxt"

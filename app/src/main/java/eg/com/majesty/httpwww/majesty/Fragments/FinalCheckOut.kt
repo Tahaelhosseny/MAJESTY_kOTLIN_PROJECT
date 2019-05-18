@@ -15,6 +15,7 @@ import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Adapters.FinalCartAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.InterFaces.RemoveFromCartUpdate
 import eg.com.majesty.httpwww.majesty.Models.CartModel
 import eg.com.majesty.httpwww.majesty.R
@@ -85,7 +86,7 @@ class FinalCheckOut : Fragment()
 
     fun loadData()
     {
-        var makeRequest = MakeRequest("OrderFullDetailsByUserID?isArabic=false&userID=" + ID + "&userAddressId="+UseAddressID,"0",activity,"OrderFullDetailsByUserID",true)
+        var makeRequest = MakeRequest("OrderFullDetailsByUserID?isArabic="+Utils.isArabic(activity)+"&userID=" + ID + "&userAddressId="+UseAddressID,"0",activity,"OrderFullDetailsByUserID",true)
         makeRequest.request(object  : VolleyCallback
         {
             override fun onSuccess(result: Map<String, String>)
@@ -121,7 +122,7 @@ class FinalCheckOut : Fragment()
             deliveryFee.text = OrderHeader.get("DeliveryFees").asFloat.toString()
             discount.text = OrderHeader.get("Discount").asFloat.toString()
             grandTotal.text = OrderHeader.get("Total").asFloat.toString()
-            time.text = OrderHeader.get("ExpectedDeliveryMinues").asFloat.toString() + "Minutes"
+            time.text = OrderHeader.get("ExpectedDeliveryMinues").asFloat.toString() +" "+ this@FinalCheckOut.resources.getString(R.string.min)
 
 
             val itemType = object : TypeToken<List<CartModel>>() {}.type
@@ -168,7 +169,7 @@ class FinalCheckOut : Fragment()
         noteStr = note.text.toString()
 
 
-        var makeRequest = MakeRequest("ConfirmCurrentShoppingCart?isArabic=false&userID=" + ID +"&notes="+noteStr+"&userAddressId="+UseAddressID,"0",activity,"ConfirmCurrentShoppingCart",true)
+        var makeRequest = MakeRequest("ConfirmCurrentShoppingCart?isArabic="+Utils.isArabic(activity)+"&userID=" + ID +"&notes="+noteStr+"&userAddressId="+UseAddressID,"0",activity,"ConfirmCurrentShoppingCart",true)
 
         makeRequest.request(object  : VolleyCallback
         {

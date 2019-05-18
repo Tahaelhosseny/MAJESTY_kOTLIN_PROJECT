@@ -30,6 +30,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:id="@+id/line1"
+                android:rotationY="180"
                 android:layout_toLeftOf="@+id/min1"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/exomedium"
@@ -40,6 +41,8 @@
 
             <TextView
                 android:layout_width="match_parent"
+                android:rotationY="180"
+
                 android:id="@+id/line2"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/exomedium"
@@ -53,6 +56,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:id="@+id/line3"
+                android:rotationY="180"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/exomedium"
                 android:layout_marginTop="5dp"
@@ -66,6 +70,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/line4"
                 android:layout_below="@+id/line3"
+                android:rotationY="180"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/exomedium"
@@ -104,6 +109,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/mline1"
                 android:layout_toLeftOf="@+id/min2"
+                android:rotationY="180"
 
                 android:fontFamily="@font/exomedium"
                 android:layout_marginLeft="5dp"
@@ -118,6 +124,8 @@
                 android:layout_width="match_parent"
                 android:id="@+id/mline2"
                 android:layout_marginTop="5dp"
+                android:rotationY="180"
+
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:lineSpacingExtra="-3dp"
@@ -128,6 +136,8 @@
                 android:layout_width="match_parent"
                 android:fontFamily="@font/exomedium"
                 android:id="@+id/mline3"
+                android:rotationY="180"
+
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -138,6 +148,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:id="@+id/mline4"
+                android:rotationY="180"
+
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/exomedium"
@@ -150,7 +162,9 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/main"
                 android:layout_alignParentRight="true"
-                android:text="Main Adress"
+                android:text="العنوان الرئيسى"
+                android:rotationY="180"
+
                 android:textColor="#f81243"
                 android:gravity="center"
                 android:layout_marginRight="10dp"
@@ -162,6 +176,8 @@
             <ImageView
                 android:layout_width="30dp"
                 android:padding="5dp"
+                android:rotationY="180"
+
                 android:src="@drawable/icon_check_copy_3"
                 android:layout_toLeftOf="@+id/main"
                 android:layout_below="@+id/mline4"

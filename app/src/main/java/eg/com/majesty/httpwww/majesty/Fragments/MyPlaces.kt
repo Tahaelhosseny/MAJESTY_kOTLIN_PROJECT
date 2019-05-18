@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken
 import eg.com.majesty.httpwww.majesty.Activity.AddNewPlace
 import eg.com.majesty.httpwww.majesty.Adapters.MyPlacesAdapter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.InterFaces.UpdateCity
 import eg.com.majesty.httpwww.majesty.Models.UserAddressAsLines
 import eg.com.majesty.httpwww.majesty.R
@@ -79,7 +80,7 @@ class MyPlaces : Fragment()
 
     fun getUserAddressesAsLines()
     {
-        var makeRequest = MakeRequest("GetUserAddressesAsLines?isArabic=false&userId=" + ID,"0",activity,"getUserAddressesAsLines",true)
+        var makeRequest = MakeRequest("GetUserAddressesAsLines?isArabic="+Utils.isArabic(activity)+"&userId=" + ID,"0",activity,"getUserAddressesAsLines",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -88,8 +89,6 @@ class MyPlaces : Fragment()
 
                 var str = result.get("res").toString()
                 var jsonObject = Gson().fromJson(str, JsonObject::class.java)
-
-
 
                 val itemType = object : TypeToken<List<UserAddressAsLines>>() {}.type
                 userAddressAsLinesList = Gson().fromJson<MutableList<UserAddressAsLines>>(jsonObject.get("UserAddressAsLines").asJsonArray.toString(), itemType)
@@ -132,10 +131,10 @@ class MyPlaces : Fragment()
         ID = ForeraaParameter(activity).getString("UserID")
         if(isAddressBok)
         {
-            catNamee.text = "Select Delivery Address"
+            catNamee.text = activity.resources.getString(R.string.select_address)
         }else
         {
-            catNamee.text = "My Address Book"
+            catNamee.text = activity.resources.getString(R.string.address_book)
         }
         backNow.setOnClickListener { activity.onBackPressed() }
 

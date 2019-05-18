@@ -39,6 +39,7 @@ import android.support.v4.content.ContextCompat
 import android.content.Intent
 import android.content.DialogInterface
 import android.provider.Settings
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import kotlinx.android.synthetic.main.previous_orders_lay.view.*
 
 
@@ -236,8 +237,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
 
     fun getCites()
     {
-        var makeRequest = MakeRequest("GetCities?isArabic=false" ,"0",this,"GetCities",true)
-
+        var makeRequest = MakeRequest("GetCities?isArabic="+Utils.isArabic(this) ,"0",this,"GetCities",true)
         makeRequest.request(object  : VolleyCallback
         {
             override fun onSuccess(result: Map<String, String>)
@@ -272,7 +272,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
 
     fun getArea()
     {
-        var makeRequest = MakeRequest("GetAreas?isArabic=false&cityId=" + cityId,"0",this,"GetCities",true)
+        var makeRequest = MakeRequest("GetAreas?isArabic="+Utils.isArabic(this)+"&cityId=" + cityId,"0",this,"GetCities",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -309,7 +309,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
 
     fun getSubAreas()
     {
-        var makeRequest = MakeRequest("GetSubAreas?isArabic=false&areaId=" + areaId,"0",this,"GetCities",true)
+        var makeRequest = MakeRequest("GetSubAreas?isArabic="+Utils.isArabic(this)+"&areaId=" + areaId,"0",this,"GetCities",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -345,7 +345,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
 
     fun saveAdd()
     {
-        var makeRequest = MakeRequest("AddUserAddress?isArabic=false&subAreaId=" + subAreaa
+        var makeRequest = MakeRequest("AddUserAddress?isArabic="+Utils.isArabic(this)+"subAreaId=" + subAreaa
                 + "&userId=" +ID
                 + "&street=" + StreettStr
                 + "&buildingNumber=" + buildingNumberStr

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/setMain" android:title="Main Address"/>
-    <item android:id="@+id/edit" android:title="Edit Address"/>
-    <item android:id="@+id/Delete" android:title="Delete Address"/>
+    <item android:id="@+id/setMain" android:title="@string/mainaddress"/>
+    <item android:id="@+id/edit" android:title="@string/editaddress"/>
+    <item android:id="@+id/Delete" android:title="@string/deleteaddress"/>
 </menu>

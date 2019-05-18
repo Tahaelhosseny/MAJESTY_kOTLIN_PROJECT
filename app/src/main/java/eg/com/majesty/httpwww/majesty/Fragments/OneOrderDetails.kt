@@ -90,7 +90,6 @@ class OneOrderDetails : Fragment()
 
 
                 rat = orderHeader.get("Rating").asInt
-
                 comment = orderHeader.get("CommentAfterDelivery").asString
                 date.text = Utils.getDate(orderHeader.get("OrderDateTS").asLong)
                 rating(rat)
@@ -223,7 +222,6 @@ class OneOrderDetails : Fragment()
 
     fun status(status:String)
     {
-        sttext.setText(status)
 
         if(status.equals("Delivered"))
         {
@@ -261,7 +259,7 @@ class OneOrderDetails : Fragment()
             img4.visibility = View.INVISIBLE
             img5.visibility = View.INVISIBLE
 
-            sttext.text = "Canceled"
+
             Glide.with(this).load(R.drawable.ic_can).thumbnail(.2f).into(statIcon)
         } else if(status.equals("Pending")) {
 
@@ -272,7 +270,7 @@ class OneOrderDetails : Fragment()
             img3.visibility = View.INVISIBLE
             img4.visibility = View.INVISIBLE
             img5.visibility = View.INVISIBLE
-            sttext.text = "Pending"
+
             Glide.with(this).load(R.drawable.ic_pen).thumbnail(.2f).into(statIcon)
         }else
         {
@@ -283,7 +281,6 @@ class OneOrderDetails : Fragment()
             img3.visibility = View.INVISIBLE
             img4.visibility = View.INVISIBLE
             img5.visibility = View.INVISIBLE
-            sttext.text = status
             Glide.with(this).load(R.drawable.ic_pen).thumbnail(.2f).into(statIcon)
         }
 
