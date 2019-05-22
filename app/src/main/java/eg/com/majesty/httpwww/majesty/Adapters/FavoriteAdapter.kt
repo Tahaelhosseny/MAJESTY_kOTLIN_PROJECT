@@ -118,7 +118,7 @@ class FavoriteAdapter (val activity : Activity, val categoryItems: MutableList<G
                     }
                 }else
                 {
-                    Toast.makeText(activity , "Not Logged Please Login First"  , Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity , activity.resources.getString(R.string.notLogged)  , Toast.LENGTH_LONG).show()
                 }
 
 

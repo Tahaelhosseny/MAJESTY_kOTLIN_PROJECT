@@ -43,8 +43,8 @@ android {
         applicationId "eg.com.majesty.httpwww.majesty"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 100
-        versionName "1.0.0"
+        versionCode 101
+        versionName "1.0.1"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

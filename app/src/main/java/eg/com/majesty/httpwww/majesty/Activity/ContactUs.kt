@@ -115,7 +115,7 @@ class ContactUs : Activity()
                 startActivity(my_callIntent)
             }
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(applicationContext, "Error in your phone call" + e.message, Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, this.resources.getString(R.string.phoneerror) + e.message, Toast.LENGTH_LONG).show()
         }
 
     }
@@ -125,7 +125,7 @@ class ContactUs : Activity()
 
     fun GetFollowAboutInfo()
     {
-        var makeRequest = MakeRequest("GetFollowAboutInfo?isArabic=false&getAboutUs=false" ,"0",this,"GetFollowAboutInfo",true)
+        var makeRequest = MakeRequest("GetFollowAboutInfo?isArabic="+Utils.isArabic(this)+"&getAboutUs=false" ,"0",this,"GetFollowAboutInfo",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -157,7 +157,7 @@ class ContactUs : Activity()
 
                 Glide.with(this@ContactUs).load(Image).thumbnail(.1f).into(image)
                 address.setText(Addressss + "\n" + ContactNumbers)
-                name.setText(BranchName)
+                name.setText(this@ContactUs.resources.getString(R.string.contact_info))
 
             }
         } ,object : ONRetryHandler

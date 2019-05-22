@@ -235,7 +235,7 @@ class MainActivity : Activity()
 
         }else
         {
-            Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
+            Toast.makeText(this , this.resources.getString(R.string.notLogged)  , Toast.LENGTH_LONG).show()
         }
 
 
@@ -266,7 +266,7 @@ class MainActivity : Activity()
 
         if(ID.equals(""))
         {
-            Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
+            Toast.makeText(this , this.resources.getString(R.string.notLogged)  , Toast.LENGTH_LONG).show()
         }else
         {
             homeIm.setImageResource(R.drawable.icon_home)
@@ -320,7 +320,7 @@ class MainActivity : Activity()
             orders.setClearr(false)
         }else
         {
-            Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
+            Toast.makeText(this , this.resources.getString(R.string.notLogged)  , Toast.LENGTH_LONG).show()
         }
 
 
@@ -366,7 +366,7 @@ class MainActivity : Activity()
 
         }else
         {
-            Toast.makeText(this , "You Must Login First" , Toast.LENGTH_LONG).show()
+            Toast.makeText(this , this.resources.getString(R.string.notLogged)  , Toast.LENGTH_LONG).show()
         }
 
 

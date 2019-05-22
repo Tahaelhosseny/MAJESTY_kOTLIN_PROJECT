@@ -33,5 +33,56 @@
     <string name="editaddress">تعديل العنوان</string>
     <string name="deleteaddress">مسح العنوان</string>
     <string name="min">دقيقة</string>
+    <string name="choose_your_area">أختر منطقتك</string>
+    <string name="contact_info">معلومات للتواصل</string>
+    <string name="phone_num"><font>*</font>رقم التليفون</string>
+    <string name="second_phone_num"><font>*</font>رقم التليفون الثانى</string>
+    <string name="pass"><font>*</font>رمز المرور</string>
+    <string name="repass"><font>*</font>أعد رمز المرور</string>
+    <string name="notCorrectPhone">رقم الهاتف خطأ او مسجل مسبقاََ</string>
+    <string name="dataUpdate">تم تعديل بياناتك بنجاح</string>
+
+
+    <string name="Please_select_city_first">من فضلك أختر المدينه اولا</string>
+    <string name="Please_select_area_first">من فضلك أختر المنطقه اولا</string>
+    <string name="addressAdded">تم اضافه العنوان بنجاح</string>
+    <string name="cant_get_location">لم نستطع الحصول على بيانات الموقع الرجاء اعاده المحاوله</string>
+    <string name="login_cancel">تم الغاء تسجيل الدخول , حاول مره اخرى</string>
+    <string name="not_registered">هذا الحساب غير مسجل مسبقاََ</string>
+    <string name="facebooklogindone">تم لادخول بحساب الفيسبوك بنجاج , من فضلك اكمل البيانات</string>
+    <string name="facebookused">حساب الفيس بوم مستخدم مسبقاََ</string>
+    <string name="not_valid_birth">تاريخ ميلاد خاطئ</string>
+    <string name="notLogged">لم يتم تسجيل الدخول , من فضلك  قم بتسجيل الدخول </string>
+    <string name="itemnotedit">لم يتم تعديل  حاول مره اخرى</string>
+    <string name="itemnottreroved">تم ازاله الصنف بنجاح</string>
+    <string name="itemnedited">تم تعديل الصنف بنجاح</string>
+    <string name="itemtocart">تم اضافه العنصر الى السله بنجاح</string>
+    <string name="itemnottocart">لم يتم اضافه العنصر الى السله حاول مره اخرى</string>
+    <string name="phoneerror">خطأ ف الاتصال حاول مره اخرى</string>
+    <string name="cityfirst">من فضلك اختر المدينه اولا</string>
+    <string name="areafirst">من فضلك الختر المنطقه اولا</string>
+    <string name="addressedited">تم تعديل العنوان بنجاح</string>
+    <string name="orderDone">تم ارسال طلب بنجاح </string>
+    <string name="emptycart">السله فارغه من فضلك قم بأضافه بعض المنتجات</string>
+
+
+
+    <string name="selectsubare">اختر المنطقه الفرعيه</string>
+    <string name="enterStreet">أدخل اسم الشارع</string>
+    <string name="buildnum">أدحل رقم العقار</string>
+    <string name="floarNum">أدخل رقم الدور</string>
+    <string name="ApartmentNumber">ادخل رقم الشقه</string>
+    <string name="PasswordError">رمز المرور غير صحيح</string>
+    <string name="phone11">يجب ان يكون رقم التليفون 11 رقم</string>
+    <string name="title">من فضلك ادخل اللقب</string>
+    <string name="mailnotvalid">بريد الكترونى غير صحيح</string>
+    <string name="firstName">لا يجب ان يقل الاسم الاول عن 3 حروف</string>
+    <string name="SecondName">لا يجب ان يقل الاسم الثانى عن 3 حروفs</string>
+    <string name="pass6">يجب ان يكون رمز المرور على الاقل 6 حروف</string>
+    <string name="passnotmatch">رمز المرور غير متطابق</string>
+    <string name="emailused">البريد الألكتعرونى مستخدم من قبل</string>
+
+
+
 
 </resources>

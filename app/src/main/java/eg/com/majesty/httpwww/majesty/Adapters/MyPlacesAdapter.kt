@@ -126,13 +126,13 @@ class MyPlacesAdapter(var activity : Activity, var userAddressAsLines : MutableL
         popup.setOnMenuItemClickListener { item ->
 
 
-            if(item.title.equals("Main Address"))
+            if(item.title.equals(activity.resources.getString(R.string.mainaddress)))
             {
                 SetAddressAsDefault(position)
-            }else if(item.title.equals("Edit Address"))
+            }else if(item.title.equals(activity.resources.getString(R.string.editaddress)))
             {
                 activity.startActivity(Intent(activity , EditAddress::class.java).putExtra("userAddressID" , userAddressAsLines.get(position).UseAddressID.toString()))
-            }else if(item.title.equals("Delete Address"))
+            }else if(item.title.equals(activity.resources.getString(R.string.deleteaddress)))
             {
                 RemoveUserAddress(position)
             }

@@ -12,6 +12,7 @@
         android:layout_marginTop="20dp"
         android:id="@+id/back"
         android:padding="13dp"
+        android:onClick="backImg"
         android:src="@drawable/icon_back_copy"
         android:layout_height="50dp" />
 

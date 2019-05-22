@@ -391,10 +391,10 @@ class OneItem : Fragment()
                         activity.notiNum.text = jsonObject.get("NotificationsCount").toString()
                         activity.cartTxt.text = jsonObject.get("CartItemsCount").toString()
 
-                        Toast.makeText(activity , "Item Added To Cart Successfully" , Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity , activity.resources.getString(R.string.itemtocart) , Toast.LENGTH_LONG).show()
                     }else
                     {
-                        Toast.makeText(activity , "This Item Failed To Add To Cart Please Tray Again Later" , Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity , activity.resources.getString(R.string.itemnottocart) , Toast.LENGTH_LONG).show()
                     }
                 }
             } ,object : ONRetryHandler

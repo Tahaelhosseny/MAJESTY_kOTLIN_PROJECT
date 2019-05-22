@@ -69,7 +69,7 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
 
     fun GetAllBranches()
     {
-        var makeRequest = MakeRequest("GetAllBranches?isArabic=false" ,"0",this,"getUserAddressesAsLines",true)
+        var makeRequest = MakeRequest("GetAllBranches?isArabic="+Utils.isArabic(this) ,"0",this,"getUserAddressesAsLines",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -132,7 +132,7 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
                     branchDataList.addAll(temp)
                 }
                 mapSetMarkers(branchDataList)
-                subTownModelSpiners.add(0 ,AreaSpinnerModel(-1 ,"Choose Your Area " , JsonArray()) )
+                subTownModelSpiners.add(0 ,AreaSpinnerModel(-1 ,this@Branches.resources.getString(R.string.choose_your_area) , JsonArray()) )
                 var areaSpinnerAdapter = AreaSpinnerAdapter(this@Branches, R.layout.area_name, R.id.areaName, subTownModelSpiners)
 
                 areaSpinner.adapter = areaSpinnerAdapter
@@ -146,13 +146,22 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
         })
 
 
+        if(Utils.isArabicBoolean(this))
+        {
+            branchesRec.layoutManager = LinearLayoutManager(this , LinearLayoutManager.HORIZONTAL , true)
 
-        branchesRec.layoutManager = LinearLayoutManager(this , LinearLayoutManager.HORIZONTAL , false)
+        }else
+        {
+            branchesRec.layoutManager = LinearLayoutManager(this , LinearLayoutManager.HORIZONTAL , false)
+
+        }
+
+
         branchesRec.adapter =  branchesAdapter
         branchesAdapter.notifyDataSetChanged()
 
         subTownModelSpiners = Gson().fromJson(branches.get(0).BranchesInCityList.toString(), object : TypeToken<ArrayList<AreaSpinnerModel>>() {}.type) as ArrayList<AreaSpinnerModel>
-        subTownModelSpiners.add(0 ,AreaSpinnerModel(-1 ,"Choose Your Area " , JsonArray()) )
+        subTownModelSpiners.add(0 ,AreaSpinnerModel(-1 ,this@Branches.resources.getString(R.string.choose_your_area) , JsonArray()) )
 
         var areaSpinnerAdapter = AreaSpinnerAdapter(this@Branches, R.layout.area_name, R.id.areaName, subTownModelSpiners)
 
@@ -198,6 +207,10 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
                     branchDataList.addAll(temp)
 
                 }
+
+
+                dialog.visibility = View.GONE
+
             }
 
 
@@ -281,7 +294,6 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
     fun direction (view: View)
     {
         var my_data = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr="+lat+","+lng+nam)
-
         var intent = Intent(Intent.ACTION_VIEW, Uri.parse(my_data))
         intent.setPackage("com.google.android.apps.maps")
         startActivity(intent)
@@ -291,7 +303,18 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
 
     fun backImg(view: View)
     {
-        dialog.visibility = View.GONE
+        if(dialog.visibility == View.VISIBLE)
+            dialog.visibility = View.GONE
+        else onBackPressed()
+
+    }
+
+
+    fun back(view: View)
+    {
+        if(dialog.visibility == View.VISIBLE)
+            dialog.visibility = View.GONE
+        else onBackPressed()
 
     }
 }

@@ -47,6 +47,57 @@
     <string name="editaddress">Edit Address</string>
     <string name="deleteaddress">Delete Address</string>
     <string name="min">Minutes</string>
+    <string name="choose_your_area">Choose Your Area </string>
+    <string name="contact_info">Contact information</string>
+    <string name="phone_num"><font>*</font>رقم التليفون</string>
+    <string name="second_phone_num"><font>*</font>رقم التليفون الثانى</string>
+    <string name="pass"><font>*</font>رمز المرور</string>
+    <string name="repass"><font>*</font>أعد رمز المرور</string>
 
+    <string name="notCorrectPhone">Phone Not Correct or Duplicate</string>
+
+    <string name="dataUpdate">Your Data Updated Successfully</string>
+
+
+    <string name="Please_select_city_first">Please Select City First</string>
+    <string name="Please_select_area_first">Please Select Area First</string>
+    <string name="addressAdded">Address Add Successfully</string>
+    <string name="cant_get_location">Can\'t Get Your Location Please Try Again</string>
+    <string name="login_cancel">Login Cancel , Please Try Again</string>
+    <string name="not_registered">This Account Not Registered</string>
+    <string name="facebooklogindone">Facebook Login Success , Please Complete Your Data</string>
+    <string name="facebookused">This Facebook account has been used before</string>
+    <string name="not_valid_birth">Not Valid BirthDay</string>
+    <string name="notLogged">Not Logged Please Login First</string>
+    <string name="itemnotedit">Item Can\'t Edited Successfully from your cart</string>
+    <string name="itemnottreroved">Item Removed Successfully from your cart</string>
+    <string name="itemnedited">Item Edited Successfully from your cart</string>
+    <string name="itemtocart">Item Added To Cart Successfully</string>
+    <string name="itemnottocart">This Item Failed To Add To Cart Please Tray Again Later</string>
+    <string name="phoneerror">Error in your phone call</string>
+    <string name="cityfirst">Please Select City First</string>
+    <string name="areafirst">Please Select Area First</string>
+    <string name="addressedited">Address Edited Successfully !!</string>
+    <string name="orderDone">Order Added Successfully , Thank You</string>
+    <string name="emptycart">Your Cart Is Empty Please Add Items In It</string>
+
+
+
+
+
+    <string name="selectsubare">Please Select SubArea</string>
+    <string name="enterStreet">Please Enter Street</string>
+    <string name="buildnum">Please Enter BuildingNumber</string>
+    <string name="floarNum">Please Enter FloorNumber</string>
+    <string name="ApartmentNumber">Please Enter ApartmentNumber</string>
+    <string name="PasswordError">Password Error</string>
+    <string name="phone11">Phone Must be 11 numbre</string>
+    <string name="title">Please Enter Title </string>
+    <string name="mailnotvalid">Not Valid Mail </string>
+    <string name="firstName">First Name Must be At Least 3 Letters</string>
+    <string name="SecondName">Second Name Must be At Least 3 Letters</string>
+    <string name="pass6">Passowrd Must be At Least 6 Letters</string>
+    <string name="passnotmatch">Password Not Match</string>
+    <string name="emailused">Email is already used before</string>
 
 </resources>

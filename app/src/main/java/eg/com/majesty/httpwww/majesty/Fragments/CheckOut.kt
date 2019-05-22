@@ -76,7 +76,7 @@ class CheckOut : Fragment()
         ID = foreraaParameter.getString("UserID")
         if(ID.equals(""))
             {
-                Toast.makeText(activity , "Please Login In and Try Again" , Toast.LENGTH_LONG).show()
+                Toast.makeText(activity ,activity.resources.getString(R.string.notLogged) , Toast.LENGTH_LONG).show()
 
             }else
                 loadData()
@@ -207,7 +207,7 @@ class CheckOut : Fragment()
 
         if(adapter.cartModels!!.size==0)
         {
-            Toast.makeText(activity , "Your Cart Is Empty Please Add Items In It" , Toast.LENGTH_LONG).show()
+            Toast.makeText(activity , this.resources.getString(R.string.emptycart) , Toast.LENGTH_LONG).show()
         }
         else
         {

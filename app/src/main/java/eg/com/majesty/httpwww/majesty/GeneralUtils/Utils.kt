@@ -15,6 +15,12 @@ import java.util.*
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
+import java.security.MessageDigest
+
+import android.util.Base64
+import android.R.attr.label
+import android.content.ClipData
+import android.text.ClipboardManager
 
 
 /**
@@ -351,6 +357,28 @@ object Utils {
             config.locale = Locale(language)
         }
         res.updateConfiguration(config, null)
+    }
+
+
+    fun getKeyHash(context: Context): String?
+    {
+        val info = context.packageManager.getPackageInfo("eg.com.majesty.httpwww.majesty", PackageManager.GET_SIGNATURES)
+        for (signature in info.signatures)
+        {
+            val md = MessageDigest.getInstance("SHA")
+            md.update(signature.toByteArray())
+            Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.text.ClipboardManager
+                clipboard.text =  Base64.encodeToString(md.digest(), Base64.DEFAULT)
+            } else {
+                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                val clip = ClipData.newPlainText("Copied Text",  Base64.encodeToString(md.digest(), Base64.DEFAULT))
+                clipboard.primaryClip = clip
+            }
+
+        }
+        return null
     }
 
 }

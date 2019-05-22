@@ -151,23 +151,23 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
 
 
         if(cityId == -1)
-            city.setError("Please Select City")
+            city.setError(this.resources.getString(R.string.cityfirst))
         else if(areaId == -1)
-            area.setError("Please Select Area")
+            area.setError(this.resources.getString(R.string.areafirst))
         else if(subAreaa == -1)
-            subArea.setError("Please Select SubArea")
+            subArea.setError(this.resources.getString(R.string.selectsubare))
         else if(StreettStr.equals(""))
         {
-            Street.setError("Please Enter Street")
+            Street.setError(this.resources.getString(R.string.enterStreet))
         }else if (buildingNumberStr.equals(""))
         {
-            buildingNumber.setError("Please Enter BuildingNumber")
+            buildingNumber.setError(this.resources.getString(R.string.buildnum))
         }else if (floorStr.equals(""))
         {
-            floor.setError("Please Enter FloorNumber")
+            floor.setError(this.resources.getString(R.string.floarNum))
         }else if (apartmentStr.equals(""))
         {
-            apartment.setError("Please Enter ApartmentNumber")
+            apartment.setError(this.resources.getString(R.string.ApartmentNumber))
         }else
         {
             saveAdd()
@@ -197,7 +197,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
 
         if(cityId == -1)
         {
-            Toast.makeText(applicationContext , "Please Select City First" , Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext , this.resources.getString(R.string.Please_select_city_first) , Toast.LENGTH_LONG).show()
         }
         else
         {
@@ -218,7 +218,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
 
         if(areaId == -1)
         {
-            Toast.makeText(applicationContext , "Please Select Area First" , Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext , this.resources.getString(R.string.Please_select_area_first) , Toast.LENGTH_LONG).show()
         }
         else
         {
@@ -364,7 +364,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
                 var jsonObject = Gson().fromJson(str, JsonObject::class.java)
                 if( jsonObject.get("NotificationsNumbers").asJsonArray.get(0).asJsonObject.get("Succeed").asBoolean)
                 {
-                    Toast.makeText(this@AddNewPlace , "Address Add Successfully !!" , Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddNewPlace , this@AddNewPlace.resources.getString(R.string.addressAdded) , Toast.LENGTH_LONG).show()
                     finish()
                 }
             }
@@ -501,7 +501,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
             {
                 if(locationResult == null)
                 {
-                    Toast.makeText(this@AddNewPlace , "Can't Get Your Location Please Try Again" , Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddNewPlace , this@AddNewPlace.resources.getString(R.string.cant_get_location) , Toast.LENGTH_LONG).show()
                     return
 
                 }

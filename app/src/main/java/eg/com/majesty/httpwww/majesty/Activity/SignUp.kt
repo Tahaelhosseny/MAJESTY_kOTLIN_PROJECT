@@ -107,49 +107,6 @@ class SignUp : FragmentActivity()
 
 
         TimePickerFragment().show(supportFragmentManager, "timePicker")
-
-
-
-
-
-/*        SpinnerDatePickerDialogBuilder()
-                .context(this)
-
-                .callback(object : DatePickerDialog.OnDateSetListener, com.tsongkha.spinnerdatepicker.DatePickerDialog.OnDateSetListener {
-                    override fun onDateSet(view: com.tsongkha.spinnerdatepicker.DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int)
-                    {
-
-                        val calendar = Calendar.getInstance()
-                        calendar.timeInMillis = System.currentTimeMillis()
-
-                        val mYear = calendar.get(Calendar.YEAR)
-                        val mMonth = calendar.get(Calendar.MONTH)
-                        val mDay = calendar.get(Calendar.DAY_OF_MONTH)
-
-
-                        if(mYear - year <10 )
-                        {
-                            Toast.makeText(this@SignUp , "Not Valid BirthDay" , Toast.LENGTH_LONG).show()
-                            birthdate.setText("")
-                        }else
-                        {
-                            birthdate.setText(year.toString() + "/" + (monthOfYear+1) + "/" + dayOfMonth)
-                        }
-                    }
-
-                    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int)
-                    {
-                    }
-                })
-                .spinnerTheme(R.style.NumberPickerStyle)
-                .showTitle(true)
-                .showDaySpinner(true)
-                .defaultDate(1993, 4, 12)
-                .maxDate(2050, 0, 1)
-                .minDate(1950, 0, 1)
-                .build()
-                .show()*/
-
     }
 
 
@@ -176,7 +133,7 @@ class SignUp : FragmentActivity()
             if (pOnet.length != 11)
             {
                 x++
-                pOne.setError("Phone Must be 11 numbre")
+                pOne.setError(this.resources.getString(R.string.phone11))
             }
             else
             {
@@ -187,7 +144,7 @@ class SignUp : FragmentActivity()
                 if (pSecondt.length != 11)
                 {
 
-                    pSecond.setError("Phone Must be 11 numbre")
+                    pSecond.setError(this.resources.getString(R.string.phone11))
                     map.set("phone2" , "")
                 } else
                 {
@@ -199,7 +156,7 @@ class SignUp : FragmentActivity()
             if (titleT.length<2)
             {
                 x++
-                titleee.setError("You Have To Enter Title ")
+                titleee.setError(this.resources.getString(R.string.title))
             }
             else
             {
@@ -212,7 +169,7 @@ class SignUp : FragmentActivity()
             if(!EMAIL_ADDRESS_PATTERN.matcher(emailt).matches())
             {
                 x++
-                email.setError("Not Valid Mail")
+                email.setError(this.resources.getString(R.string.mailnotvalid))
             }
             else
             {
@@ -222,7 +179,7 @@ class SignUp : FragmentActivity()
             if (fNamet.length<2)
             {
                 x++
-                fName.setError("First Name Must be At Least 3 Letters")
+                fName.setError(this.resources.getString(R.string.firstName))
             }
             else
             {
@@ -234,7 +191,7 @@ class SignUp : FragmentActivity()
             if (titleT.length<2)
             {
                 x++
-                titleee.setError("You Have To Enter Title ")
+                titleee.setError(this.resources.getString(R.string.title))
             }
             else
             {
@@ -248,7 +205,7 @@ class SignUp : FragmentActivity()
             if (sNamet.length<2)
             {
                 x++
-                sName.setError("Second Name Must be At Least 3 Letters")
+                titleee.setError(this.resources.getString(R.string.SecondName))
             }
             else
             {
@@ -260,7 +217,8 @@ class SignUp : FragmentActivity()
             if (pOnet.length != 11)
             {
                 x++
-                pOne.setError("Phone Must be 11 numbre")
+                pOne.setError(this.resources.getString(R.string.phone11))
+
             }
             else
             {
@@ -271,7 +229,7 @@ class SignUp : FragmentActivity()
                 {
 
 
-                    pSecond.setError("Phone Must be 11 numbre")
+                    pSecond.setError(this.resources.getString(R.string.phone11))
                     map.set("phone2" , "")
                 }
 
@@ -284,14 +242,14 @@ class SignUp : FragmentActivity()
             if (passwordt.length < 6)
             {
                 x++
-                Password.setError("Passowrd Must be At Least 6 Letters")
+                Password.setError(this.resources.getString(R.string.pass6))
             }
 
             if (!cPasswordt.toString().equals(passwordt.toString()))
             {
                 x++
-                Password.setError("Password Not Match")
-                cPassword.setError("Password Not Match")
+                Password.setError(this.resources.getString(R.string.passnotmatch))
+                cPassword.setError(this.resources.getString(R.string.passnotmatch))
             }else
             {
                 map.set("password" , cPasswordt.toString())
@@ -352,7 +310,7 @@ class SignUp : FragmentActivity()
                         ecPassword.visibility = View.GONE
 
                         social = true
-                        Toast.makeText(this@SignUp , "Facebook Login Success , Please Complete Your Data" ,Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@SignUp , this@SignUp.resources.getString(R.string.facebooklogindone) ,Toast.LENGTH_LONG).show()
                     }
                 })
                 graphRequest.setParameters(parameters)
@@ -425,19 +383,19 @@ class SignUp : FragmentActivity()
                         {
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("1"))
                         {
-                            email.setError("Email is already used before")
+                            email.setError(this@SignUp.resources.getString(R.string.emailused))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("2"))
                         {
-                            pOne.setError("Please enter a valid phone number")
+                            pOne.setError(this@SignUp.resources.getString(R.string.notCorrectPhone))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("3"))
                         {
-                            pOne.setError("Phone number is already used before")
+                            pOne.setError(this@SignUp.resources.getString(R.string.notCorrectPhone))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("4"))
                         {
-                            email.setError("Email is already used before")
+                            email.setError(this@SignUp.resources.getString(R.string.emailused))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("5"))
                         {
-                            email.setError("Please enter a valid email address")
+                            email.setError(this@SignUp.resources.getString(R.string.mailnotvalid))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("6"))
                         {
 
@@ -502,22 +460,21 @@ class SignUp : FragmentActivity()
                         {
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("1"))
                         {
-                            email.setError("Email is already used before")
+                            email.setError(this@SignUp.resources.getString(R.string.emailused))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("2"))
                         {
-                            pOne.setError("Please enter a valid phone number")
+                            pOne.setError(this@SignUp.resources.getString(R.string.notCorrectPhone))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("3"))
                         {
-                            pOne.setError("Phone number is already used before")
+                            pOne.setError(this@SignUp.resources.getString(R.string.notCorrectPhone))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("4"))
                         {
-                            email.setError("Email is already used before")
+                            email.setError(this@SignUp.resources.getString(R.string.emailused))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("5"))
                         {
-                            email.setError("Please enter a valid email address")
+                            email.setError(this@SignUp.resources.getString(R.string.mailnotvalid))
                         }else if(jsonO.asJsonObject.get("ErrorCode").asString.equals("6"))
                         {
-                            Toast.makeText(this@SignUp , "This Facebook account has been used before"  , Toast.LENGTH_LONG).show()
 
                         }
                     }
@@ -572,7 +529,7 @@ class SignUp : FragmentActivity()
 
             if(mYear - year <10 )
             {
-                Toast.makeText(activity , "Not Valid BirthDay" , Toast.LENGTH_LONG).show()
+                Toast.makeText(activity , this.resources.getString(R.string.not_valid_birth) , Toast.LENGTH_LONG).show()
                 activity!!.birthdate.setText("")
             }else
             {

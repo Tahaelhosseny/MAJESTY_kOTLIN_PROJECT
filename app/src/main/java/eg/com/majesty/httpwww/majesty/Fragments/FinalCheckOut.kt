@@ -180,7 +180,7 @@ class FinalCheckOut : Fragment()
                 var jsonObject = Gson().fromJson(str, JsonObject::class.java)
                 if(jsonObject.get("NewOrderStatus").asJsonObject.get("IsOrderAdded").asBoolean)
                 {
-                    Toast.makeText(activity ,"Order Added Successfully , Thank You" , Toast.LENGTH_LONG ).show()
+                    Toast.makeText(activity ,this@FinalCheckOut.resources.getString(R.string.orderDone), Toast.LENGTH_LONG ).show()
                     activity.headerText.setText(R.string.Orders)
                     activity.homeIm.setImageResource(R.drawable.icon_home)
                     activity.favoriteIm.setImageResource(R.drawable.favorite)

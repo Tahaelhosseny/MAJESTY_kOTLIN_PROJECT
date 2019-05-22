@@ -163,7 +163,7 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
 
                 if(jsonObject.get("Succeed").asBoolean)
                 {
-                    Toast.makeText(activity!!.applicationContext , "Item Removed Successfully from your cart" ,Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity!!.applicationContext , activity.resources.getString(R.string.itemnottreroved),Toast.LENGTH_LONG).show()
                     cartModels!!.removeAt(position)
                     notifyDataSetChanged()
 
@@ -204,11 +204,11 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
 
                 if(jsonObject.get("Succeed").asBoolean)
                 {
-                    Toast.makeText(activity!!.applicationContext , "Item Edited Successfully from your cart" ,Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity!!.applicationContext , activity.resources.getString(R.string.itemnedited) ,Toast.LENGTH_LONG).show()
                     notifyDataSetChanged()
                 }else
                 {
-                    Toast.makeText(activity!!.applicationContext , "Item Can't Edited Successfully from your cart" ,Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity!!.applicationContext , activity.resources.getString(R.string.itemnotedit),Toast.LENGTH_LONG).show()
                     if(isAdd)
                         cartModels!!.get(position).Quantity =cartModels!!.get(position).Quantity-1
                     else

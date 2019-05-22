@@ -29,10 +29,6 @@ import kotlinx.android.synthetic.main.activity_add_new_place.*
 class EditAddress : Activity(), SearchView.OnQueryTextListener
 {
 
-
-
-
-
     lateinit var adapter : CityAdapter
     lateinit var areaadapter : AreaAdapter
     lateinit var subareaadapter : SubAreaAdapter
@@ -140,23 +136,23 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
 
 
         if(cityId == -1)
-            city.setError("Please Select City")
+            city.setError(this.resources.getString(R.string.cityfirst))
         else if(areaId == -1)
-            area.setError("Please Select Area")
+            area.setError(this.resources.getString(R.string.areafirst))
         else if(subAreaa == -1)
-            subArea.setError("Please Select SubArea")
+            subArea.setError(this.resources.getString(R.string.selectsubare))
         else if(StreettStr.equals(""))
         {
-            Street.setError("Please Enter Street")
+            Street.setError(this.resources.getString(R.string.enterStreet))
         }else if (buildingNumberStr.equals(""))
         {
-            buildingNumber.setError("Please Enter BuildingNumber")
+            buildingNumber.setError(this.resources.getString(R.string.buildnum))
         }else if (floorStr.equals(""))
         {
-            floor.setError("Please Enter FloorNumber")
+            floor.setError(this.resources.getString(R.string.floarNum))
         }else if (apartmentStr.equals(""))
         {
-            apartment.setError("Please Enter ApartmentNumber")
+            apartment.setError(this.resources.getString(R.string.ApartmentNumber))
         }else
         {
             saveAdd()
@@ -186,7 +182,7 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
 
         if(cityId == -1)
         {
-            Toast.makeText(applicationContext , "Please Select City First" , Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext , this.resources.getString(R.string.cityfirst) , Toast.LENGTH_LONG).show()
         }
         else
         {
@@ -207,7 +203,7 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
 
         if(areaId == -1)
         {
-            Toast.makeText(applicationContext , "Please Select Area First" , Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext , this.resources.getString(R.string.areafirst) , Toast.LENGTH_LONG).show()
         }
         else
         {
@@ -355,7 +351,7 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
                 var jsonObject = Gson().fromJson(str, JsonObject::class.java)
                 if( jsonObject.get("NotificationsNumbers").asJsonArray.get(0).asJsonObject.get("Succeed").asBoolean)
                 {
-                    Toast.makeText(this@EditAddress , "Address Edited Successfully !!" , Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditAddress , this@EditAddress.resources.getString(R.string.addressedited) , Toast.LENGTH_LONG).show()
                     finish()
                 }
             }

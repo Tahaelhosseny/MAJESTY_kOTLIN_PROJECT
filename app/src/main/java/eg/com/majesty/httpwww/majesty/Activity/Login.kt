@@ -108,11 +108,11 @@ class Login : Activity()
 
             override fun onCancel()
             {
-                Toast.makeText(applicationContext , "Login Cancel , Please Try Again" , Toast.LENGTH_LONG)
+                Toast.makeText(applicationContext , this@Login.resources.getString(R.string.login_cancel) , Toast.LENGTH_LONG)
             }
             override fun onError(error: FacebookException?)
             {
-                Toast.makeText(applicationContext , "Failed To Login With Facebook , Please Try Again" , Toast.LENGTH_LONG)
+                Toast.makeText(applicationContext , this@Login.resources.getString(R.string.login_cancel) , Toast.LENGTH_LONG)
             }
         })
 
@@ -155,7 +155,7 @@ class Login : Activity()
                             startActivity(Intent(this@Login , MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                         }else
                         {
-                            Toast.makeText(this@Login , "This Account Not Register" , Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@Login , this@Login.resources.getString(R.string.not_registered) , Toast.LENGTH_LONG).show()
                         }
                     }
 
@@ -177,7 +177,7 @@ class Login : Activity()
     }
 
 
-    fun login(views: View)
+    fun loginnnn(views: View)
     {
         val userName = email.getText()
         val passwordd = password.getText()
@@ -216,9 +216,9 @@ class Login : Activity()
 
                                 }else
                                 {
-                                    email.setError("This Email Not Registered Yet")
-                                    password.setError("Password Error")
-                                    Toast.makeText(this@Login , "This Account Not Register" , Toast.LENGTH_LONG).show()
+                                    email.setError(this@Login.resources.getString(R.string.not_registered))
+                                    password.setError(this@Login.resources.getString(R.string.PasswordError))
+                                    Toast.makeText(this@Login , this@Login.resources.getString(R.string.not_registered) , Toast.LENGTH_LONG).show()
                                 }
 
                             }
@@ -247,4 +247,17 @@ class Login : Activity()
         callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -18,6 +18,7 @@ import eg.com.majesty.httpwww.majesty.Activity.TutorialPage
 import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils.getKeyHash
 import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
@@ -70,7 +71,7 @@ class Splash : Activity()
                     Log.d("tokennnnn", token)
                 })
 
-
+        getKeyHash(this)
 
         var foreraaParameter = ForeraaParameter(applicationContext)
         Handler().postDelayed(
