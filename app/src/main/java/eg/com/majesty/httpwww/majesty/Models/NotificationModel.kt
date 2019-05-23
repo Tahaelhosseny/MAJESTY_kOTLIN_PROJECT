@@ -5,4 +5,5 @@ class NotificationModel (
     var Title: String,
     var Notification: String,
     var InDate: String,
+    var IsRead: Boolean,
     var InDateTS : String)

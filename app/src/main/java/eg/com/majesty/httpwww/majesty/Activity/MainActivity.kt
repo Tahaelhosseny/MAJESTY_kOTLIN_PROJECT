@@ -442,6 +442,7 @@ class MainActivity : Activity()
                     var foreraaParameter = ForeraaParameter(this@MainActivity)
                     foreraaParameter.setString("UserID" , "")
                     cartTxt.setText("0")
+                    notiNum.setText("0")
                     userName.setText("User Name")
                     editProfile.visibility = View.INVISIBLE
                     logOutLayout.visibility = View.INVISIBLE

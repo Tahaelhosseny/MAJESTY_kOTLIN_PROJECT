@@ -29,12 +29,11 @@ import android.text.ClipboardManager
 object Utils {
 
     val TAG = "Utils"
-
     var IsDev: Boolean? = false
 
 
     var DevUrl = "https://demo.majesty.com.eg/ws/mjws.asmx/"
-    var ReleaseUrl = "https://demo.majesty.com.eg/ws/mjws.asmx/"
+    var ReleaseUrl = "https://majesty.com.eg/ws/mjws.asmx/"
 
 
     val kiwihatParentURL: String

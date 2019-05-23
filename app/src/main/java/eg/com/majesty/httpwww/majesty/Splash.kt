@@ -5,30 +5,33 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.reflect.TypeToken
 import com.jaeger.library.StatusBarUtil
 import eg.com.majesty.httpwww.majesty.Activity.TutorialPage
-//import eg.com.majesty.httpwww.majesty.Activity.MainActivity_
-//import eg.com.majesty.httpwww.majesty.Activity.TutorialPage_
-import eg.com.majesty.httpwww.majesty.Adapters.GetFoodMenus
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
-import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils.getKeyHash
-import eg.com.majesty.httpwww.majesty.Models.GetFoodMenusModel
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
 import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
 import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_favorite.*
-import org.json.JSONObject
 import java.util.*
-import kotlin.math.log
+import android.R.string
+import android.os.AsyncTask
+import com.android.volley.*
+import com.facebook.share.model.ShareMessengerMediaTemplateContent
+import io.fabric.sdk.android.services.settings.IconRequest.build
+import org.json.JSONObject
+import com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+import com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES
+import com.android.volley.toolbox.Volley
+import com.android.volley.Request.Method.POST
+import com.android.volley.toolbox.JsonObjectRequest
+import org.json.JSONException
+
+
+
+
 
 
 class Splash : Activity()
@@ -107,11 +110,11 @@ class Splash : Activity()
         if(!foreraaParameter.getString("UserID").equals(""))
         {
             token = FirebaseInstanceId.getInstance().getToken().toString()
-            Log.e("jjjj",token)
+            Log.e("jjjj",foreraaParameter.getString("UserID"))
 
         }
 
-        var makeRequest = MakeRequest("GetAppIntroData?isArabic=" + isArabic +"&token="+token, "0", this, "GetFoodMenuTypes", false)
+        var makeRequest = MakeRequest("GetAppIntroData?isArabic=" + isArabic +"&token="+token , "0", this, "GetFoodMenuTypes", false)
         makeRequest.request(object : VolleyCallback
         {
             override fun onSuccess(result: Map<String, String>)
@@ -132,4 +135,9 @@ class Splash : Activity()
 
 
     }
+
+
+
+
+
 }
