@@ -65,6 +65,10 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
     var notesStr = ""
     var REQUEST_ID_MULTIPLE_PERMISSIONS = 50
 
+    var latstr ="0"
+    var lonstr ="0"
+
+
     private lateinit var userLocationClient : FusedLocationProviderClient
     private lateinit var userLocationCallback : LocationCallback
     val userLocationRequest = LocationRequest().apply {
@@ -141,37 +145,60 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
     fun saveAddress(view: View)
     {
 
-        StreettStr = Street.text.toString()
-        buildingNumberStr = buildingNumber.text.toString()
-        floorStr = floor.text.toString()
-        apartmentStr = apartment.text.toString()
-        landmarkStr = landmark.text.toString()
-        notesStr = notes.text.toString()
 
+        if(latstr.equals("0"))
+        {
 
+            if (canGetLocation())
+            {
+                checkPermissions()
+            } else {
 
-        if(cityId == -1)
-            city.setError(this.resources.getString(R.string.cityfirst))
-        else if(areaId == -1)
-            area.setError(this.resources.getString(R.string.areafirst))
-        else if(subAreaa == -1)
-            subArea.setError(this.resources.getString(R.string.selectsubare))
-        else if(StreettStr.equals(""))
-        {
-            Street.setError(this.resources.getString(R.string.enterStreet))
-        }else if (buildingNumberStr.equals(""))
-        {
-            buildingNumber.setError(this.resources.getString(R.string.buildnum))
-        }else if (floorStr.equals(""))
-        {
-            floor.setError(this.resources.getString(R.string.floarNum))
-        }else if (apartmentStr.equals(""))
-        {
-            apartment.setError(this.resources.getString(R.string.ApartmentNumber))
+                showSettingsAlert()
+            }
+
         }else
         {
-            saveAdd()
+            StreettStr = Street.text.toString()
+            buildingNumberStr = buildingNumber.text.toString()
+            floorStr = floor.text.toString()
+            apartmentStr = apartment.text.toString()
+            landmarkStr = landmark.text.toString()
+            notesStr = notes.text.toString()
+
+
+
+            if(cityId == -1)
+                city.setError(this.resources.getString(R.string.cityfirst))
+            else if(areaId == -1)
+                area.setError(this.resources.getString(R.string.areafirst))
+            else if(subAreaa == -1)
+                subArea.setError(this.resources.getString(R.string.selectsubare))
+            else if(StreettStr.equals(""))
+            {
+                Street.setError(this.resources.getString(R.string.enterStreet))
+            }else if (buildingNumberStr.equals(""))
+            {
+                buildingNumber.setError(this.resources.getString(R.string.buildnum))
+            }else if (floorStr.equals(""))
+            {
+                floor.setError(this.resources.getString(R.string.floarNum))
+            }else if (apartmentStr.equals(""))
+            {
+                apartment.setError(this.resources.getString(R.string.ApartmentNumber))
+            }else
+            {
+                saveAdd()
+            }
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -345,7 +372,8 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
 
     fun saveAdd()
     {
-        var makeRequest = MakeRequest("AddUserAddress?isArabic="+Utils.isArabic(this)+"subAreaId=" + subAreaa
+        var makeRequest = MakeRequest("AddUserAddress?isArabic="+Utils.isArabic(this)
+                +"&subAreaId=" + subAreaa
                 + "&userId=" +ID
                 + "&street=" + StreettStr
                 + "&buildingNumber=" + buildingNumberStr
@@ -353,7 +381,9 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
                 + "&apartmentNumber=" + apartmentStr
                 + "&landmark=" + landmarkStr
                 + "&notes=" + notesStr
-                +"&addressType=" + addressType,"0",this,"AddUserAddress",true)
+                + "&lat="+latstr
+                + "&long="+lonstr
+                + "&addressType=" + addressType,"0",this,"AddUserAddress",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -388,22 +418,16 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
     {
 
 
-
-
-
         if (canGetLocation())
         {
-
             checkPermissions()
         } else {
 
             showSettingsAlert()
-
         }
 
 
     }
-
 
 
     fun onLocationChangeeeed(location: Location)
@@ -412,6 +436,8 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
             var latitude = location.getLatitude()
             var longitude = location.getLongitude()
 
+            latstr = latitude.toString()
+            lonstr = latitude.toString()
 
             try {
                 var addresses = geocoder.getFromLocation(latitude, longitude, 1)
@@ -449,14 +475,14 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
         val alertDialog = AlertDialog.Builder(this)
 
         // Setting Dialog Title
-        alertDialog.setTitle("Error!")
+        alertDialog.setTitle(this.resources.getString(R.string.openGps))
 
         // Setting Dialog Message
-        alertDialog.setMessage("Please ")
+        alertDialog.setMessage(this.resources.getString(R.string.openGps2))
 
         // On pressing Settings button
         alertDialog.setPositiveButton(
-                "Okay",
+                this.resources.getString(R.string.okay),
                 DialogInterface.OnClickListener { dialog, which ->
                     val intent = Intent(
                             Settings.ACTION_LOCATION_SOURCE_SETTINGS)

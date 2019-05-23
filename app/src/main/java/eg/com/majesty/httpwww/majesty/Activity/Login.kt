@@ -11,6 +11,7 @@ import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.firebase.iid.FirebaseInstanceId
 import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
@@ -32,12 +33,7 @@ class Login : Activity()
     var social = false
     var fbId = ""
 
-
-
-
-
-
-
+    var token = FirebaseInstanceId.getInstance().getToken().toString()
 
 
 
@@ -86,6 +82,10 @@ class Login : Activity()
 
 
 
+    fun forget(views: View)
+    {
+        startActivity(Intent(this , ForgetPassword::class.java))
+    }
 
 
     fun facebookLogin(views: View)
@@ -124,7 +124,7 @@ class Login : Activity()
     fun fbLogin()
     {
         var map = HashMap<String , String>()
-        var makeRequest = MakeRequest("UserLoginWithFacebook?isLoginThroughMobileApp=true&isArabic=false&facebookUserId=" + fbId,"0", map , this,"UserLoginWithFacebook",true)
+        var makeRequest = MakeRequest("UserLoginWithFacebook?isLoginThroughMobileApp=true&isArabic=false&facebookUserId=" + fbId +"&token="+token,"0", map , this,"UserLoginWithFacebook",true)
 
         var foreraaParameter = ForeraaParameter(applicationContext)
                 makeRequest.request(object  : VolleyCallback
@@ -186,7 +186,7 @@ class Login : Activity()
 
         var map = HashMap<String , String>()
 
-                var makeRequest = MakeRequest("UserLogin?isLoginThroughMobileApp=true&isArabic=false&username=" +userName +"&password="+passwordd,"0", map , this,"UserLogin",true)
+                var makeRequest = MakeRequest("UserLogin?isLoginThroughMobileApp=true&isArabic=false&username=" +userName +"&password="+passwordd +"&token="+token,"0", map , this,"UserLogin",true)
 
                         makeRequest.request(object  : VolleyCallback
                         {

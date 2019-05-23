@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
@@ -27,12 +28,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import org.json.JSONObject
 import java.util.*
+import kotlin.math.log
 
 
 class Splash : Activity()
 {
 
     var isArabic = false
+    var token = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -71,7 +74,7 @@ class Splash : Activity()
                     Log.d("tokennnnn", token)
                 })
 
-        getKeyHash(this)
+       // getKeyHash(this)
 
         var foreraaParameter = ForeraaParameter(applicationContext)
         Handler().postDelayed(
@@ -93,14 +96,22 @@ class Splash : Activity()
 
     fun getTutorial ()
     {
+        FirebaseMessaging.getInstance().subscribeToTopic("all")
 
         if(ForeraaParameter(this).getInt("language" ,0) == 0)
             isArabic = true
         else
             isArabic = false
+        var foreraaParameter = ForeraaParameter(this)
 
+        if(!foreraaParameter.getString("UserID").equals(""))
+        {
+            token = FirebaseInstanceId.getInstance().getToken().toString()
+            Log.e("jjjj",token)
 
-        var makeRequest = MakeRequest("GetAppIntroData?isArabic=" + isArabic , "0", this, "GetFoodMenuTypes", false)
+        }
+
+        var makeRequest = MakeRequest("GetAppIntroData?isArabic=" + isArabic +"&token="+token, "0", this, "GetFoodMenuTypes", false)
         makeRequest.request(object : VolleyCallback
         {
             override fun onSuccess(result: Map<String, String>)

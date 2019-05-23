@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:rotationY="180"
+    android:layout_height="match_parent">
+
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/backNow"
+        android:padding="13dp"
+        android:src="@drawable/icon_back_copy"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/backNow"
+        android:layout_marginTop="20dp"
+        android:rotationY="180"
+        android:id="@+id/catNamee"
+        android:text="أشعارات المستخدم"
+        android:textColor="@color/black"
+        android:fontFamily="@font/exosemibold"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:layout_height="50dp" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginTop="70dp"
+        android:id="@+id/notificationrecycle"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+
+
+</RelativeLayout>

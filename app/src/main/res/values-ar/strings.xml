@@ -76,11 +76,20 @@
     <string name="phone11">يجب ان يكون رقم التليفون 11 رقم</string>
     <string name="title">من فضلك ادخل اللقب</string>
     <string name="mailnotvalid">بريد الكترونى غير صحيح</string>
-    <string name="firstName">لا يجب ان يقل الاسم الاول عن 3 حروف</string>
-    <string name="SecondName">لا يجب ان يقل الاسم الثانى عن 3 حروفs</string>
+    <string name="firstName">لا يجب ان يقل الاسم الاول عن 2 حروف</string>
+    <string name="SecondName">لا يجب ان يقل الاسم الثانى عن 2 حروفs</string>
     <string name="pass6">يجب ان يكون رمز المرور على الاقل 6 حروف</string>
     <string name="passnotmatch">رمز المرور غير متطابق</string>
     <string name="emailused">البريد الألكتعرونى مستخدم من قبل</string>
+
+    <string name="openGps">لا نستطيع الوصول الى بيانات الموقع </string>
+    <string name="openGps2">من فضلك قم بفتح بيانات الموقع</string>
+    <string name="okay">موافق</string>
+    <string name="sendok">تم الأرسال بنجاح</string>
+    <string name="sendnotok">فشل الارسال حاول ف وقت لاحق</string>
+
+    <string name="vercodeerror">كود التحقق قصير جدا</string>
+
 
 
 

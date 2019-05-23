@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken
 import java.util.HashMap
 
 import dmax.dialog.SpotsDialog
+import eg.com.majesty.httpwww.majesty.Dialogs.LoadingDialog
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.R
 
@@ -75,21 +76,19 @@ class MakeRequest {
         if (!Utils.isOnline(context)) {
             onRetryHandler.onRetryHandler(funName)
         } else {
-            val progressDialog = SpotsDialog(context, R.style.Custom1)
-            // progressDialog.setMessage("جارى التحميل ...");
-            progressDialog.setCancelable(false)
+           var loadingDialog =  LoadingDialog(context)
             if (flag!!)
-                progressDialog.show()
+                loadingDialog.show()
             val stringRequest = object : StringRequest(Integer.valueOf(Type), cUrl, Response.Listener
             { response ->
                 Responce["status"] = "ok"
                 Responce["res"] = response
-                progressDialog.dismiss()
+                loadingDialog.dismiss()
                 callback.onSuccess(Responce)
             }, Response.ErrorListener { error ->
                 Responce["status"] = "not"
                 Responce["res"] = error.toString()
-                progressDialog.dismiss()
+                loadingDialog.dismiss()
                 callback.onSuccess(Responce)
             }){}
 

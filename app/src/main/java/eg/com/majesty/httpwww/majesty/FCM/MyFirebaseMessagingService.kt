@@ -15,12 +15,13 @@ import eg.com.majesty.httpwww.majesty.R
 
 class MyFirebaseMessagingService : FirebaseMessagingService()
 {
+
+
     val TAG = "FirebaseMessagingService"
-
     @SuppressLint("LongLogTag")
-    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+    override fun onMessageReceived(remoteMessage: RemoteMessage)
+    {
         Log.d(TAG, "Dikirim dari: ${remoteMessage.from}")
-
         if (remoteMessage.notification != null) {
             showNotification(remoteMessage.notification?.title, remoteMessage.notification?.body)
         }
@@ -30,16 +31,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService()
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.app_icon)
+                .setSmallIcon(R.drawable.com_facebook_button_icon)
                 .setContentTitle(title)
-                .setContentText(body)
+                .setContentText("فشاش"+body)
                 .setAutoCancel(true)
                 .setSound(soundUri)
                 .setContentIntent(pendingIntent)
-
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(0, notificationBuilder.build())
     }

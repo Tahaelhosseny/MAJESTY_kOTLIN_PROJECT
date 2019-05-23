@@ -94,6 +94,15 @@
             android:fontFamily="@font/exoregular"
             android:gravity="center"
             android:layout_height="30dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="#202020"
+                android:fontFamily="@font/exoregular"
+                android:text="Feedback"
+                android:onClick="Feedback"
+                android:id="@+id/Feedback"
+                android:layout_height="30dp" />
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
@@ -101,6 +110,7 @@
             android:fontFamily="@font/exoregular"
             android:text="Settings"
             android:layout_height="30dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
@@ -111,15 +121,15 @@
             android:id="@+id/LogIn"
             android:layout_height="30dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:textColor="#202020"
-                android:fontFamily="@font/exoregular"
-                android:text="عربى"
-                android:onClick="arabic"
-                android:id="@+id/arabic"
-                android:layout_height="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textColor="#202020"
+            android:fontFamily="@font/exoregular"
+            android:text="عربى"
+            android:onClick="arabic"
+            android:id="@+id/arabic"
+            android:layout_height="30dp" />
 
     </LinearLayout>
         <LinearLayout

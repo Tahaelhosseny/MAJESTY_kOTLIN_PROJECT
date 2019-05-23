@@ -36,6 +36,7 @@ import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.firebase.iid.FirebaseInstanceId
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 
 import org.json.JSONObject
@@ -48,6 +49,7 @@ class SignUp : FragmentActivity()
     lateinit var callbackManager : CallbackManager
     var social = false
     var fbId = ""
+    var token = FirebaseInstanceId.getInstance().getToken().toString()
 
     val EMAIL_ADDRESS_PATTERN = Pattern.compile(
              "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -340,7 +342,7 @@ class SignUp : FragmentActivity()
 
         var foreraaParameter = ForeraaParameter(applicationContext)
         var makeRequest = MakeRequest("AddUser?isArabic=false&isMobileAppRegisteration=true&title="+ titleee.text.toString()+"&firstname=" + map.get("firstname")+"&secondname="+map.get("secondname")+"&phone1=" +map.get("phone1") +"&phone2=" +map.get("phone2")+"&birthdate="+map.get("birthdate")+"&email="+map.get("email")
-                +"&username="+map.get("email")+"&password="+map.get("password"),"0", map , this,"GetFoodMenuTypes",true)
+                +"&token="+token +"&username="+map.get("email")+"&password="+map.get("password"),"0", map , this,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {
@@ -420,7 +422,7 @@ class SignUp : FragmentActivity()
 
         var foreraaParameter = ForeraaParameter(applicationContext)
         var makeRequest = MakeRequest("AddUserWithFacebook?isArabic=false&isMobileAppRegisteration=true&&title="+""+"&facebookUserId="+fbId+"&firstname=" + fName.text+"&secondname="+sName.getText()+"&phone1=" +pOne.text +"&phone2=" +pSecond.getText()+"&birthdate="+birthdate.getText()+"&email="+email.getText()
-                +"&username="+email.getText()+"&password="+"","0", map , this,"GetFoodMenuTypes",true)
+                +"&token="+token +"&username="+email.getText()+"&password="+"","0", map , this,"GetFoodMenuTypes",true)
 
         makeRequest.request(object  : VolleyCallback
         {

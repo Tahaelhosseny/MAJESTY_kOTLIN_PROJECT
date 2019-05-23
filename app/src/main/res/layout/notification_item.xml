@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+
+
+        <ImageView
+            android:layout_width="11dp"
+            android:layout_gravity="center"
+            android:src="@drawable/clock_with_white_face"
+            android:layout_height="11dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="2 hours ago"
+            android:textSize="10dp"
+            android:id="@+id/elapsedTime"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="10dp"
+        app:cardCornerRadius="10dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/linNotificationContent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:id="@+id/dash"
+                    android:padding="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="4dp"
+                    android:src="@color/black" />
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtNotificationTitle"
+                    android:textSize="18dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:textColor="@android:color/black"
+                    />
+
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/txtNotificationContent"
+                android:textSize="16dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@android:color/black"
+                android:paddingLeft="10dp"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
+
+

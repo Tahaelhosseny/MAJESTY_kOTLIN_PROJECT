@@ -21,10 +21,13 @@ import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import android.view.View
 import android.view.WindowManager
+import com.google.firebase.iid.FirebaseInstanceId
 import eg.com.majesty.httpwww.majesty.Splash
+import eg.com.majesty.httpwww.majesty.netHelper.MakeRequest
+import eg.com.majesty.httpwww.majesty.netHelper.ONRetryHandler
+import eg.com.majesty.httpwww.majesty.netHelper.VolleyCallback
 import kotlinx.android.synthetic.main.drawer_menu.*
-
-
+import org.json.JSONArray
 
 
 var isHistory = false
@@ -36,6 +39,10 @@ class MainActivity : Activity()
 
    var activeCenterFragments: MutableList<Fragment> = ArrayList<Fragment>()
     var savedInstanceStateA :Bundle? = null
+
+    var token = FirebaseInstanceId.getInstance().getToken().toString()
+
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -422,13 +429,38 @@ class MainActivity : Activity()
 
     fun logOutLayout(view: View)
     {
-        var foreraaParameter = ForeraaParameter(this@MainActivity)
-        foreraaParameter.setString("UserID" , "")
-        cartTxt.setText("0")
-        userName.setText("User Name")
-        editProfile.visibility = View.INVISIBLE
-        logOutLayout.visibility = View.INVISIBLE
-        LogIn.visibility = View.VISIBLE
+
+        var makeRequest = MakeRequest("LogOutUser?"+"token="+token+"&userId=" +ForeraaParameter(this).getString("UserID"), "0", this, "LogOutUser", true)
+        makeRequest.request(object : VolleyCallback
+        {
+            override fun onSuccess(result: Map<String, String>)
+            {
+                var jsonobject = JSONArray(result.get("res").toString()).getJSONObject(0)
+                if(jsonobject.getBoolean("Succeed"))
+                {
+                    closeLay()
+                    var foreraaParameter = ForeraaParameter(this@MainActivity)
+                    foreraaParameter.setString("UserID" , "")
+                    cartTxt.setText("0")
+                    userName.setText("User Name")
+                    editProfile.visibility = View.INVISIBLE
+                    logOutLayout.visibility = View.INVISIBLE
+                    LogIn.visibility = View.VISIBLE
+                }
+            }
+        }, object : ONRetryHandler {
+            override fun onRetryHandler(funName: String) {
+
+            }
+        })
+
+
+
+
+
+
+
+
 
 
 
@@ -462,6 +494,40 @@ class MainActivity : Activity()
             drawerLayout.openDrawer(drawer)
         }
     }
+
+
+
+    fun noti(view: View)
+    {
+        closeLay()
+
+        val notificationFragment = NotificationFragment()
+        activeCenterFragments.add(notificationFragment)
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frameContainer, notificationFragment)
+        fragmentTransaction.addToBackStack("notificationFragment")
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        fragmentTransaction.commit()
+    }
+
+
+
+
+
+
+    fun Feedback(view: View)
+    {
+        closeLay()
+
+        val feedBack = FeedBack()
+        activeCenterFragments.add(feedBack)
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frameContainer, feedBack)
+        fragmentTransaction.addToBackStack("feedBack")
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        fragmentTransaction.commit()
+    }
+
 
 
     fun arabic(view: View)

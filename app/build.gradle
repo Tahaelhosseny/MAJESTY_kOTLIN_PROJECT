@@ -43,8 +43,8 @@ android {
         applicationId "eg.com.majesty.httpwww.majesty"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 101
-        versionName "1.0.1"
+        versionCode 102
+        versionName "1.0.2"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -59,7 +59,6 @@ android {
                     abortOnError false
                 }
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
 
 
             }
@@ -87,7 +86,7 @@ android {
                 storePassword 'tahaAmira'
 
             }
-            
+
         }
 
     }
@@ -146,5 +145,3 @@ dependencies {
     implementation 'com.durranilab:LabProgress:1.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'
 }
-
-
