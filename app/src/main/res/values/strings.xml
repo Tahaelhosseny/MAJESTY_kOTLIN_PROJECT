@@ -102,6 +102,8 @@
     <string name="sendok">Your Feed Back Send Successfully</string>
     <string name="sendnotok">Failed TO Send , Try Again Later</string>
     <string name="vercodeerror">Verification code is very short</string>
-
+    <string name="reload">Retry</string>
+    <string name="tet1">Unable To Connect</string>
+    <string name="tet2">Please Check Your Internet Connection</string>
 
 </resources>

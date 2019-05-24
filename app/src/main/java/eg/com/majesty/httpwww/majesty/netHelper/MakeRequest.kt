@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken
 import java.util.HashMap
 
 import dmax.dialog.SpotsDialog
+import eg.com.majesty.httpwww.majesty.Dialogs.ConnectionLost
 import eg.com.majesty.httpwww.majesty.Dialogs.LoadingDialog
 import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.R
@@ -73,8 +74,9 @@ class MakeRequest {
     {
 
 
-        if (!Utils.isOnline(context)) {
-            onRetryHandler.onRetryHandler(funName)
+        if (!Utils.isOnline(context))
+        {
+            ConnectionLost(context , onRetryHandler).show()
         } else {
            var loadingDialog =  LoadingDialog(context)
             if (flag!!)
