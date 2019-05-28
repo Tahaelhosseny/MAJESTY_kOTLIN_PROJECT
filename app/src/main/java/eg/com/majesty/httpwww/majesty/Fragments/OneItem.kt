@@ -195,7 +195,7 @@ class OneItem : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                loadData()
             }
         })
 
@@ -401,6 +401,7 @@ class OneItem : Fragment()
             {
                 override fun onRetryHandler(funName: String)
                 {
+                    addToCartt()
                 }
             })
         }
@@ -466,7 +467,7 @@ class OneItem : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                additemtoFavourites()
             }
         })
 
@@ -502,7 +503,7 @@ class OneItem : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                removeItemfromFavourites()
             }
         })
 
@@ -544,7 +545,7 @@ class OneItem : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                rateItem()
             }
         })
     }

@@ -115,7 +115,7 @@ class EditUserData : FragmentActivity()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getUserData()
             }
         })
     }
@@ -163,7 +163,7 @@ class EditUserData : FragmentActivity()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                editProfile(view)
             }
         })
     }

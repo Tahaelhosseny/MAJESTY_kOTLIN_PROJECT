@@ -82,33 +82,28 @@
                         android:layout_width="15dp"
                         android:src="@drawable/star1"
                         android:id="@+id/img1"
-                        android:onClick="img1"
                         android:layout_height="15dp" />
 
                     <ImageView
                         android:layout_width="15dp"
                         android:id="@+id/img2"
-                        android:onClick="img2"
                         android:src="@drawable/star"
                         android:layout_height="15dp" />
 
                     <ImageView
                         android:layout_width="15dp"
-                        android:onClick="img3"
                         android:src="@drawable/star"
                         android:id="@+id/img3"
                         android:layout_height="15dp" />
 
                     <ImageView
                         android:layout_width="15dp"
-                        android:onClick="img4"
                         android:id="@+id/img4"
                         android:src="@drawable/star"
                         android:layout_height="15dp" />
 
                     <ImageView
                         android:layout_width="15dp"
-                        android:onClick="img5"
                         android:id="@+id/img5"
                         android:src="@drawable/star"
                         android:layout_height="15dp" />
@@ -358,7 +353,6 @@
                 android:layout_marginLeft="20dp"
                 app:cardCornerRadius="25dp"
                 android:id="@+id/comentLay"
-                android:onClick="comentLay"
                 android:visibility="gone"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="50dp"

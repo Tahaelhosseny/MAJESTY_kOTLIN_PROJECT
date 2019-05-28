@@ -291,7 +291,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getCites()
             }
         })
     }
@@ -327,7 +327,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getArea()
             }
         })
     }
@@ -364,7 +364,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getSubAreas()
             }
         })
     }
@@ -402,7 +402,7 @@ class AddNewPlace : Activity(), SearchView.OnQueryTextListener
         {
             override fun onRetryHandler(funName: String)
             {
-
+                saveAdd()
             }
         })
     }

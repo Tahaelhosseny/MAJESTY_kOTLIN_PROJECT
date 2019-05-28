@@ -410,7 +410,7 @@ class SignUp : FragmentActivity()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                confirmSign(map)
             }
         })
 
@@ -486,7 +486,7 @@ class SignUp : FragmentActivity()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                confirmFbSign(map)
             }
         })
     }

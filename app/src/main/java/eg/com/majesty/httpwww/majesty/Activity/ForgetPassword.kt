@@ -101,7 +101,7 @@ class ForgetPassword : AppCompatActivity() {
         {
             override fun onRetryHandler(funName: String)
             {
-
+                sendmail()
             }
         })
     }
@@ -134,7 +134,7 @@ class ForgetPassword : AppCompatActivity() {
         {
             override fun onRetryHandler(funName: String)
             {
-
+                sendVerificationCode()
             }
         })
     }

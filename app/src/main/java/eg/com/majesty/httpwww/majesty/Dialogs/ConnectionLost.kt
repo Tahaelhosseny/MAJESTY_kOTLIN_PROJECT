@@ -13,6 +13,8 @@ import android.content.DialogInterface
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityCompat.finishAffinity
 import android.view.KeyEvent
+import eg.com.majesty.httpwww.majesty.GeneralUtils.ForeraaParameter
+import eg.com.majesty.httpwww.majesty.GeneralUtils.Utils
 import eg.com.majesty.httpwww.majesty.R
 
 
@@ -24,6 +26,9 @@ class ConnectionLost(var c: Context ,var onRetryHandler: ONRetryHandler) : Dialo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Utils.changeLocale(c, c.resources.getStringArray(R.array.languages_tag)[ForeraaParameter(c).getInt( "language" ,0)])
+
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.conection_lost)
         d.getWindow().setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -43,9 +48,7 @@ class ConnectionLost(var c: Context ,var onRetryHandler: ONRetryHandler) : Dialo
             {
                 if (keyCode == KeyEvent.KEYCODE_BACK)
                 {
-                    d.dismiss()
                     System.exit(0)
-
                 }
                 return true
 
@@ -53,7 +56,6 @@ class ConnectionLost(var c: Context ,var onRetryHandler: ONRetryHandler) : Dialo
         })
 
         retry.setOnClickListener({
-            Toast.makeText(c , "retry" , Toast.LENGTH_LONG).show()
             onRetryHandler.onRetryHandler("hi")
             d.cancel()
         })

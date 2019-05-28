@@ -98,6 +98,7 @@ class FinalCheckOut : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
+                loadData()
             }
         })
 
@@ -216,7 +217,7 @@ class FinalCheckOut : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                footer()
             }
         })
     }

@@ -68,6 +68,15 @@ class OneOrderDetails : Fragment()
                     backkk()
                 })
         getData()
+
+
+        img1.setOnClickListener({img1()})
+        img2.setOnClickListener({img2()})
+        img3.setOnClickListener({img3()})
+        img4.setOnClickListener({img4()})
+        img5.setOnClickListener({img5()})
+        comentLay.setOnClickListener({comentLay()})
+
     }
 
 
@@ -158,7 +167,7 @@ class OneOrderDetails : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getData()
             }
         })
 
@@ -288,7 +297,7 @@ class OneOrderDetails : Fragment()
     
 
 
-    fun comentLay(view: View)
+    fun comentLay()
     {
         var makeRequest = MakeRequest("AddCommentToDeliveredOrder?orderId=" + orderId+"&comment=" + note.text.toString(),"0",activity,"AddCommentToDeliveredOrder",true)
 
@@ -311,7 +320,7 @@ class OneOrderDetails : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                comentLay()
             }
         })
 
@@ -320,31 +329,31 @@ class OneOrderDetails : Fragment()
 
 
 
-    fun img1(view: View)
+    fun img1()
     {
         setRating(1)
     }
 
 
-    fun img2(view: View)
+    fun img2()
     {
         setRating(2)
     }
 
 
-    fun img3(view: View)
+    fun img3()
     {
         setRating(3)
     }
 
 
-    fun img4(view: View)
+    fun img4()
     {
         setRating(4)
     }
 
 
-    fun img5(view: View)
+    fun img5()
     {
         setRating(5)
     }
@@ -376,7 +385,7 @@ class OneOrderDetails : Fragment()
             {
                 override fun onRetryHandler(funName: String)
                 {
-
+                    setRating(ratee)
                 }
             })
 

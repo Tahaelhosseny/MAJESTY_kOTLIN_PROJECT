@@ -156,7 +156,7 @@ class FavoriteAdapter (val activity : Activity, val categoryItems: MutableList<G
         {
             override fun onRetryHandler(funName: String)
             {
-
+                additemtoFavourites(holder , position)
             }
         })
 
@@ -191,7 +191,7 @@ class FavoriteAdapter (val activity : Activity, val categoryItems: MutableList<G
         {
             override fun onRetryHandler(funName: String)
             {
-
+                removeItemfromFavourites(holder, position)
             }
         })
 

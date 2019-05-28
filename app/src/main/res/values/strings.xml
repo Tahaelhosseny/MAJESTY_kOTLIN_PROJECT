@@ -105,5 +105,9 @@
     <string name="reload">Retry</string>
     <string name="tet1">Unable To Connect</string>
     <string name="tet2">Please Check Your Internet Connection</string>
+    <string name="fresh_offers">Fresh Offers</string>
+    <string name="popular_food">Popular Food</string>
+    <string name="username">User Name</string>
+
 
 </resources>

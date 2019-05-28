@@ -63,6 +63,30 @@ class Menu : Fragment()
         activity.favoriteIm.setImageResource(R.drawable.favorite)
         activity.ordersIm.setImageResource(R.drawable.ordera)
         activity.menuIm.setImageResource(R.drawable.menu1)
+
+        loadData()
+
+
+
+
+
+    }
+
+
+
+    override fun onDestroy()
+    {
+        super.onDestroy()
+        activity.back.visibility = View.GONE
+        activity.menu.visibility = View.VISIBLE
+
+    }
+
+
+
+
+    fun loadData()
+    {
         var foreraaParameter = ForeraaParameter(activity)
 
         try
@@ -101,29 +125,19 @@ class Menu : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                loadData()
             }
         })
 
 
 
-
-
-
-
-
-
     }
 
 
 
-    override fun onDestroy()
-    {
-        super.onDestroy()
-        activity.back.visibility = View.GONE
-        activity.menu.visibility = View.VISIBLE
 
-    }
+
+
 
 }
 

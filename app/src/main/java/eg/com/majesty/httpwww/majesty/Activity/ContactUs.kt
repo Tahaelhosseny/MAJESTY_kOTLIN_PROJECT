@@ -164,6 +164,7 @@ class ContactUs : Activity()
         {
             override fun onRetryHandler(funName: String)
             {
+                GetFollowAboutInfo()
             }
         })
 

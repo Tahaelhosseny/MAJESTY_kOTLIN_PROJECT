@@ -76,7 +76,7 @@ class NotificationAdapter (var activity: Activity, var notificationList : Mutabl
             }
         }, object : ONRetryHandler {
             override fun onRetryHandler(funName: String) {
-
+                setUsRead( position)
             }
         })
     }

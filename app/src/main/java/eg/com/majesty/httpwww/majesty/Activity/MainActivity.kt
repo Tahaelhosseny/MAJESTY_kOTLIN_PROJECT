@@ -443,7 +443,7 @@ class MainActivity : Activity()
                     foreraaParameter.setString("UserID" , "")
                     cartTxt.setText("0")
                     notiNum.setText("0")
-                    userName.setText("User Name")
+                    userName.setText(this@MainActivity.resources.getString(R.string.username))
                     editProfile.visibility = View.INVISIBLE
                     logOutLayout.visibility = View.INVISIBLE
                     LogIn.visibility = View.VISIBLE
@@ -451,7 +451,7 @@ class MainActivity : Activity()
             }
         }, object : ONRetryHandler {
             override fun onRetryHandler(funName: String) {
-
+                logOutLayout(view)
             }
         })
 

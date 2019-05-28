@@ -127,8 +127,9 @@ class Splash : Activity()
                 finish()
             }
         }, object : ONRetryHandler {
-            override fun onRetryHandler(funName: String) {
-
+            override fun onRetryHandler(funName: String)
+            {
+                getTutorial()
             }
         })
 

@@ -174,7 +174,7 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
         {
             override fun onRetryHandler(funName: String)
             {
-
+                loadData(foodMenuID , position)
             }
         })
 
@@ -225,7 +225,7 @@ class CartAdapter (val activity: Activity?=null, val cartModels: MutableList<Car
         {
             override fun onRetryHandler(funName: String)
             {
-
+                editCartItemQua(foodMenuID  , position ,qun  , isAdd )
             }
         })
 

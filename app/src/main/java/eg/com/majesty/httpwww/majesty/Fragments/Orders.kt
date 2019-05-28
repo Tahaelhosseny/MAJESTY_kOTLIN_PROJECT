@@ -171,7 +171,7 @@ class Orders : Fragment() {
         {
             override fun onRetryHandler(funName: String)
             {
-
+                GetAllUserOrders()
             }
         })
 

@@ -125,6 +125,7 @@ class CheckOut : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
+                loadData()
             }
         })
     }

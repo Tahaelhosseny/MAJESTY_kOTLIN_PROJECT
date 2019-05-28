@@ -163,7 +163,7 @@ class Login : Activity()
                 {
                     override fun onRetryHandler(funName: String)
                     {
-
+                        fbLogin()
                     }
                 })
     }
@@ -226,7 +226,7 @@ class Login : Activity()
                         {
                             override fun onRetryHandler(funName: String)
                             {
-
+                                loginnnn(views)
                             }
                         })
 

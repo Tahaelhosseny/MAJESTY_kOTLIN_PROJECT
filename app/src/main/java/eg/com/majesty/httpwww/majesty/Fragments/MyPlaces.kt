@@ -111,7 +111,7 @@ class MyPlaces : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getUserAddressesAsLines()
             }
         })
 

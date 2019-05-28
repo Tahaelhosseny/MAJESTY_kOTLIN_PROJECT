@@ -89,7 +89,7 @@ class FreshOffers : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                loadData()
             }
         })
 
@@ -132,7 +132,7 @@ class FreshOffers : Fragment()
         activity.favoriteIm.setImageResource(R.drawable.favorite)
         activity.ordersIm.setImageResource(R.drawable.ordera)
         activity.menuIm.setImageResource(R.drawable.menu)
-        activity.headerText.setText("Fresh Offers")
+        activity.headerText.setText(activity.resources.getString(R.string.fresh_offers))
         loadData()
     }
 

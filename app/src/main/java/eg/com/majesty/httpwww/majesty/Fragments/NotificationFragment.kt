@@ -117,7 +117,7 @@ class NotificationFragment : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getData()
             }
         })
     }

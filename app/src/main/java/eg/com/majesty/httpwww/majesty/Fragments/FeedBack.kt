@@ -133,6 +133,7 @@ class FeedBack : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
+                send()
             }
         })
     }

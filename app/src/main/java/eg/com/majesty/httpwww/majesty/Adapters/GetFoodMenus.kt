@@ -155,7 +155,7 @@ class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenu
         {
             override fun onRetryHandler(funName: String)
             {
-
+                additemtoFavourites(holder , position)
             }
         })
 
@@ -191,7 +191,7 @@ class GetFoodMenus (val activity : Activity, val categoryItems: List<GetFoodMenu
         {
             override fun onRetryHandler(funName: String)
             {
-
+                removeItemfromFavourites(holder , position)
             }
         })
 

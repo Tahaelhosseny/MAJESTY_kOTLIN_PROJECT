@@ -93,7 +93,7 @@ class LoadCatItems : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                loadData()
             }
         })
 

@@ -86,6 +86,7 @@ class Branches :  FragmentActivity(), OnMapReadyCallback , GoogleMap.OnMarkerCli
         {
             override fun onRetryHandler(funName: String)
             {
+                GetAllBranches()
             }
         })
 

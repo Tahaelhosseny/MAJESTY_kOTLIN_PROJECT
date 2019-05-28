@@ -75,7 +75,7 @@ class Home : Fragment()
             override fun onClick(v: View?)
             {
                 var freshOffers = FreshOffers()
-                activity.headerText.setText("Fresh Offers")
+                activity.headerText.setText(activity.resources.getString(R.string.fresh_offers))
                 var fragmentTransaction = activity.fragmentManager.beginTransaction()
                 fragmentTransaction.addToBackStack("freshOffers")
                 fragmentTransaction.replace(R.id.frameContainer,freshOffers )
@@ -92,7 +92,7 @@ class Home : Fragment()
             {
                 var popularFood = PopularFood()
                 MainActivity().activeCenterFragments.add(popularFood)
-                activity.headerText.setText("Popular Food")
+                activity.headerText.setText(activity.resources.getString(R.string.popular_food))
                 var fragmentTransaction = activity.fragmentManager.beginTransaction()
                 fragmentTransaction.addToBackStack("popularFood")
                 fragmentTransaction.replace(R.id.frameContainer,popularFood )
@@ -182,7 +182,7 @@ class Home : Fragment()
         {
             override fun onRetryHandler(funName: String)
             {
-
+                requestData()
             }
         })
 

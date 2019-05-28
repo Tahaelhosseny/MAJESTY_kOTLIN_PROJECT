@@ -90,8 +90,11 @@
 
     <string name="vercodeerror">كود التحقق قصير جدا</string>
 
+    <string name="fresh_offers">اخر العروض</string>
+    <string name="popular_food">الاطعمه المفضله</string>
+    <string name="username">اسم المستخدم</string>
 
-
-
+    <string name="tet1">غير قادر على الاتصال</string>
+    <string name="tet2">الرجاء التحقق من اتصال الانترنت الخاص بك</string>
 
 </resources>

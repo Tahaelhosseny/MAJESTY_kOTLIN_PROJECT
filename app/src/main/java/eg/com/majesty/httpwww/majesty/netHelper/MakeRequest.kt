@@ -88,10 +88,8 @@ class MakeRequest {
                 loadingDialog.dismiss()
                 callback.onSuccess(Responce)
             }, Response.ErrorListener { error ->
-                Responce["status"] = "not"
-                Responce["res"] = error.toString()
                 loadingDialog.dismiss()
-                callback.onSuccess(Responce)
+                ConnectionLost(context , onRetryHandler).show()
             }){}
 
             stringRequest.retryPolicy = DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)

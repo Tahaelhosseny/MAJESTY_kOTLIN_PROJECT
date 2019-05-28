@@ -250,7 +250,7 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getCites()
             }
         })
     }
@@ -286,7 +286,7 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getArea()
             }
         })
     }
@@ -323,7 +323,7 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getSubAreas()
             }
         })
     }
@@ -359,7 +359,7 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
         {
             override fun onRetryHandler(funName: String)
             {
-
+                saveAdd()
             }
         })
     }
@@ -413,7 +413,7 @@ class EditAddress : Activity(), SearchView.OnQueryTextListener
         {
             override fun onRetryHandler(funName: String)
             {
-
+                getUserAddressForEdit()
             }
         })
     }

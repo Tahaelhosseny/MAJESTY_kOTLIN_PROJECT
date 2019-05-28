@@ -69,6 +69,19 @@ class Favorite : Fragment()
         activity.ordersIm.setImageResource(R.drawable.ordera)
         activity.menuIm.setImageResource(R.drawable.menu)
 
+        loadData()
+    }
+
+
+
+
+
+
+
+
+
+    fun loadData()
+    {
         var foreraaParameter = ForeraaParameter(activity)
 
         try
@@ -103,9 +116,11 @@ class Favorite : Fragment()
             }
         }, object : ONRetryHandler {
             override fun onRetryHandler(funName: String) {
-
+                loadData()
             }
         })
 
     }
+
+
 }

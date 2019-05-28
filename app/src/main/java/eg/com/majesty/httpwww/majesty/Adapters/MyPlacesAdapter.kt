@@ -183,7 +183,7 @@ class MyPlacesAdapter(var activity : Activity, var userAddressAsLines : MutableL
         {
             override fun onRetryHandler(funName: String)
             {
-
+                SetAddressAsDefault(position)
             }
         })
     }
@@ -213,7 +213,7 @@ class MyPlacesAdapter(var activity : Activity, var userAddressAsLines : MutableL
         {
             override fun onRetryHandler(funName: String)
             {
-
+                RemoveUserAddress(position)
             }
         })
     }
