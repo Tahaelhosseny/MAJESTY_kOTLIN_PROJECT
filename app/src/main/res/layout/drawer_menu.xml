@@ -108,6 +108,7 @@
             android:gravity="center"
             android:textColor="#202020"
             android:fontFamily="@font/exoregular"
+            android:visibility="gone"
             android:text="Settings"
             android:layout_height="30dp" />
 

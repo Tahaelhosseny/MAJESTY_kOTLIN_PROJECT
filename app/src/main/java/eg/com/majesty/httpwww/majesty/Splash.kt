@@ -27,6 +27,7 @@ import com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES
 import com.android.volley.toolbox.Volley
 import com.android.volley.Request.Method.POST
 import com.android.volley.toolbox.JsonObjectRequest
+import eg.com.majesty.httpwww.majesty.Activity.MainActivity
 import org.json.JSONException
 
 
@@ -82,7 +83,14 @@ class Splash : Activity()
         var foreraaParameter = ForeraaParameter(applicationContext)
         Handler().postDelayed(
                 {
-                    getTutorial()
+                    if(ForeraaParameter(this).getString("UserID").equals(""))
+                    {
+                        getTutorial()
+                    }
+                    else{
+                        startActivity(Intent(this , MainActivity::class.java))
+                        finish()
+                    }
                 },3000)
 
 

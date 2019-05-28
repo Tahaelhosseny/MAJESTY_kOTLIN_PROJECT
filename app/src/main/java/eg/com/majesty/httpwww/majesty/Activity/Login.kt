@@ -153,6 +153,7 @@ class Login : Activity()
                             foreraaParameter.setBoolean("rem" , rem)
                             foreraaParameter.setBoolean("social" , true)
                             startActivity(Intent(this@Login , MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                            finish()
                         }else
                         {
                             Toast.makeText(this@Login , this@Login.resources.getString(R.string.not_registered) , Toast.LENGTH_LONG).show()
@@ -213,6 +214,7 @@ class Login : Activity()
                                     foreraaParameter.setBoolean("rem" , rem)
                                     foreraaParameter.setBoolean("social" , false)
                                     startActivity(Intent(this@Login , MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                                    finish
 
                                 }else
                                 {

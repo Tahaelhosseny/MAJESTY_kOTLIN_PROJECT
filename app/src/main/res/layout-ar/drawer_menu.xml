@@ -107,6 +107,7 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:textColor="#202020"
+            android:visibility="gone"
             android:fontFamily="@font/exoregular"
             android:text="الأعدادات"
             android:layout_height="30dp" />

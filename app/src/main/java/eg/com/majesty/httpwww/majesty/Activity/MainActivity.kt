@@ -48,8 +48,6 @@ class MainActivity : Activity()
         super.onCreate(savedInstanceState)
         Utils.changeLocale(this, resources.getStringArray(R.array.languages_tag)[ForeraaParameter(this).getInt( "language" ,0)])
         setContentView(R.layout.activity_main)
-
-
         if(ForeraaParameter(this).getInt("language" ,0)==0)
         {
             ViewPump.init(ViewPump.builder()
@@ -447,6 +445,7 @@ class MainActivity : Activity()
                     editProfile.visibility = View.INVISIBLE
                     logOutLayout.visibility = View.INVISIBLE
                     LogIn.visibility = View.VISIBLE
+                    clearfragment()
                 }
             }
         }, object : ONRetryHandler {
@@ -547,6 +546,16 @@ class MainActivity : Activity()
    fun editProfile(view: View)
     {
         startActivity(Intent(this , EditUserData::class.java))
+    }
+
+
+
+    fun clearfragment()
+    {
+        val fm = this.fragmentManager
+        for (i in 0 until fm.getBackStackEntryCount()) {
+            fm.popBackStack()
+        }
     }
 
 }
