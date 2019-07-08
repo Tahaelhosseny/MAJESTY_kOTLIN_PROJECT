@@ -79,11 +79,11 @@ android {
 
                 keyAlias 'android apps'
 
-                keyPassword 'tahaAmira'
+                keyPassword 'TahaAmira'
 
                 storeFile file('../tahaKeyStore')
 
-                storePassword 'tahaAmira'
+                storePassword 'TahaAmira'
 
             }
 
